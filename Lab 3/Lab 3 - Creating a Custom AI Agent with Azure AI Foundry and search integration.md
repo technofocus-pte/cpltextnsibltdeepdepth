@@ -21,58 +21,35 @@ enhance user engagement through intuitive and efficient interactions.
 
 ## Task 1: Create an Azure AI Search resource
 
-1.  In a web browser, open the Azure
-    portal at <https://portal.azure.com> and sign in using your Azure
-    credentials.
+1.  In a web browser, open the Azure portal at +++https://portal.azure.com+++ and sign in using your Azure credentials.
 
-> <img src="./media/image1.png" style="width:6.5in;height:3.08264in" />
+    ![](./media/image1.png)
 
-2.  On the home page, select **+ Create a resource** and search
-    for **Azure AI Search**. Then **create** a new Azure AI Search
-    resource with the following settings:
+2.  On the home page, select **+ Create a resource** and search for +++**Azure AI Search**+++. Then **create** a new Azure AI Search resource with the following settings:
 
-    - **Subscription**: *Select your Azure subscription.*
+    - **Subscription**: *Select your Azure subscription.
 
-    - **Resource group**: *Select or create a resource group, here we
-      select **RG4OpenAI***
+    - **Resource group**: *Select or create a resource group, here we select **RG4OpenAI***
 
-    - **Service name**: *Enter a unique service name, here we name it as
-      **copilotXXXX***
+    - **Service name**: *Enter a unique service name, here we name it as **copilotXXXX***
 
-    - **Location**: *Make a **random** choice from any of the following
-      regions, here we select Canada East*
+    - **Location**: *Make a **random** choice from any of the following regions, here we select Canada East*
 
       - Australia East
 
-      <!-- -->
-
       - Canada East
-
-      <!-- -->
 
       - East US
 
-      <!-- -->
-
       - East US 2
-
-      <!-- -->
 
       - France Central
 
-      <!-- -->
-
       - Japan East
-
-      <!-- -->
 
       - North Central US
 
-      <!-- -->
-
       - Sweden Central
-
-      <!-- -->
 
       - Switzerland
 
@@ -80,48 +57,36 @@ enhance user engagement through intuitive and efficient interactions.
 
     - Click on **Review+create,** then click on **Create.**
 
-> <img src="./media/image2.png" style="width:6.5in;height:4.78681in" />
->
-> <img src="./media/image3.png" style="width:6.5in;height:5.25139in" />
->
-> <img src="./media/image4.png" style="width:6.5in;height:3.77847in" />
->
-> <img src="./media/image5.png" style="width:6.5in;height:5.67569in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> Later, you’re going to create an Azure AI Hub (which includes an Azure
-> OpenAI service) in the same region as your Azure AI Search resource.
-> Azure OpenAI resources are constrained at the tenant level by regional
-> quotas. The listed regions include default quota for the model type(s)
-> used in this exercise. Randomly choosing a region reduces the risk of
-> a single region reaching its quota limit in scenarios where you are
-> sharing a tenant with other users. In the event of a quota limit being
-> reached later in the exercise, there’s a possibility you may need to
-> create another Azure AI hub in a different region.
+    ![](./media/image2.png)
+
+    ![](./media/image3.png)
+
+    ![](./media/image4.png)
+
+    ![](./media/image5.png)
+
+    Later, you’re going to create an Azure AI Hub (which includes an Azure OpenAI service) in the same region as your Azure AI Search resource. Azure OpenAI resources are constrained at the tenant level by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a tenant with other users. In the event of a quota limit being reached later in the exercise, there’s a possibility you may need to create another Azure AI hub in a different region.
 
 3.  Wait for your Azure AI Search resource deployment to be completed.
 
-> <img src="./media/image6.png" style="width:6.5in;height:3.25278in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image6.png)
+
 
 ## Task 2: Create an Azure AI project
 
-1.  In a web browser, open [Azure AI Foundry
-    portal](https://ai.azure.com/) at <https://ai.azure.com> and sign in
-    using your Azure credentials.
+1.  In a web browser, open Azure AI Foundry at +++https://ai.azure.com+++ and sign in using your Azure credentials.
 
 2.  In the home page, select **+ Create project**.
 
-> <img src="./media/image7.png" style="width:6.5in;height:3.12083in" />
+    ![](./media/image7.png)
 
-3.  In the **Create a project** wizard enter project name as
-    **ProjectXXXX** and click on **Customize**.
 
-> <img src="./media/image8.png" style="width:6.5in;height:4.25625in" />
+3.  In the **Create a project** wizard enter project name as **ProjectXXXX** and click on **Customize**.
 
-4.  **In Customize**, connect to your Azure AI Search resource, enter
-    the following details, select **Next** and review your
-    configuration.
+    ![](./media/image8.png)
+
+
+4.  **In Customize**, connect to your Azure AI Search resource, enter the following details, select **Next** and review your configuration.
 
     - **Hub name**: ***hubXXXX***
 
@@ -129,66 +94,52 @@ enhance user engagement through intuitive and efficient interactions.
 
     - **Resource group**: **RG4OpenAI**
 
-    - **Location**: *The same location as your Azure AI Search resource,
-      **Canada East***
+    - **Location**: *The same location as your Azure AI Search resource, **Canada East***
 
-    - **Connect Azure AI Services or Azure OpenAI**: (New) *Autofill’s
-      with your selected hub name*
+    - **Connect Azure AI Services or Azure OpenAI**: (New)*Autofill’s with your selected hub name*
 
-    - **Connect Azure AI Search**: *Select your Azure AI Search
-      resource, **copilotXXXX***
+    - **Connect Azure AI Search**: *Select your Azure AI Search resource, **copilotXXXX***
 
-> <img src="./media/image9.png" style="width:6.5in;height:4.7in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image9.png)
 
-5.  Select **Next** and then **Create** and wait for the process to
-    complete.
+5.  Select **Next** and then **Create** and wait for the process to complete.
 
-> <img src="./media/image10.png" style="width:6.5in;height:4.70556in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image11.png" style="width:6.5in;height:4.7in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image12.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image10.png)
+
+    ![](./media/image11.png)
+
+    ![](./media/image12.png)
+
 
 ## Task 3: Deploy models
 
 You need two models to implement your solution:
 
-- An *embedding* model to vectorize text data for efficient indexing and
-  processing.
+- An *embedding* model to vectorize text data for efficient indexing and processing.
 
-- A model that can generate natural language responses to questions
-  based on your data.
+- A model that can generate natural language responses to questions based on your data.
 
-1.  In the Azure AI Foundry portal, in your project, in the navigation
-    pane on the left, under **My assets**, select the **Models +
-    endpoints** page.
+1.  In the Azure AI Foundry portal, in your project, in the navigation pane on the left, under **My assets**, select the **Models + endpoints** page.
 
-> <img src="./media/image13.png"
-> style="width:5.07631in;height:5.72258in" />
+    ![](./media/image13.png)
 
-2.  On the **Manage deployments of your models and services page,**
-    click on **+Deploy model** and select **Deploy base model.**
 
-> <img src="./media/image14.png"
-> style="width:5.32789in;height:5.98475in" />
+2.  On the **Manage deployments of your models and services page,** click on **+ Deploy model** and select **Deploy base model.**
 
-3.  On the **Select a model** page, search and
-    select **text-embedding-ada-002** model and click on **Confirm.**
+    ![](./media/image14.png)
 
-> <img src="./media/image15.png" style="width:6.5in;height:4.93681in" />
 
-4.  On the **Deploy model text-embedding-ada-**002 pane click on
-    **Customize** and enter the following details in the Deploy model
+3.  On the **Select a model** page, search and select +++**text-embedding-ada-002**+++ model and click on **Confirm.**
+
+    ![](./media/image15.png)
+
+4.  On the **Deploy model text-embedding-ada-**002 pane click on **Customize** and enter the following details in the Deploy model
     wizard:
 
-> <img src="./media/image16.png"
-> style="width:5.23267in;height:5.45156in" />
+    ![](./media/image16.png)
 
-- **Deployment name**: text-embedding-ada-002
+
+- **Deployment name**: +++text-embedding-ada-002+++
 
 - **Deployment type**: Standard
 
@@ -202,85 +153,66 @@ You need two models to implement your solution:
 
 - **Enable dynamic quota**: Disabled
 
-> <img src="./media/image17.png" style="width:5.27436in;height:6.65028in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image18.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image17.png)
 
-5.  Repeat the previous steps to deploy a **gpt-35-turbo-16k** model
-    with the deployment name gpt-35-turbo-16k.
+    ![](./media/image18.png)
 
-> <img src="./media/image19.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image20.png" style="width:6.5in;height:3.53125in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> **Note**: Reducing the Tokens Per Minute (TPM) helps avoid over-using
-> the quota available in the subscription you are using. 5,000 TPM is
-> sufficient for the data used in this exercise.
+
+5.  Repeat the previous steps to deploy a **gpt-35-turbo-16k** model with the deployment name gpt-35-turbo-16k.
+
+    ![](./media/image19.png)
+
+    ![](./media/image20.png)
+
+    > **Note**: Reducing the Tokens Per Minute (TPM) helps avoid over-using the quota available in the subscription you are using. 5,000 TPM is sufficient for the data used in this exercise.
 
 ## Task 4: Add data to your project
 
-The data for your copilot consists of a set of travel brochures in PDF
-format from the fictitious travel agency *Margie’s Travel*. Let’s add
-them to the project.
+The data for your copilot consists of a set of travel brochures in PDF format from the fictitious travel agency *Margie’s Travel*. Let’s add them to the project.
 
-1.  Navigate to folder named **brochures** in the C:\Lab files of your
-    system.
+1.  Navigate to folder named **brochures** in the C:\Lab files of your system.
 
-2.  In Azure AI Foundry portal, in your project, in the navigation pane
-    on the left, under **My assets**, select the **Data +
-    indexes** page.
+2.  In Azure AI Foundry portal, in your project, in the navigation pane on the left, under **My assets**, select the **Data + indexes** page.
 
-> <img src="./media/image21.png" style="width:6.5in;height:4.025in" />
+    ![](./media/image21.png)
 
 3.  Select **+ New data**.
 
-> <img src="./media/image22.png" style="width:5.77469in;height:3.99225in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image22.png)
 
-4.  In the **Add your data** wizard, expand the drop-down menu to
-    select **Upload files/folders**.
 
-> <img src="./media/image23.png" style="width:6.5in;height:4.76181in"
-> alt="A screenshot of a computer Description automatically generated" />
+4.  In the **Add your data** wizard, expand the drop-down menu to select **Upload files/folders**.
+
+    ![](./media/image23.png)
+
 
 5.  Select **Upload folder** and select the **brochures** folder.
 
-> <img src="./media/image24.png" style="width:6.5in;height:4.71806in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image24.png)
+
 
 6.  Select **Next** on the screen.
 
-> <img src="./media/image25.png" style="width:6.5in;height:4.69236in" />
+    ![](./media/image25.png)
 
-7.  Wait for the folder to be uploaded and note that it contains several
-    .pdf files.
+7.  Wait for the folder to be uploaded and note that it contains several .pdf files.
 
-8.  On the next page of name and finish, enter the data name as
-    **data0212** and click on **Create.**
+8.  On the next page of name and finish, enter the data name as +++**data0212**+++ and click on **Create.**
 
-> <img src="./media/image26.png" style="width:6.5in;height:4.73542in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image27.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image26.png)
+
+    ![](./media/image27.png)
+
 
 ## Task 5: Create an index for your data
 
-Now that you’ve added a data source to your project, you can use it to
-create an index in your Azure AI Search resource.
+Now that you’ve added a data source to your project, you can use it to create an index in your Azure AI Search resource.
 
-1.  In Azure AI Foundry portal, in your project, in the navigation pane
-    on the left, under **My assets**, select the **Data +
-    indexes** page.
+1.  In Azure AI Foundry portal, in your project, in the navigation pane on the left, under **My assets**, select the **Data + indexes** page.
 
-> <img src="./media/image28.png" style="width:6.5in;height:3.79583in" />
+    ![](./media/image28.png)
 
-2.  In the **Indexes** tab, add a new index with the following settings
-    and then select on **Next**.
+2.  In the **Indexes** tab, add a new index with the following settings and then select on **Next**.
 
     - **Source location**:
 
@@ -288,43 +220,31 @@ create an index in your Azure AI Search resource.
 
         - *Select the **brochures** data source- **dataXXXX***
 
-<img src="./media/image29.png" style="width:6.5in;height:4.76806in"
-alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image29.png)
+
 
 - Configure the index as below given options and then select **Next.**
 
-  - **Select Azure AI Search service**: *Select
-    the **AzureAISearch** connection to your Azure AI Search resource*
-
-  <!-- -->
+  - **Select Azure AI Search service**: *Select the **AzureAISearch** connection to your Azure AI Search resource*
 
   - **Vector index**: brochures-index
 
-  <!-- -->
-
   - **Virtual machine**: Auto select
 
-> <img src="./media/image30.png" style="width:6.5in;height:4.70278in" />
+    ![](./media/image30.png)
 
-- Configure the search setting as given below and select **Next**, on
-  the Review window click on the **Create Vector Index**.
+- Configure the search setting as given below and select **Next**, on the Review window click on the **Create Vector Index**.
 
   - **Vector settings**: Add vector search to this search resource
 
-  <!-- -->
+  - **Azure OpenAI connection**: *Select the default Azure OpenAI resource for your hub.*
 
-  - **Azure OpenAI connection**: *Select the default Azure OpenAI
-    resource for your hub.*
+    ![](./media/image31.png)
 
-> <img src="./media/image31.png" style="width:6.5in;height:4.72708in"
-> alt="A screenshot of a search settings Description automatically generated" />
->
-> <img src="./media/image32.png" style="width:6.5in;height:4.67361in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image32.png)
 
-3.  Wait for the indexing process to be completed, which can take
-    several minutes. The index creation operation consists of the
-    following jobs:
+
+3.  Wait for the indexing process to be completed, which can take several minutes. The index creation operation consists of the following jobs:
 
     - Crack, chunk, and embed the text tokens in your brochures data.
 
@@ -332,116 +252,79 @@ alt="A screenshot of a computer Description automatically generated" />
 
     - Register the index asset.
 
-<img src="./media/image33.png" style="width:6.5in;height:3.08264in"
-alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image33.png)
 
-<img src="./media/image34.png" style="width:6.5in;height:3.15347in" />
+    ![](./media/image34.png)
 
 ## Task 6: Test the index
 
-Before using your index in a RAG-based prompt flow, let’s verify that it
-can be used to affect generative AI responses.
+Before using your index in a RAG-based prompt flow, let’s verify that it can be used to affect generative AI responses.
 
-1.  In the navigation pane on the left, select the **Playgrounds** page
-    and then select **Chat Playground.**
+1.  In the navigation pane on the left, select the **Playgrounds** page and then select **Chat Playground.**
 
-> <img src="./media/image35.png" style="width:6.5in;height:2.96875in" />
+    ![](./media/image35.png)
 
-2.  On the Chat page, in the Setup pane, ensure that
-    your **gpt-35-turbo-16k** model deployment is selected. Then, in the
-    main chat session panel, submit the prompt **Where can I stay in New
-    York?**
+2.  On the Chat page, in the Setup pane, ensure that your **gpt-35-turbo-16k** model deployment is selected. Then, in the main chat session panel, submit the prompt +++**Where can I stay in New York?**+++
 
-> <img src="./media/image36.png" style="width:6.5in;height:3.65069in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image36.png)
 
-3.  Review the response, which should be a generic answer from the model
-    without any data from the index.
 
-4.  In the Setup pane, expand the **Add your data** field, and then add
-    the **brochures-index** project index and select the **hybrid
-    (vector + keyword)** search type.
+3.  Review the response, which should be a generic answer from the model without any data from the index.
 
-> <img src="./media/image37.png" style="width:5.40987in;height:6.58774in"
-> alt="A screenshot of a chat Description automatically generated" />
->
-> **Note**: Some users are finding newly created indexes unavailable
-> right away. Refreshing the browser usually helps, but if you’re still
-> experiencing the issue where it can’t find the index you may need to
-> wait until the index is recognized.
+4.  In the Setup pane, expand the **Add your data** field, and then add the **brochures-index** project index and select the **hybrid (vector + keyword)** search type.
 
-5.  After the index has been added and the chat session has restarted,
-    resubmit the prompt **Where can I stay in New York?**
+    ![](./media/image37.png)
 
-> <img src="./media/image38.png" style="width:6.5in;height:4.25556in"
-> alt="A screenshot of a chat Description automatically generated" />
+    > **Note**: Some users are finding newly created indexes unavailable right away. Refreshing the browser usually helps, but if you’re still experiencing the issue where it can’t find the index you may need to wait until the index is recognized.
+
+5.  After the index has been added and the chat session has restarted, resubmit the prompt **Where can I stay in New York?**
+
+    ![](./media/image38.png)
 
 6.  Review the response, which should be based on data in the index.
 
 ## Task 7: Use the index in a prompt flow
 
-Your vector index has been saved in your Azure AI Foundry project,
-enabling you to use it easily in a prompt flow.
+Your vector index has been saved in your Azure AI Foundry project, enabling you to use it easily in a prompt flow.
 
-1.  In Azure AI Foundry portal, in your project, in the navigation pane
-    on the left, under **Build and customize**, select the **Prompt
-    flow** page and click on **+Create.**
+1.  In Azure AI Foundry portal, in your project, in the navigation pane on the left, under **Build and customize**, select the **Prompt flow** page and click on **+Create.**
 
-> <img src="./media/image39.png" style="width:6.5in;height:4.68056in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image39.png)
 
-2.  Create a new prompt flow by cloning the **Multi-Round Q&A on Your
-    Data** sample in the gallery. Save your clone of this sample in a
-    folder named **brochure-flow**.
+2.  Create a new prompt flow by cloning the **Multi-Round Q&A on Your Data** sample in the gallery. Save your clone of this sample in a folder named **brochure-flow**.
 
-> <img src="./media/image40.png" style="width:6.5in;height:3.25in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image41.png" style="width:5.22224in;height:6.23334in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> Note: if Permissions error, retry with a new name after 2 minutes and
-> the flow will get cloned.
->
-> <img src="./media/image42.png" style="width:6.5in;height:5.91458in" />
+    ![](./media/image40.png)
 
-3.  When the prompt flow designer page opens, review **brochure-flow**.
-    Its graph should resemble the following image:
+    ![](./media/image41.png)
 
-> <img src="./media/image43.png" style="width:6.5in;height:3.08264in" />
 
-<img src="./media/image44.png" style="width:4.14583in;height:8.64583in"
-alt="A screenshot a a prompt flow graph" />
+    > Note: if Permissions error, retry with a new name after 2 minutes and the flow will get cloned.
 
-> The sample prompt flow you are using implements the prompt logic for a
-> chat application in which the user can iteratively submit text input
-> to chat interface. The conversational history is retained and included
-> in the context for each iteration. The prompt flow orchestrates a
-> sequence of *tools* to:
+    ![](./media/image42.png)
 
-- Append the history to the chat input to define a prompt in the form of
-  a contextualized form of a question.
+3.  When the prompt flow designer page opens, review **brochure-flow**. Its graph should resemble the following image:
 
-- Retrieve the context using your index and a query type of your own
-  choice based on the question.
+    ![](./media/image43.png)
 
-- Generate prompt context by using the retrieved data from the index to
-  augment the question.
+    ![](./media/image44.png)
 
-- Create prompt variants by adding a system message and structuring the
-  chat history.
+    The sample prompt flow you are using implements the prompt logic for a chat application in which the user can iteratively submit text input to chat interface. The conversational history is retained and included in the context for each iteration. The prompt flow orchestrates a sequence of *tools* to:
 
-- Submit the prompt to a language model to generate a natural language
-  response.
+    - Append the history to the chat input to define a prompt in the form of a contextualized form of a question.
 
-4.  Use the **Start compute session** button to start the runtime
-    compute for the flow.
+    - Retrieve the context using your index and a query type of your own choice based on the question.
 
-> Wait for the runtime to start. This provides a compute context for the
-> prompt flow. While you’re waiting, in the **Flow** tab, review the
-> sections for the tools in the flow.
->
-> <img src="./media/image45.png" style="width:6.5in;height:3.08264in" />
+    - Generate prompt context by using the retrieved data from the index to augment the question.
+
+    - Create prompt variants by adding a system message and structuring the chat history.
+
+    - Submit the prompt to a language model to generate a natural language response.
+
+4.  Use the **Start compute session** button to start the runtime compute for the flow.
+
+    Wait for the runtime to start. This provides a compute context for the prompt flow. While you’re waiting, in the **Flow** tab, review the sections for the tools in the flow.
+
+    ![](./media/image45.png)
 
 5.  In the **Inputs** section, ensure the inputs include:
 
@@ -449,24 +332,21 @@ alt="A screenshot a a prompt flow graph" />
 
     - **chat_input**
 
-The default chat history in this sample includes some conversation about
-AI.
+    The default chat history in this sample includes some conversation about AI.
 
-<img src="./media/image46.png"
-style="width:4.37793in;height:4.9825in" />
+    ![](./media/image46.png)
+
 
 6.  In the **Outputs** section, ensure that the output includes:
 
     - **chat_output** with value \${chat_with_context.output}
 
-> <img src="./media/image47.png"
-> style="width:5.39944in;height:4.9825in" />
+    ![](./media/image47.png)
 
-7.  In the **modify_query_with_history** section, select the following
-    settings (leaving others as they are):
 
-    - **Connection**: *The default Azure OpenAI resource for your AI
-      hub*
+7.  In the **modify_query_with_history** section, select the following settings (leaving others as they are):
+
+    - **Connection**: *The default Azure OpenAI resource for your AI hub*
 
     - **Api**: chat
 
@@ -474,17 +354,13 @@ style="width:4.37793in;height:4.9825in" />
 
     - **response_format**: {“type”:”text”}
 
-> <img src="./media/image48.png" style="width:6.5in;height:3.49236in" />
+    ![](./media/image48.png)
 
-8.  Wait for the compute session to start, then in
-    the **lookup** section, set the following parameter values:
+8.  Wait for the compute session to start, then in the **lookup** section, set the following parameter values:
 
-    - **mlindex_content**: *Select the empty field to open the Generate
-      pane*
+    - **mlindex_content**: *Select the empty field to open the Generate pane*
 
       - **index_type**: Registered Index
-
-      <!-- -->
 
       - **mlindex_asset_id**: brochures-index:1
 
@@ -494,21 +370,17 @@ style="width:4.37793in;height:4.9825in" />
 
     - **top_k**: 2
 
-> <img src="./media/image49.png" style="width:6.5in;height:3.08264in" />
->
-> <img src="./media/image50.png" style="width:6.5in;height:3.71181in" />
+    ![](./media/image49.png)
 
-9.  In the **generate_prompt_context** section, review the Python script
-    and ensure that the **inputs** for this tool include the following
-    parameter:
+    ![](./media/image50.png)
+
+9.  In the **generate_prompt_context** section, review the Python script and ensure that the **inputs** for this tool include the following parameter:
 
     - **search_result** *(object)*: \${lookup.output}
 
-> <img src="./media/image51.png" style="width:6.5in;height:4.50556in" />
+    ![](./media/image51.png)
 
-10. In the **Prompt_variants** section, review the Python script and
-    ensure that the **inputs** for this tool include the following
-    parameters:
+10. In the **Prompt_variants** section, review the Python script and ensure that the **inputs** for this tool include the following parameters:
 
     - **contexts** *(string)*: \${generate_prompt_context.output}
 
@@ -516,10 +388,9 @@ style="width:4.37793in;height:4.9825in" />
 
     - **chat_input** *(string)*: \${inputs.chat_input}
 
-> <img src="./media/image52.png" style="width:6.5in;height:4.91181in" />
+    ![](./media/image52.png)
 
-11. In the **chat_with_context** section, select the following settings
-    (leaving others as they are):
+11. In the **chat_with_context** section, select the following settings (leaving others as they are):
 
     - **Connection**: Default_AzureOpenAI
 
@@ -529,76 +400,58 @@ style="width:4.37793in;height:4.9825in" />
 
     - **response_format**: {“type”:”text”}
 
-Then ensure that the **inputs** for this tool include the following
-parameters:
+Then ensure that the **inputs** for this tool include the following parameters:
 
 - **prompt_text** *(string)*: \${Prompt_variants.output}
 
-> <img src="./media/image53.png" style="width:6.5in;height:4.49236in" />
+    ![](./media/image53.png)
 
-12. On the toolbar, use the **Save** button to save the changes you’ve
-    made to the tools in the prompt flow.
+12. On the toolbar, use the **Save** button to save the changes you’ve made to the tools in the prompt flow.
 
-> <img src="./media/image54.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image54.png)
 
-13. On the toolbar, select **Chat**. A chat pane opens with the sample
-    conversation history and the input already filled in based on the
-    sample values. You can ignore these.
 
-> <img src="./media/image55.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+13. On the toolbar, select **Chat**. A chat pane opens with the sample conversation history and the input already filled in based on the sample values. You can ignore these.
 
-14. In the chat pane, replace the default input with the
-    question **Where can I stay in London?** and submit it.
+    ![](./media/image55.png)
 
-> <img src="./media/image56.png"
-> style="width:5.31606in;height:6.65028in" />
+
+14. In the chat pane, replace the default input with the question +++**Where can I stay in London?**+++ and submit it.
+
+    ![](./media/image56.png)
+
 
 15. Review the response, which should be based on data in the index.
 
 16. Review the outputs for each tool in the flow.
 
-> <img src="./media/image57.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image57.png)
 
-17. In the chat pane, enter the question **What can I do there?**
 
-18. Review the response, which should be based on data in the index and
-    take into account the chat history (so “there” is understood as “in
-    London”).
+17. In the chat pane, enter the question +++**What can I do there?**+++
 
-> <img src="./media/image58.png"
-> style="width:4.81572in;height:6.65028in" />
+18. Review the response, which should be based on data in the index and take into account the chat history (so “there” is understood as “in London”).
 
-19. Review the outputs for each tool in the flow, noting how each tool
-    in the flow operated on its inputs to prepare a contextualized
-    prompt and get an appropriate response.
+    ![](./media/image58.png)
+
+
+19. Review the outputs for each tool in the flow, noting how each tool in the flow operated on its inputs to prepare a contextualized prompt and get an appropriate response.
 
 ## Task 8: Challenge
 
-Now you’ve experienced how to integrate your own data in a copilot built
-with the Azure AI Foundry portal, let’s explore further!
+Now you’ve experienced how to integrate your own data in a copilot built with the Azure AI Foundry portal, let’s explore further!
 
-Try adding a new data source through the Azure AI Foundry portal, index
-it, and integrate the indexed data in a prompt flow. Some data sets you
-could try are:
+Try adding a new data source through the Azure AI Foundry portal, index it, and integrate the indexed data in a prompt flow. Some data sets you could try are:
 
 - A collection of (research) articles you have on your computer.
 
 - A set of presentations from past conferences.
 
-Be as resourceful as you can to create your data source and integrate it
-in your prompt flow. Try out the new prompt flow and submit prompts that
-could only be answered by the data set you chose!
+Be as resourceful as you can to create your data source and integrate it in your prompt flow. Try out the new prompt flow and submit prompts that could only be answered by the data set you chose!
 
 ## Task 9: Clean up
 
-To avoid unnecessary Azure costs and resource utilization, you should
-remove the resources you deployed in this exercise.
+To avoid unnecessary Azure costs and resource utilization, you should remove the resources you deployed in this exercise.
 
-If you’ve finished exploring Azure AI Foundry, return to the [Azure
-portal](https://portal.azure.com/) at https://portal.azure.com and sign
-in using your Azure credentials if necessary. Then delete the resources
-in the resource group where you provisioned your Azure AI Search and
-Azure AI resources.
+If you’ve finished exploring Azure AI Foundry, return to the Azure
+portal at +++https://portal.azure.com+++ and sign in using your Azure credentials if necessary. Then delete the resources in the resource group where you provisioned your Azure AI Search and Azure AI resources.
