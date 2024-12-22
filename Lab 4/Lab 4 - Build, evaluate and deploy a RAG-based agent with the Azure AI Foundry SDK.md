@@ -29,101 +29,89 @@ predefined datasets and metrics to enhance its effectiveness.
 
 ### Task 1 Create a project
 
-To create a project in [Azure AI Foundry](https://ai.azure.com/), follow
+To create a project in Azure AI Foundry, follow
 these steps:
 
-1.  Go to the **Home** page of Azure AI Foundry, by navigating to the
-    following link.
+1.  Go to the **Home** page of Azure AI Foundry, by navigating to the following link +++https://ai.azure.com/+++ and click on **Sign in.**
 
-> <https://ai.azure.com/> and click on **Sign in.**
->
-> <img src="./media/image1.png" style="width:6.5in;height:3.20556in" />
+    ![](./media/image1.png)
 
 2.  When prompted enter the tenant details and do the login.
 
 3.  Select **+ Create project**.
 
-> <img src="./media/image2.png" style="width:6.5in;height:3.12083in" />
+    ![](./media/image2.png)
 
 4.  Enter a **ProjectXXXX** as name for the project, click on Customize.
 
-> <img src="./media/image3.png"
-> style="width:6.45223in;height:5.98317in" />
+    ![](./media/image3.png)
+
 
 5.  On the next page, enter the following details and click on **Next.**
 
-> /Hub name: hubXXXX
->
-> Subscription: Select your subscription
->
-> Create new Resource group: RG4OpenAI
->
-> Location: East US 2, or Sweden Central
->
-> Leave the rest as default and click on Next.
->
-> <img src="./media/image4.png" style="width:6.5in;height:4.52917in"
-> alt="A screenshot of a computer Description automatically generated" />
+    - Hub name: hubXXXX
+
+    - Subscription: Select your subscription
+
+    - Create new Resource group: +++RG4OpenAI+++
+
+    - Location: East US 2, or Sweden Central
+
+    - Leave the rest as default and click on Next.
+
+!   [](./media/image4.png)
+
 
 6.  On the **Review and finish** page, click on **Create.**
 
-> <img src="./media/image5.png" style="width:6.5in;height:4.54722in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image5.png)
+
 
 7.  The resource creation will take a few minutes.
 
-<img src="./media/image6.png" style="width:6.5in;height:4.51111in" />
+    ![](./media/image6.png)
 
 8.  Close the pop-up windows, if any appears.
 
-9.  From the home page of the project, note down the Project connection
-    string on the notepad to be used in next task of this exercise.
+9.  From the home page of the project, note down the Project connection string on the notepad to be used in next task of this exercise.
 
-> <img src="./media/image7.png" style="width:6.5in;height:3.08264in" />
->
-> <img src="./media/image8.png" style="width:5.03462in;height:5.35775in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image7.png)
+
+    ![](./media/image8.png)
+
 
 ### Task 2: Deploy models
 
-You need two models to build a RAG-based chat app: an Azure OpenAI chat
-model (gpt-4o-mini) and an Azure OpenAI embedding model
-(text-embedding-ada-002). Deploy these models in your Azure AI Foundry
-project, using this set of steps for each model.
+You need two models to build a RAG-based chat app: an Azure OpenAI chat model (gpt-4o-mini) and an Azure OpenAI embedding model (text-embedding-ada-002). Deploy these models in your Azure AI Foundry project, using this set of steps for each model.
 
-These steps deploy a model to a real-time endpoint from the AI Foundry
-portal [model
-catalogue](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/model-catalog-overview):
+These steps deploy a model to a real-time endpoint from the AI Foundry portal:
 
 1.  On the left navigation pane, select **Model catalogue**.
 
-> <img src="./media/image9.png" style="width:6.5in;height:5.60069in" />
+    ![](./media/image9.png)
 
-2.  Select the **gpt-4o-mini** model from the list of models. You can
-    use the search bar to find it.
+2.  Select the **gpt-4o-mini** model from the list of models. You can use the search bar to find it.
 
-> <img src="./media/image10.png" style="width:6.5in;height:3.58889in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image10.png)
+
 
 3.  On the model details page, select **Deploy**.
 
-> <img src="./media/image11.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image11.png)
 
-4.  Leave the default **Deployment name**. select **Deploy**. Or, if the
-    model isn't available in your region, a different region is selected
-    for you and connected to your project. In this case,
-    select **Connect and deploy**.
 
-> <img src="./media/image12.png" style="width:5.94147in;height:6.67113in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image13.png" style="width:6.5in;height:3.08264in" />
+4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect and deploy**.
+
+    ![](./media/image12.png)
+
+    ![](./media/image13.png)
+
 
 5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
     the **text-embedding-ada-002** model.
 
-<img src="./media/image14.png" style="width:6.5in;height:3.08264in" />
+    ![](./media/image14.png)
+
 
 ### Task 3: Create an Azure AI Search service
 
@@ -134,73 +122,68 @@ based on the user's question.
 You need an Azure AI Search service and connection to create a search
 index.
 
-If you already have an Azure AI Search service, you can skip to
-the [next
-section](https://learn.microsoft.com/en-us/azure/ai-studio/tutorials/copilot-sdk-create-resources?tabs=windows#connect).
+If you already have an Azure AI Search service, you can skip to the next section.
 
 Otherwise, you can create an Azure AI Search service using the Azure
 portal.
 
-1.  [Create an Azure AI Search
-    service](https://portal.azure.com/#create/Microsoft.Search) in the
-    Azure portal, search for **AI search** and click on icon
+1.  Create an Azure AI Search
+    service +++https://portal.azure.com/#create/Microsoft.Search+++ in the Azure portal, search for +++**AI search**+++ and click on icon.
 
-> <img src="./media/image15.png" style="width:6.5in;height:4.20278in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image15.png)
+
 
 2.  Click on **+ Create** icon and fill in the following details.
 
-> <img src="./media/image16.png"
-> style="width:5.59749in;height:5.21182in" />
+    ![](./media/image16.png)
+
 
 3.  Select your resource group, enter the service name as
-    **aiserviceXXXX,** select the region as Sweden Central or East us2
-    or any region closer to your location.
+    **aiserviceXXXX,** select the region as **Sweden Central or East us2** or any region closer to your location.
 
 4.  Continue through the wizard and select **Review + assign** to create
     the resource.
 
-> <img src="./media/image17.png" style="width:6.5in;height:4.86528in" />
+    ![](./media/image17.png)
 
 5.  Confirm the details of your Azure AI Search service, including
     estimated cost.
 
 6.  Select **Create** to create the Azure AI Search service.
 
-> <img src="./media/image18.png" style="width:6.5in;height:5.80486in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image19.png" style="width:6.5in;height:3.36667in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image18.png)
+
+    ![](./media/image19.png)
+
 
 ### Task 4: Connect the Azure AI Search to your project
 
 In the Azure AI Foundry portal, check for an Azure AI Search connected
 resource.
 
-1.  In [Azure AI Foundry](https://ai.azure.com/), go to your project and
+1.  In Azure AI Foundry +++https://ai.azure.com/+++, go to your project and
     select **Management center** from the left pane.
 
-> <img src="./media/image20.png" style="width:6.5in;height:4.63958in"
-> alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image20.png)
+
 
 2.  In the **Connected resources** section, look to see if you have a
-    connection of type **Azure AI Search**. Otherwise, select **New
-    connection** and then **Azure AI Search**.
+    connection of type +++**Azure AI Search**+++. Otherwise, select **New connection** and then **Azure AI Search**.
 
-> <img src="./media/image21.png" style="width:6.5in;height:3.81597in" />
->
-> <img src="./media/image22.png" style="width:6.5in;height:3.89722in" />
+    ![](./media/image21.png)
 
-3.  Use **API key** for **Authentication** and select **Add
-    connection**.
+    ![](./media/image22.png)
 
-> <img src="./media/image23.png" style="width:6.5in;height:4.00556in"
-> alt="A screenshot of a computer Description automatically generated" />
->
-> <img src="./media/image24.png" style="width:6.5in;height:3.89306in" />
->
-> <img src="./media/image25.png" style="width:6.5in;height:4.25486in" />
+3.  Use **API key** for **Authentication** and select **Add connection**.
+
+    ![](./media/image23.png)
+
+
+    ![](./media/image24.png)
+
+
+    ![](./media/image25.png)
+
 
 ### Task 5: Install the Azure CLI and sign in
 
@@ -208,286 +191,280 @@ You install the Azure CLI and sign in from your local development
 environment, so that you can use your user credentials to call the Azure
 OpenAI service.
 
-1.  In most cases you can install the Azure CLI from your terminal using
-    the following command:
+1.  In most cases you can install the Azure CLI from your terminal using the following command:
 
++++
+```
 winget install -e --id Microsoft.AzureCLI
+```
++++
 
-<img src="./media/image26.png" style="width:6.5in;height:2.79583in"
-alt="A screenshot of a computer Description automatically generated" />
+![](./media/image26.png)
 
-<img src="./media/image27.png" style="width:6.5in;height:3.65556in" />
+![](./media/image27.png)
 
-<img src="./media/image28.png" style="width:6.5in;height:3.65556in" />
+![](./media/image28.png)
 
-2.  After you install the Azure CLI, sign in using the az login command
-    and sign-in using the browser:
+2.  After you install the Azure CLI, sign in using the az login command and sign-in using the browser:
 
++++
+```
 Az login
+```
++++
 
-select the tenant that your intent to login in with and click on
-**Continue**.
+select the tenant that your intent to login in with and click on **Continue**.
 
-<img src="./media/image29.png" style="width:6.5in;height:3.65556in" />
+![](./media/image29.png)
 
-<img src="./media/image30.png" style="width:6.5in;height:3.42639in" />
+
+![](./media/image30.png)
+
 
 ### Task 6: Create a new Python environment
 
-First you need to create a new Python environment to use to install the
-package you need for this tutorial. DO NOT install packages into your
-global python installation. You should always use a virtual or conda
-environment when installing python packages, otherwise you can break
-your global install of Python.
+First you need to create a new Python environment to use to install the package you need for this tutorial. DO NOT install packages into your global python installation. You should always use a virtual or conda environment when installing python packages, otherwise you can break your global install of Python.
 
 **Create a virtual environment**
 
-1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX, by entering
-    the following command in your powershell.**
+1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**, by entering the following command in your powershell.
 
-**mkdir ProjectXXXX**
++++
+```
+mkdir ProjectXXXX
+```
++++
 
-<img src="./media/image31.png" style="width:6.22126in;height:2.18838in"
-alt="A screenshot of a computer Description automatically generated" />
+![](./media/image31.png)
 
-2.  In your terminal enter the following command to navigate to the new
-    folder location
 
-**cd C:\Users\Admin\ProjectXXXX**
+2.  In your terminal enter the following command to navigate to the new folder location **cd C:\Users\Admin\ProjectXXXX**
 
-<img src="./media/image32.png"
-style="width:5.14792in;height:1.49019in" />
+![](./media/image32.png)
 
-3.  If you already have Python 3.10 or higher installed, you can create
-    a virtual environment using the following commands:
 
+3.  If you already have Python 3.10 or higher installed, you can create a virtual environment using the following commands:
+
++++
+```
 py -3 -m venv .venv
+```
++++
 
++++
+```
 .venv\scripts\activate
+```
++++
 
-> <img src="./media/image33.png"
-> style="width:6.09621in;height:1.52145in" />
->
-> Activating the Python environment means that when you
-> run python or pip from the command line, you then use the Python
-> interpreter contained in the .venv folder of your application.
+![](./media/image33.png)
 
-4.  Run the following command to open the directory in VS
+Activating the Python environment means that when you run python or pip from the command line, you then use the Python interpreter contained in the .venv folder of your application.
 
-**code.**
+4.  Run the following command to open the directory in VS **code.**
 
-<img src="./media/image34.png" style="width:6.5in;height:3.42639in"
-alt="A screenshot of a computer Description automatically generated" />
+    ![](./media/image34.png)
+
 
 ### Task 7: Install packages
 
-Install azure-ai-projects(preview) and azure-ai-inference (preview),
-along with other required packages.
+Install **azure-ai-projects(preview) and azure-ai-inference (preview)**,along with other required packages.
 
-5.  Create a file named **requirements.txt** in your **ProjectXXXX**
-    folder and add the following packages to the file:
+5.  Create a file named **requirements.txt** in your **ProjectXXXX** folder and add the following packages to the file:
 
-> azure-ai-projects
->
-> azure-ai-inference\[prompts\]
->
-> azure-identity
->
-> azure-search-documents
->
-> pandas
->
-> python-dotenv
->
-> opentelemetry-api
++++
+```
+azure-ai-projects
+azure-ai-inference[prompts]
+azure-identity
+azure-search-documents
+pandas
+python-dotenv
+opentelemetry-api
+```
++++
 
-<img src="./media/image35.png" style="width:4.0131in;height:5.09716in"
-alt="A screenshot of a computer Description automatically generated" />
+![](./media/image35.png)
 
-> <img src="./media/image36.png" style="width:6.5in;height:3.79861in"
-> alt="A screenshot of a computer Description automatically generated" />
 
-6.  On the top navigation bar click on file and save all , the right
-    clicks on the project and open the integrated terminal.
+![](./media/image36.png)
 
-<img src="./media/image37.png"
-style="width:5.97274in;height:4.84699in" />
 
-<img src="./media/image38.png" style="width:6.5in;height:2.34722in" />
+6.  On the top navigation bar click on file and save all , the right clicks on the project and open the integrated terminal.
+
+    ![](./media/image37.png)
+
+
+    ![](./media/image38.png)
+
 
 7.  Run the following command to get into the virtual environment
 
++++
+```
 py -3 -m venv .venv
+```
++++
 
++++
+```
 .venv\scripts\activate
+```
++++
 
-<img src="./media/image39.png" style="width:6.5in;height:3.42639in"
-alt="A screenshot of a computer Description automatically generated" />
+![](./media/image39.png)
 
-8.  Run the az login command and do the login with your credentials.
 
-<img src="./media/image40.png" style="width:6.5in;height:3.42639in" />
+8.  Run the +++**az login**+++ command and do the login with your credentials.
+
+    ![](./media/image40.png)
+
 
 9.  To Install the required packages, run the following code.
 
++++
+```
 pip install -r requirements.txt
+```
++++
 
-<img src="./media/image41.png" style="width:6.5in;height:3.42639in" />
+![](./media/image41.png)
 
-<img src="./media/image42.png" style="width:6.5in;height:3.42639in" />
 
-> **Note:** if you get a notice to of new release of pip, kindly run the
-> following command to upgrade pip and then re-run
->
-> pip install -r requirements.txt
+![](./media/image42.png)
 
+
+> **Note:** if you get a notice to of new release of pip, kindly run the following command to upgrade pip and then re-run
+
++++
+```
+pip install -r requirements.txt
+```
++++
+
++++
+```
 python.exe -m pip install --upgrade pip
+```
++++
 
-> <img src="./media/image43.png" style="width:6.5in;height:2.38125in"
-> alt="A screenshot of a computer program Description automatically generated" />
+![](./media/image43.png)
+
 
 ### Task 8: Create helper script
 
-1.  Create a new folder named **src**. By running the following command
-    in the terminal.
+1.  Create a new folder named **src**. By running the following command in the terminal.
 
++++
+```
 mkdir src
+```
++++
 
-<img src="./media/image44.png" style="width:6.5in;height:3.42639in" />
+![](./media/image44.png)
 
-2.  Create a new file in **src** folder and name it **config.py** 
 
-<img src="./media/image45.png" style="width:3.91929in;height:3.31472in"
-alt="A screenshot of a computer Description automatically generated" />
+2.  Create a new file in **src** folder and name it +++**config.py**+++ 
+
+![](./media/image45.png)
+
 
 3.  Add the following code to **config.py** and save it.
 
-\# ruff: noqa: ANN201, ANN001
++++
+```
+# ruff: noqa: ANN201, ANN001
 
 import os
-
 import sys
-
 import pathlib
-
 import logging
-
 from azure.identity import DefaultAzureCredential
-
 from azure.ai.projects import AIProjectClient
-
 from azure.ai.inference.tracing import AIInferenceInstrumentor
 
-\# load environment variables from the .env file
-
+# load environment variables from the .env file
 from dotenv import load_dotenv
 
 load_dotenv()
 
-\# Set "./assets" as the path where assets are stored, resolving the
-absolute path:
+# Set "./assets" as the path where assets are stored, resolving the absolute path:
+ASSET_PATH = pathlib.Path(__file__).parent.resolve() / "assets"
 
-ASSET_PATH = pathlib.Path(\_\_file\_\_).parent.resolve() / "assets"
-
-\# Configure an root app logger that prints info level logs to stdout
-
+# Configure an root app logger that prints info level logs to stdout
 logger = logging.getLogger("app")
-
 logger.setLevel(logging.INFO)
-
 logger.addHandler(logging.StreamHandler(stream=sys.stdout))
 
-\# Returns a module-specific logger, inheriting from the root app logger
 
+# Returns a module-specific logger, inheriting from the root app logger
 def get_logger(module_name):
+    return logging.getLogger(f"app.{module_name}")
 
-return logging.getLogger(f"app.{module_name}")
 
-\# Enable instrumentation and logging of telemetry to the project
-
+# Enable instrumentation and logging of telemetry to the project
 def enable_telemetry(log_to_project: bool = False):
+    AIInferenceInstrumentor().instrument()
 
-AIInferenceInstrumentor().instrument()
+    # enable logging message contents
+    os.environ["AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED"] = "true"
 
-\# enable logging message contents
+    if log_to_project:
+        from azure.monitor.opentelemetry import configure_azure_monitor
 
-os.environ\["AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED"\] = "true"
+        project = AIProjectClient.from_connection_string(
+            conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+        )
+        tracing_link = f"https://ai.azure.com/tracing?wsid=/subscriptions/{project.scope['subscription_id']}/resourceGroups/{project.scope['resource_group_name']}/providers/Microsoft.MachineLearningServices/workspaces/{project.scope['project_name']}"
+        application_insights_connection_string = project.telemetry.get_connection_string()
+        if not application_insights_connection_string:
+            logger.warning(
+                "No application insights configured, telemetry will not be logged to project. Add application insights at:"
+            )
+            logger.warning(tracing_link)
 
-if log_to_project:
+            return
 
-from azure.monitor.opentelemetry import configure_azure_monitor
+        configure_azure_monitor(connection_string=application_insights_connection_string)
+        logger.info("Enabled telemetry logging to project, view traces at:")
+        logger.info(tracing_link)
 
-project = AIProjectClient.from_connection_string(
+```
++++
 
-conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
-credential=DefaultAzureCredential()
+![](./media/image46.png)
 
-)
 
-tracing_link =
-f"https://ai.azure.com/tracing?wsid=/subscriptions/{project.scope\['subscription_id'\]}/resourceGroups/{project.scope\['resource_group_name'\]}/providers/Microsoft.MachineLearningServices/workspaces/{project.scope\['project_name'\]}"
-
-application_insights_connection_string =
-project.telemetry.get_connection_string()
-
-if not application_insights_connection_string:
-
-logger.warning(
-
-"No application insights configured, telemetry will not be logged to
-project. Add application insights at:"
-
-)
-
-logger.warning(tracing_link)
-
-return
-
-configure_azure_monitor(connection_string=application_insights_connection_string)
-
-logger.info("Enabled telemetry logging to project, view traces at:")
-
-logger.info(tracing_link)
-
-<img src="./media/image46.png" style="width:6.5in;height:3.42639in" />
-
-**Note**: this newly created config.py file script will be used in the
-next exercise.
+> **Note**: this newly created config.py file script will be used in the next exercise.
 
 ### Task 9: Configure environment variables
 
-Your project connection string is required to call the Azure OpenAI
-service from your code. In this quickstart, you save this value in
-a .env file, which is a file that contains environment variables that
-your application can read.
+Your project connection string is required to call the Azure OpenAI service from your code. In this quickstart, you save this value in a .env file, which is a file that contains environment variables that your application can read.
 
-1.  Create new file ** .env** in the src directory, and paste the
-    following code:
+1.  Create new file **.env** in the src directory, and paste the following code:
 
-Replace the connection string with the value saved on notepad in task 1
-step 9 and save it.
+Replace the connection string with the value saved on notepad in task 1 step 9 and save it.
 
-AIPROJECT_CONNECTION_STRING=\<your-connection-string\>
-
++++
+```
+AIPROJECT_CONNECTION_STRING=<your-connection-string>
 AISEARCH_INDEX_NAME="example-index"
-
 EMBEDDINGS_MODEL="text-embedding-ada-002"
-
 INTENT_MAPPING_MODEL="gpt-4o-mini"
-
 CHAT_MODEL="gpt-4o-mini"
-
 EVALUATION_MODEL="gpt-4o-mini"
+```
++++
 
-<img src="./media/image47.png"
-style="width:4.11734in;height:3.88802in" />
+![](./media/image47.png)
 
-<img src="./media/image48.png" style="width:6.5in;height:3.42639in" />
 
-**Note**: Your connection string can be found in the Azure AI Foundry
-project homepage under **Overview**.
+![](./media/image48.png)
 
-<img src="./media/image49.png" style="width:6.5in;height:3.0375in" />
+
+> **Note**: Your connection string can be found in the Azure AI Foundry project homepage under **Overview**.
+
+![](./media/image49.png)
 
 AISEARCH_INDEX_NAME : you'll create one in the next exercise.
 
@@ -495,9 +472,7 @@ AISEARCH_INDEX_NAME : you'll create one in the next exercise.
 
 **Prerequisites**
 
-Complete [Exercise 1 - Create resources for building a custom chat
-application with the Azure AI
-SDK](https://learn.microsoft.com/en-us/azure/ai-studio/tutorials/copilot-sdk-create-resources) to:
+CompleteExercise 1 - Create resources for building a custom chat application with the Azure AI SDK to:
 
 - Create a project with a connected Azure AI Search index
 
@@ -507,1172 +482,793 @@ SDK](https://learn.microsoft.com/en-us/azure/ai-studio/tutorials/copilot-sdk-cre
 
 ### Task 1: Create example data for your chat app
 
-The goal with this RAG-based application is to ground the model
-responses in your custom data. You use an Azure AI Search index that
-stores vectorized data from the embeddings model. The search index is
-used to retrieve relevant documents based on the user's question.
+The goal with this RAG-based application is to ground the model responses in your custom data. You use an Azure AI Search index that stores vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
 
 1.  Create an **assets** directory in your project folder\src.
 
++++
+```
 mkdir assets
+```
++++
 
-<img src="./media/image50.png" style="width:4.07564in;height:4.75318in"
-alt="A screenshot of a computer Description automatically generated" />
+![](./media/image50.png)
 
-2.  Copy **products.csv** file from Lab files and paste it in
-    **Project0612** folder.
 
-<img src="./media/image51.png" style="width:6.5in;height:2.22778in" />
+2.  Copy **products.csv** file from Lab files and paste it in +++**Project0612**+++ folder.
 
-<img src="./media/image52.png" style="width:4.0131in;height:5.05546in"
-alt="A screenshot of a computer Description automatically generated" />
+![](./media/image51.png)
 
-3.  Navigate to **File** on the top navigation bar and click on **Save
-    all.**
+![](./media/image52.png)
 
-<img src="./media/image53.png" style="width:4.10691in;height:6.94214in"
-alt="A screenshot of a computer Description automatically generated" />
+
+3.  Navigate to **File** on the top navigation bar and click on **Save all.**
+
+![](./media/image53.png)
+
 
 ### Task 2: Create a search index
 
-> The search index is used to store vectorized data from the embeddings
-> model. The search index is used to retrieve relevant documents based
-> on the user's question.
+The search index is used to store vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
 
-1.  On your VS code create the file **create_search_index.py** in your
-    src folder here it is (that is, the same directory where you placed
-    your **assets** folder, not inside the **assets** folder).
+1.  On your VS code create the file +++**create_search_index.py**+++ in your src folder here it is (that is, the same directory where you placed your **assets** folder, not inside the **assets** folder).
 
-> <img src="./media/image54.png" style="width:4.02352in;height:5.09716in"
-> alt="A screenshot of a computer Description automatically generated" />
+![](./media/image54.png)
 
-2.  Open **create_search_index.py** file in Visual studio and add the
-    following code to import the required libraries, create a project
-    client, and configure some settings:
 
-> import os
->
-> from azure.ai.projects import AIProjectClient
->
-> from azure.ai.projects.models import ConnectionType
->
-> from azure.identity import DefaultAzureCredential
->
-> from azure.core.credentials import AzureKeyCredential
->
-> from azure.search.documents import SearchClient
->
-> from azure.search.documents.indexes import SearchIndexClient
->
-> from config import get_logger
->
-> \# initialize logging object
->
-> logger = get_logger(\_\_name\_\_)
->
-> \# create a project client using environment variables loaded from the
-> .env file
->
-> project = AIProjectClient.from_connection_string(
->
-> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
-> credential=DefaultAzureCredential()
->
-> )
->
-> \# create a vector embeddings client that will be used to generate
-> vector embeddings
->
-> embeddings = project.inference.get_embeddings_client()
->
-> \# use the project client to get the default search connection
->
-> search_connection = project.connections.get_default(
->
-> connection_type=ConnectionType.AZURE_AI_SEARCH,
-> include_credentials=True
->
-> )
->
-> \# Create a search index client using the search connection
->
-> \# This client will be used to create and delete search indexes
->
-> index_client = SearchIndexClient(
->
-> endpoint=search_connection.endpoint_url,
-> credential=AzureKeyCredential(key=search_connection.key)
->
-> )
->
-> <img src="./media/image55.png" style="width:6.5in;height:3.42639in" />
+2.  Open **create_search_index.py** file in Visual studio and add the following code to import the required libraries, create a project client, and configure some settings:
 
-3.  Now add the function at the end of the create_search_index.py to
-    define a search index:
++++
+```
+import os
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import ConnectionType
+from azure.identity import DefaultAzureCredential
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents import SearchClient
+from azure.search.documents.indexes import SearchIndexClient
+from config import get_logger
 
-> import pandas as pd
->
-> from azure.search.documents.indexes.models import (
->
-> SemanticSearch,
->
-> SearchField,
->
-> SimpleField,
->
-> SearchableField,
->
-> SearchFieldDataType,
->
-> SemanticConfiguration,
->
-> SemanticPrioritizedFields,
->
-> SemanticField,
->
-> VectorSearch,
->
-> HnswAlgorithmConfiguration,
->
-> VectorSearchAlgorithmKind,
->
-> HnswParameters,
->
-> VectorSearchAlgorithmMetric,
->
-> ExhaustiveKnnAlgorithmConfiguration,
->
-> ExhaustiveKnnParameters,
->
-> VectorSearchProfile,
->
-> SearchIndex,
->
-> )
->
-> def create_index_definition(index_name: str, model: str) -\>
-> SearchIndex:
->
-> dimensions = 1536 \# text-embedding-ada-002
->
-> if model == "text-embedding-3-large":
->
-> dimensions = 3072
->
-> \# The fields we want to index. The "embedding" field is a vector
-> field that will
->
-> \# be used for vector search.
->
-> fields = \[
->
-> SimpleField(name="id", type=SearchFieldDataType.String, key=True),
->
-> SearchableField(name="content", type=SearchFieldDataType.String),
->
-> SimpleField(name="filepath", type=SearchFieldDataType.String),
->
-> SearchableField(name="title", type=SearchFieldDataType.String),
->
-> SimpleField(name="url", type=SearchFieldDataType.String),
->
-> SearchField(
->
-> name="contentVector",
->
-> type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
->
-> searchable=True,
->
-> \# Size of the vector created by the text-embedding-ada-002 model.
->
-> vector_search_dimensions=dimensions,
->
-> vector_search_profile_name="myHnswProfile",
->
-> ),
->
-> \]
->
-> \# The "content" field should be prioritized for semantic ranking.
->
-> semantic_config = SemanticConfiguration(
->
-> name="default",
->
-> prioritized_fields=SemanticPrioritizedFields(
->
-> title_field=SemanticField(field_name="title"),
->
-> keywords_fields=\[\],
->
-> content_fields=\[SemanticField(field_name="content")\],
->
-> ),
->
-> )
->
-> \# For vector search, we want to use the HNSW (Hierarchical Navigable
-> Small World)
->
-> \# algorithm (a type of approximate nearest neighbor search algorithm)
-> with cosine
->
-> \# distance.
->
-> vector_search = VectorSearch(
->
-> algorithms=\[
->
-> HnswAlgorithmConfiguration(
->
-> name="myHnsw",
->
-> kind=VectorSearchAlgorithmKind.HNSW,
->
-> parameters=HnswParameters(
->
-> m=4,
->
-> ef_construction=1000,
->
-> ef_search=1000,
->
-> metric=VectorSearchAlgorithmMetric.COSINE,
->
-> ),
->
-> ),
->
-> ExhaustiveKnnAlgorithmConfiguration(
->
-> name="myExhaustiveKnn",
->
-> kind=VectorSearchAlgorithmKind.EXHAUSTIVE_KNN,
->
-> parameters=ExhaustiveKnnParameters(metric=VectorSearchAlgorithmMetric.COSINE),
->
-> ),
->
-> \],
->
-> profiles=\[
->
-> VectorSearchProfile(
->
-> name="myHnswProfile",
->
-> algorithm_configuration_name="myHnsw",
->
-> ),
->
-> VectorSearchProfile(
->
-> name="myExhaustiveKnnProfile",
->
-> algorithm_configuration_name="myExhaustiveKnn",
->
-> ),
->
-> \],
->
-> )
->
-> \# Create the semantic settings with the configuration
->
-> semantic_search = SemanticSearch(configurations=\[semantic_config\])
->
-> \# Create the search index definition
->
-> return SearchIndex(
->
-> name=index_name,
->
-> fields=fields,
->
-> semantic_search=semantic_search,
->
-> vector_search=vector_search,
->
-> )
->
-> <img src="./media/image56.png" style="width:6.5in;height:3.42639in" />
+# initialize logging object
+logger = get_logger(__name__)
 
-4.  Now add the function in create_search_index.py to create the
-    function to add a csv file to the index:
+# create a project client using environment variables loaded from the .env file
+project = AIProjectClient.from_connection_string(
+    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+)
 
-> \# define a function for indexing a csv file, that adds each row as a
-> document
->
-> \# and generates vector embeddings for the specified content_column
->
-> def create_docs_from_csv(path: str, content_column: str, model: str)
-> -\> list\[dict\[str, any\]\]:
->
-> products = pd.read_csv(path)
->
-> items = \[\]
->
-> for product in products.to_dict("records"):
->
-> content = product\[content_column\]
->
-> id = str(product\["id"\])
->
-> title = product\["name"\]
->
-> url = f"/products/{title.lower().replace(' ', '-')}"
->
-> emb = embeddings.embed(input=content, model=model)
->
-> rec = {
->
-> "id": id,
->
-> "content": content,
->
-> "filepath": f"{title.lower().replace(' ', '-')}",
->
-> "title": title,
->
-> "url": url,
->
-> "contentVector": emb.data\[0\].embedding,
->
-> }
->
-> items.append(rec)
->
-> return items
->
-> def create_index_from_csv(index_name, csv_file):
->
-> \# If a search index already exists, delete it:
->
-> try:
->
-> index_definition = index_client.get_index(index_name)
->
-> index_client.delete_index(index_name)
->
-> logger.info(f"🗑️ Found existing index named '{index_name}', and
-> deleted it")
->
-> except Exception:
->
-> pass
->
-> \# create an empty search index
->
-> index_definition = create_index_definition(index_name,
-> model=os.environ\["EMBEDDINGS_MODEL"\])
->
-> index_client.create_index(index_definition)
->
-> \# create documents from the products.csv file, generating vector
-> embeddings for the "description" column
->
-> docs = create_docs_from_csv(path=csv_file,
-> content_column="description", model=os.environ\["EMBEDDINGS_MODEL"\])
->
-> \# Add the documents to the index using the Azure AI Search client
->
-> search_client = SearchClient(
->
-> endpoint=search_connection.endpoint_url,
->
-> index_name=index_name,
->
-> credential=AzureKeyCredential(key=search_connection.key),
->
-> )
->
-> search_client.upload_documents(docs)
->
-> logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}'
-> index")
->
-> <img src="./media/image57.png" style="width:6.5in;height:3.42639in" />
+# create a vector embeddings client that will be used to generate vector embeddings
+embeddings = project.inference.get_embeddings_client()
 
-5.  Finally, Add the below functions in create_search_index.py to build
-    the index and register it to the cloud project. After adding the
-    code go to Files from top bar and click on **Save all.**
+# use the project client to get the default search connection
+search_connection = project.connections.get_default(
+    connection_type=ConnectionType.AZURE_AI_SEARCH, include_credentials=True
+)
 
-> if \_\_name\_\_ == "\_\_main\_\_":
->
-> import argparse
->
-> parser = argparse.ArgumentParser()
->
-> parser.add_argument(
->
-> "--index-name",
->
-> type=str,
->
-> help="index name to use when creating the AI Search index",
->
-> default=os.environ\["AISEARCH_INDEX_NAME"\],
->
-> )
->
-> parser.add_argument(
->
-> "--csv-file", type=str, help="path to data for creating search index",
-> default="assets/products.csv"
->
-> )
->
-> args = parser.parse_args()
->
-> index_name = args.index_name
->
-> csv_file = args.csv_file
->
-> create_index_from_csv(index_name, csv_file)
->
-> <img src="./media/image58.png" style="width:6.5in;height:3.42639in" />
+# Create a search index client using the search connection
+# This client will be used to create and delete search indexes
+index_client = SearchIndexClient(
+    endpoint=search_connection.endpoint_url, credential=AzureKeyCredential(key=search_connection.key)
+)
+```
++++
 
-6.  Right click on the create_search_index.py and select **Open in
-    integrated terminal** option.
+![](./media/image55.png)
 
-<img src="./media/image59.png" style="width:6.5in;height:3.86667in" />
 
-7.  From your terminal, log in to your Azure account and follow
-    instructions for authenticating your account:
+3.  Now add the function at the end of the create_search_index.py to define a search index:
 
-> az login
->
-> <img src="./media/image60.png"
-> style="width:5.48381in;height:2.29187in" />
->
-> <img src="./media/image61.png"
-> style="width:4.64207in;height:5.29212in" />
++++
+```
+import pandas as pd
+from azure.search.documents.indexes.models import (
+    SemanticSearch,
+    SearchField,
+    SimpleField,
+    SearchableField,
+    SearchFieldDataType,
+    SemanticConfiguration,
+    SemanticPrioritizedFields,
+    SemanticField,
+    VectorSearch,
+    HnswAlgorithmConfiguration,
+    VectorSearchAlgorithmKind,
+    HnswParameters,
+    VectorSearchAlgorithmMetric,
+    ExhaustiveKnnAlgorithmConfiguration,
+    ExhaustiveKnnParameters,
+    VectorSearchProfile,
+    SearchIndex,
+)
 
-8.  Run the code to build your index locally and register it to the
-    cloud project:
 
-> python create_search_index.py
->
-> <img src="./media/image62.png" style="width:6.5in;height:3.16458in" />
+def create_index_definition(index_name: str, model: str) -> SearchIndex:
+    dimensions = 1536  # text-embedding-ada-002
+    if model == "text-embedding-3-large":
+        dimensions = 3072
 
-9.  Once the script is run, you can view your newly created index in
-    **Home/All resources/aiservice0612/indexes** on the Azure portal.
+    # The fields we want to index. The "embedding" field is a vector field that will
+    # be used for vector search.
+    fields = [
+        SimpleField(name="id", type=SearchFieldDataType.String, key=True),
+        SearchableField(name="content", type=SearchFieldDataType.String),
+        SimpleField(name="filepath", type=SearchFieldDataType.String),
+        SearchableField(name="title", type=SearchFieldDataType.String),
+        SimpleField(name="url", type=SearchFieldDataType.String),
+        SearchField(
+            name="contentVector",
+            type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+            searchable=True,
+            # Size of the vector created by the text-embedding-ada-002 model.
+            vector_search_dimensions=dimensions,
+            vector_search_profile_name="myHnswProfile",
+        ),
+    ]
 
-> <img src="./media/image63.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
+    # The "content" field should be prioritized for semantic ranking.
+    semantic_config = SemanticConfiguration(
+        name="default",
+        prioritized_fields=SemanticPrioritizedFields(
+            title_field=SemanticField(field_name="title"),
+            keywords_fields=[],
+            content_fields=[SemanticField(field_name="content")],
+        ),
+    )
 
-10. If you run the script again with the same index name, it creates a
-    new version of the same index.
+    # For vector search, we want to use the HNSW (Hierarchical Navigable Small World)
+    # algorithm (a type of approximate nearest neighbor search algorithm) with cosine
+    # distance.
+    vector_search = VectorSearch(
+        algorithms=[
+            HnswAlgorithmConfiguration(
+                name="myHnsw",
+                kind=VectorSearchAlgorithmKind.HNSW,
+                parameters=HnswParameters(
+                    m=4,
+                    ef_construction=1000,
+                    ef_search=1000,
+                    metric=VectorSearchAlgorithmMetric.COSINE,
+                ),
+            ),
+            ExhaustiveKnnAlgorithmConfiguration(
+                name="myExhaustiveKnn",
+                kind=VectorSearchAlgorithmKind.EXHAUSTIVE_KNN,
+                parameters=ExhaustiveKnnParameters(metric=VectorSearchAlgorithmMetric.COSINE),
+            ),
+        ],
+        profiles=[
+            VectorSearchProfile(
+                name="myHnswProfile",
+                algorithm_configuration_name="myHnsw",
+            ),
+            VectorSearchProfile(
+                name="myExhaustiveKnnProfile",
+                algorithm_configuration_name="myExhaustiveKnn",
+            ),
+        ],
+    )
+
+    # Create the semantic settings with the configuration
+    semantic_search = SemanticSearch(configurations=[semantic_config])
+
+    # Create the search index definition
+    return SearchIndex(
+        name=index_name,
+        fields=fields,
+        semantic_search=semantic_search,
+        vector_search=vector_search,
+    )
+```
++++
+
+![](./media/image56.png)
+
+
+4.  Now add the function in create_search_index.py to create the function to add a csv file to the index:
+
++++
+```
+# define a function for indexing a csv file, that adds each row as a document
+# and generates vector embeddings for the specified content_column
+def create_docs_from_csv(path: str, content_column: str, model: str) -> list[dict[str, any]]:
+    products = pd.read_csv(path)
+    items = []
+    for product in products.to_dict("records"):
+        content = product[content_column]
+        id = str(product["id"])
+        title = product["name"]
+        url = f"/products/{title.lower().replace(' ', '-')}"
+        emb = embeddings.embed(input=content, model=model)
+        rec = {
+            "id": id,
+            "content": content,
+            "filepath": f"{title.lower().replace(' ', '-')}",
+            "title": title,
+            "url": url,
+            "contentVector": emb.data[0].embedding,
+        }
+        items.append(rec)
+
+    return items
+
+
+def create_index_from_csv(index_name, csv_file):
+    # If a search index already exists, delete it:
+    try:
+        index_definition = index_client.get_index(index_name)
+        index_client.delete_index(index_name)
+        logger.info(f"🗑️  Found existing index named '{index_name}', and deleted it")
+    except Exception:
+        pass
+
+    # create an empty search index
+    index_definition = create_index_definition(index_name, model=os.environ["EMBEDDINGS_MODEL"])
+    index_client.create_index(index_definition)
+
+    # create documents from the products.csv file, generating vector embeddings for the "description" column
+    docs = create_docs_from_csv(path=csv_file, content_column="description", model=os.environ["EMBEDDINGS_MODEL"])
+
+    # Add the documents to the index using the Azure AI Search client
+    search_client = SearchClient(
+        endpoint=search_connection.endpoint_url,
+        index_name=index_name,
+        credential=AzureKeyCredential(key=search_connection.key),
+    )
+
+    search_client.upload_documents(docs)
+    logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}' index")
+```
++++
+
+![](./media/image57.png)
+
+
+5.  Finally, Add the below functions in create_search_index.py to build the index and register it to the cloud project. After adding the code go to Files from top bar and click on **Save all.**
+
++++
+```
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--index-name",
+        type=str,
+        help="index name to use when creating the AI Search index",
+        default=os.environ["AISEARCH_INDEX_NAME"],
+    )
+    parser.add_argument(
+        "--csv-file", type=str, help="path to data for creating search index", default="assets/products.csv"
+    )
+    args = parser.parse_args()
+    index_name = args.index_name
+    csv_file = args.csv_file
+
+    create_index_from_csv(index_name, csv_file)
+```
++++
+
+![](./media/image58.png)
+
+
+6.  Right click on the create_search_index.py and select **Open in integrated terminal** option.
+
+![](./media/image59.png)
+
+
+7.  From your terminal, log in to your Azure account and follow instructions for authenticating your account:
+
++++
+```
+az login
+```
++++
+
+![](./media/image60.png)
+
+![](./media/image61.png)
+
+
+8.  Run the code to build your index locally and register it to the cloud project:
+
++++
+```
+python create_search_index.py
+```
++++
+
+![](./media/image62.png)
+
+
+9.  Once the script is run, you can view your newly created index in **Home/All resources/aiservice0612/indexes** on the Azure portal.
+
+![](./media/image63.png)
+
+
+10. If you run the script again with the same index name, it creates a new version of the same index.
 
 ### Task 3: Get product documents
 
-> Next, you create a script to get product documents from the search
-> index. The script queries the search index for documents that match a
-> user's question.
->
-> **Create script to get product documents**
->
-> When the chat gets a request, it searches through your data to find
-> relevant information. This script uses the Azure AI SDK to query the
-> search index for documents that match a user's question. It then
-> returns the documents to the chat app.
+Next, you create a script to get product documents from the search index. The script queries the search index for documents that match a user's question.
 
-1.  Create the **get_product_documents.py** file in your main
-    directory(src directory). Copy and paste the following code into the
-    file.
+**Create script to get product documents**
 
-> <img src="./media/image64.png"
-> style="width:4.15903in;height:4.41962in" />
+When the chat gets a request, it searches through your data to find relevant information. This script uses the Azure AI SDK to query the search index for documents that match a user's question. It then returns the documents to the chat app.
 
-2.  Start with code to import the required libraries, create a project
-    client, and configure settings:
 
-> import os
->
-> from pathlib import Path
->
-> from opentelemetry import trace
->
-> from azure.ai.projects import AIProjectClient
->
-> from azure.ai.projects.models import ConnectionType
->
-> from azure.identity import DefaultAzureCredential
->
-> from azure.core.credentials import AzureKeyCredential
->
-> from azure.search.documents import SearchClient
->
-> from config import ASSET_PATH, get_logger
->
-> \# initialize logging and tracing objects
->
-> logger = get_logger(\_\_name\_\_)
->
-> tracer = trace.get_tracer(\_\_name\_\_)
->
-> \# create a project client using environment variables loaded from the
-> .env file
->
-> project = AIProjectClient.from_connection_string(
->
-> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
-> credential=DefaultAzureCredential()
->
-> )
->
-> \# create a vector embeddings client that will be used to generate
-> vector embeddings
->
-> chat = project.inference.get_chat_completions_client()
->
-> embeddings = project.inference.get_embeddings_client()
->
-> \# use the project client to get the default search connection
->
-> search_connection = project.connections.get_default(
->
-> connection_type=ConnectionType.AZURE_AI_SEARCH,
-> include_credentials=True
->
-> )
->
-> \# Create a search index client using the search connection
->
-> \# This client will be used to create and delete search indexes
->
-> search_client = SearchClient(
->
-> index_name=os.environ\["AISEARCH_INDEX_NAME"\],
->
-> endpoint=search_connection.endpoint_url,
->
-> credential=AzureKeyCredential(key=search_connection.key),
->
-> )
+1.  Create the +++**get_product_documents.py**+++ file in your main directory(src directory). Copy and paste the following code into the file.
 
-3.  Add the function in get_product-documents.py to get product
-    documents:
+![](./media/image64.png)
 
-> from azure.ai.inference.prompts import PromptTemplate
->
-> from azure.search.documents.models import VectorizedQuery
->
-> @tracer.start_as_current_span(name="get_product_documents")
->
-> def get_product_documents(messages: list, context: dict = None) -\>
-> dict:
->
-> if context is None:
->
-> context = {}
->
-> overrides = context.get("overrides", {})
->
-> top = overrides.get("top", 5)
->
-> \# generate a search query from the chat messages
->
-> intent_prompty = PromptTemplate.from_prompty(Path(ASSET_PATH) /
-> "intent_mapping.prompty")
->
-> intent_mapping_response = chat.complete(
->
-> model=os.environ\["INTENT_MAPPING_MODEL"\],
->
-> messages=intent_prompty.create_messages(conversation=messages),
->
-> \*\*intent_prompty.parameters,
->
-> )
->
-> search_query = intent_mapping_response.choices\[0\].message.content
->
-> logger.debug(f"🧠 Intent mapping: {search_query}")
->
-> \# generate a vector representation of the search query
->
-> embedding = embeddings.embed(model=os.environ\["EMBEDDINGS_MODEL"\],
-> input=search_query)
->
-> search_vector = embedding.data\[0\].embedding
->
-> \# search the index for products matching the search query
->
-> vector_query = VectorizedQuery(vector=search_vector,
-> k_nearest_neighbors=top, fields="contentVector")
->
-> search_results = search_client.search(
->
-> search_text=search_query, vector_queries=\[vector_query\],
-> select=\["id", "content", "filepath", "title", "url"\]
->
-> )
->
-> documents = \[
->
-> {
->
-> "id": result\["id"\],
->
-> "content": result\["content"\],
->
-> "filepath": result\["filepath"\],
->
-> "title": result\["title"\],
->
-> "url": result\["url"\],
->
-> }
->
-> for result in search_results
->
-> \]
->
-> \# add results to the provided context
->
-> if "thoughts" not in context:
->
-> context\["thoughts"\] = \[\]
->
-> \# add thoughts and documents to the context object so it can be
-> returned to the caller
->
-> context\["thoughts"\].append(
->
-> {
->
-> "title": "Generated search query",
->
-> "description": search_query,
->
-> }
->
-> )
->
-> if "grounding_data" not in context:
->
-> context\["grounding_data"\] = \[\]
->
-> context\["grounding_data"\].append(documents)
->
-> logger.debug(f"📄 {len(documents)} documents retrieved: {documents}")
->
-> return documents
 
-4.  Finally, add code to test the function when you run the script
-    directly:
+2.  Start with code to import the required libraries, create a project client, and configure settings:
 
-> if \_\_name\_\_ == "\_\_main\_\_":
->
-> import logging
->
-> import argparse
->
-> \# set logging level to debug when running this module directly
->
-> logger.setLevel(logging.DEBUG)
->
-> \# load command line arguments
->
-> parser = argparse.ArgumentParser()
->
-> parser.add_argument(
->
-> "--query",
->
-> type=str,
->
-> help="Query to use to search product",
->
-> default="I need a new tent for 4 people, what would you recommend?",
->
-> )
->
-> args = parser.parse_args()
->
-> query = args.query
->
-> result = get_product_documents(messages=\[{"role": "user", "content":
-> query}\])
->
-> <img src="./media/image65.png" style="width:6.5in;height:4.72917in" />
++++
+```
+import os
+from pathlib import Path
+from opentelemetry import trace
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import ConnectionType
+from azure.identity import DefaultAzureCredential
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents import SearchClient
+from config import ASSET_PATH, get_logger
 
-5.  Click on File\> Save all.
+# initialize logging and tracing objects
+logger = get_logger(__name__)
+tracer = trace.get_tracer(__name__)
 
-<img src="./media/image66.png"
-style="width:4.14861in;height:5.30563in" />
+# create a project client using environment variables loaded from the .env file
+project = AIProjectClient.from_connection_string(
+    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+)
+
+# create a vector embeddings client that will be used to generate vector embeddings
+chat = project.inference.get_chat_completions_client()
+embeddings = project.inference.get_embeddings_client()
+
+# use the project client to get the default search connection
+search_connection = project.connections.get_default(
+    connection_type=ConnectionType.AZURE_AI_SEARCH, include_credentials=True
+)
+
+# Create a search index client using the search connection
+# This client will be used to create and delete search indexes
+search_client = SearchClient(
+    index_name=os.environ["AISEARCH_INDEX_NAME"],
+    endpoint=search_connection.endpoint_url,
+    credential=AzureKeyCredential(key=search_connection.key),
+)
+```
++++
+
+3.  Add the function in get_product-documents.py to get product documents:
+
++++
+```
+from azure.ai.inference.prompts import PromptTemplate
+from azure.search.documents.models import VectorizedQuery
+
+
+@tracer.start_as_current_span(name="get_product_documents")
+def get_product_documents(messages: list, context: dict = None) -> dict:
+    if context is None:
+        context = {}
+
+    overrides = context.get("overrides", {})
+    top = overrides.get("top", 5)
+
+    # generate a search query from the chat messages
+    intent_prompty = PromptTemplate.from_prompty(Path(ASSET_PATH) / "intent_mapping.prompty")
+
+    intent_mapping_response = chat.complete(
+        model=os.environ["INTENT_MAPPING_MODEL"],
+        messages=intent_prompty.create_messages(conversation=messages),
+        **intent_prompty.parameters,
+    )
+
+    search_query = intent_mapping_response.choices[0].message.content
+    logger.debug(f"🧠 Intent mapping: {search_query}")
+
+    # generate a vector representation of the search query
+    embedding = embeddings.embed(model=os.environ["EMBEDDINGS_MODEL"], input=search_query)
+    search_vector = embedding.data[0].embedding
+
+    # search the index for products matching the search query
+    vector_query = VectorizedQuery(vector=search_vector, k_nearest_neighbors=top, fields="contentVector")
+
+    search_results = search_client.search(
+        search_text=search_query, vector_queries=[vector_query], select=["id", "content", "filepath", "title", "url"]
+    )
+
+    documents = [
+        {
+            "id": result["id"],
+            "content": result["content"],
+            "filepath": result["filepath"],
+            "title": result["title"],
+            "url": result["url"],
+        }
+        for result in search_results
+    ]
+
+    # add results to the provided context
+    if "thoughts" not in context:
+        context["thoughts"] = []
+
+    # add thoughts and documents to the context object so it can be returned to the caller
+    context["thoughts"].append(
+        {
+            "title": "Generated search query",
+            "description": search_query,
+        }
+    )
+
+    if "grounding_data" not in context:
+        context["grounding_data"] = []
+    context["grounding_data"].append(documents)
+
+    logger.debug(f"📄 {len(documents)} documents retrieved: {documents}")
+    return documents
+```
++++
+
+4.  Finally, add code to test the function when you run the script directly:
+
++++
+```
+if __name__ == "__main__":
+    import logging
+    import argparse
+
+    # set logging level to debug when running this module directly
+    logger.setLevel(logging.DEBUG)
+
+    # load command line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--query",
+        type=str,
+        help="Query to use to search product",
+        default="I need a new tent for 4 people, what would you recommend?",
+    )
+
+    args = parser.parse_args()
+    query = args.query
+
+    result = get_product_documents(messages=[{"role": "user", "content": query}])
+```
++++
+
+![](./media/image65.png)
+
+
+5.  Click on File --> Save all.
+
+![](./media/image66.png)
+
 
 ### Task 4: Create prompt template for intent mapping
 
-> The **get_product_documents.py** script uses a prompt template to
-> convert the conversation to a search query. The template instructs how
-> to extract the user's intent from the conversation.
+The **get_product_documents.py** script uses a prompt template to convert the conversation to a search query. The template instructs how to extract the user's intent from the conversation.
 
-1.  Before you run the script, create the prompt template. Add the
-    file **intent_mapping.prompty** to your **assets** folder:
+1. Before you run the script, create the prompt template. Add the file +++**intent_mapping.prompty**+++ to your assets folder:
 
-> <img src="./media/image67.png" style="width:4.25284in;height:6.11868in"
-> alt="A screenshot of a computer Description automatically generated" />
+![](./media/image67.png)
 
-4.  Copy the following code to the intent_mapping_prompty file and the
-    from top bar go to Files and click on **Save all.**
 
-> ---
->
-> name: Chat Prompt
->
-> description: A prompty that extract users query intent based on the
-> current_query and chat_history of the conversation
->
-> model:
->
-> api: chat
->
-> configuration:
->
-> azure_deployment: gpt-4o
->
-> inputs:
->
-> conversation:
->
-> type: array
->
-> ---
->
-> system:
->
-> \# Instructions
->
-> \- You are an AI assistant reading a current user query and
-> chat_history.
->
-> \- Given the chat_history, and current user's query, infer the user's
-> intent expressed in the current user query.
->
-> \- Once you infer the intent, respond with a search query that can be
-> used to retrieve relevant documents for the current user's query based
-> on the intent
->
-> \- Be specific in what the user is asking about, but disregard parts
-> of the chat history that are not relevant to the user's intent.
->
-> \- Provide responses in json format
->
-> \# Examples
->
-> Example 1:
->
-> With a conversation like below:
->
-> \`\`\`
->
-> \- user: are the trailwalker shoes waterproof?
->
-> \- assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They
-> are designed with a durable and waterproof construction to withstand
-> various terrains and weather conditions.
->
-> \- user: how much do they cost?
->
-> \`\`\`
->
-> Respond with:
->
-> {
->
-> "intent": "The user wants to know how much the Trailwalker Hiking
-> Shoes cost.",
->
-> "search_query": "price of Trailwalker Hiking Shoes"
->
-> }
->
-> Example 2:
->
-> With a conversation like below:
->
-> \`\`\`
->
-> \- user: are the trailwalker shoes waterproof?
->
-> \- assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They
-> are designed with a durable and waterproof construction to withstand
-> various terrains and weather conditions.
->
-> \- user: how much do they cost?
->
-> \- assistant: The TrailWalker Hiking Shoes are priced at \$110.
->
-> \- user: do you have waterproof tents?
->
-> \- assistant: Yes, we have waterproof tents available. Can you please
-> provide more information about the type or size of tent you are
-> looking for?
->
-> \- user: which is your most waterproof tent?
->
-> \- assistant: Our most waterproof tent is the Alpine Explorer Tent. It
-> is designed with a waterproof material and has a rainfly with a
-> waterproof rating of 3000mm. This tent provides reliable protection
-> against rain and moisture.
->
-> \- user: how much does it cost?
->
-> \`\`\`
->
-> Respond with:
->
-> {
->
-> "intent": "The user would like to know how much the Alpine Explorer
-> Tent costs.",
->
-> "search_query": "price of Alpine Explorer Tent"
->
-> }
->
-> user:
->
-> Return the search query for the messages in the following
-> conversation:
->
-> {{#conversation}}
->
-> \- {{role}}: {{content}}
->
-> {{/conversation}}
->
-> <img src="./media/image68.png" style="width:6.5in;height:3.42569in" />
+4.  Copy the following code to the intent_mapping_prompty file and the from top bar go to Files and click on **Save all.**
+
++++
+```
+---
+name: Chat Prompt
+description: A prompty that extract users query intent based on the current_query and chat_history of the conversation
+model:
+    api: chat
+    configuration:
+        azure_deployment: gpt-4o
+inputs:
+    conversation:
+        type: array
+---
+system:
+# Instructions
+- You are an AI assistant reading a current user query and chat_history.
+- Given the chat_history, and current user's query, infer the user's intent expressed in the current user query.
+- Once you infer the intent, respond with a search query that can be used to retrieve relevant documents for the current user's query based on the intent
+- Be specific in what the user is asking about, but disregard parts of the chat history that are not relevant to the user's intent.
+- Provide responses in json format
+
+# Examples
+Example 1:
+With a conversation like below:
+
+ - user: are the trailwalker shoes waterproof?
+ - assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They are designed with a durable and waterproof construction to withstand various terrains and weather conditions.
+ - user: how much do they cost?
+
+Respond with:
+{
+    "intent": "The user wants to know how much the Trailwalker Hiking Shoes cost.",
+    "search_query": "price of Trailwalker Hiking Shoes"
+}
+
+Example 2:
+With a conversation like below:
+
+ - user: are the trailwalker shoes waterproof?
+ - assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They are designed with a durable and waterproof construction to withstand various terrains and weather conditions.
+ - user: how much do they cost?
+ - assistant: The TrailWalker Hiking Shoes are priced at $110.
+ - user: do you have waterproof tents?
+ - assistant: Yes, we have waterproof tents available. Can you please provide more information about the type or size of tent you are looking for?
+ - user: which is your most waterproof tent?
+ - assistant: Our most waterproof tent is the Alpine Explorer Tent. It is designed with a waterproof material and has a rainfly with a waterproof rating of 3000mm. This tent provides reliable protection against rain and moisture.
+ - user: how much does it cost?
+
+Respond with:
+{
+    "intent": "The user would like to know how much the Alpine Explorer Tent costs.",
+    "search_query": "price of Alpine Explorer Tent"
+}
+
+user:
+Return the search query for the messages in the following conversation:
+{{#conversation}}
+ - {{role}}: {{content}}
+{{/conversation}}
+```
+
+![](./media/image68.png)
+
 
 ### Task 5: Test the product document retrieval script
 
-1.  Now that you have both the script and template, run the script to
-    test out what documents the search index returns from a query. In a
-    terminal window run:
+1.  Now that you have both the script and template, run the script to test out what documents the search index returns from a query. In a terminal window run:
 
-> python get_product_documents.py --query "I need a new tent for 4
-> people, what would you recommend?"
->
-> <img src="./media/image69.png" style="width:6.5in;height:3.42639in" />
++++
+```
+python get_product_documents.py --query "I need a new tent for 4 people, what would you recommend?"
+```
++++
+
+![](./media/image69.png)
+
 
 ### Task 6: Develop custom knowledge retrieval (RAG) code
 
-> Next you create custom code to add retrieval augmented generation
-> (RAG) capabilities to a basic chat application.
->
-> **Create a chat script with RAG capabilities**
+Next you create custom code to add retrieval augmented generation (RAG) capabilities to a basic chat application.
+
+**Create a chat script with RAG capabilities**
 
 1.  In your src folder, create a new file
-    called **chat_with_products.py**. This script retrieves product
-    documents and generates a response to a user's question.
+    called +++**chat_with_products.py**+++. This script retrieves product documents and generates a response to a user's question.
 
-> <img src="./media/image70.png"
-> style="width:4.33623in;height:5.31606in" />
+![](./media/image70.png)
 
-2.  Add the code to import the required libraries, create a project
-    client, and configure settings:
 
-> import os
->
-> from pathlib import Path
->
-> from opentelemetry import trace
->
-> from azure.ai.projects import AIProjectClient
->
-> from azure.identity import DefaultAzureCredential
->
-> from config import ASSET_PATH, get_logger, enable_telemetry
->
-> from get_product_documents import get_product_documents
->
-> \# initialize logging and tracing objects
->
-> logger = get_logger(\_\_name\_\_)
->
-> tracer = trace.get_tracer(\_\_name\_\_)
->
-> \# create a project client using environment variables loaded from the
-> .env file
->
-> project = AIProjectClient.from_connection_string(
->
-> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
-> credential=DefaultAzureCredential()
->
-> )
->
-> \# create a chat client we can use for testing
->
-> chat = project.inference.get_chat_completions_client()
->
-> <img src="./media/image71.png" style="width:6.5in;height:3.42569in"
-> alt="A screenshot of a computer Description automatically generated" />
+2.  Add the code to import the required libraries, create a project client, and configure settings:
 
-3.  Add the code at end of chat_with_products.py to create the chat
-    function that uses the RAG capabilities:
++++
+```
+import os
+from pathlib import Path
+from opentelemetry import trace
+from azure.ai.projects import AIProjectClient
+from azure.identity import DefaultAzureCredential
+from config import ASSET_PATH, get_logger, enable_telemetry
+from get_product_documents import get_product_documents
 
-> from azure.ai.inference.prompts import PromptTemplate
->
-> @tracer.start_as_current_span(name="chat_with_products")
->
-> def chat_with_products(messages: list, context: dict = None) -\> dict:
->
-> if context is None:
->
-> context = {}
->
-> documents = get_product_documents(messages, context)
->
-> \# do a grounded chat call using the search results
->
-> grounded_chat_prompt = PromptTemplate.from_prompty(Path(ASSET_PATH) /
-> "grounded_chat.prompty")
->
-> system_message =
-> grounded_chat_prompt.create_messages(documents=documents,
-> context=context)
->
-> response = chat.complete(
->
-> model=os.environ\["CHAT_MODEL"\],
->
-> messages=system_message + messages,
->
-> \*\*grounded_chat_prompt.parameters,
->
-> )
->
-> logger.info(f"💬 Response: {response.choices\[0\].message}")
->
-> \# Return a chat protocol compliant response
->
-> return {"message": response.choices\[0\].message, "context": context}
->
-> <img src="./media/image72.png" style="width:6.5in;height:3.42569in"
-> alt="A screenshot of a computer Description automatically generated" />
 
-4.  Finally, add the code to run the chat function and then go to files
-    and click on save all.
+# initialize logging and tracing objects
+logger = get_logger(__name__)
+tracer = trace.get_tracer(__name__)
 
-> if \_\_name\_\_ == "\_\_main\_\_":
->
-> import argparse
->
-> \# load command line arguments
->
-> parser = argparse.ArgumentParser()
->
-> parser.add_argument(
->
-> "--query",
->
-> type=str,
->
-> help="Query to use to search product",
->
-> default="I need a new tent for 4 people, what would you recommend?",
->
-> )
->
-> parser.add_argument(
->
-> "--enable-telemetry",
->
-> action="store_true",
->
-> help="Enable sending telemetry back to the project",
->
-> )
->
-> args = parser.parse_args()
->
-> if args.enable_telemetry:
->
-> enable_telemetry(True)
->
-> \# run chat with products
->
-> response = chat_with_products(messages=\[{"role": "user", "content":
-> args.query}\])
->
-> <img src="./media/image73.png" style="width:6.5in;height:3.42569in" />
+# create a project client using environment variables loaded from the .env file
+project = AIProjectClient.from_connection_string(
+    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+)
+
+# create a chat client we can use for testing
+chat = project.inference.get_chat_completions_client()
+```
++++
+
+![](./media/image71.png)
+
+
+3.  Add the code at end of chat_with_products.py to create the chat function that uses the RAG capabilities:
+
++++
+```
+from azure.ai.inference.prompts import PromptTemplate
+
+
+@tracer.start_as_current_span(name="chat_with_products")
+def chat_with_products(messages: list, context: dict = None) -> dict:
+    if context is None:
+        context = {}
+
+    documents = get_product_documents(messages, context)
+
+    # do a grounded chat call using the search results
+    grounded_chat_prompt = PromptTemplate.from_prompty(Path(ASSET_PATH) / "grounded_chat.prompty")
+
+    system_message = grounded_chat_prompt.create_messages(documents=documents, context=context)
+    response = chat.complete(
+        model=os.environ["CHAT_MODEL"],
+        messages=system_message + messages,
+        **grounded_chat_prompt.parameters,
+    )
+    logger.info(f"💬 Response: {response.choices[0].message}")
+
+    # Return a chat protocol compliant response
+    return {"message": response.choices[0].message, "context": context}
+```
++++
+
+![](./media/image72.png)
+
+
+4.  Finally, add the code to run the chat function and then go to files and click on save all.
+
++++
+```
+if __name__ == "__main__":
+    import argparse
+
+    # load command line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--query",
+        type=str,
+        help="Query to use to search product",
+        default="I need a new tent for 4 people, what would you recommend?",
+    )
+    parser.add_argument(
+        "--enable-telemetry",
+        action="store_true",
+        help="Enable sending telemetry back to the project",
+    )
+    args = parser.parse_args()
+    if args.enable_telemetry:
+        enable_telemetry(True)
+
+    # run chat with products
+    response = chat_with_products(messages=[{"role": "user", "content": args.query}])
+```
++++
+
+![](./media/image73.png)
+
 
 ### Task 7: Create a grounded chat prompt template
 
-> The **chat_with_products.py** script calls a prompt template to
-> generate a response to the user's question. The template instructs how
-> to generate a response based on the user's question and the retrieved
-> documents. Create this template now.
+The chat_with_products.py script calls a prompt template to generate a response to the user's question. The template instructs how to generate a response based on the user's question and the retrieved documents. Create this template now.
 
-1.  In your **assets** folder, add the file **grounded_chat.prompty**
+1.  In your **assets** folder, add the file +++**grounded_chat.prompty**+++
 
-> <img src="./media/image74.png"
-> style="width:5.04504in;height:5.5141in" />
+![](./media/image74.png)
+
 
 2.  Add the following code grounded_chat.prompty.
 
-> ---
->
-> name: Chat with documents
->
-> description: Uses a chat completions model to respond to queries
-> grounded in relevant documents
->
-> model:
->
-> api: chat
->
-> configuration:
->
-> azure_deployment: gpt-4o
->
-> inputs:
->
-> conversation:
->
-> type: array
->
-> ---
->
-> system:
->
-> You are an AI assistant helping users with queries related to outdoor
-> outdooor/camping gear and clothing.
->
-> If the question is not related to outdoor/camping gear and clothing,
-> just say 'Sorry, I only can answer queries related to outdoor/camping
-> gear and clothing. So, how can I help?'
->
-> Don't try to make up any answers.
->
-> If the question is related to outdoor/camping gear and clothing but
-> vague, ask for clarifying questions instead of referencing documents.
-> If the question is general, for example it uses "it" or "they", ask
-> the user to specify what product they are asking about.
->
-> Use the following pieces of context to answer the questions about
-> outdoor/camping gear and clothing as completely, correctly, and
-> concisely as possible.
->
-> Do not add documentation reference in the response.
->
-> \# Documents
->
-> {{#documents}}
->
-> \## Document {{id}}: {{title}}
->
-> {{content}}
->
-> {{/documents}}
->
-> <img src="./media/image75.png" style="width:6.5in;height:3.42639in" />
++++
+```
+---
+name: Chat with documents
+description: Uses a chat completions model to respond to queries grounded in relevant documents
+model:
+    api: chat
+    configuration:
+        azure_deployment: gpt-4o
+inputs:
+    conversation:
+        type: array
+---
+system:
+You are an AI assistant helping users with queries related to outdoor outdooor/camping gear and clothing.
+If the question is not related to outdoor/camping gear and clothing, just say 'Sorry, I only can answer queries related to outdoor/camping gear and clothing. So, how can I help?'
+Don't try to make up any answers.
+If the question is related to outdoor/camping gear and clothing but vague, ask for clarifying questions instead of referencing documents. If the question is general, for example it uses "it" or "they", ask the user to specify what product they are asking about.
+Use the following pieces of context to answer the questions about outdoor/camping gear and clothing as completely, correctly, and concisely as possible.
+Do not add documentation reference in the response.
 
-3.  Click on **File\> Save all.**
+# Documents
 
-> <img src="./media/image76.png" style="width:6.5in;height:3.42639in" />
+{{#documents}}
+
+## Document {{id}}: {{title}}
+{{content}}
+{{/documents}}
+```
++++
+
+![](./media/image75.png)
+
+
+3.  Click on **File -->Save all.**
+
+![](./media/image76.png)
+
 
 ### Task 8: Run the chat script with RAG capabilities
 
-1.  Now that you have both the script and the template, run the script
-    to test your chat app with RAG capabilities:
+1.  Now that you have both the script and the template, run the script to test your chat app with RAG capabilities:
 
-> python chat_with_products.py --query "I need a new tent for 4 people,
-> what would you recommend?"
->
-> <img src="./media/image77.png" style="width:6.5in;height:1.90903in" />
++++
+```
+python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?"
+```
++++
+
+![](./media/image77.png)
+
 
 2.  To enable logging of telemetry to your project,
     Install azure-monitor-opentelemetry:
 
-> pip install azure-monitor-opentelemetry
->
-> <img src="./media/image78.png" style="width:6.5in;height:3.42639in" />
++++
+```
+pip install azure-monitor-opentelemetry
+```
++++
 
-3.  Add the --enable-telemetry flag when you use
-    the chat_with_products.py script:
+![](./media/image78.png)
 
-> python chat_with_products.py --query "I need a new tent for 4 people,
-> what would you recommend?" --enable-telemetry
+
+3.  Add the --enable-telemetry flag when you use the chat_with_products.py script:
+
++++
+```
+python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable-telemetry
+```
++++
 
 ## Exercise 3: Evaluate a custom chat application with the Azure AI Foundry SDK
 
 ### Task 1: Evaluate the quality of the chat app responses
 
-Now that you know your chat app responds well to your queries, including
-with chat history, it's time to evaluate how it does across a few
-different metrics and more data.
+Now that you know your chat app responds well to your queries, including with chat history, it's time to evaluate how it does across a few different metrics and more data.
 
-You use an evaluator with an evaluation dataset and
-the get_chat_response() target function, then assess the evaluation
-results.
+You use an evaluator with an evaluation dataset and the get_chat_response() target function, then assess the evaluation results.
 
-Once you run an evaluation, you can then make improvements to your
-logic, like improving your system prompt, and observing how the chat app
-responses change and improve.
+Once you run an evaluation, you can then make improvements to your logic, like improving your system prompt, and observing how the chat app responses change and improve.
 
 **Create evaluation dataset**
 
-Use the following evaluation dataset, which contains example questions
-and expected answers (truth).
+Use the following evaluation dataset, which contains example questions and expected answers (truth).
 
-1.  Create a file called **chat_eval_data.jsonl** in
+
+1.  Create a file called +++**chat_eval_data.jsonl**+++ in
     your **assets** folder.
 
-> <img src="./media/image79.png"
-> style="width:3.97141in;height:5.56622in" />
+![](./media/image79.png)
+
 
 2.  Paste this dataset into the file and the save the file.
 
-> {"query": "Which tent is the most waterproof?", "truth": "The Alpine
-> Explorer Tent has the highest rainfly waterproof rating at 3000m"}
->
-> {"query": "Which camping table holds the most weight?", "truth": "The
-> Adventure Dining Table has a higher weight capacity than all of the
-> other camping tables mentioned"}
->
-> {"query": "How much do the TrailWalker Hiking Shoes cost? ", "truth":
-> "The Trailewalker Hiking Shoes are priced at \$110"}
->
-> {"query": "What is the proper care for trailwalker hiking shoes? ",
-> "truth": "After each use, remove any dirt or debris by brushing or
-> wiping the shoes with a damp cloth."}
->
-> {"query": "What brand is TrailMaster tent? ", "truth":
-> "OutdoorLiving"}
->
-> {"query": "How do I carry the TrailMaster tent around? ", "truth": "
-> Carry bag included for convenient storage and transportation"}
->
-> {"query": "What is the floor area for Floor Area? ", "truth": "80
-> square feet"}
->
-> {"query": "What is the material for TrailBlaze Hiking Pants?",
-> "truth": "Made of high-quality nylon fabric"}
->
-> {"query": "What color does TrailBlaze Hiking Pants come in?", "truth":
-> "Khaki"}
->
-> {"query": "Can the warrenty for TrailBlaze pants be transfered? ",
-> "truth": "The warranty is non-transferable and applies only to the
-> original purchaser of the TrailBlaze Hiking Pants. It is valid only
-> when the product is purchased from an authorized retailer."}
->
-> {"query": "How long are the TrailBlaze pants under warranty for? ",
-> "truth": " The TrailBlaze Hiking Pants are backed by a 1-year limited
-> warranty from the date of purchase."}
->
-> {"query": "What is the material for PowerBurner Camping Stove? ",
-> "truth": "Stainless Steel"}
->
-> {"query": "Is France in Europe?", "truth": "Sorry, I can only queries
-> related to outdoor/camping gear and equipment"}
->
-> <img src="./media/image80.png" style="width:6.5in;height:3.42569in" />
++++
+```
+{"query": "Which tent is the most waterproof?", "truth": "The Alpine Explorer Tent has the highest rainfly waterproof rating at 3000m"}
+{"query": "Which camping table holds the most weight?", "truth": "The Adventure Dining Table has a higher weight capacity than all of the other camping tables mentioned"}
+{"query": "How much do the TrailWalker Hiking Shoes cost? ", "truth": "The Trailewalker Hiking Shoes are priced at $110"}
+{"query": "What is the proper care for trailwalker hiking shoes? ", "truth": "After each use, remove any dirt or debris by brushing or wiping the shoes with a damp cloth."}
+{"query": "What brand is TrailMaster tent? ", "truth": "OutdoorLiving"}
+{"query": "How do I carry the TrailMaster tent around? ", "truth": " Carry bag included for convenient storage and transportation"}
+{"query": "What is the floor area for Floor Area? ", "truth": "80 square feet"}
+{"query": "What is the material for TrailBlaze Hiking Pants?", "truth": "Made of high-quality nylon fabric"}
+{"query": "What color does TrailBlaze Hiking Pants come in?", "truth": "Khaki"}
+{"query": "Can the warrenty for TrailBlaze pants be transfered? ", "truth": "The warranty is non-transferable and applies only to the original purchaser of the TrailBlaze Hiking Pants. It is valid only when the product is purchased from an authorized retailer."}
+{"query": "How long are the TrailBlaze pants under warranty for? ", "truth": " The TrailBlaze Hiking Pants are backed by a 1-year limited warranty from the date of purchase."}
+{"query": "What is the material for PowerBurner Camping Stove? ", "truth": "Stainless Steel"}
+{"query": "Is France in Europe?", "truth": "Sorry, I can only queries related to outdoor/camping gear and equipment"}
+```
++++
+
+![](./media/image80.png)
 
 ### Task 2: Evaluate with Azure AI evaluators
 
@@ -1696,225 +1292,190 @@ results in the command line, and to a json file.
 The script also logs the evaluation results to the cloud project so that
 you can compare evaluation runs in the UI.
 
-1.  Create a file called **evaluate.py** in your main folder(src
-    folder).
+1.  Create a file called +++**evaluate.py**+++ in your main folder(src folder).
 
-> <img src="./media/image81.png"
-> style="width:3.99225in;height:5.71215in" />
+![](./media/image81.png)
 
-2.  Add the following code to import the required libraries, create a
-    project client, and configure some settings:
+2.  Add the following code to import the required libraries, create a project client, and configure some settings:
 
-> import os
->
-> import pandas as pd
->
-> from azure.ai.projects import AIProjectClient
->
-> from azure.ai.projects.models import ConnectionType
->
-> from azure.ai.evaluation import evaluate, GroundednessEvaluator
->
-> from azure.identity import DefaultAzureCredential
->
-> from chat_with_products import chat_with_products
->
-> \# load environment variables from the .env file at the root of this
-> repo
->
-> from dotenv import load_dotenv
->
-> load_dotenv()
->
-> \# create a project client using environment variables loaded from the
-> .env file
->
-> project = AIProjectClient.from_connection_string(
->
-> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
-> credential=DefaultAzureCredential()
->
-> )
->
-> connection =
-> project.connections.get_default(connection_type=ConnectionType.AZURE_OPEN_AI,
-> include_credentials=True)
->
-> evaluator_model = {
->
-> "azure_endpoint": connection.endpoint_url,
->
-> "azure_deployment": os.environ\["EVALUATION_MODEL"\],
->
-> "api_version": "2024-06-01",
->
-> "api_key": connection.key,
->
-> }
->
-> groundedness = GroundednessEvaluator(evaluator_model)
->
-> <img src="./media/image82.png" style="width:6.5in;height:3.42569in" />
++++
+```
+import os
+import pandas as pd
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import ConnectionType
+from azure.ai.evaluation import evaluate, GroundednessEvaluator
+from azure.identity import DefaultAzureCredential
 
-3.  Add code to create a wrapper function that implements the evaluation
-    interface for query and response evaluation:
+from chat_with_products import chat_with_products
 
-> def evaluate_chat_with_products(query):
->
-> response = chat_with_products(messages=\[{"role": "user", "content":
-> query}\])
->
-> return {"response": response\["message"\].content, "context":
-> response\["context"\]\["grounding_data"\]}
->
-> <img src="./media/image83.png" style="width:6.5in;height:3.42639in" />
+# load environment variables from the .env file at the root of this repo
+from dotenv import load_dotenv
 
-4.  Finally, add code to run the evaluation, view the results locally,
-    and gives you a link to the evaluation results in AI Foundry portal:
+load_dotenv()
 
-> \# Evaluate must be called inside of \_\_main\_\_, not on import
->
-> if \_\_name\_\_ == "\_\_main\_\_":
->
-> from config import ASSET_PATH
->
-> \# workaround for multiprocessing issue on linux
->
-> from pprint import pprint
->
-> from pathlib import Path
->
-> import multiprocessing
->
-> import contextlib
->
-> with contextlib.suppress(RuntimeError):
->
-> multiprocessing.set_start_method("spawn", force=True)
->
-> \# run evaluation with a dataset and target function, log to the
-> project
->
-> result = evaluate(
->
-> data=Path(ASSET_PATH) / "chat_eval_data.jsonl",
->
-> target=evaluate_chat_with_products,
->
-> evaluation_name="evaluate_chat_with_products",
->
-> evaluators={
->
-> "groundedness": groundedness,
->
-> },
->
-> evaluator_config={
->
-> "default": {
->
-> "query": {"\${data.query}"},
->
-> "response": {"\${target.response}"},
->
-> "context": {"\${target.context}"},
->
-> }
->
-> },
->
-> azure_ai_project=project.scope,
->
-> output_path="./myevalresults.json",
->
-> )
->
-> tabular_result = pd.DataFrame(result.get("rows"))
->
-> pprint("-----Summarized Metrics-----")
->
-> pprint(result\["metrics"\])
->
-> pprint("-----Tabular Result-----")
->
-> pprint(tabular_result)
->
-> pprint(f"View evaluation results in AI Studio:
-> {result\['studio_url'\]}")
->
-> <img src="./media/image84.png" style="width:6.5in;height:3.42639in" />
+# create a project client using environment variables loaded from the .env file
+project = AIProjectClient.from_connection_string(
+    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+)
+
+connection = project.connections.get_default(connection_type=ConnectionType.AZURE_OPEN_AI, include_credentials=True)
+
+evaluator_model = {
+    "azure_endpoint": connection.endpoint_url,
+    "azure_deployment": os.environ["EVALUATION_MODEL"],
+    "api_version": "2024-06-01",
+    "api_key": connection.key,
+}
+
+groundedness = GroundednessEvaluator(evaluator_model)
+```
++++
+
+![](./media/image82.png)
+
+
+3.  Add code to create a wrapper function that implements the evaluation interface for query and response evaluation:
+
++++
+```
+def evaluate_chat_with_products(query):
+    response = chat_with_products(messages=[{"role": "user", "content": query}])
+    return {"response": response["message"].content, "context": response["context"]["grounding_data"]}
+```
++++
+
+![](./media/image83.png)
+
+
+4.  Finally, add code to run the evaluation, view the results locally, and gives you a link to the evaluation results in AI Foundry portal:
+
++++
+```
+# Evaluate must be called inside of __main__, not on import
+if __name__ == "__main__":
+    from config import ASSET_PATH
+
+    # workaround for multiprocessing issue on linux
+    from pprint import pprint
+    from pathlib import Path
+    import multiprocessing
+    import contextlib
+
+    with contextlib.suppress(RuntimeError):
+        multiprocessing.set_start_method("spawn", force=True)
+
+    # run evaluation with a dataset and target function, log to the project
+    result = evaluate(
+        data=Path(ASSET_PATH) / "chat_eval_data.jsonl",
+        target=evaluate_chat_with_products,
+        evaluation_name="evaluate_chat_with_products",
+        evaluators={
+            "groundedness": groundedness,
+        },
+        evaluator_config={
+            "default": {
+                "query": {"${data.query}"},
+                "response": {"${target.response}"},
+                "context": {"${target.context}"},
+            }
+        },
+        azure_ai_project=project.scope,
+        output_path="./myevalresults.json",
+    )
+
+    tabular_result = pd.DataFrame(result.get("rows"))
+
+    pprint("-----Summarized Metrics-----")
+    pprint(result["metrics"])
+    pprint("-----Tabular Result-----")
+    pprint(tabular_result)
+    pprint(f"View evaluation results in AI Studio: {result['studio_url']}")
+```
++++
+
+![](./media/image84.png)
+
 
 5.  Click on **Save all** under **File** in the top navigation bar.
 
 ### Task 3: Configure the evaluation model
 
-Since the evaluation script calls the model many times, you might want
-to increase the number of tokens per minute for the evaluation model.
+Since the evaluation script calls the model many times, you might want to increase the number of tokens per minute for the evaluation model.
 
-In Part 1 of this tutorial series, you created an **.env** file that
-specifies the name of the evaluation model, gpt-4o-mini. Try to increase
-the tokens per minute limit for this model, if you have available quota.
-If you don't have enough quota to increase the value, don't worry. The
-script is designed to handle limit errors.
+In Part 1 of this tutorial series, you created an **.env** file that specifies the name of the evaluation model, gpt-4o-mini. Try to increase the tokens per minute limit for this model, if you have available quota.
 
-1.  In your project in Azure AI Foundry portal, select **Models +
-    endpoints**.
+If you don't have enough quota to increase the value, don't worry. The script is designed to handle limit errors.
 
-> <img src="./media/image85.png" style="width:6.5in;height:3.08264in" />
+1.  In your project in Azure AI Foundry portal, select **Models + endpoints**.
+
+![](./media/image85.png)
+
 
 2.  Select **gpt-4o-mini**, click on **Edit.**
 
-> <img src="./media/image86.png" style="width:6.5in;height:3.08264in"
-> alt="A screenshot of a computer Description automatically generated" />
->
+![](./media/image86.png)
+
+
 > Note: increase quota if your limit is less than 30
 
-3.  If you have quota to increase the **Tokens per Minute Rate Limit**,
-    try increasing it to 30.
+3.  If you have quota to increase the **Tokens per Minute Rate Limit**, try increasing it to 30.
 
 4.  Select **Save and close**.
 
-> <img src="./media/image87.png"
-> style="width:5.98317in;height:6.73367in" />
+![](./media/image87.png)
+
 
 ### Task 4: Run the evaluation script
 
 1.  From your console, sign in to your Azure account with the Azure CLI:
 
++++
+```
 az login
+```
++++
 
-<img src="./media/image88.png" style="width:6.5in;height:3.42569in" />
+![](./media/image88.png)
+
 
 2.  Install the required package:
 
++++
+```
 pip install azure_ai-evaluation\[prompts\]
+```
++++
 
++++
+```
 pip install azure-ai-evaluation\[remote\]
+```
++++
 
-<img src="./media/image89.png" style="width:6.5in;height:3.42639in" />
+![](./media/image89.png)
+
 
 3.  Now run the evaluation script.
 
++++
+```
 python evaluate.py
+```
++++
 
-<img src="./media/image90.png" style="width:6.5in;height:3.42639in" />
+![](./media/image90.png)
+
 
 ### task 5: Interpret the evaluation output
 
-In the console output, you see an answer for each question, followed by
-a table with summarized metrics. (You might see different columns in
-your output.)
+In the console output, you see an answer for each question, followed by a table with summarized metrics. (You might see different columns in your output.)
 
-If you weren't able to increase the tokens per minute limit for your
-model, you might see some time-out errors, which are expected. The
-evaluation script is designed to handle these errors and continue
-running.
+If you weren't able to increase the tokens per minute limit for your model, you might see some time-out errors, which are expected. The evaluation script is designed to handle these errors and continue running.
 
-** Note**
+**Note**: You may also see many WARNING:opentelemetry.attributes: - these can be safely ignored and do not affect the evaluation results.
 
-You may also see many WARNING:opentelemetry.attributes: - these can be
-safely ignored and do not affect the evaluation results.
-
+```
 ====================================================
 
 '-----Summarized Metrics-----'
@@ -1958,49 +1519,34 @@ outputs.response ... line_number
 ('View evaluation results in AI Foundry portal: '
 
 'https://xxxxxxxxxxxxxxxxxxxxxxx')
+```
 
 ### Task 6: View evaluation results in AI Foundry portal(optional)
 
-Once the evaluation run completes, follow the link to view the
-evaluation results on the **Evaluation** page in the Azure AI Foundry
-portal.
+Once the evaluation run completes, follow the link to view the evaluation results on the **Evaluation** page in the Azure AI Foundry portal.
 
-<img src="./media/image91.png" style="width:6.1875in;height:8.375in"
-alt="Screenshot shows evaluation overview in Azure AI Foundry portal." />
+![](./media/image91.png)
 
-You can also look at the individual rows and see metric scores per row,
-and view the full context/documents that were retrieved. These metrics
-can be helpful in interpreting and debugging evaluation results.
 
-<img src="./media/image92.png" style="width:6.5in;height:3.47917in"
-alt="Screenshot shows rows of evaluation results in Azure AI Foundry portal." />
+You can also look at the individual rows and see metric scores per row, and view the full context/documents that were retrieved. These metrics can be helpful in interpreting and debugging evaluation results.
 
-For more information about evaluation results in AI Foundry portal,
-see [How to view evaluation results in AI Foundry
-portal](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/evaluate-results).
+![](./media/image92.png)
+
+
+For more information about evaluation results in AI Foundry portal, see How to view evaluation results in AI Foundry portal.
 
 ### Task 7: Iterate and improve(Optional)
 
-Notice that the responses are not well grounded. In many cases, the
-model replies with a question rather than an answer. This is a result of
-the prompt template instructions.
+Notice that the responses are not well grounded. In many cases, the model replies with a question rather than an answer. This is a result of the prompt template instructions.
 
-- In your **assets/grounded_chat.prompty** file, find the sentence "If
-  the question is related to outdoor/camping gear and clothing but
-  vague, ask for clarifying questions instead of referencing documents."
+- In your **assets/grounded_chat.prompty** file, find the sentence "If the question is related to outdoor/camping gear and clothing but vague, ask for clarifying questions instead of referencing documents."
 
-- Change the sentence to "If the question is related to outdoor/camping
-  gear and clothing but vague, try to answer based on the reference
-  documents, then ask for clarifying questions."
+- Change the sentence to "If the question is related to outdoor/camping gear and clothing but vague, try to answer based on the reference documents, then ask for clarifying questions."
 
 - Save the file and re-run the evaluation script.
 
-Try other modifications to the prompt template, or try different models,
-to see how the changes affect the evaluation results.
+Try other modifications to the prompt template, or try different models, to see how the changes affect the evaluation results.
 
 ## Clean up resources
 
-To avoid incurring unnecessary Azure costs, you should delete the
-resources you created in this tutorial if they're no longer needed. To
-manage resources, you can use the [Azure
-portal](https://portal.azure.com/?azure-portal=true).
+To avoid incurring unnecessary Azure costs, you should delete the resources you created in this tutorial if they're no longer needed. To manage resources, you can use the Azure portal.
