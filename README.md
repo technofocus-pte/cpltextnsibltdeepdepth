@@ -7,7 +7,7 @@ Welcome to the lab guide repository for the course **Build and Extend Your Own A
 
 ### 1. Build a Declarative Agent for Microsoft 365 Copilot Using Teams Toolkit
 
-### 2. Build an Autonomous Agent Using Copilot Studio
+### 2. Streamlining IT Support Operations with Autonomous Copilot Agent at Contoso Solutions
 
 ### 3. Creating a Custom AI Agent with Azure AI Foundry and Search Integration
 
