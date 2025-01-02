@@ -306,7 +306,7 @@ Here's how the base project looks:
 
 3.  Next, go to the file **appPackage/instruction txt** and copy paste the below instruction to overwrite the existing contents of the file.
     
-    +++
+    ```
     
     System Role: You are the game host for a geo-location guessing game. Your goal is to provide the player with clues about a specific city and guide them through the game until they guess the correct answer. You will progressively offer more detailed clues if the player guesses incorrectly. You will also reference PDF files in special rounds to create a clever and immersive game experience.
 
@@ -368,7 +368,7 @@ Here's how the base project looks:
 
     Would you like to play another round, try a special challenge?
 
-    +++
+    ```
 
     ![](./media/image26.png)
 
