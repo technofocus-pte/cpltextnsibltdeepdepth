@@ -95,7 +95,7 @@ integrate plugins into a larger application.
 
 2.  In the **CurrencyConverter.cs** file, add the following code to create a plugin function:
 
-+++
+
 ```
 using Microsoft.SemanticKernel;
 using System.ComponentModel;
@@ -111,7 +111,7 @@ class CurrencyConverter
     }
 }
 ```
-+++
+
 
 ![](./media/image13.png)
 
@@ -119,7 +119,7 @@ In this code, you use the KernelFunction decorator to declare your native func
 
 3.  Modify your **ConvertAmount** function, the full code is looks like:
 
-+++
+
 ```
 using Microsoft.SemanticKernel;
 using System.ComponentModel;
@@ -155,7 +155,7 @@ class CurrencyConverter
     }
 }
 ```
-+++
+
 
 In this code, you use the Currency.Currencies dictionary to get the Currency object for the target and base currencies. You then use the Currency object to convert the amount from the base currency to the target currency. Finally, you return a string with the converted amount. Next, let's test your plugin.
 
@@ -166,7 +166,7 @@ In this code, you use the Currency.Currencies dictionary to get the Currency�
 
 4.  In the **Starter/Program.cs** file, import and invoke your new plugin function with the following code. (Delete the code below var kernel = builder.Build(); and replace it with the given below code. )
 
-+++
+
 ```
 kernel.ImportPluginFromType<CurrencyConverter>();
 kernel.ImportPluginFromType<ConversationSummaryPlugin>();
@@ -183,7 +183,7 @@ var result = await kernel.InvokeAsync("CurrencyConverter",
 
 Console.WriteLine(result);
 ```
-+++
+
 
 In this code, you use the ImportPluginFromType method to import your plugin. Then you use the InvokeAsync method to invoke your plugin function. The InvokeAsync method takes the plugin name, function name, and a dictionary of parameters. Finally, you print the result to the console. Next, run the code to make sure it's working.
 
@@ -228,7 +228,7 @@ conversions.
 
 4.  Open the newly created **config.json** file in Visual Studio Code. Copy and paste the following code into the file:
 
-+++
+
 ```
 {
     "schema": 1,
@@ -249,7 +249,7 @@ conversions.
     ]
 }
 ```
-+++
+
 
 ![](./media/image21.png)
 
@@ -262,7 +262,7 @@ Save the file by pressing Ctrl + S. This configuration defines how the AI system
 
 6.  Open the **skprompt.txt** file in your text editor and paste the following content:
 
-+++
+
 ```
 <message role="system">Identify the target currency, base currency, and 
 amount from the user's input in the format target|base|amount</message>
@@ -281,7 +281,7 @@ For example:
 <message role="user">{{$input}}</message>
 <message role="assistant">target|base|amount</message>
 ```
-+++
+
 
 
 ![](./media/image23.png)
@@ -308,7 +308,7 @@ personalized and creative travel recommendations.
 
 3.  Replace the existing code in the **config.json** file with the following:
 
-+++
+
 ```
 {
     "schema": 1,
@@ -334,7 +334,7 @@ personalized and creative travel recommendations.
     ]
   }
 ```
-+++
+
 
 ![](./media/image26.png)
 
@@ -347,7 +347,7 @@ Save the file after making the changes by pressing Ctrl + S. This file configure
 
 5.  Replace the existing content of **skprompt.txt** with the following text:
 
-+++
+
 ```
 You are an experienced travel agent. 
 You are helpful, creative, and very friendly. 
@@ -355,7 +355,7 @@ Consider the traveler's background: {{$history}}
 The traveler would like some activity recommendations for their trip to {{$destination}}.
 Please suggest a list of things to do, see, and points of interest.
 ```
-+++
+
 
 ![](./media/image28.png)
 
@@ -379,7 +379,7 @@ and intent recognition, leveraging plugins and prompt-based logic.
 
     > **Note:** After replacing code, please again add endpoint, Key and deployment name in the respected part of code.
 
-+++
+
 ```
 using System.Text;
 using Microsoft.SemanticKernel;
@@ -481,7 +481,7 @@ do {
 } 
 while (!string.IsNullOrWhiteSpace(input));
 ```
-+++
+
 
 The program begins by importing essential namespaces such as System.Text for text handling and Microsoft.SemanticKernel for AI-powered conversational workflows. It integrates Microsoft Azure OpenAI services through the Microsoft.SemanticKernel.Connectors.OpenAI namespace, allowing communication with the GPT model (gpt-35-turbo-16k). The configuration involves setting up variables like yourDeploymentName, yourEndpoint, and yourApiKey to authenticate and connect to the Azure OpenAI endpoint.
 
