@@ -1443,13 +1443,13 @@ az login
 
 +++
 ```
-pip install azure_ai-evaluation\[prompts\]
+pip install azure_ai-evaluation[prompts]
 ```
 +++
 
 +++
 ```
-pip install azure-ai-evaluation\[remote\]
+pip install azure-ai-evaluation[remote]
 ```
 +++
 
