@@ -48,45 +48,22 @@ account to complete these steps.
     ![](./media/image1.png)
 
 
-2.  In the **Start** section of Visual Studio Code, click **Clone Git Repository**.
+2. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code**. The folder will open in VS Code.
 
-    ![](./media/image2.png)
-
-3.  In the URL bar, enter the following repository URL: +++https://github.com/MicrosoftLearning/APL-2005-Guided-Project.git+++
-
-    ![](./media/image3.png)
+    ![](./media/add.png)
 
 
-4.  In the File Explorer, create a new folder in a location that is easy to find, such as on your Desktop.
-
-    ![](./media/image4.png)
-
-5.  Click Select as Repository Destination to choose this folder as the location to clone the repository.
-
-    > **Note:** You need to be signed in to GitHub to successfully clone the project.
-
-    ![](./media/image5.png)
-
-
-6.  After cloning, Visual Studio Code will automatically open the project.
-
-    ![](./media/image6.png)
-
-
-    ![](./media/image7.png)
-
-
-7.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select Open in Integrated Terminal.
+3.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select Open in Integrated Terminal.
 
     ![](./media/image8.png)
 
 
-8.  In the Explorer panel, expand the Starter folder, and you should see the **Plugins folder, Prompts folder, and Program.cs** file.
+4.  In the Explorer panel, expand the Starter folder, and you should see the **Plugins folder, Prompts folder, and Program.cs** file.
 
     ![](./media/image9.png)
 
 
-9.  Open the **Starter/Program.cs** file and update the following variables with your Azure OpenAI Services deployment name, API key, and endpoint. After making the changes, press Ctrl + S to save the file:
+5.  Open the **Starter/Program.cs** file and update the following variables with your Azure OpenAI Services deployment name, API key, and endpoint. After making the changes, press Ctrl + S to save the file:
 
     - **string yourDeploymentName** = "gpt-35-turbo-16k";
 
