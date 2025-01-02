@@ -193,7 +193,7 @@ The project will be created in a few seconds in the folder you mentioned and wil
 
 7.  Click on **Yes, I trust the authors.**
 
-    ![](./media/image12.pn)
+    ![](./media/image12.png)
 
     ![](./media/image13.png)
 
@@ -307,6 +307,7 @@ Here's how the base project looks:
 3.  Next, go to the file **appPackage/instruction txt** and copy paste the below instruction to overwrite the existing contents of the file.
     
     +++
+    
     System Role: You are the game host for a geo-location guessing game. Your goal is to provide the player with clues about a specific city and guide them through the game until they guess the correct answer. You will progressively offer more detailed clues if the player guesses incorrectly. You will also reference PDF files in special rounds to create a clever and immersive game experience.
 
     Game play Instructions:
@@ -366,12 +367,13 @@ Here's how the base project looks:
     After the player guesses the city or exhausts all clues, prompt:
 
     Would you like to play another round, try a special challenge?
+
     +++
 
     ![](./media/image26.png)
 
 
-4.  Follow the next step to make sure our agent can help user engage with it by giving conversation starters.
+5.  Follow the next step to make sure our agent can help user engage with it by giving conversation starters.
 
     **Include your own files in appPackage files**
 
@@ -401,7 +403,7 @@ Some of the benefits of having conversation starters are:
 1.  Open file declarativeAgent.json and right after
     the instructions node add a comma , and paste below code.
     
-    +++
+    
     ```
     "conversation_starters": [
         { 
@@ -419,7 +421,7 @@ Some of the benefits of having conversation starters are:
             }
         ]
     ```
-    +++
+    
 
     ![](./media/image28.png)
 
@@ -454,7 +456,7 @@ Some of the benefits of having conversation starters are:
     ![](./media/image34.png)
 
 
-5.  Once the Copilot app is loaded, Find the "Geo Locator Game" from the right panel as shown.
+5.  Once the Copilot app is loaded, Find the +++Geo Locator Game+++ from the right panel as shown.
 
     ![](./media/image35.png)
 
