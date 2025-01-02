@@ -59,7 +59,7 @@ these steps:
 
     - Leave the rest as default and click on Next.
 
-    [](./media/image4.png)
+    ![](./media/image4.png)
 
 
 6.  On the **Review and finish** page, click on **Create.**
