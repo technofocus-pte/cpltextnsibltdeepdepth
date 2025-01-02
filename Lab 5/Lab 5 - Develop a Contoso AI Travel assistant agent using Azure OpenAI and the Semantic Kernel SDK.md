@@ -50,7 +50,7 @@ account to complete these steps.
 
 2. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code**. The folder will open in VS Code.
 
-    ![](./media/add.png)
+![](./media/add.png)
 
 
 3.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select Open in Integrated Terminal.
