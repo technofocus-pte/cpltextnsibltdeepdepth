@@ -193,11 +193,11 @@ OpenAI service.
 
 1.  In most cases you can install the Azure CLI from your terminal using the following command:
 
-+++
+
 ```
 winget install -e --id Microsoft.AzureCLI
 ```
-+++
+
 
 ![](./media/image26.png)
 
@@ -207,11 +207,11 @@ winget install -e --id Microsoft.AzureCLI
 
 2.  After you install the Azure CLI, sign in using the az login command and sign-in using the browser:
 
-+++
+
 ```
 Az login
 ```
-+++
+
 
 select the tenant that your intent to login in with and click on **Continue**.
 
@@ -229,11 +229,11 @@ First you need to create a new Python environment to use to install the package 
 
 1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**, by entering the following command in your powershell.
 
-+++
+
 ```
 mkdir ProjectXXXX
 ```
-+++
+
 
 ![](./media/image31.png)
 
@@ -245,17 +245,17 @@ mkdir ProjectXXXX
 
 3.  If you already have Python 3.10 or higher installed, you can create a virtual environment using the following commands:
 
-+++
+
 ```
 py -3 -m venv .venv
 ```
-+++
 
-+++
+
+
 ```
 .venv\scripts\activate
 ```
-+++
+
 
 ![](./media/image33.png)
 
@@ -272,7 +272,7 @@ Install **azure-ai-projects(preview) and azure-ai-inference (preview)**,along
 
 5.  Create a file named **requirements.txt** in your **ProjectXXXX** folder and add the following packages to the file:
 
-+++
+
 ```
 azure-ai-projects
 azure-ai-inference[prompts]
@@ -282,7 +282,7 @@ pandas
 python-dotenv
 opentelemetry-api
 ```
-+++
+
 
 ![](./media/image35.png)
 
@@ -300,17 +300,17 @@ opentelemetry-api
 
 7.  Run the following command to get into the virtual environment
 
-+++
+
 ```
 py -3 -m venv .venv
 ```
-+++
 
-+++
+
+
 ```
 .venv\scripts\activate
 ```
-+++
+
 
 ![](./media/image39.png)
 
@@ -322,11 +322,11 @@ py -3 -m venv .venv
 
 9.  To Install the required packages, run the following code.
 
-+++
+
 ```
 pip install -r requirements.txt
 ```
-+++
+
 
 ![](./media/image41.png)
 
@@ -336,17 +336,17 @@ pip install -r requirements.txt
 
 > **Note:** if you get a notice to of new release of pip, kindly run the following command to upgrade pip and then re-run
 
-+++
+
 ```
 pip install -r requirements.txt
 ```
-+++
 
-+++
+
+
 ```
 python.exe -m pip install --upgrade pip
 ```
-+++
+
 
 ![](./media/image43.png)
 
@@ -355,11 +355,11 @@ python.exe -m pip install --upgrade pip
 
 1.  Create a new folder named **src**. By running the following command in the terminal.
 
-+++
+
 ```
 mkdir src
 ```
-+++
+
 
 ![](./media/image44.png)
 
@@ -371,7 +371,7 @@ mkdir src
 
 3.  Add the following code to **config.py** and save it.
 
-+++
+
 ```
 # ruff: noqa: ANN201, ANN001
 
@@ -430,7 +430,7 @@ def enable_telemetry(log_to_project: bool = False):
         logger.info(tracing_link)
 
 ```
-+++
+
 
 ![](./media/image46.png)
 
@@ -445,7 +445,7 @@ Your project connection string is required to call the Azure OpenAI service from
 
 Replace the connection string with the value saved on notepad in task 1 step 9 and save it.
 
-+++
+
 ```
 AIPROJECT_CONNECTION_STRING=<your-connection-string>
 AISEARCH_INDEX_NAME="example-index"
@@ -454,7 +454,7 @@ INTENT_MAPPING_MODEL="gpt-4o-mini"
 CHAT_MODEL="gpt-4o-mini"
 EVALUATION_MODEL="gpt-4o-mini"
 ```
-+++
+
 
 ![](./media/image47.png)
 
@@ -486,11 +486,11 @@ The goal with this RAG-based application is to ground the model responses in you
 
 1.  Create an **assets** directory in your project folder\src.
 
-+++
+
 ```
 mkdir assets
 ```
-+++
+
 
 ![](./media/image50.png)
 
@@ -518,7 +518,7 @@ The search index is used to store vectorized data from the embeddings model. The
 
 2.  Open **create_search_index.py** file in Visual studio and add the following code to import the required libraries, create a project client, and configure some settings:
 
-+++
+
 ```
 import os
 from azure.ai.projects import AIProjectClient
@@ -551,14 +551,14 @@ index_client = SearchIndexClient(
     endpoint=search_connection.endpoint_url, credential=AzureKeyCredential(key=search_connection.key)
 )
 ```
-+++
+
 
 ![](./media/image55.png)
 
 
 3.  Now add the function at the end of the create_search_index.py to define a search index:
 
-+++
+
 ```
 import pandas as pd
 from azure.search.documents.indexes.models import (
@@ -659,14 +659,13 @@ def create_index_definition(index_name: str, model: str) -> SearchIndex:
         vector_search=vector_search,
     )
 ```
-+++
 
 ![](./media/image56.png)
 
 
 4.  Now add the function in create_search_index.py to create the function to add a csv file to the index:
 
-+++
+
 ```
 # define a function for indexing a csv file, that adds each row as a document
 # and generates vector embeddings for the specified content_column
@@ -718,14 +717,14 @@ def create_index_from_csv(index_name, csv_file):
     search_client.upload_documents(docs)
     logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}' index")
 ```
-+++
+
 
 ![](./media/image57.png)
 
 
 5.  Finally, Add the below functions in create_search_index.py to build the index and register it to the cloud project. After adding the code go to Files from top bar and click on **Save all.**
 
-+++
+
 ```
 if __name__ == "__main__":
     import argparse
@@ -746,7 +745,7 @@ if __name__ == "__main__":
 
     create_index_from_csv(index_name, csv_file)
 ```
-+++
+
 
 ![](./media/image58.png)
 
@@ -758,11 +757,11 @@ if __name__ == "__main__":
 
 7.  From your terminal, log in to your Azure account and follow instructions for authenticating your account:
 
-+++
+
 ```
 az login
 ```
-+++
+
 
 ![](./media/image60.png)
 
@@ -771,11 +770,11 @@ az login
 
 8.  Run the code to build your index locally and register it to the cloud project:
 
-+++
+
 ```
 python create_search_index.py
 ```
-+++
+
 
 ![](./media/image62.png)
 
@@ -803,7 +802,7 @@ When the chat gets a request, it searches through your data to find relevant inf
 
 2.  Start with code to import the required libraries, create a project client, and configure settings:
 
-+++
+
 ```
 import os
 from pathlib import Path
@@ -841,11 +840,11 @@ search_client = SearchClient(
     credential=AzureKeyCredential(key=search_connection.key),
 )
 ```
-+++
+
 
 3.  Add the function in get_product-documents.py to get product documents:
 
-+++
+
 ```
 from azure.ai.inference.prompts import PromptTemplate
 from azure.search.documents.models import VectorizedQuery
@@ -912,11 +911,11 @@ def get_product_documents(messages: list, context: dict = None) -> dict:
     logger.debug(f"📄 {len(documents)} documents retrieved: {documents}")
     return documents
 ```
-+++
+
 
 4.  Finally, add code to test the function when you run the script directly:
 
-+++
+
 ```
 if __name__ == "__main__":
     import logging
@@ -939,7 +938,7 @@ if __name__ == "__main__":
 
     result = get_product_documents(messages=[{"role": "user", "content": query}])
 ```
-+++
+
 
 ![](./media/image65.png)
 
@@ -960,7 +959,7 @@ The **get_product_documents.py** script uses a prompt template to convert the 
 
 4.  Copy the following code to the intent_mapping_prompty file and the from top bar go to Files and click on **Save all.**
 
-+++
+
 ```
 ---
 name: Chat Prompt
@@ -1019,6 +1018,7 @@ Return the search query for the messages in the following conversation:
 {{#conversation}}
  - {{role}}: {{content}}
 {{/conversation}}
+
 ```
 
 ![](./media/image68.png)
@@ -1028,11 +1028,11 @@ Return the search query for the messages in the following conversation:
 
 1.  Now that you have both the script and template, run the script to test out what documents the search index returns from a query. In a terminal window run:
 
-+++
+
 ```
 python get_product_documents.py --query "I need a new tent for 4 people, what would you recommend?"
 ```
-+++
+
 
 ![](./media/image69.png)
 
@@ -1051,7 +1051,7 @@ Next you create custom code to add retrieval augmented generation (RAG) capabili
 
 2.  Add the code to import the required libraries, create a project client, and configure settings:
 
-+++
+
 ```
 import os
 from pathlib import Path
@@ -1074,14 +1074,14 @@ project = AIProjectClient.from_connection_string(
 # create a chat client we can use for testing
 chat = project.inference.get_chat_completions_client()
 ```
-+++
+
 
 ![](./media/image71.png)
 
 
 3.  Add the code at end of chat_with_products.py to create the chat function that uses the RAG capabilities:
 
-+++
+
 ```
 from azure.ai.inference.prompts import PromptTemplate
 
@@ -1107,14 +1107,14 @@ def chat_with_products(messages: list, context: dict = None) -> dict:
     # Return a chat protocol compliant response
     return {"message": response.choices[0].message, "context": context}
 ```
-+++
+
 
 ![](./media/image72.png)
 
 
 4.  Finally, add the code to run the chat function and then go to files and click on save all.
 
-+++
+
 ```
 if __name__ == "__main__":
     import argparse
@@ -1139,7 +1139,7 @@ if __name__ == "__main__":
     # run chat with products
     response = chat_with_products(messages=[{"role": "user", "content": args.query}])
 ```
-+++
+
 
 ![](./media/image73.png)
 
@@ -1155,7 +1155,7 @@ The chat_with_products.py script calls a prompt template to generate a response 
 
 2.  Add the following code grounded_chat.prompty.
 
-+++
+
 ```
 ---
 name: Chat with documents
@@ -1184,7 +1184,7 @@ Do not add documentation reference in the response.
 {{content}}
 {{/documents}}
 ```
-+++
+
 
 ![](./media/image75.png)
 
@@ -1198,11 +1198,11 @@ Do not add documentation reference in the response.
 
 1.  Now that you have both the script and the template, run the script to test your chat app with RAG capabilities:
 
-+++
+
 ```
 python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?"
 ```
-+++
+
 
 ![](./media/image77.png)
 
@@ -1210,22 +1210,22 @@ python chat_with_products.py --query "I need a new tent for 4 people, what would
 2.  To enable logging of telemetry to your project,
     Install azure-monitor-opentelemetry:
 
-+++
+
 ```
 pip install azure-monitor-opentelemetry
 ```
-+++
+
 
 ![](./media/image78.png)
 
 
 3.  Add the --enable-telemetry flag when you use the chat_with_products.py script:
 
-+++
+
 ```
 python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable-telemetry
 ```
-+++
+
 
 ## Exercise 3: Evaluate a custom chat application with the Azure AI Foundry SDK
 
@@ -1250,7 +1250,7 @@ Use the following evaluation dataset, which contains example questions and expec
 
 2.  Paste this dataset into the file and the save the file.
 
-+++
+
 ```
 {"query": "Which tent is the most waterproof?", "truth": "The Alpine Explorer Tent has the highest rainfly waterproof rating at 3000m"}
 {"query": "Which camping table holds the most weight?", "truth": "The Adventure Dining Table has a higher weight capacity than all of the other camping tables mentioned"}
@@ -1266,7 +1266,7 @@ Use the following evaluation dataset, which contains example questions and expec
 {"query": "What is the material for PowerBurner Camping Stove? ", "truth": "Stainless Steel"}
 {"query": "Is France in Europe?", "truth": "Sorry, I can only queries related to outdoor/camping gear and equipment"}
 ```
-+++
+
 
 ![](./media/image80.png)
 
@@ -1298,7 +1298,7 @@ you can compare evaluation runs in the UI.
 
 2.  Add the following code to import the required libraries, create a project client, and configure some settings:
 
-+++
+
 ```
 import os
 import pandas as pd
@@ -1330,27 +1330,27 @@ evaluator_model = {
 
 groundedness = GroundednessEvaluator(evaluator_model)
 ```
-+++
+
 
 ![](./media/image82.png)
 
 
 3.  Add code to create a wrapper function that implements the evaluation interface for query and response evaluation:
 
-+++
+
 ```
 def evaluate_chat_with_products(query):
     response = chat_with_products(messages=[{"role": "user", "content": query}])
     return {"response": response["message"].content, "context": response["context"]["grounding_data"]}
 ```
-+++
+
 
 ![](./media/image83.png)
 
 
 4.  Finally, add code to run the evaluation, view the results locally, and gives you a link to the evaluation results in AI Foundry portal:
 
-+++
+
 ```
 # Evaluate must be called inside of __main__, not on import
 if __name__ == "__main__":
@@ -1392,7 +1392,7 @@ if __name__ == "__main__":
     pprint(tabular_result)
     pprint(f"View evaluation results in AI Studio: {result['studio_url']}")
 ```
-+++
+
 
 ![](./media/image84.png)
 
@@ -1430,39 +1430,39 @@ If you don't have enough quota to increase the value, don't worry. The script is
 
 1.  From your console, sign in to your Azure account with the Azure CLI:
 
-+++
+
 ```
 az login
 ```
-+++
+
 
 ![](./media/image88.png)
 
 
 2.  Install the required package:
 
-+++
+
 ```
 pip install azure_ai-evaluation[prompts]
 ```
-+++
 
-+++
+
+
 ```
 pip install azure-ai-evaluation[remote]
 ```
-+++
+
 
 ![](./media/image89.png)
 
 
 3.  Now run the evaluation script.
 
-+++
+
 ```
 python evaluate.py
 ```
-+++
+
 
 ![](./media/image90.png)
 
