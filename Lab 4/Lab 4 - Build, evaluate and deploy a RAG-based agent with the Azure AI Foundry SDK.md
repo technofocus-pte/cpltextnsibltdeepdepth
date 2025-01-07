@@ -32,7 +32,7 @@ predefined datasets and metrics to enhance its effectiveness.
 To create a project in Azure AI Foundry, follow
 these steps:
 
-1.  Go to the **Home** page of Azure AI Foundry, by navigating to the following link +++https://ai.azure.com/+++ and click on **Sign in.**
+1.  Go to the **Home** page of Azure AI Foundry, by navigating to the following link +++https://ai.azure.com/+++ and click on **Sign in** with office 365 admin tenant credentials.
 
     ![](./media/image1.png)
 
