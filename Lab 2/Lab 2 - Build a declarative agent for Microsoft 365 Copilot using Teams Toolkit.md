@@ -1,4 +1,4 @@
-# Lab 1: Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit
+# Lab 2: Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit
 
 **Estimated Time: 30 mins**
 
