@@ -1,4 +1,4 @@
-# Lab 2: Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit
+# Lab 1: Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit
 
 **Estimated Time: 30 mins**
 
@@ -201,7 +201,7 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
 ### Task 2: Set up accounts in Teams Toolkit
 
-1.  Now select the Teams Toolkit icon in the left Under **Accounts** click **Sign in to Microsoft 365** and log in with your own Microsoft 365 account.
+1.  Now select the Teams Toolkit icon in the left Under **Accounts** click **Sign in to Microsoft 365** and log in with your **User1 credentials**.
 
     ![](./media/image14.png)
 
