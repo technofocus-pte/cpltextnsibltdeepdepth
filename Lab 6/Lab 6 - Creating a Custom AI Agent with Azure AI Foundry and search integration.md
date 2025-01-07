@@ -1,4 +1,4 @@
-# Lab 3 - Creating a Custom AI Agent with Azure AI Foundry and search integration
+# Lab 6 - Creating a Custom AI Agent with Azure AI Foundry and search integration
 
 **Estimated time: 45 min**
 
