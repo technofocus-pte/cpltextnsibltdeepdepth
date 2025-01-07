@@ -43,27 +43,23 @@ application for execution using your Azure OpenAI deployment details.
 **Important:** You must have .NET Framework 8.0 installed and a GitHub
 account to complete these steps.
 
-1.  Open Visual Studio Code on your virtual machine.
 
-    ![](./media/image1.png)
-
-
-2. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code**. The folder will open in VS Code.
+1. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code**. The folder will open in VS Code.
 
 ![](./media/add.png)
 
 
-3.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select Open in Integrated Terminal.
+2.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select Open in Integrated Terminal.
 
     ![](./media/image8.png)
 
 
-4.  In the Explorer panel, expand the Starter folder, and you should see the **Plugins folder, Prompts folder, and Program.cs** file.
+3.  In the Explorer panel, expand the Starter folder, and you should see the **Plugins folder, Prompts folder, and Program.cs** file.
 
     ![](./media/image9.png)
 
 
-5.  Open the **Starter/Program.cs** file and update the following variables with your Azure OpenAI Services deployment name, API key, and endpoint. After making the changes, press Ctrl + S to save the file:
+4.  Open the **Starter/Program.cs** file and update the following variables with your Azure OpenAI Services deployment name, API key, and endpoint. After making the changes, press Ctrl + S to save the file:
 
     - **string yourDeploymentName** = "gpt-35-turbo-16k";
 
