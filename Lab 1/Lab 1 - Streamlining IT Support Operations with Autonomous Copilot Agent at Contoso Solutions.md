@@ -679,7 +679,7 @@ trigger automated workflows effectively.
 6.  In test section click on the **Connect**, it will open the
     connection window.
 
-    ![](./media/image89.png)
+    ![](./media/image89a.png)
 
 
 7.  Click on the **Connect** again and then select **Submit.**
@@ -697,7 +697,7 @@ trigger automated workflows effectively.
 
 9.  The support request is automatically generated.
 
-    ![](./media/image93.png)
+    ![](./media/image93a.png)
 
 
 10. Navigate to power apps and go to Employee support ticket record
