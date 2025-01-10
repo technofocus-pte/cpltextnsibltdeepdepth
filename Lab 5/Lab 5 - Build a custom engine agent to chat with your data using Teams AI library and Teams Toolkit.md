@@ -33,7 +33,7 @@ organizational workflows.
 ### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
 
 1.  Navigate to the following the URL +++https://oai.azure.com/portal+++ and
-    login using the tenant credentials provided in the resources.
+    login using the admin tenant credentials provided in the resources.
 
     ![](./media/image1.png)
 
