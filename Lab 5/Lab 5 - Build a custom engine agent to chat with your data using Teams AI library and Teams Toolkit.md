@@ -50,7 +50,7 @@ organizational workflows.
 
     | **Subscription** | **Select the assigned subscription** |
     |-------------------|-------------------------------------|
-    | **Resource group** | Click on 🡪 Create new<br>Enter name **RG4OpenAI** then press<br>Ok |
+    | **Resource group** | Click on 🡪 Create new<br>Enter name +++**RG4OpenAI**+++ then press<br>Ok |
     | **Region**         | East US 2                         |
     | **Name**           | +++ContosoAgent+++                      |
     | **Pricing tier**    | Standard S0                       |
@@ -105,7 +105,7 @@ organizational workflows.
 
 ### Task 1: Deploy chat in AI Foundary
 
-1.  Navigate to +++https://portal.azure.com/+++ and click on **All
+1.  Navigate to +++https://portal.azure.com/+++, sign in with admin credentials and click on **All
     resources**.
 
     ![](./media/image15.png)
@@ -159,7 +159,7 @@ organizational workflows.
 ### Task 2: Creating a storage account
 
 1.  Navigate to azure portal +++https://portal.azure.com/+++ search and
-    select for Storage account.
+    select for +++**Storage account**+++.
 
     ![](./media/image24.png)
 
@@ -194,7 +194,7 @@ organizational workflows.
 
     ![](./media/image29.png)
 
-5.  Enter the container name as **source** and click on **create.**
+5.  Enter the container name as +++**source**+++ and click on **create.**
 
     ![](./media/image30.png)
 
@@ -238,8 +238,8 @@ organizational workflows.
     ![](./media/image37.png)
 
 4.  On contoso-ai-search-01 overview, save URL endpoint for future use.
-    Then from left navigation bar select key and save primary and
-    secondary key for future use.
+    Then from left navigation bar under **Settings** select **key** and save **primary and
+    secondary key** for future use.
     
     ![](./media/image38.png)
 
@@ -247,8 +247,8 @@ organizational workflows.
 
 ### Task 4: Add data to chat in Azure AI Foundry
 
-1.  Navigate to **Azure AI Foundry** page, select **Chat** a **Add your
-    data à Add a data source**.
+1.  Navigate to **Azure AI Foundry** page, select **Chat** then scroll down click on **Add your
+    data and Add a data source**.
 
     ![](./media/image40.png)
 
@@ -308,7 +308,7 @@ organizational workflows.
     ![](./media/image47.png)
 
 2.  On the VS home page, on the left navigation pane click on the
-    **Extensions** icon, search for **Teams Toolkit** and click on
+    **Extensions** icon, search for +++**Teams Toolkit**+++ and click on
     **Install.**
 
     ![](./media/image48.png)
@@ -347,7 +347,7 @@ organizational workflows.
     ![](./media/image56.png)
 
 
-    - **Deployment name**
+    - **Deployment name** -- +++**ContosoAgent+++**
 
     ![](./media/image57.png)
 
