@@ -407,7 +407,7 @@ Let's customize the prompt for your custom engine agent.
     ![](./media/image62.png)
 
 2.  Go to the **config.json** file under prompts/chat. Replace the following
-    code and replace the endpoint , index_name, and key values with your
+    code and replace the endpoint , and key values with your
     Azure AI Search resource details. After update press ctrl+s to save
     the file.
 
@@ -432,7 +432,7 @@ Let's customize the prompt for your custom engine agent.
         "type": "azure_search",
         "parameters": {
             "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
-            "index_name": "YOUR-INDEX_NAME",
+            "index_name": "contosoindex01",
             "authentication": {
             "type": "api_key",
             "key": "AZURE-AI-SEARCH-KEY"
