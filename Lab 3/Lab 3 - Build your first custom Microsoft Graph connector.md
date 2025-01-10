@@ -44,7 +44,7 @@ In this section you'll register an application that supports app-only
 authentication using [client credentials
 flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow).
 
-1.  Sign in to the [Microsoft Entra admin. By navigating to
+1.  Sign in to the Microsoft Entra admin with admin tenant credentials. By navigating to
     +++https://entra.microsoft.com/+++
 
     ![](./media/image1.png)
@@ -55,8 +55,7 @@ flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2
     ![](./media/image2.png)
 
 
-3.  Enter a name for your application, for example, +++**Parts Inventory
-    Connector**+++.
+3.  Enter a name for your application, for example, +++**Parts Inventory Connector**+++.
 
 4.  Set **Supported account types** to **Accounts in this organizational
     directory only**.
@@ -131,7 +130,7 @@ flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2
     ![](./media/image17.png)
 
 
-16. Enter description as MS Graph secret, choose a duration of 90 days,
+16. Enter description as +++**MS Graph secret**+++, choose a duration of 90 days,
     and select **Add**.
 
     ![](./media/image18.png)
@@ -180,20 +179,13 @@ CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/).
 
 ### Task 3: Install dependencies
 
-    Before moving on, add some additional dependencies that you use later.
+Before moving on, add some additional dependencies that you use later.
 
-    .NET configuration packages to read application configuration from
-    appsettings.json.
-
-    Azure Identity client library for .NET to authenticate the user and
-    acquire access tokens.
-
-    Microsoft Graph .NET client library to make calls to the Microsoft
-    Graph.
-
-    Entity Framework packages for accessing a local database.
-
-    CsvHelper for reading CSV files.
+.NET configuration packages to read application configuration from appsettings.json.
+Azure Identity client library for .NET to authenticate the user and acquire access tokens.
+Microsoft Graph .NET client library to make calls to the Microsoft Graph.
+Entity Framework packages for accessing a local database.
+CsvHelper for reading CSV files.
 
 1.  Run the following commands in your CLI to install the dependencies.
 
