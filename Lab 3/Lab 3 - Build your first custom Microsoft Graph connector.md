@@ -32,8 +32,7 @@ real-time data surfacing in Microsoft Search.
 
 ## Exercise 1: Register the app in the portal
 
-In this exercise you'll register a new application in Microsoft Entra ID
-to enable [app-only
+In this exercise you'll register a new application in Microsoft Entra ID to enable [app-only
 authentication](https://learn.microsoft.com/en-us/graph/auth-v2-service).
 Microsoft Graph connectors use app-only authentication to access the
 connector APIs.
@@ -44,21 +43,18 @@ In this section you'll register an application that supports app-only
 authentication using [client credentials
 flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow).
 
-1.  Sign in to the Microsoft Entra admin with admin tenant credentials. By navigating to
-    +++https://entra.microsoft.com/+++
+1.  Sign in to the Microsoft Entra admin with admin tenant credentials. By navigating to +++https://entra.microsoft.com/+++
 
     ![](./media/image1.png)
 
-2.  Expand the **Identity** menu \> select **Applications** \> **App
-    registrations** \> **New registration**.
+2.  Expand the **Identity** menu --> select **Applications** --> **App registrations** --> **New registration**.
 
     ![](./media/image2.png)
 
 
 3.  Enter a name for your application, for example, +++**Parts Inventory Connector**+++.
 
-4.  Set **Supported account types** to **Accounts in this organizational
-    directory only**.
+4.  Set **Supported account types** to **Accounts in this organizational directory only**.
 
 5.  Leave **Redirect URI** empty.
 
@@ -104,45 +100,37 @@ flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2
     ![](./media/image11.png)
 
 
-13. Select **ExternalConnection.ReadWrite.OwnedBy** and **ExternalItem.ReadWrite.OwnedBy**,
-    then select **Add permissions**.
+13. Search and Select +++**ExternalConnection.ReadWrite.OwnedBy**+++ and +++**ExternalItem.ReadWrite.OwnedBy**+++, then select **Add permissions**.
 
     ![](./media/image12.png)
-
 
     ![](./media/image13.png)
 
 
-14. Select **Grant admin consent for...**, then select **Yes** to
-    provide admin consent for the selected permission.
+14. Select **Grant admin consent for...**, then select **Yes** to provide admin consent for the selected permission.
 
     ![](./media/image14.png)
-
 
     ![](./media/image15.png)
 
     ![](./media/image16.png)
 
 
-15. Select **Certificates and secrets** under **Manage**, then
-    select **New client secret**.
+15. Select **Certificates and secrets** under **Manage**, then select **New client secret**.
 
     ![](./media/image17.png)
 
 
-16. Enter description as +++**MS Graph secret**+++, choose a duration of 90 days,
-    and select **Add**.
+16. Enter description as +++**MS Graph secret**+++, choose a duration of 90 days, and select **Add**.
 
     ![](./media/image18.png)
 
-17. Copy the secret from the **Value** column and save it on your
-    notepad, you'll need it in the next steps.
+17. Copy the secret from the **Value** column and save it on your notepad, you'll need it in the next steps.
 
     ![](./media/image19.png)
 
 
     ![](./media/image20.png)
-
 
     > ** Important** - This client secret is never shown again, so make sure you copy it now.
 
@@ -151,31 +139,30 @@ flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2
 Begin by creating a new .NET console project using the [.NET
 CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/).
 
-1.  Open your command-line interface (CLI) in a directory where you want
-    to create the project. Run the following command.
+1.  Open your command-line interface (CLI) in a directory where you want to create the project. Run the following command.
 
-    ```
-    dotnet new console -o PartsInventoryConnector
-    ```
+```
+dotnet new console -o PartsInventoryConnector
+```
 
-    ![](./media/image21.png)
+![](./media/image21.png)
 
 
 2.  Once the project is created, verify that it works by changing the
     current directory to the **PartsInventoryConnector** directory and
     running the following commands in your CLI.
 
-    ```
-    cd "C:\Users\Admin\PartsInventoryConnector"
-    ```
+```
+cd "C:\Users\Student\PartsInventoryConnector"
+```
 
-    ```
-    dotnet run
-    ```
+```
+dotnet run
+```
 
-    If it works, the app should output Hello, World!.
+If it works, the app should output **Hello, World!**.
 
-    ![](./media/image22.png)
+![](./media/image22.png)
 
 ### Task 3: Install dependencies
 
@@ -189,33 +176,33 @@ CsvHelper for reading CSV files.
 
 1.  Run the following commands in your CLI to install the dependencies.
 
-    ```
-    dotnet add package Microsoft.Extensions.Configuration.Binder
-    ```
+```
+dotnet add package Microsoft.Extensions.Configuration.Binder
+```
 
-    ```
-    dotnet add package Microsoft.Extensions.Configuration.UserSecrets
-    ```
+```
+dotnet add package Microsoft.Extensions.Configuration.UserSecrets
+```
 
-    ```
-    dotnet add package Azure.Identity
-    ```
+```
+dotnet add package Azure.Identity
+```
 
-    ```
-    dotnet add package Microsoft.Graph
-    ```
+```
+dotnet add package Microsoft.Graph
+```
 
-    ```
-    dotnet add package Microsoft.EntityFrameworkCore.Design
-    ```
+```
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
 
-    ```
-    dotnet add package Microsoft.EntityFrameworkCore.Sqlite
-    ```
-    
-    ```
-    dotnet add package CsvHelper
-    ```
+```
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+```
+
+```
+dotnet add package CsvHelper
+```
 
 3.  Check if all the 7 dependencies are installed.
 
@@ -251,228 +238,227 @@ project.
     and *\<client-secret\>* with your client secret, details of which
     are saved on the notepad
 
-    ```
-    dotnet user-secrets init
-    ```
+```
+dotnet user-secrets init
+```
 
-    ```
-    dotnet user-secrets set settings:clientId \<client-id\>
-    ```
+```
+dotnet user-secrets set settings:clientId <client-id>
+```
 
-    ```
-    dotnet user-secrets set settings:tenantId \<tenant-id\>
-    ```
+```
+dotnet user-secrets set settings:tenantId <tenant-id>
+```
 
-    ```
-    dotnet user-secrets set settings:clientSecret \<client-secret\>
-    ```
+```
+dotnet user-secrets set settings:clientSecret <client-secret>
+```
 
-    ![](./media/image30.png)
+![](./media/image30.png)
 
 
-2.  Create a file in the **PartsInventoryConnector** directory
-    named s**ettings.cs** and add the following code.
+2.  Open **PartsInventoryConnector** in VS code editor and create a directory
+    named +++**settings.cs**+++ and add the following code.
 
-    ```
-    using Microsoft.Extensions.Configuration;
+```
+using Microsoft.Extensions.Configuration;
 
-    namespace PartsInventoryConnector;
+namespace PartsInventoryConnector;
 
-    public class Settings
+public class Settings
+{
+    public string? ClientId { get; set; }
+    public string? ClientSecret { get; set; }
+    public string? TenantId { get; set; }
+
+    public static Settings LoadSettings()
     {
-        public string? ClientId { get; set; }
-        public string? ClientSecret { get; set; }
-        public string? TenantId { get; set; }
+        // Load settings
+        IConfiguration config = new ConfigurationBuilder()
+            .AddUserSecrets<Program>()
+            .Build();
 
-        public static Settings LoadSettings()
-        {
-            // Load settings
-            IConfiguration config = new ConfigurationBuilder()
-                .AddUserSecrets<Program>()
-                .Build();
-
-            return config.GetRequiredSection("Settings").Get<Settings>() ??
-                throw new Exception("Could not load app settings. See README for configuration instructions.");
-        }
+        return config.GetRequiredSection("Settings").Get<Settings>() ??
+            throw new Exception("Could not load app settings. See README for configuration instructions.");
     }
-    ```
+}
+```
 
-    ![](./media/image31.png)
+![](./media/image31.png)
 
 
-    ![](./media/image32.png)
+![](./media/image32.png)
 
 
 ### Task 5: Design the app
 
 In this section you create a console-based menu.
 
-1.  Open.**/Program.cs** and replace its entire contents with the
+1.  Open **Program.cs** and replace its entire contents with the
     following code.
 
-    ```
-    using System.Text.Json;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Graph;
-    using Microsoft.Graph.Models.ExternalConnectors;
-    using Microsoft.Graph.Models.ODataErrors;
-    using PartsInventoryConnector;
-    using PartsInventoryConnector.Data;
-    using PartsInventoryConnector.Graph;
+```
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph;
+using Microsoft.Graph.Models.ExternalConnectors;
+using Microsoft.Graph.Models.ODataErrors;
+using PartsInventoryConnector;
+using PartsInventoryConnector.Data;
+using PartsInventoryConnector.Graph;
 
-    Console.WriteLine("Parts Inventory Search Connector\n");
+Console.WriteLine("Parts Inventory Search Connector\n");
 
-    var settings = Settings.LoadSettings();
+var settings = Settings.LoadSettings();
 
-    // Initialize Graph
-    InitializeGraph(settings);
+// Initialize Graph
+InitializeGraph(settings);
 
-    ExternalConnection? currentConnection = null;
-    int choice = -1;
+ExternalConnection? currentConnection = null;
+int choice = -1;
 
-    while (choice != 0)
+while (choice != 0)
+{
+    Console.WriteLine($"Current connection: {(currentConnection == null ? "NONE" : currentConnection.Name)}\n");
+    Console.WriteLine("Please choose one of the following options:");
+    Console.WriteLine("0. Exit");
+    Console.WriteLine("1. Create a connection");
+    Console.WriteLine("2. Select an existing connection");
+    Console.WriteLine("3. Delete current connection");
+    Console.WriteLine("4. Register schema for current connection");
+    Console.WriteLine("5. View schema for current connection");
+    Console.WriteLine("6. Push updated items to current connection");
+    Console.WriteLine("7. Push ALL items to current connection");
+    Console.Write("Selection: ");
+
+    try
     {
-        Console.WriteLine($"Current connection: {(currentConnection == null ? "NONE" : currentConnection.Name)}\n");
-        Console.WriteLine("Please choose one of the following options:");
-        Console.WriteLine("0. Exit");
-        Console.WriteLine("1. Create a connection");
-        Console.WriteLine("2. Select an existing connection");
-        Console.WriteLine("3. Delete current connection");
-        Console.WriteLine("4. Register schema for current connection");
-        Console.WriteLine("5. View schema for current connection");
-        Console.WriteLine("6. Push updated items to current connection");
-        Console.WriteLine("7. Push ALL items to current connection");
-        Console.Write("Selection: ");
-
-        try
-        {
-            choice = int.Parse(Console.ReadLine() ?? string.Empty);
-        }
-        catch (FormatException)
-        {
-            // Set to invalid value
-            choice = -1;
-        }
-
-        switch(choice)
-        {
-            case 0:
-                // Exit the program
-                Console.WriteLine("Goodbye...");
-                break;
-            case 1:
-                currentConnection = await CreateConnectionAsync();
-                break;
-            case 2:
-                currentConnection = await SelectExistingConnectionAsync();
-                break;
-            case 3:
-                await DeleteCurrentConnectionAsync(currentConnection);
-                currentConnection = null;
-                break;
-            case 4:
-                await RegisterSchemaAsync();
-                break;
-            case 5:
-                await GetSchemaAsync();
-                break;
-            case 6:
-                await UpdateItemsFromDatabaseAsync(true, settings.TenantId);
-                break;
-            case 7:
-                await UpdateItemsFromDatabaseAsync(false, settings.TenantId);
-                break;
-            default:
-                Console.WriteLine("Invalid choice! Please try again.");
-                break;
-        }
+        choice = int.Parse(Console.ReadLine() ?? string.Empty);
+    }
+    catch (FormatException)
+    {
+        // Set to invalid value
+        choice = -1;
     }
 
-    static string? PromptForInput(string prompt, bool valueRequired)
+    switch(choice)
     {
-        string? response;
-
-        do
-        {
-            Console.WriteLine($"{prompt}:");
-            response = Console.ReadLine();
-            if (valueRequired && string.IsNullOrEmpty(response))
-            {
-                Console.WriteLine("You must provide a value");
-            }
-        } while (valueRequired && string.IsNullOrEmpty(response));
-
-        return response;
+        case 0:
+            // Exit the program
+            Console.WriteLine("Goodbye...");
+            break;
+        case 1:
+            currentConnection = await CreateConnectionAsync();
+            break;
+        case 2:
+            currentConnection = await SelectExistingConnectionAsync();
+            break;
+        case 3:
+            await DeleteCurrentConnectionAsync(currentConnection);
+            currentConnection = null;
+            break;
+        case 4:
+            await RegisterSchemaAsync();
+            break;
+        case 5:
+            await GetSchemaAsync();
+            break;
+        case 6:
+            await UpdateItemsFromDatabaseAsync(true, settings.TenantId);
+            break;
+        case 7:
+            await UpdateItemsFromDatabaseAsync(false, settings.TenantId);
+            break;
+        default:
+            Console.WriteLine("Invalid choice! Please try again.");
+            break;
     }
+}
 
-    static DateTime GetLastUploadTime()
+static string? PromptForInput(string prompt, bool valueRequired)
+{
+    string? response;
+
+    do
     {
-        if (File.Exists("lastuploadtime.bin"))
+        Console.WriteLine($"{prompt}:");
+        response = Console.ReadLine();
+        if (valueRequired && string.IsNullOrEmpty(response))
         {
-            return DateTime.Parse(
-                File.ReadAllText("lastuploadtime.bin")).ToUniversalTime();
+            Console.WriteLine("You must provide a value");
         }
+    } while (valueRequired && string.IsNullOrEmpty(response));
 
-        return DateTime.MinValue;
-    }
+    return response;
+}
 
-    static void SaveLastUploadTime(DateTime uploadTime)
+static DateTime GetLastUploadTime()
+{
+    if (File.Exists("lastuploadtime.bin"))
     {
-        File.WriteAllText("lastuploadtime.bin", uploadTime.ToString("u"));
+        return DateTime.Parse(
+            File.ReadAllText("lastuploadtime.bin")).ToUniversalTime();
     }
-    ```
+
+    return DateTime.MinValue;
+}
+
+static void SaveLastUploadTime(DateTime uploadTime)
+{
+    File.WriteAllText("lastuploadtime.bin", uploadTime.ToString("u"));
+}
+```
 
 
-    ![](./media/image33.png)
+![](./media/image33.png)
 
 
-2.  Add the following placeholder methods at the end of the file. You
+2.  Add the following placeholder methods at the end of the Program.cs file. You
     implement them in later steps.
 
-    ```
-    void InitializeGraph(Settings settings)
-    {
-        // TODO
-    }
+```
+void InitializeGraph(Settings settings)
+{
+    // TODO
+}
 
-    async Task<ExternalConnection?> CreateConnectionAsync()
-    {
-        // TODO
-        throw new NotImplementedException();
-    }
+async Task<ExternalConnection?> CreateConnectionAsync()
+{
+    // TODO
+    throw new NotImplementedException();
+}
 
-    async Task<ExternalConnection?> SelectExistingConnectionAsync()
-    {
-        // TODO
-        throw new NotImplementedException();
-    }
+async Task<ExternalConnection?> SelectExistingConnectionAsync()
+{
+    // TODO
+    throw new NotImplementedException();
+}
 
-    async Task DeleteCurrentConnectionAsync(ExternalConnection? connection)
-    {
-        // TODO
-    }
+async Task DeleteCurrentConnectionAsync(ExternalConnection? connection)
+{
+    // TODO
+}
 
-    async Task RegisterSchemaAsync()
-    {
-        // TODO
-    }
+async Task RegisterSchemaAsync()
+{
+    // TODO
+}
 
-    async Task GetSchemaAsync()
-    {
-        // TODO
-    }
+async Task GetSchemaAsync()
+{
+    // TODO
+}
 
-    async Task UpdateItemsFromDatabaseAsync(bool uploadModifiedOnly, string? tenantId)
-    {
-        // TODO
-    }
-    ```
+async Task UpdateItemsFromDatabaseAsync(bool uploadModifiedOnly, string? tenantId)
+{
+    // TODO
+}
+```
 
-    ![](./media/image34.png)
+![](./media/image34.png)
 
 
-    This implements a basic menu and reads the user's choice from the
-    command line.
+This implements a basic menu and reads the user's choice from the command line.
 
 ## Exercise 2: Configure Microsoft Graph
 
@@ -481,9 +467,7 @@ app-only authentication.
 
 ### Task 1: Create a helper class
 
-1.  Right click and open the integrated terminal in VS in
-    **PartsInventoryconnector** directory and create a new directory
-    named **Graph** by running the following command.
+1.  Right click on **PartsInventoryconnector** directory and open the integrated terminal. Create a new directory named **Graph** by running the following command.
 
 ```
 mkdir Graph
@@ -496,86 +480,83 @@ mkdir Graph
 
 
 2.  Create a file in the **Graph** directory
-    named **GraphHelper.cs** and add the following using statements.
+    named as +++**GraphHelper.cs**+++ and add the following using statements.
 
-    ```
-    using Azure.Identity;
+```
+using Azure.Identity;
 
-    using Microsoft.Graph;
+using Microsoft.Graph;
 
-    using Microsoft.Graph.Models.ExternalConnectors;
+using Microsoft.Graph.Models.ExternalConnectors;
 
-    using Microsoft.Kiota.Authentication.Azure;
-    ```
-
-
-    ![](./media/image37.png)
+using Microsoft.Kiota.Authentication.Azure;
+```
 
 
-    ![](./media/image38.png)
-
-3.  Add a namespace and class definition.
-
-    ```
-    namespace PartsInventoryConnector.Graph;
-
-    public static class GraphHelper
-    {
-    }
-    ```
+![](./media/image37.png)
 
 
-    ![](./media/image39.png)
+![](./media/image38.png)
+
+3.  Add a namespace and class definition code at the end of GraphHelper.cs.
+
+```
+namespace PartsInventoryConnector.Graph;
+public static class GraphHelper
+{
+}
+```
+
+![](./media/image39.png)
 
 
-4.  Add the following code to the GraphHelper class, which configures
-    a GraphServiceClient with app-only authentication.
+4.  Add the following code to the GraphHelper class in GraphHelper.cs file, which configures a GraphServiceClient with app-only authentication.
 
 
-    ```
-    private static GraphServiceClient? graphClient;
-    private static HttpClient? httpClient;
-    public static void Initialize(Settings settings)
-    {
-        // Create a credential that uses the client credentials
-        // authorization flow
-        var credential = new ClientSecretCredential(
-            settings.TenantId, settings.ClientId, settings.ClientSecret);
+```
+private static GraphServiceClient? graphClient;
+private static HttpClient? httpClient;
+public static void Initialize(Settings settings)
+{
+    // Create a credential that uses the client credentials
+    // authorization flow
+    var credential = new ClientSecretCredential(
+        settings.TenantId, settings.ClientId, settings.ClientSecret);
 
-        // Create an HTTP client
-        httpClient = GraphClientFactory.Create();
+    // Create an HTTP client
+    httpClient = GraphClientFactory.Create();
 
-        // Create an auth provider
-        var authProvider = new AzureIdentityAuthenticationProvider(
-            credential, scopes: new[] { "https://graph.microsoft.com/.default" });
+    // Create an auth provider
+    var authProvider = new AzureIdentityAuthenticationProvider(
+        credential, scopes: new[] { "https://graph.microsoft.com/.default" });
 
-        // Create a Graph client using the credential
-        graphClient = new GraphServiceClient(httpClient, authProvider);
-    }
-    ```
+    // Create a Graph client using the credential
+    graphClient = new GraphServiceClient(httpClient, authProvider);
+}
+```
 
-    ![](./media/image40.png)
+![](./media/image40.png)
 
-5.  Replace the empty InitializeGraph function in **Program.cs** with
+5.  Replace the empty **InitializeGraph** function in **Program.cs** with
     the following.
 
-    ```
-    void InitializeGraph(Settings settings)
+```
+void InitializeGraph(Settings settings)
+{
+    try
     {
-        try
-        {
-            GraphHelper.Initialize(settings);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error initializing Graph: {ex.Message}");
-        }
+        GraphHelper.Initialize(settings);
     }
-    ```
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error initializing Graph: {ex.Message}");
+    }
+}
+```
 
-    ![](./media/image41.png)
+![](./media/image41.png)
 
-    ![](./media/image42.png)
+![](./media/image42.png)
 
 ## Exercise 3: Create the database
 
@@ -586,226 +567,223 @@ initialize the database.
 ### Task 1: Define the model
 
 1.  Create a new directory in the **PartsInventoryConnector** directory
-    named **Data**.
+    named +++**Data**+++.
 
     ![](./media/image43.png)
 
 2.  Create a file in the **Data** directory
-    named **AppliancePart.cs** and add the following code.
+    named +++**AppliancePart.cs**+++ and add the following code.
 
-    ```
-    using System.ComponentModel.DataAnnotations;
-    using System.Text.Json.Serialization;
-    using Microsoft.Graph.Models.ExternalConnectors;
+```
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using Microsoft.Graph.Models.ExternalConnectors;
 
-    namespace PartsInventoryConnector.Data;
+namespace PartsInventoryConnector.Data;
 
-    public class AppliancePart
+public class AppliancePart
+{
+    [JsonPropertyName("appliances@odata.type")]
+    private const string AppliancesODataType = "Collection(String)";
+
+    [Key]
+    public int PartNumber { get; set; }
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+    public double Price { get; set; }
+    public int Inventory { get; set; }
+    public List<string>? Appliances { get; set; }
+
+    public Properties AsExternalItemProperties()
     {
-        [JsonPropertyName("appliances@odata.type")]
-        private const string AppliancesODataType = "Collection(String)";
+        _ = Name ?? throw new MemberAccessException("Name cannot be null");
+        _ = Description ?? throw new MemberAccessException("Description cannot be null");
+        _ = Appliances ?? throw new MemberAccessException("Appliances cannot be null");
 
-        [Key]
-        public int PartNumber { get; set; }
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public double Price { get; set; }
-        public int Inventory { get; set; }
-        public List<string>? Appliances { get; set; }
-
-        public Properties AsExternalItemProperties()
+        var properties = new Properties
         {
-            _ = Name ?? throw new MemberAccessException("Name cannot be null");
-            _ = Description ?? throw new MemberAccessException("Description cannot be null");
-            _ = Appliances ?? throw new MemberAccessException("Appliances cannot be null");
-
-            var properties = new Properties
+            AdditionalData = new Dictionary<string, object>
             {
-                AdditionalData = new Dictionary<string, object>
-                {
-                    { "partNumber", PartNumber },
-                    { "name", Name },
-                    { "description", Description },
-                    { "price", Price },
-                    { "inventory", Inventory },
-                    { "appliances@odata.type", "Collection(String)" },
-                    { "appliances", Appliances }
-                }
-            };
+                { "partNumber", PartNumber },
+                { "name", Name },
+                { "description", Description },
+                { "price", Price },
+                { "inventory", Inventory },
+                { "appliances@odata.type", "Collection(String)" },
+                { "appliances", Appliances }
+            }
+        };
 
-            return properties;
+        return properties;
+    }
+}
+```
+
+![](./media/image44.png)
+
+
+![](./media/image45.png)
+
+3.  Create a file in the **Data** directory named +++**ApplianceDbContext.cs**+++ and add the following code.
+
+```
+using System.Text.Json;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+
+namespace PartsInventoryConnector.Data;
+
+public class ApplianceDbContext : DbContext
+{
+    public DbSet<AppliancePart> Parts => Set<AppliancePart>();
+
+    public void EnsureDatabase()
+    {
+        if (Database.EnsureCreated() || !Parts.Any())
+        {
+            // File was just created (or is empty),
+            // seed with data from CSV file
+            var parts = CsvDataLoader.LoadPartsFromCsv("ApplianceParts.csv");
+            Parts.AddRange(parts);
+            SaveChanges();
         }
     }
-    ```
 
-    ![](./media/image44.png)
-
-
-    ![](./media/image45.png)
-
-3.  Create a file in the **Data** directory
-    named **ApplianceDbContext.cs** and add the following code.
-
-    ```
-    using System.Text.Json;
-    using Microsoft.Data.Sqlite;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-    namespace PartsInventoryConnector.Data;
-
-    public class ApplianceDbContext : DbContext
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        public DbSet<AppliancePart> Parts => Set<AppliancePart>();
+        options.UseSqlite("Data Source=parts.db");
+    }
 
-        public void EnsureDatabase()
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // EF Core can't store lists, so add a converter for the Appliances
+        // property to serialize as a JSON string on save to DB
+        modelBuilder.Entity<AppliancePart>()
+            .Property(ap => ap.Appliances)
+            .HasConversion(
+                v => JsonSerializer.Serialize(v, JsonSerializerOptions.Default),
+                v => JsonSerializer.Deserialize<List<string>>(v, JsonSerializerOptions.Default)
+            );
+
+        // Add LastUpdated and IsDeleted shadow properties
+        modelBuilder.Entity<AppliancePart>()
+            .Property<DateTime>("LastUpdated")
+            .HasDefaultValueSql("datetime()")
+            .ValueGeneratedOnAddOrUpdate();
+        modelBuilder.Entity<AppliancePart>()
+            .Property<bool>("IsDeleted")
+            .IsRequired()
+            .HasDefaultValue(false);
+
+        // Exclude any soft-deleted items (IsDeleted = 1) from
+        // the default query sets
+        modelBuilder.Entity<AppliancePart>()
+            .HasQueryFilter(a => !EF.Property<bool>(a, "IsDeleted"));
+    }
+
+    public override int SaveChanges()
+    {
+        // Prevent deletes of data, instead mark the item as deleted
+        // by setting IsDeleted = true.
+        foreach(var entry in ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Deleted))
         {
-            if (Database.EnsureCreated() || !Parts.Any())
+            if (entry.Entity.GetType() == typeof(AppliancePart))
             {
-                // File was just created (or is empty),
-                // seed with data from CSV file
-                var parts = CsvDataLoader.LoadPartsFromCsv("ApplianceParts.csv");
-                Parts.AddRange(parts);
-                SaveChanges();
-            }
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlite("Data Source=parts.db");
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // EF Core can't store lists, so add a converter for the Appliances
-            // property to serialize as a JSON string on save to DB
-            modelBuilder.Entity<AppliancePart>()
-                .Property(ap => ap.Appliances)
-                .HasConversion(
-                    v => JsonSerializer.Serialize(v, JsonSerializerOptions.Default),
-                    v => JsonSerializer.Deserialize<List<string>>(v, JsonSerializerOptions.Default)
-                );
-
-            // Add LastUpdated and IsDeleted shadow properties
-            modelBuilder.Entity<AppliancePart>()
-                .Property<DateTime>("LastUpdated")
-                .HasDefaultValueSql("datetime()")
-                .ValueGeneratedOnAddOrUpdate();
-            modelBuilder.Entity<AppliancePart>()
-                .Property<bool>("IsDeleted")
-                .IsRequired()
-                .HasDefaultValue(false);
-
-            // Exclude any soft-deleted items (IsDeleted = 1) from
-            // the default query sets
-            modelBuilder.Entity<AppliancePart>()
-                .HasQueryFilter(a => !EF.Property<bool>(a, "IsDeleted"));
-        }
-
-        public override int SaveChanges()
-        {
-            // Prevent deletes of data, instead mark the item as deleted
-            // by setting IsDeleted = true.
-            foreach(var entry in ChangeTracker.Entries()
-                .Where(e => e.State == EntityState.Deleted))
-            {
-                if (entry.Entity.GetType() == typeof(AppliancePart))
-                {
-                    SoftDelete(entry);
-                }
-
+                SoftDelete(entry);
             }
 
-            return base.SaveChanges();
         }
 
-        private void SoftDelete(EntityEntry entry)
-        {
-            var partNumber = new SqliteParameter("@partNumber",
-                entry.OriginalValues["PartNumber"]);
-
-            Database.ExecuteSqlRaw(
-                "UPDATE Parts SET IsDeleted = 1 WHERE PartNumber = @partNumber",
-                partNumber);
-
-            entry.State = EntityState.Detached;
-        }
+        return base.SaveChanges();
     }
-    ```
 
-    ![](./media/image46.png)
-
-
-    ![](./media/image47.png)
-
-4.  Create a file in the **Data** directory
-    named **CsvDataLoader.cs** and add the following code.
-
-    ```
-    using System.Globalization;
-    using CsvHelper;
-    using CsvHelper.Configuration;
-    using CsvHelper.TypeConversion;
-
-    namespace PartsInventoryConnector.Data;
-
-    public static class CsvDataLoader
+    private void SoftDelete(EntityEntry entry)
     {
-        public static List<AppliancePart> LoadPartsFromCsv(string filePath)
-        {
-            using var reader = new StreamReader(filePath);
-            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-            csv.Context.RegisterClassMap<AppliancePartMap>();
+        var partNumber = new SqliteParameter("@partNumber",
+            entry.OriginalValues["PartNumber"]);
 
-            return new List<AppliancePart>(csv.GetRecords<AppliancePart>());
-        }
+        Database.ExecuteSqlRaw(
+            "UPDATE Parts SET IsDeleted = 1 WHERE PartNumber = @partNumber",
+            partNumber);
+
+        entry.State = EntityState.Detached;
     }
+}
+```
 
-    public class ApplianceListConverter : DefaultTypeConverter
+![](./media/image46.png)
+
+![](./media/image47.png)
+
+4.  Create a file in the **Data** directory named +++**CsvDataLoader.cs**+++ and add the following code.
+
+```
+using System.Globalization;
+using CsvHelper;
+using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
+
+namespace PartsInventoryConnector.Data;
+
+public static class CsvDataLoader
+{
+    public static List<AppliancePart> LoadPartsFromCsv(string filePath)
     {
-        public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
-        {
-            var appliances = text?.Split(';') ?? Array.Empty<string>();
-            return new List<string>(appliances);
-        }
-    }
+        using var reader = new StreamReader(filePath);
+        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+        csv.Context.RegisterClassMap<AppliancePartMap>();
 
-    public class AppliancePartMap : ClassMap<AppliancePart>
+        return new List<AppliancePart>(csv.GetRecords<AppliancePart>());
+    }
+}
+
+public class ApplianceListConverter : DefaultTypeConverter
+{
+    public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
     {
-        public AppliancePartMap()
-        {
-            Map(m => m.PartNumber);
-            Map(m => m.Name);
-            Map(m => m.Description);
-            Map(m => m.Price);
-            Map(m => m.Inventory);
-            Map(m => m.Appliances).TypeConverter<ApplianceListConverter>();
-        }
+        var appliances = text?.Split(';') ?? Array.Empty<string>();
+        return new List<string>(appliances);
     }
+}
 
+public class AppliancePartMap : ClassMap<AppliancePart>
+{
+    public AppliancePartMap()
+    {
+        Map(m => m.PartNumber);
+        Map(m => m.Name);
+        Map(m => m.Description);
+        Map(m => m.Price);
+        Map(m => m.Inventory);
+        Map(m => m.Appliances).TypeConverter<ApplianceListConverter>();
+    }
+}
+```
 
-    ![](./media/image48.png)
+![](./media/image48.png)
 
-
-    ![](./media/image49.png)
+![](./media/image49.png)
 
 ### Task 2: Initialize the database
 
-1.  Open your command line interface (CLI) in the directory
-    where **PartsInventoryConnector.csproj** is located.
+1.  Open your command line interface (CLI) in the directory where **PartsInventoryConnector.csproj** is located.
 
     ![](./media/image50.png)
 
 
 2.  Run the following commands:
 
-    ```
-    dotnet ef migrations add InitialCreate
-    ```
-    ```
-    dotnet ef database update
-    ```
-    ![](./media/image51.png)
+```
+dotnet ef migrations add InitialCreate
+```
+
+```
+dotnet ef database update
+```
+
+![](./media/image51.png)
 
 ## Exercise 4: Manage connections
 
@@ -814,193 +792,187 @@ connections](https://learn.microsoft.com/en-us/graph/connecting-external-content
 
 ### Task 1: Create a connection
 
-1.  Add the following function to the GraphHelper class
-    in **GraphHelper.cs**.
+1.  Add the following function to the GraphHelper class in **GraphHelper.cs**.
 
-    ```
-    public static async Task<ExternalConnection?> CreateConnectionAsync(string id, string name, string? description)
+```
+public static async Task<ExternalConnection?> CreateConnectionAsync(string id, string name, string? description)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+
+    var newConnection = new ExternalConnection
     {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+        Id = id,
+        Name = name,
+        Description = description,
+    };
 
-        var newConnection = new ExternalConnection
-        {
-            Id = id,
-            Name = name,
-            Description = description,
-        };
+    return await graphClient.External.Connections.PostAsync(newConnection);
+}
+```
 
-        return await graphClient.External.Connections.PostAsync(newConnection);
-    }
-    ```
-
-    ![](./media/image52.png)
+![](./media/image52.png)
 
 
-2.  Replace the placeholder
-    function CreateConnectionAsync in **Program.cs** with the following.
+2.  Replace the placeholder function **CreateConnectionAsync** in **Program.cs** with the following.
 
-    ```
-    async Task<ExternalConnection?> CreateConnectionAsync()
+```
+async Task<ExternalConnection?> CreateConnectionAsync()
+{
+    var connectionId = PromptForInput(
+        "Enter a unique ID for the new connection (3-32 characters)", true) ?? "ConnectionId";
+    var connectionName = PromptForInput(
+        "Enter a name for the new connection", true) ?? "ConnectionName";
+    var connectionDescription = PromptForInput(
+        "Enter a description for the new connection", false);
+
+    try
     {
-        var connectionId = PromptForInput(
-            "Enter a unique ID for the new connection (3-32 characters)", true) ?? "ConnectionId";
-        var connectionName = PromptForInput(
-            "Enter a name for the new connection", true) ?? "ConnectionName";
-        var connectionDescription = PromptForInput(
-            "Enter a description for the new connection", false);
-
-        try
-        {
-            // Create the connection
-            var connection = await GraphHelper.CreateConnectionAsync(
-                connectionId, connectionName, connectionDescription);
-            Console.WriteLine($"New connection created - Name: {connection?.Name}, Id: {connection?.Id}");
-            return connection;
-        }
-        catch (ODataError odataError)
-        {
-            Console.WriteLine($"Error creating connection: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-            return null;
-        }
+        // Create the connection
+        var connection = await GraphHelper.CreateConnectionAsync(
+            connectionId, connectionName, connectionDescription);
+        Console.WriteLine($"New connection created - Name: {connection?.Name}, Id: {connection?.Id}");
+        return connection;
     }
-    ```
+    catch (ODataError odataError)
+    {
+        Console.WriteLine($"Error creating connection: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
+        return null;
+    }
+}
+```
 
-    ![](./media/image53.png)
+![](./media/image53.png)
 
 
-    ![](./media/image54.png)
+![](./media/image54.png)
 
 ### Task 2: Select an existing connection
 
-1.  Add the following function to the GraphHelper class
-    in **GraphHelper.cs**.
+1.  Add the following function to the GraphHelper class in **GraphHelper.cs**.
 
-    ```
-    public static async Task<ExternalConnectionCollectionResponse?> GetExistingConnectionsAsync()
-    {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+```
+public static async Task<ExternalConnectionCollectionResponse?> GetExistingConnectionsAsync()
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
 
-        return await graphClient.External.Connections.GetAsync();
-    }
-    ```
+    return await graphClient.External.Connections.GetAsync();
+}
+```
 
-    ![](./media/image55.png)
+![](./media/image55.png)
 
 2.  Replace the placeholder
-    function SelectExistingConnectionAsync in **Program.cs** with the
+    function **SelectExistingConnectionAsync** in **Program.cs** with the
     following.
 
-    ```
-    async Task<ExternalConnection?> SelectExistingConnectionAsync()
+```
+async Task<ExternalConnection?> SelectExistingConnectionAsync()
+{
+    // TODO
+    Console.WriteLine("Getting existing connections...");
+    try
     {
-        // TODO
-        Console.WriteLine("Getting existing connections...");
-        try
+        var response = await GraphHelper.GetExistingConnectionsAsync();
+        var connections = response?.Value ?? new List<ExternalConnection>();
+        if (connections.Count <= 0)
         {
-            var response = await GraphHelper.GetExistingConnectionsAsync();
-            var connections = response?.Value ?? new List<ExternalConnection>();
-            if (connections.Count <= 0)
-            {
-                Console.WriteLine("No connections exist. Please create a new connection");
-                return null;
-            }
+            Console.WriteLine("No connections exist. Please create a new connection");
+            return null;
+        }
 
-            // Display connections
-            Console.WriteLine("Choose one of the following connections:");
-            var menuNumber = 1;
-            foreach(var connection in connections)
-            {
-                Console.WriteLine($"{menuNumber++}. {connection.Name}");
-            }
+        // Display connections
+        Console.WriteLine("Choose one of the following connections:");
+        var menuNumber = 1;
+        foreach(var connection in connections)
+        {
+            Console.WriteLine($"{menuNumber++}. {connection.Name}");
+        }
 
-            ExternalConnection? selection = null;
+        ExternalConnection? selection = null;
 
-            do
+        do
+        {
+            try
             {
-                try
+                Console.Write("Selection: ");
+                var choice = int.Parse(Console.ReadLine() ?? string.Empty);
+                if (choice > 0 && choice <= connections.Count)
                 {
-                    Console.Write("Selection: ");
-                    var choice = int.Parse(Console.ReadLine() ?? string.Empty);
-                    if (choice > 0 && choice <= connections.Count)
-                    {
-                        selection = connections[choice - 1];
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice.");
-                    }
+                    selection = connections[choice - 1];
                 }
-                catch (FormatException)
+                else
                 {
                     Console.WriteLine("Invalid choice.");
                 }
-            } while (selection == null);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid choice.");
+            }
+        } while (selection == null);
 
-            return selection;
-        }
-        catch (ODataError odataError)
-        {
-            Console.WriteLine($"Error getting connections: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-            return null;
-        }
+        return selection;
     }
-    ```
+    catch (ODataError odataError)
+    {
+        Console.WriteLine($"Error getting connections: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
+        return null;
+    }
+}
+```
 
-    ![](./media/image56.png)
+![](./media/image56.png)
 
-    ![](./media/image57.png)
+![](./media/image57.png)
 
 ### Task 3: Delete a connection
 
 1.  Add the following function to the GraphHelper class
     in **GraphHelper.cs**.
 
-    ```
-    public static async Task DeleteConnectionAsync(string? connectionId)
+```
+public static async Task DeleteConnectionAsync(string? connectionId)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+    _ = connectionId ?? throw new ArgumentException("connectionId is required");
+
+    await graphClient.External.Connections[connectionId].DeleteAsync();
+}
+```
+
+![](./media/image58.png)
+
+2.  Replace the placeholder function **DeleteCurrentConnectionAsync** in **Program.cs** with the following.
+
+```
+async Task DeleteCurrentConnectionAsync(ExternalConnection? connection)
+{
+    if (connection == null)
     {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
-        _ = connectionId ?? throw new ArgumentException("connectionId is required");
-
-        await graphClient.External.Connections[connectionId].DeleteAsync();
+        Console.WriteLine(
+            "No connection selected. Please create a new connection or select an existing connection.");
+        return;
     }
-    ```
 
-    ![](./media/image58.png)
-
-2.  Replace the placeholder
-    function DeleteCurrentConnectionAsync in **Program.cs** with the
-    following.
-
-    ```
-    async Task DeleteCurrentConnectionAsync(ExternalConnection? connection)
+    try
     {
-        if (connection == null)
-        {
-            Console.WriteLine(
-                "No connection selected. Please create a new connection or select an existing connection.");
-            return;
-        }
-
-        try
-        {
-            await GraphHelper.DeleteConnectionAsync(connection.Id);
-            Console.WriteLine($"{connection.Name} deleted successfully.");
-        }
-        catch (ODataError odataError)
-        {
-            Console.WriteLine($"Error deleting connection: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-        }
+        await GraphHelper.DeleteConnectionAsync(connection.Id);
+        Console.WriteLine($"{connection.Name} deleted successfully.");
     }
-    ```
+    catch (ODataError odataError)
+    {
+        Console.WriteLine($"Error deleting connection: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
+    }
+}
+```
 
-    ![](./media/image59.png)
+![](./media/image59.png)
 
 ![](./media/image60.png)
 
 ## Exercise 5: Manage schema
 
-In this section, you'll add methods to [register the
-schema](https://learn.microsoft.com/en-us/graph/connecting-external-content-manage-schema) for
+In this section, you'll add methods to [register the schema](https://learn.microsoft.com/en-us/graph/connecting-external-content-manage-schema) for
 the connector.
 
 ### Task 1: Register the schema
@@ -1008,171 +980,170 @@ the connector.
 1.  Add the following functions to the GraphHelper class
     in **GraphHelper.cs**.
 
-    ```
-    public static async Task RegisterSchemaAsync(string? connectionId, Schema schema)
+```
+public static async Task RegisterSchemaAsync(string? connectionId, Schema schema)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+    _ = httpClient ?? throw new MemberAccessException("httpClient is null");
+    _ = connectionId ?? throw new ArgumentException("connectionId is required");
+    // Use the Graph SDK's request builder to generate the request URL
+    var requestInfo = graphClient.External
+        .Connections[connectionId]
+        .Schema
+        .ToGetRequestInformation();
+
+    requestInfo.SetContentFromParsable(graphClient.RequestAdapter, "application/json", schema);
+
+    // Convert the SDK request to an HttpRequestMessage
+    var requestMessage = await graphClient.RequestAdapter
+        .ConvertToNativeRequestAsync<HttpRequestMessage>(requestInfo);
+    _ = requestMessage ?? throw new Exception("Could not create native HTTP request");
+    requestMessage.Method = HttpMethod.Post;
+    requestMessage.Headers.Add("Prefer", "respond-async");
+
+    // Send the request
+    var responseMessage = await httpClient.SendAsync(requestMessage) ??
+        throw new Exception("No response returned from API");
+
+    if (responseMessage.IsSuccessStatusCode)
     {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
-        _ = httpClient ?? throw new MemberAccessException("httpClient is null");
-        _ = connectionId ?? throw new ArgumentException("connectionId is required");
-        // Use the Graph SDK's request builder to generate the request URL
-        var requestInfo = graphClient.External
+        // The operation ID is contained in the Location header returned
+        // in the response
+        var operationId = responseMessage.Headers.Location?.Segments.Last() ??
+            throw new Exception("Could not get operation ID from Location header");
+        await WaitForOperationToCompleteAsync(connectionId, operationId);
+    }
+    else
+    {
+        throw new ServiceException("Registering schema failed",
+            responseMessage.Headers, (int)responseMessage.StatusCode);
+    }
+}
+
+private static async Task WaitForOperationToCompleteAsync(string connectionId, string operationId)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+
+    do
+    {
+        var operation = await graphClient.External
             .Connections[connectionId]
-            .Schema
-            .ToGetRequestInformation();
+            .Operations[operationId]
+            .GetAsync();
 
-        requestInfo.SetContentFromParsable(graphClient.RequestAdapter, "application/json", schema);
-
-        // Convert the SDK request to an HttpRequestMessage
-        var requestMessage = await graphClient.RequestAdapter
-            .ConvertToNativeRequestAsync<HttpRequestMessage>(requestInfo);
-        _ = requestMessage ?? throw new Exception("Could not create native HTTP request");
-        requestMessage.Method = HttpMethod.Post;
-        requestMessage.Headers.Add("Prefer", "respond-async");
-
-        // Send the request
-        var responseMessage = await httpClient.SendAsync(requestMessage) ??
-            throw new Exception("No response returned from API");
-
-        if (responseMessage.IsSuccessStatusCode)
+        if (operation?.Status == ConnectionOperationStatus.Completed)
         {
-            // The operation ID is contained in the Location header returned
-            // in the response
-            var operationId = responseMessage.Headers.Location?.Segments.Last() ??
-                throw new Exception("Could not get operation ID from Location header");
-            await WaitForOperationToCompleteAsync(connectionId, operationId);
-        }
-        else
-        {
-            throw new ServiceException("Registering schema failed",
-                responseMessage.Headers, (int)responseMessage.StatusCode);
-        }
-    }
-
-    private static async Task WaitForOperationToCompleteAsync(string connectionId, string operationId)
-    {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
-
-        do
-        {
-            var operation = await graphClient.External
-                .Connections[connectionId]
-                .Operations[operationId]
-                .GetAsync();
-
-            if (operation?.Status == ConnectionOperationStatus.Completed)
-            {
-                return;
-            }
-            else if (operation?.Status == ConnectionOperationStatus.Failed)
-            {
-                throw new ServiceException($"Schema operation failed: {operation?.Error?.Code} {operation?.Error?.Message}");
-            }
-
-            // Wait 5 seconds and check again
-            await Task.Delay(5000);
-        } while (true);
-    }
-    ```
-
-    ![](./media/image61.png)
-
-2.  Replace the placeholder
-    function RegisterSchemaAsync in **Program.cs** with the following.
-
-    ```
-    async Task RegisterSchemaAsync()
-    {
-        if (currentConnection == null)
-        {
-            Console.WriteLine("No connection selected. Please create a new connection or select an existing connection.");
             return;
         }
-
-        Console.WriteLine("Registering schema, this may take a moment...");
-
-        try
+        else if (operation?.Status == ConnectionOperationStatus.Failed)
         {
-            // Create the schema
-            var schema = new Schema
-            {
-                BaseType = "microsoft.graph.externalItem",
-                Properties = new List<Property>
-                {
-                    new Property { Name = "partNumber", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
-                    new Property { Name = "name", Type = PropertyType.String, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false, Labels = new List<Label?>() { Label.Title }},
-                    new Property { Name = "description", Type = PropertyType.String, IsQueryable = false, IsSearchable = true, IsRetrievable = true, IsRefinable = false },
-                    new Property { Name = "price", Type = PropertyType.Double, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
-                    new Property { Name = "inventory", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
-                    new Property { Name = "appliances", Type = PropertyType.StringCollection, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false }
-                },
-            };
+            throw new ServiceException($"Schema operation failed: {operation?.Error?.Code} {operation?.Error?.Message}");
+        }
 
-            await GraphHelper.RegisterSchemaAsync(currentConnection.Id, schema);
-            Console.WriteLine("Schema registered successfully");
-        }
-        catch (ServiceException serviceException)
-        {
-            Console.WriteLine($"Error registering schema: {serviceException.ResponseStatusCode} {serviceException.Message}");
-        }
-        catch (ODataError odataError)
-        {
-            Console.WriteLine($"Error registering schema: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-        }
+        // Wait 5 seconds and check again
+        await Task.Delay(5000);
+    } while (true);
+}
+```
+
+![](./media/image61.png)
+
+2.  Replace the placeholder function **RegisterSchemaAsync** in **Program.cs** with the following.
+
+```
+async Task RegisterSchemaAsync()
+{
+    if (currentConnection == null)
+    {
+        Console.WriteLine("No connection selected. Please create a new connection or select an existing connection.");
+        return;
     }
-    ```
 
-    ![](./media/image62.png)
+    Console.WriteLine("Registering schema, this may take a moment...");
 
-    ![](./media/image63.png)
+    try
+    {
+        // Create the schema
+        var schema = new Schema
+        {
+            BaseType = "microsoft.graph.externalItem",
+            Properties = new List<Property>
+            {
+                new Property { Name = "partNumber", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
+                new Property { Name = "name", Type = PropertyType.String, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false, Labels = new List<Label?>() { Label.Title }},
+                new Property { Name = "description", Type = PropertyType.String, IsQueryable = false, IsSearchable = true, IsRetrievable = true, IsRefinable = false },
+                new Property { Name = "price", Type = PropertyType.Double, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
+                new Property { Name = "inventory", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
+                new Property { Name = "appliances", Type = PropertyType.StringCollection, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false }
+            },
+        };
+
+        await GraphHelper.RegisterSchemaAsync(currentConnection.Id, schema);
+        Console.WriteLine("Schema registered successfully");
+    }
+    catch (ServiceException serviceException)
+    {
+        Console.WriteLine($"Error registering schema: {serviceException.ResponseStatusCode} {serviceException.Message}");
+    }
+    catch (ODataError odataError)
+    {
+        Console.WriteLine($"Error registering schema: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
+    }
+}
+```
+
+![](./media/image62.png)
+
+![](./media/image63.png)
 
 ### Task 2: Get the schema for a connection
 
 1.  Add the following function to the GraphHelper class
     in **GraphHelper.cs**.
 
-    ```
-    public static async Task<Schema?> GetSchemaAsync(string? connectionId)
-    {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
-        _ = connectionId ?? throw new ArgumentException("connectionId is null");
+```
+public static async Task<Schema?> GetSchemaAsync(string? connectionId)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+    _ = connectionId ?? throw new ArgumentException("connectionId is null");
 
-        return await graphClient.External
-            .Connections[connectionId]
-            .Schema
-            .GetAsync();
-    }
-    ```
+    return await graphClient.External
+        .Connections[connectionId]
+        .Schema
+        .GetAsync();
+}
+```
 
-    ![](./media/image64.png)
+![](./media/image64.png)
 
 2.  Replace the placeholder
-    function GetSchemaAsync in **Program.cs** with the following.
+    function **GetSchemaAsync** in **Program.cs** with the following.
 
-    ```
-    async Task GetSchemaAsync()
+```
+async Task GetSchemaAsync()
+{
+    if (currentConnection == null)
     {
-        if (currentConnection == null)
-        {
-            Console.WriteLine("No connection selected. Please create a new connection or select an existing connection.");
-            return;
-        }
-
-        try
-        {
-            var schema = await GraphHelper.GetSchemaAsync(currentConnection.Id);
-            Console.WriteLine(JsonSerializer.Serialize(schema));
-
-        }
-        catch (ODataError odataError)
-        {
-            Console.WriteLine($"Error getting schema: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-        }
+        Console.WriteLine("No connection selected. Please create a new connection or select an existing connection.");
+        return;
     }
-    ```
 
-    ![](./media/image65.png)
+    try
+    {
+        var schema = await GraphHelper.GetSchemaAsync(currentConnection.Id);
+        Console.WriteLine(JsonSerializer.Serialize(schema));
 
-    ![](./media/image66.png)
+    }
+    catch (ODataError odataError)
+    {
+        Console.WriteLine($"Error getting schema: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
+    }
+}
+```
+
+![](./media/image65.png)
+
+![](./media/image66.png)
 
 ## Exercise 6: Manage items
 
@@ -1185,155 +1156,155 @@ the connector.
 1.  Add the following function to the GraphHelper class
     in **GraphHelper.cs**.
 
-    ```
-    public static async Task AddOrUpdateItemAsync(string? connectionId, ExternalItem item)
-    {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
-        _ = connectionId ?? throw new ArgumentException("connectionId is null");
+```
+public static async Task AddOrUpdateItemAsync(string? connectionId, ExternalItem item)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+    _ = connectionId ?? throw new ArgumentException("connectionId is null");
 
-        await graphClient.External
-            .Connections[connectionId]
-            .Items[item.Id]
-            .PutAsync(item);
-    }
-    ```
+    await graphClient.External
+        .Connections[connectionId]
+        .Items[item.Id]
+        .PutAsync(item);
+}
+```
 
-    ![](./media/image67.png)
+![](./media/image67.png)
 
 2.  Add the following function to the GraphHelper class
     in **GraphHelper.cs**.
 
-    ```
-    public static async Task DeleteItemAsync(string? connectionId, string? itemId)
-    {
-        _ = graphClient ?? throw new MemberAccessException("graphClient is null");
-        _ = connectionId ?? throw new ArgumentException("connectionId is null");
-        _ = itemId ?? throw new ArgumentException("itemId is null");
+```
+public static async Task DeleteItemAsync(string? connectionId, string? itemId)
+{
+    _ = graphClient ?? throw new MemberAccessException("graphClient is null");
+    _ = connectionId ?? throw new ArgumentException("connectionId is null");
+    _ = itemId ?? throw new ArgumentException("itemId is null");
 
-        await graphClient.External
-            .Connections[connectionId]
-            .Items[itemId]
-            .DeleteAsync();
-    }
-    ```
+    await graphClient.External
+        .Connections[connectionId]
+        .Items[itemId]
+        .DeleteAsync();
+}
+```
 
-    ![](./media/image68.png)
+![](./media/image68.png)
 
 3.  Replace the placeholder
-    function UpdateItemsFromDatabaseAsync in **Program.cs** with the
+    function **UpdateItemsFromDatabaseAsync** in **Program.cs** with the
     following.
 
-    ```
-    async Task UpdateItemsFromDatabaseAsync(bool uploadModifiedOnly, string? tenantId)
+```
+async Task UpdateItemsFromDatabaseAsync(bool uploadModifiedOnly, string? tenantId)
+{
+    if (currentConnection == null)
     {
-        if (currentConnection == null)
+        Console.WriteLine("No connection selected. Please create a new connection or select an existing connection.");
+        return;
+    }
+
+    _ = tenantId ?? throw new ArgumentException("tenantId is null");
+
+    List<AppliancePart>? partsToUpload = null;
+    List<AppliancePart>? partsToDelete = null;
+
+    var newUploadTime = DateTime.UtcNow;
+
+    var partsDb = new ApplianceDbContext();
+    partsDb.EnsureDatabase();
+
+    if (uploadModifiedOnly)
+    {
+        var lastUploadTime = GetLastUploadTime();
+        Console.WriteLine($"Uploading changes since last upload at {lastUploadTime.ToLocalTime()}");
+
+        partsToUpload = partsDb.Parts
+            .Where(p => EF.Property<DateTime>(p, "LastUpdated") > lastUploadTime)
+            .ToList();
+
+        partsToDelete = partsDb.Parts
+            .IgnoreQueryFilters()
+            .Where(p => EF.Property<bool>(p, "IsDeleted")
+                && EF.Property<DateTime>(p, "LastUpdated") > lastUploadTime)
+            .ToList();
+    }
+    else
+    {
+        partsToUpload = partsDb.Parts.ToList();
+
+        partsToDelete = partsDb.Parts
+            .IgnoreQueryFilters()
+            .Where(p => EF.Property<bool>(p, "IsDeleted"))
+            .ToList();
+    }
+
+    Console.WriteLine($"Processing {partsToUpload.Count} add/updates, {partsToDelete.Count} deletes.");
+    var success = true;
+
+    foreach (var part in partsToUpload)
+    {
+        var newItem = new ExternalItem
         {
-            Console.WriteLine("No connection selected. Please create a new connection or select an existing connection.");
-            return;
-        }
-
-        _ = tenantId ?? throw new ArgumentException("tenantId is null");
-
-        List<AppliancePart>? partsToUpload = null;
-        List<AppliancePart>? partsToDelete = null;
-
-        var newUploadTime = DateTime.UtcNow;
-
-        var partsDb = new ApplianceDbContext();
-        partsDb.EnsureDatabase();
-
-        if (uploadModifiedOnly)
-        {
-            var lastUploadTime = GetLastUploadTime();
-            Console.WriteLine($"Uploading changes since last upload at {lastUploadTime.ToLocalTime()}");
-
-            partsToUpload = partsDb.Parts
-                .Where(p => EF.Property<DateTime>(p, "LastUpdated") > lastUploadTime)
-                .ToList();
-
-            partsToDelete = partsDb.Parts
-                .IgnoreQueryFilters()
-                .Where(p => EF.Property<bool>(p, "IsDeleted")
-                    && EF.Property<DateTime>(p, "LastUpdated") > lastUploadTime)
-                .ToList();
-        }
-        else
-        {
-            partsToUpload = partsDb.Parts.ToList();
-
-            partsToDelete = partsDb.Parts
-                .IgnoreQueryFilters()
-                .Where(p => EF.Property<bool>(p, "IsDeleted"))
-                .ToList();
-        }
-
-        Console.WriteLine($"Processing {partsToUpload.Count} add/updates, {partsToDelete.Count} deletes.");
-        var success = true;
-
-        foreach (var part in partsToUpload)
-        {
-            var newItem = new ExternalItem
+            Id = part.PartNumber.ToString(),
+            Content = new ExternalItemContent
             {
-                Id = part.PartNumber.ToString(),
-                Content = new ExternalItemContent
+                Type = ExternalItemContentType.Text,
+                Value = part.Description
+            },
+            Acl = new List<Acl>
+            {
+                new Acl
                 {
-                    Type = ExternalItemContentType.Text,
-                    Value = part.Description
-                },
-                Acl = new List<Acl>
-                {
-                    new Acl
-                    {
-                        AccessType = AccessType.Grant,
-                        Type = AclType.Everyone,
-                        Value = tenantId,
-                    }
-                },
-                Properties = part.AsExternalItemProperties(),
-            };
+                    AccessType = AccessType.Grant,
+                    Type = AclType.Everyone,
+                    Value = tenantId,
+                }
+            },
+            Properties = part.AsExternalItemProperties(),
+        };
 
-            try
-            {
-                Console.Write($"Uploading part number {part.PartNumber}...");
-                await GraphHelper.AddOrUpdateItemAsync(currentConnection.Id, newItem);
-                Console.WriteLine("DONE");
-            }
-            catch (ODataError odataError)
-            {
-                success = false;
-                Console.WriteLine("FAILED");
-                Console.WriteLine($"Error: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-            }
-        }
-
-        foreach (var part in partsToDelete)
+        try
         {
-            try
-            {
-                Console.Write($"Deleting part number {part.PartNumber}...");
-                await GraphHelper.DeleteItemAsync(currentConnection.Id, part.PartNumber.ToString());
-                Console.WriteLine("DONE");
-            }
-            catch (ODataError odataError)
-            {
-                success = false;
-                Console.WriteLine("FAILED");
-                Console.WriteLine($"Error: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
-            }
+            Console.Write($"Uploading part number {part.PartNumber}...");
+            await GraphHelper.AddOrUpdateItemAsync(currentConnection.Id, newItem);
+            Console.WriteLine("DONE");
         }
-
-        // If no errors, update our last upload time
-        if (success)
+        catch (ODataError odataError)
         {
-            SaveLastUploadTime(newUploadTime);
+            success = false;
+            Console.WriteLine("FAILED");
+            Console.WriteLine($"Error: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
         }
     }
-    ```
 
-    ![](./media/image69.png)
+    foreach (var part in partsToDelete)
+    {
+        try
+        {
+            Console.Write($"Deleting part number {part.PartNumber}...");
+            await GraphHelper.DeleteItemAsync(currentConnection.Id, part.PartNumber.ToString());
+            Console.WriteLine("DONE");
+        }
+        catch (ODataError odataError)
+        {
+            success = false;
+            Console.WriteLine("FAILED");
+            Console.WriteLine($"Error: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
+        }
+    }
+
+    // If no errors, update our last upload time
+    if (success)
+    {
+        SaveLastUploadTime(newUploadTime);
+    }
+}
+```
+
+![](./media/image69.png)
 
 
-    ![](./media/image70.png)
+![](./media/image70.png)
 
 ## Exercise 8: Run the application
 
@@ -1341,7 +1312,7 @@ In this step, you'll build and run the sample. This code sample creates
 a new connection, register the schema, and then push items from
 the ApplianceParts.csv file into that connection.
 
-1.  Copy the **ApplianceParts.csv** to PartsInventoryConnector from your
+1.  Copy and paste the **ApplianceParts.csv** to PartsInventoryConnector from your
     lab files
 
     ![](./media/image71.png)
@@ -1355,12 +1326,12 @@ the ApplianceParts.csv file into that connection.
     ![](./media/image73.png)
 
 
-3.  Use the command **dotnet build** to build the sample.
+3.  Use the command +++**dotnet build**+++ to build the sample.
 
     ![](./media/image74.png)
 
 
-4.  Use the command **dotnet run** to run the sample.
+4.  Use the command +++**dotnet run**+++ to run the sample.
 
     ![](./media/image75.png)
 
@@ -1396,8 +1367,7 @@ and Microsoft Search in Bing.
     center +++https://admin.microsoft.com/+++ by using the global
     administrator role.
 
-2.  Go to **Settings** \> **Search &
-    intelligence** \> **Customizations**.
+2.  Go to **Settings** --> **Search & intelligence** --> **Customizations**.
 
     ![](./media/image81.png)
 
@@ -1411,8 +1381,7 @@ and Microsoft Search in Bing.
     ![](./media/image83.png)
 
 
-5.  Select **Connectors**, then select the **Parts
-    Inventory** connector. Select **Next**.
+5.  Select **Connectors**, then select the **Parts Inventory** connector. Select **Next**.
 
     ![](./media/image84.png)
 
@@ -1440,8 +1409,7 @@ and Microsoft Search in Bing.
     ![](./media/image89.png)
 
 
-10. Once the vertical is created, you can see it under the list of
-    items.
+10. Once the vertical is created, you can see it under the list of items.
 
     ![](./media/image90.png)
 
@@ -1450,8 +1418,7 @@ and Microsoft Search in Bing.
 
 To create a result type:
 
-1.  Go to **Settings** \> **Search &
-    intelligence** \> **Customizations**.
+1.  Go to **Settings** --> **Search & intelligence** --> **Customizations**.
 
     ![](./media/image91.png)
 
@@ -1459,7 +1426,7 @@ To create a result type:
 
     ![](./media/image92.png)
 
-3.  Enter Appliance Part in the **Name** field and select **Next**.
+3.  Enter Appliance Part in the +++**Name**+++ field and select **Next**.
 
     ![](./media/image93.png)
 
@@ -1478,66 +1445,66 @@ To create a result type:
 6.  On the **Design your layout** page, paste the following JSON, then
     select **Next**.
 
-    ```
+```
+{
+"type": "AdaptiveCard",
+"version": "1.3",
+"body": [
     {
-    "type": "AdaptiveCard",
-    "version": "1.3",
-    "body": [
+    "type": "ColumnSet",
+    "columns": [
         {
-        "type": "ColumnSet",
-        "columns": [
+        "type": "Column",
+        "width": 6,
+        "items": [
             {
-            "type": "Column",
-            "width": 6,
-            "items": [
-                {
-                "type": "TextBlock",
-                "text": "__${name} (Part #${partNumber})__",
-                "color": "accent",
-                "size": "medium",
-                "spacing": "none",
-                "$when": "${name != \"\"}"
-                },
-                {
-                "type": "TextBlock",
-                "text": "${description}",
-                "wrap": true,
-                "maxLines": 3,
-                "$when": "${description != \"\"}"
-                }
-            ],
-            "horizontalAlignment": "Center",
-            "spacing": "none"
+            "type": "TextBlock",
+            "text": "__${name} (Part #${partNumber})__",
+            "color": "accent",
+            "size": "medium",
+            "spacing": "none",
+            "$when": "${name != \"\"}"
             },
             {
-            "type": "Column",
-            "width": 2,
-            "items": [
-                {
-                "type": "FactSet",
-                "facts": [
-                    {
-                    "title": "Price",
-                    "value": "$${price}"
-                    },
-                    {
-                    "title": "Current Inventory",
-                    "value": "${inventory} units"
-                    }
-                ]
-                }
-            ],
-            "spacing": "none",
-            "horizontalAlignment": "right"
+            "type": "TextBlock",
+            "text": "${description}",
+            "wrap": true,
+            "maxLines": 3,
+            "$when": "${description != \"\"}"
             }
-        ]
+        ],
+        "horizontalAlignment": "Center",
+        "spacing": "none"
+        },
+        {
+        "type": "Column",
+        "width": 2,
+        "items": [
+            {
+            "type": "FactSet",
+            "facts": [
+                {
+                "title": "Price",
+                "value": "$${price}"
+                },
+                {
+                "title": "Current Inventory",
+                "value": "${inventory} units"
+                }
+            ]
+            }
+        ],
+        "spacing": "none",
+        "horizontalAlignment": "right"
         }
-    ],
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+    ]
     }
-    ```
+],
+"$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+}
+```
 
-    ![](./media/image96.png)
+![](./media/image96.png)
 
 
 7.  Select **Add result type**, then select **Done**.
@@ -1558,19 +1525,18 @@ In this step, you search for parts in SharePoint.
     ![](./media/image100.png)
 
 
-2.  On the welcome to SharePoint floater window click on the x icon to
+2.  On the welcome to SharePoint floater window click on the **x** icon to
     close.
 
     ![](./media/image101.png)
 
 
-3.  Using the search box at the top of the page, search for **hinge**.
+3.  Using the search box at the top of the page, search for +++**hinge**+++.
 
     ![](./media/image102.png)
 
 
-4.  When the search completes with 0 results, select the **Appliance
-    Parts** tab. Results from the connector are displayed.
+4.  When the search completes with 0 results, select the **Appliance Parts** tab. Results from the connector are displayed.
 
     ![](./media/image103.png)
 
