@@ -43,13 +43,25 @@ application for execution using your Azure OpenAI deployment details.
 **Important:** You must have .NET Framework 8.0 installed and a GitHub
 account to complete these steps.
 
+1. Open command line editor and execute the gien below command one by one.
 
-1. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code**. The folder will open in VS Code.
+```
+dotnet nuget list source
+```
+
+```
+dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
+```
+
+![](./media/image1a.png)
+
+
+1. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code** folder will open in VS Code or you can open VS code go to files and click on open folder. Choose the folder from lab file **AITravelAgent** and open it.
 
 ![](./media/add.png)
 
 
-2.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select Open in Integrated Terminal.
+2.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select **Open in Integrated Terminal**.
 
     ![](./media/image8.png)
 
@@ -61,13 +73,13 @@ account to complete these steps.
 
 4.  Open the **Starter/Program.cs** file and update the following variables with your Azure OpenAI Services deployment name, API key, and endpoint. After making the changes, press Ctrl + S to save the file:
 
-    - **string yourDeploymentName** = "gpt-35-turbo-16k";
+    - **string yourDeploymentName** = +++"gpt-35-turbo-16k"+++;
 
-    - **string yourEndpoint** = "Which we created in Lab 6";
+    - **string yourEndpoint** = "Which we created in Lab 3";
 
-    - **string yourKey** = "Which we created in Lab 6";
+    - **string yourKey** = "Which we created in Lab 3";
 
-    > **Note:** For the API key and endpoint, refer to the AI Foundry and the Lab 6 project overview section.
+    > **Note:** For the API key and endpoint, refer to the AI Foundry and the Lab 3 project overview section.
 
     ![](./media/image10.png)
 
@@ -84,7 +96,7 @@ integrate plugins into a larger application.
 
 **Important:** You need to complete the Setup instructions in the previous unit, Prepare, before you begin this exercise.
 
-1.  Create a new file named **CurrencyConverter.cs** in the **Stater/Plugins/ConvertCurrency** folder
+1.  Create a new file named +++**CurrencyConverter.cs**+++ in the **Stater/Plugins/ConvertCurrency** folder
 
     ![](./media/image12.png)
 
@@ -212,12 +224,12 @@ conversions.
     ![](./media/image18.png)
 
 
-2.  Inside the **Starter/Prompt** folder, create a new folder named **GetTargetCurrencies**. This folder will contain all the files related to this exercise.
+2.  Inside the **Starter/Prompt** folder, create a new folder named +++**GetTargetCurrencies**+++. This folder will contain all the files related to this exercise.
 
     ![](./media/image19.png)
 
 
-3.  Within the **GetTargetCurrencies** folder, create a new file named **config.json**.
+3.  Within the **GetTargetCurrencies** folder, create a new file named +++**config.json**+++.
 
     ![](./media/image20.png)
 
