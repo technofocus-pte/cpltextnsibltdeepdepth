@@ -191,7 +191,22 @@ You install the Azure CLI and sign in from your local development
 environment, so that you can use your user credentials to call the Azure
 OpenAI service.
 
-1.  In most cases you can install the Azure CLI from your terminal using the following command:
+1. Open windows power shell and paste the below given command and run it.
+
+```
+$progressPreference = 'silentlyContinue'
+Write-Host "Installing WinGet PowerShell module from PSGallery..."
+Install-PackageProvider -Name NuGet -Force | Out-Null
+Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
+Repair-WinGetPackageManager
+Write-Host "Done."
+```
+
+![](./media/imagez.png)
+
+
+2.  In most cases you can install the Azure CLI from your command line terminal using the following command:
 
 
 ```
@@ -205,7 +220,7 @@ winget install -e --id Microsoft.AzureCLI
 
 ![](./media/image28.png)
 
-2.  After you install the Azure CLI, sign in using the az login command and sign-in using the browser:
+3.  After you install the Azure CLI, sign in using the az login command and sign-in using the browser:
 
 
 ```
@@ -261,7 +276,7 @@ py -3 -m venv .venv
 
 Activating the Python environment means that when you run python or pip from the command line, you then use the Python interpreter contained in the .venv folder of your application.
 
-4.  Run the following command to open the directory in VS **code.**
+4.  Open the project folder in VS Code
 
     ![](./media/image34.png)
 
@@ -270,7 +285,7 @@ Activating the Python environment means that when you run python or pip from
 
 Install **azure-ai-projects(preview) and azure-ai-inference (preview)**,along with other required packages.
 
-5.  Create a file named **requirements.txt** in your **ProjectXXXX** folder and add the following packages to the file:
+5.  Create a file named +++**requirements.txt**+++ in your **ProjectXXXX** folder and add the following packages. After adding packages go to files and select **Save All**:
 
 
 ```
@@ -281,6 +296,7 @@ azure-search-documents
 pandas
 python-dotenv
 opentelemetry-api
+marshmallow==3.23.2
 ```
 
 
@@ -484,18 +500,14 @@ CompleteExercise 1 - Create resources for building a custom chat application wit
 
 The goal with this RAG-based application is to ground the model responses in your custom data. You use an Azure AI Search index that stores vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
 
-1.  Create an **assets** directory in your project folder\src.
-
-
-```
-mkdir assets
-```
+1.  Create an +++**assets**+++
+2.   directory in your project folder\src.
 
 
 ![](./media/image50.png)
 
 
-2.  Copy **products.csv** file from Lab files and paste it in +++**Project0612**+++ folder.
+2.  Copy **products.csv** file from Lab files and paste it in +++**Project0612/src/assets**+++ folder.
 
 ![](./media/image51.png)
 
@@ -1219,11 +1231,11 @@ pip install azure-monitor-opentelemetry
 ![](./media/image78.png)
 
 
-3.  Add the --enable-telemetry flag when you use the chat_with_products.py script:
+3.  Add the --enable --telemetry flag when you use the chat_with_products.py script:
 
 
 ```
-python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable-telemetry
+python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable--telemetry
 ```
 
 

@@ -37,6 +37,156 @@ authentication](https://learn.microsoft.com/en-us/graph/auth-v2-service).
 Microsoft Graph connectors use app-only authentication to access the
 connector APIs.
 
+### Task 0: Sync Host environment time
+
+1.  Login to the Lab Virtual Machine using the credentials provided on
+    the Home tab of the Lab interface. 
+
+
+2.  In your VM, navigate and click in the **Search bar**, type
+    **Settings** and then click on **Settings** under **Best match**.
+    
+    ![](./media/image01.png)
+
+
+2.  On Settings window, navigate and click on **Time & language**. 
+
+    ![](./media/image02.png)
+
+3.  On **Time & language** page, navigate and click on **Date & time**. 
+
+    ![](./media/image03.png)
+
+
+4.  Scroll down and navigate to **Additional settings** section, then
+    click on **Syn now** button.  
+
+    ![](./media/image04.png)
+
+
+5.  Close the **Settings** window.  
+
+    ![](./media/image05.png)
+
+
+6.  In your lab VM, open Microsoft Edge and enter +++**http://www.microsoftazurepass.com**+++
+
+    ![](./media/image06.png)
+
+7.  On **Ready to get started?** page, click on the **Start** button. 
+
+    ![](./media/image07.jpeg)
+
+
+    > **Note**: Do not use your Company/Work Account to login to redeem the Azure Pass, another Azure Pass will not be issued. 
+
+8.  In the **Sign in** window, enter the **Office 365 Tenant ID** -
+    <admin@WWLxxxx.onmicrosoft.com> and click on the **Next** button. 
+
+    ![](./media/image08.png)
+
+9.  Enter Office **365 Tenant Password** and click on the **Sign in**
+    button. 
+
+    ![](./media/image09.png)
+
+10.  On **Stayed signed in?** dialog box, click on **Yes** button. 
+
+![](./media/image010.png)
+
+
+11.  On **The following Microsoft Account will be used for Azure pass**
+    page, click on **Confirm Microsoft Account** button. 
+
+![](./media/image011.png)
+
+
+12.  Enter the Promocode provided in the lab environment in the **Enter
+    Promo code** field, then enter the characters under the **Enter the
+    characters you see** field and click on the **Submit** button.  
+
+![](./media/image012.png)
+
+
+13.  **We are processing your request** page will appear, it may take few
+    seconds to process the redemption. 
+
+![](./media/image013.png)
+
+
+14. Enter correct details in **Your Profile** page, tick all the check
+    boxes, and then click on **Sign up** button. 
+
+    ![](./media/image014.png)
+
+    ![](./media/image015.png)
+
+    ![](./media/image016.png)
+
+
+15. On **Protect your account** dialog box, click on the **Next**
+    button. 
+
+    ![](./media/image017.png)
+
+
+16. Then, on **More information required** dialog box, click on
+    the **Next** button. 
+
+    ![](./media/image018.png)
+
+17. If prompted, then enter the password and click on the **Sign in**
+    button. 
+
+    ![](./media/image019.png)
+
+
+18. In your mobile, install the **Microsoft Authenticator App**. Then,
+    go back to Microsoft Azure port. In the Azure portal, **Microsoft
+    Authenticator -** **Start by getting the app** window, navigate and
+    click on the **Next** button. 
+
+    ![](./media/image020.png)
+
+
+19. In **Microsoft Authenticator –** **Set up your account** window,
+    click on the **Next** button. 
+
+    ![](./media/image021.png)
+
+
+20. **Scan the QR code** using the **Authenticator app** installed in
+    your mobile phone and click on the **Next** button. 
+
+    ![](./media/image022.png)
+
+
+21. Enter the number in your mobile authenticator app and select
+    **Yes**. In **testvm1**, click on the **Next** button. 
+
+    ![](./media/image023.png)
+
+
+22. Click on the **Next** button. 
+
+    ![](./media/image024.png)
+
+
+23. Click on the **Done** button. 
+
+    ![](./media/image025.png)
+
+
+24. Enter the number again in your mobile authenticator app and select
+    **Yes**.. 
+
+     ![](./media/image026.png)
+
+
+25. In the **Stay signed in?** window, click on the **Yes** button. 
+
+    ![](./media/image010.png)
+
 ### Task 1: Register application for app-only authentication
 
 In this section you'll register an application that supports app-only
