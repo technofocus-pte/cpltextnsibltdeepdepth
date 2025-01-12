@@ -327,6 +327,18 @@ CsvHelper for reading CSV files.
 1.  Run the following commands in your CLI to install the dependencies.
 
 ```
+dotnet nuget list source
+```
+
+```
+dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
+```
+
+```
+dotnet tool install --global dotnet-ef
+```
+
+```
 dotnet add package Microsoft.Extensions.Configuration.Binder
 ```
 
