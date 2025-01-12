@@ -456,6 +456,22 @@ public class Settings
 
 In this section you create a console-based menu.
 
+1.  Open PartsInventoryConnector in the VS Code and, Navigate to
+    extensions.
+
+![](./media/imageZ1.png)
+
+2.  Search for **C#** in the search bar and click on the **Install**.
+
+![](./media/imageZ2.png)
+
+
+3.  Search for **C# Dev Kit** in the search bar and click on the
+    **Install**.
+
+![](./media/imageZ3.png)
+
+
 1.  Open **Program.cs** and replace its entire contents with the
     following code.
 
