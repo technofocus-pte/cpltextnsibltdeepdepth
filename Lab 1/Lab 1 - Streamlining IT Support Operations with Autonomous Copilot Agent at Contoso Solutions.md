@@ -26,7 +26,111 @@ email notifications for unresolved issues. Finally, participants will
 test the agent to validate its troubleshooting accuracy and workflow
 automation, ensuring seamless IT support operations.
 
-#  Exercise 1: Creating the Contoso IT Support Agent
+# Exercise 1: Getting Started with Power Apps
+
+This exercise introduces participants to Power Apps and Dataverse. The
+goal is to log in to Power Apps, set up a working environment, and
+create a Dataverse table by importing data from an Excel file.
+Participants will learn essential skills for working with data-driven
+applications.
+
+## Task 1: Logging into Power Apps
+
+1.  Navigate to power apps website +++https://www.microsoft.com/en-us/power-platform/products/power-apps+++ and click on the **Try for Free** button.
+
+    ![](./media/image15.png)
+
+
+2.  Enter **office 365 admin tenant**, check the box and click on **Start free** .
+
+    ![](./media/image16.png)
+
+
+3.  Enter Country/ Region, Phone number, select box check box and click
+    on the **Get started**.
+
+    ![](./media/image17.png)
+
+
+4.  Confirm the account details and then click on the **Get started**.
+
+    ![](./media/image18.png)
+
+
+5.  On the Stay signed in tab select **Yes**.
+
+    ![](./media/image19.png)
+
+
+## Task 2: Setting Up a Dataverse Table
+
+1.  On the power apps home page, from top select the development
+    environment. In our case its **Dev One**, participant can choose their
+    own environment.
+
+    ![](./media/image20.png)
+
+
+2.  From the left navigation bar select **Tables.** In the tables
+    section top bar click on the **+ New table** and then select
+    **Create new tables**.
+
+    ![](./media/image21.png)
+
+
+3.  Select **Import an Excel file or CSV** option to create a new table.
+
+    ![](./media/image22.png)
+
+
+4.  Click on the select form device option and select **Support Ticket**
+    excel file from **Lab Files** folder.
+
+    ![](./media/image23.png)
+
+
+5.  Select the table and click on **View data** to see the table.
+
+    > Note: In my case, the table is named *Employee Technical Support Record*. The name may vary with each execution. Please save the table name for future             reference.
+
+    ![](./media/image24.png)
+
+
+6.  Go to table data, select **Technical Issue Description down arrow**,
+    select **Edit column**, Set the data type as **Text** 🡪 **Multiple
+    line** 🡪 **Plain Text** and click on the **Update**. The column name
+    may be different in each case.
+
+    ![](./media/image25.png)
+
+
+    ![](./media/image26.png)
+
+
+7.  Select **Current Status down arrow**, select **Edit column**, Set
+    the Choices as +++**Unresolved**+++, +++**Resolved**+++, +++**Processing**+++. Set Default
+    choices as **Unresolved** and click on the **Update**.
+
+    ![](./media/image27.png)
+
+
+8.  From top right side click on **Save and exit** to save the table.
+
+    ![](./media/image28.png)
+
+
+## Conclusion
+
+By completing this exercise, participants will learn:
+
+- How to access and navigate Power Apps using office 365 admin tenant credentials.
+
+- Steps to create and configure a Dataverse table by importing data.
+
+- Practical knowledge of setting up an environment to support app
+  development workflows.
+
+#  Exercise 2: Creating the Contoso IT Support Agent
 
 This exercise focuses on logging into Microsoft Copilot Studio and
 creating a customized Copilot agent tailored for IT support operations
@@ -41,7 +145,7 @@ agent to streamline IT workflows.
     ![](./media/image2.png)
 
 
-2.  Enter **User1** credentials in the respected field and click on the **Next** button.
+2.  Enter **office 365 admin tenant** credentials in the respected field and click on the **Next** button.
 
     ![](./media/image3.png)
 
@@ -130,111 +234,6 @@ By completing this exercise, participants will learn:
 
 - Ways to enhance IT operations by automating ticket creation and
   leveraging AI for troubleshooting.
-
-# Exercise 2: Getting Started with Power Apps
-
-This exercise introduces participants to Power Apps and Dataverse. The
-goal is to log in to Power Apps, set up a working environment, and
-create a Dataverse table by importing data from an Excel file.
-Participants will learn essential skills for working with data-driven
-applications.
-
-## Task 1: Logging into Power Apps
-
-1.  Navigate to power apps website +++https://www.microsoft.com/en-us/power-platform/products/power-apps+++ and click on the **Try for Fre**e **button.**
-
-    ![](./media/image15.png)
-
-
-2.  Enter **User1 Credentials**, check the box and click
-    on **Start free,** for this tab we are using admin tenant id.
-
-    ![](./media/image16.png)
-
-
-3.  Enter Country/ Region, Phone number, select box check box and click
-    on the **Get started**.
-
-    ![](./media/image17.png)
-
-
-4.  Confirm the account details and then click on the **Get started**.
-
-    ![](./media/image18.png)
-
-
-5.  On the Stay signed in tab select **Yes**.
-
-    ![](./media/image19.png)
-
-
-## Task 2: Setting Up a Dataverse Table
-
-1.  On the power apps home page, from top select the development
-    environment. In our case its **Dev One**, participant can choose their
-    own environment.
-
-    ![](./media/image20.png)
-
-
-2.  From the left navigation bar select **Tables.** In the tables
-    section top bar click on the **+ New table** and then select
-    **Create new tables**.
-
-    ![](./media/image21.png)
-
-
-3.  Select **Import an Excel file or CSV** option to create a new table.
-
-    ![](./media/image22.png)
-
-
-4.  Click on the select form device option and select **Support Ticket**
-    excel file from **Lab Files** folder.
-
-    ![](./media/image23.png)
-
-
-5.  Select the table and click on **View data** to see the table.
-
-    > Note: In my case, the table is named *Employee Technical Support Record*. The name may vary with each execution. Please save the table name for future reference.
-
-    ![](./media/image24.png)
-
-
-6.  Go to table data, select **Technical Issue Description down arrow**,
-    select **Edit column**, Set the data type as **Text** 🡪 **Multiple
-    line** 🡪 **Plain Text** and click on the **Update**. The column name
-    may be different in each case.
-
-    ![](./media/image25.png)
-
-
-    ![](./media/image26.png)
-
-
-7.  Select **Current Status down arrow**, select **Edit column**, Set
-    the Choices as **Unresolved, Resolved, Processing**. Set Default
-    choices as **Unresolved** and click on the **Update**.
-
-    ![](./media/image27.png)
-
-
-8.  From top right side click on **Save and exit** to save the table.
-
-    ![](./media/image28.png)
-
-
-## Conclusion
-
-By completing this exercise, participants will learn:
-
-- How to access and navigate Power Apps using User1 credentials.
-
-- Steps to create and configure a Dataverse table by importing data.
-
-- Practical knowledge of setting up an environment to support app
-  development workflows.
 
 # Exercise 3: Enhancing Bot Capabilities
 
@@ -387,9 +386,9 @@ data in Dataverse, and notify support engineers via email.
     ![](./media/image46.png)
 
 
-2.  In choose an action window, scroll down and click on **Create a new flow**, power automate flow window will open.
+2.  In choose an action window, From top left side click on the **+ New Action** and select **New Power Automate Flow** . 
 
-    ![](./media/image47.png)
+    ![](./media/image47a.png)
 
 
 3.  In Power automate flow, click on **Run a flow from copilot** and then select **Add an Input**.
@@ -418,7 +417,7 @@ data in Dataverse, and notify support engineers via email.
 
 6.  Below Run a flow from copilot, click on **(+)** sign and select **Add an action**.
 
-    ![](./media/image52.png)
+    ![](./media/image52a.png)
 
 
 7.  In Add an action search bar, enter +++**Add a new row**+++ . Then select
@@ -457,7 +456,7 @@ data in Dataverse, and notify support engineers via email.
 
 10. Below Add a new row action click on (+) and select **Add an action**.
 
-    ![](./media/image58.png)
+    ![](./media/image58a.png)
 
 
 11. In add an action section, enter +++**Send an email**+++ in the search bar
@@ -469,17 +468,32 @@ data in Dataverse, and notify support engineers via email.
 12. In send an email section, Enter the below given detail in the
     respected section:
 
-| **To**     | Enter support engineer email (Use any email ID)                                                                                                                                                             |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Subject** | New Technical Support Ticket Raised                                                                                                                                                                      |
-| **Body**    | A new technical support ticket has been raised and requires your attention. Please find details below:                                                                                                  |
-|            | - **Employee Name**: Name (Use Name dynamic content variable (Thunder bolt))                                                                                                                             |
-|            | - **Employee ID**: ID (Use Name dynamic content variable (Thunder bolt))                                                                                                                                 |
-|            | - **Technical Issue**: Details (Use Name dynamic content variable (Thunder Bolt))                                                                                                                       |
-|            |                                                                                                                                                                                                          |
-|            | Thank you for your prompt attention to this matter.                                                                                                                                                     |
-|            |                                                                                                                                                                                                          |
-|            | **Best Regards**                                                                                                                                                                                        |
+**To**
+
+```
+Enter support engineer email (Use any email ID) 
+```
+
+**Subject**
+
+```
+New Technical Support Ticket Raised 
+```
+
+**Body**
+
+```
+A new technical support ticket has been raised and requires your attention. Please find details below:
+
+Employee Name: Name (Use Name dynamic content variable (Thunder bolt))
+Employee ID: ID (Use Name dynamic content variable (Thunder bolt))
+Technical Issue: Details (Use Name dynamic content variable (Thunder Bolt))
+
+Thank you for your prompt attention to this matter.'
+
+Best Regards
+```
+
 
 ![](./media/image60.png)
 
@@ -496,41 +510,42 @@ data in Dataverse, and notify support engineers via email.
 
 15. Go back to Copilot window and click on **Refresh** button.
 
-    ![](./media/image63.png)
+    ![](./media/image63a.png)
 
 
 16. In Choose an action window, select **Employee Data** flow.
 
-    ![](./media/image64.png)
+    ![](./media/image64a.png)
 
 
-17. Click on **Next** to move forward and configure the flow.
+17. Click on **Add action** button to add a flow
 
-    ![](./media/image65.png)
-
-
-18. In the Review input and output window, click on **Edit inputs**.
-
-    ![](./media/image66.png)
+    ![](./media/imagea.png)
 
 
-19. Enter the given description in the respected input, after entering
-    the description click on **Save** button. After saving the inputs
-    description click on **Next** and then **Finish**.
+18. Click on the **Employee Data** flow and open it, after opening select inputs option.
 
-| Name -- Description | +++Enter the name of the employee.+++ |
+    ![](./media/imageb.png)
+    
+    ![](./media/imagec.png)
+
+
+20. Enter the given description in the respected input, after entering
+    the description click on **Save** button. 
+
+| Section | Details |
 |----|----|
+| Name -- Description | +++Enter the name of the employee.+++ |
 | ID -- Description | +++Enter the employee ID in the field.+++ |
 | Email -- Description | +++Enter the email address of the employee from whom the email is received.+++ |
 | Details -- Description | +++Enter the email details of the employee.+++ |
 
-![](./media/image67.png)
+![](./media/imaged.png)
+
+ ![](./media/imagee.png)
 
 
-![](./media/image68.png)
 
-
-![](./media/image69.png)
 
 
 ## Conclusion
@@ -656,8 +671,7 @@ trigger automated workflows effectively.
 
 
 3.  Open outlook or other email service provider login and send email on
-    same credentials which is using in copilot
-    and power automate login.
+    same credentials which is using in copilot and power automate login.
 
     ![](./media/image85.png)
 
@@ -732,6 +746,7 @@ By completing this exercise, participants will learn:
 - Steps to validate email-triggered workflows and ticket generation in
   Power Automate.
 
+
 - How to review generated records in Dataverse and ensure notifications
   are sent to the support team.
 
@@ -752,7 +767,6 @@ able to:
 2.  **Navigate Power Apps**: Participants gained practical knowledge in
     logging into Power Apps, setting up a Dataverse table, and importing
     data from Excel to track and manage support tickets efficiently.
-
 3.  **Enhance Bot Capabilities**: The exercises focused on adding a
     knowledge base to the bot, customizing the conversation start and
     fallback topics to improve user interaction, and ensuring the bot
