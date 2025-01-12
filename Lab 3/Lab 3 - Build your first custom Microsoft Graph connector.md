@@ -1370,8 +1370,7 @@ public static async Task DeleteItemAsync(string? connectionId, string? itemId)
 
 3.  Replace the placeholder
     function **UpdateItemsFromDatabaseAsync** in **Program.cs** with the
-    following.
-
+    following. navigate to files and click on **Save all**
 ```
 async Task UpdateItemsFromDatabaseAsync(bool uploadModifiedOnly, string? tenantId)
 {
