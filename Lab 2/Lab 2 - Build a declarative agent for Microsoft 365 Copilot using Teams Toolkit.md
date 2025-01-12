@@ -400,8 +400,7 @@ Some of the benefits of having conversation starters are:
 
 - **User Retention**: Well-designed starters keep users interested, encouraging repeat interactions with the AI.
 
-1.  Open file declarativeAgent.json and right after
-    the instructions node add a comma , and paste below code.
+1.  Open file **declarativeAgent.json** and right after the instructions node add a comma press enter, and paste below code.
     
     
     ```
