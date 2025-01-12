@@ -19,157 +19,6 @@ providing contextual responses. By leveraging AI and search integration,
 the solution aims to streamline workflows, improve decision-making, and
 enhance user engagement through intuitive and efficient interactions.
 
-## Task 0: Sync Host environment time
-
-1.  Login to the Lab Virtual Machine using the credentials provided on
-    the Home tab of the Lab interface. 
-
-
-2.  In your VM, navigate and click in the **Search bar**, type
-    **Settings** and then click on **Settings** under **Best match**.
-    
-    ![](./media/image01.png)
-
-
-2.  On Settings window, navigate and click on **Time & language**. 
-
-    ![](./media/image02.png)
-
-3.  On **Time & language** page, navigate and click on **Date & time**. 
-
-    ![](./media/image03.png)
-
-
-4.  Scroll down and navigate to **Additional settings** section, then
-    click on **Syn now** button.  
-
-    ![](./media/image04.png)
-
-
-5.  Close the **Settings** window.  
-
-    ![](./media/image05.png)
-
-
-6.  In your lab VM, open Microsoft Edge and enter +++**http://www.microsoftazurepass.com**+++
-
-    ![](./media/image06.png)
-
-7.  On **Ready to get started?** page, click on the **Start** button. 
-
-    ![](./media/image07.jpeg)
-
-
-    > **Note**: Do not use your Company/Work Account to login to redeem the Azure Pass, another Azure Pass will not be issued. 
-
-8.  In the **Sign in** window, enter the **Office 365 Tenant ID** -
-    <admin@WWLxxxx.onmicrosoft.com> and click on the **Next** button. 
-
-    ![](./media/image08.png)
-
-9.  Enter Office **365 Tenant Password** and click on the **Sign in**
-    button. 
-
-    ![](./media/image09.png)
-
-10.  On **Stayed signed in?** dialog box, click on **Yes** button. 
-
-![](./media/image010.png)
-
-
-11.  On **The following Microsoft Account will be used for Azure pass**
-    page, click on **Confirm Microsoft Account** button. 
-
-![](./media/image011.png)
-
-
-12.  Enter the Promocode provided in the lab environment in the **Enter
-    Promo code** field, then enter the characters under the **Enter the
-    characters you see** field and click on the **Submit** button.  
-
-![](./media/image012.png)
-
-
-13.  **We are processing your request** page will appear, it may take few
-    seconds to process the redemption. 
-
-![](./media/image013.png)
-
-
-14. Enter correct details in **Your Profile** page, tick all the check
-    boxes, and then click on **Sign up** button. 
-
-    ![](./media/image014.png)
-
-    ![](./media/image015.png)
-
-    ![](./media/image016.png)
-
-
-15. On **Protect your account** dialog box, click on the **Next**
-    button. 
-
-    ![](./media/image017.png)
-
-
-16. Then, on **More information required** dialog box, click on
-    the **Next** button. 
-
-    ![](./media/image018.png)
-
-17. If prompted, then enter the password and click on the **Sign in**
-    button. 
-
-    ![](./media/image019.png)
-
-
-18. In your mobile, install the **Microsoft Authenticator App**. Then,
-    go back to Microsoft Azure port. In the Azure portal, **Microsoft
-    Authenticator -** **Start by getting the app** window, navigate and
-    click on the **Next** button. 
-
-    ![](./media/image020.png)
-
-
-19. In **Microsoft Authenticator –** **Set up your account** window,
-    click on the **Next** button. 
-
-    ![](./media/image021.png)
-
-
-20. **Scan the QR code** using the **Authenticator app** installed in
-    your mobile phone and click on the **Next** button. 
-
-    ![](./media/image022.png)
-
-
-21. Enter the number in your mobile authenticator app and select
-    **Yes**. In **testvm1**, click on the **Next** button. 
-
-    ![](./media/image023.png)
-
-
-22. Click on the **Next** button. 
-
-    ![](./media/image024.png)
-
-
-23. Click on the **Done** button. 
-
-    ![](./media/image025.png)
-
-
-24. Enter the number again in your mobile authenticator app and select
-    **Yes**.. 
-
-     ![](./media/image026.png)
-
-
-25. In the **Stay signed in?** window, click on the **Yes** button. 
-
-    ![](./media/image010.png)
-
-
 ## Task 1: Create an Azure AI Search resource
 
 1.  In a web browser, open the Azure portal at +++https://portal.azure.com+++ and sign in using your office 365 admin tenant credentials.
@@ -284,7 +133,7 @@ You need two models to implement your solution:
 
     ![](./media/image15.png)
 
-4.  On the **Deploy model text-embedding-ada-**002 pane click on **Customize** and enter the following details in the Deploy model
+4.  On the Deploy model **text-embedding-ada-002** pane click on **Customize** and enter the following details in the Deploy model
     wizard:
 
     ![](./media/image16.png)
@@ -309,7 +158,7 @@ You need two models to implement your solution:
     ![](./media/image18.png)
 
 
-5.  Repeat the previous steps to deploy a **gpt-35-turbo-16k** model with the deployment name gpt-35-turbo-16k.
+5.  Repeat the previous steps to deploy a +++**gpt-35-turbo-16k**+++ model with the deployment name gpt-35-turbo-16k.
 
     ![](./media/image19.png)
 
@@ -367,7 +216,7 @@ Now that you’ve added a data source to your project, you can use it to create 
 
     - **Source location**:
 
-      - **Data source**: Data in Azure AI Studio
+      - **Data source**: Data in Azure AI Foundry
 
         - *Select the **brochures** data source- **dataXXXX***
 
@@ -378,7 +227,7 @@ Now that you’ve added a data source to your project, you can use it to create 
 
   - **Select Azure AI Search service**: *Select the **AzureAISearch** connection to your Azure AI Search resource*
 
-  - **Vector index**: brochures-index
+  - **Vector index**: +++brochures-index+++
 
   - **Virtual machine**: Auto select
 
@@ -428,7 +277,7 @@ Before using your index in a RAG-based prompt flow, let’s verify that it can b
 
     > **Note**: Some users are finding newly created indexes unavailable right away. Refreshing the browser usually helps, but if you’re still experiencing the issue where it can’t find the index you may need to wait until the index is recognized.
 
-5.  After the index has been added and the chat session has restarted, resubmit the prompt **Where can I stay in New York?**
+5.  After the index has been added and the chat session has restarted, resubmit the prompt +++**Where can I stay in New York?**+++
 
     ![](./media/image38.png)
 
@@ -515,7 +364,7 @@ Your vector index has been saved in your Azure AI Foundry project, enabling you 
 
       - **mlindex_asset_id**: brochures-index:1
 
-    - **queries**: \${modify_query_with_history.output}
+    - **queries**: +++\${modify_query_with_history.output}+++
 
     - **query_type**: Hybrid (vector + keyword)
 
@@ -599,10 +448,3 @@ Try adding a new data source through the Azure AI Foundry portal, index it, and 
 - A set of presentations from past conferences.
 
 Be as resourceful as you can to create your data source and integrate it in your prompt flow. Try out the new prompt flow and submit prompts that could only be answered by the data set you chose!
-
-## Task 9: Clean up
-
-To avoid unnecessary Azure costs and resource utilization, you should remove the resources you deployed in this exercise.
-
-If you’ve finished exploring Azure AI Foundry, return to the Azure
-portal at +++https://portal.azure.com+++ and sign in using your Azure credentials if necessary. Then delete the resources in the resource group where you provisioned your Azure AI Search and Azure AI resources.
