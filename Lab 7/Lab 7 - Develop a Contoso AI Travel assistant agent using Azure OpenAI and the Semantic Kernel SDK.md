@@ -75,9 +75,9 @@ dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
 
     - **string yourDeploymentName** = +++"gpt-35-turbo-16k"+++;
 
-    - **string yourEndpoint** = "Which we created in Lab 3";
+    - **string yourEndpoint** = "Which we created in Lab 6";
 
-    - **string yourKey** = "Which we created in Lab 3";
+    - **string yourKey** = "Which we created in Lab 6";
 
     > **Note:** For the API key and endpoint, refer to the AI Foundry and the Lab 3 project overview section.
 
