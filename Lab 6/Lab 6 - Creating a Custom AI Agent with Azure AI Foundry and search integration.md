@@ -27,13 +27,13 @@ enhance user engagement through intuitive and efficient interactions.
 
 2.  On the home page, select **+ Create a resource** and search for +++**Azure AI Search**+++. Then **create** a new Azure AI Search resource with the following settings:
 
-    - **Subscription**: *Select your Azure subscription.
+    - **Subscription**: Select your Azure subscription.
 
-    - **Resource group**: *Select or create a resource group, here we select **RG4OpenAI***
+    - **Resource group**: Click on **Create New** ->  +++**RG4OpenAI**+++
 
-    - **Service name**: *Enter a unique service name, here we name it as **copilotXXXX***
+    - **Service name**: Enter a unique service name, here we name it as +++**copilotXXXX**+++
 
-    - **Location**: *Make a **random** choice from any of the following regions, here we select Canada East*
+    - **Location**: Select one region from following regions, here we have selected **Canada East**
 
       - Australia East
 
@@ -74,7 +74,7 @@ enhance user engagement through intuitive and efficient interactions.
 
 ## Task 2: Create an Azure AI project
 
-1.  In a web browser, open Azure AI Foundry at +++https://ai.azure.com+++ and sign in using your Azure credentials.
+1.  In a web browser, open Azure AI Foundry at +++https://ai.azure.com+++ and sign in using your admin tenant credentials.
 
 2.  In the home page, select **+ Create project**.
 
@@ -139,19 +139,19 @@ You need two models to implement your solution:
     ![](./media/image16.png)
 
 
-- **Deployment name**: +++text-embedding-ada-002+++
-
-- **Deployment type**: Standard
-
-- **Model version**: *Select the default version*
-
-- **AI resource**: *Select the resource created previously*
-
-- **Tokens per Minute Rate Limit (thousands)**: 5K
-
-- **Content filter**: DefaultV2
-
-- **Enable dynamic quota**: Disabled
+    - **Deployment name**: +++text-embedding-ada-002+++
+    
+    - **Deployment type**: Standard
+    
+    - **Model version**: *Select the default version*
+    
+    - **AI resource**: *Select the resource created previously*
+    
+    - **Tokens per Minute Rate Limit (thousands)**: 5K
+    
+    - **Content filter**: DefaultV2
+    
+    - **Enable dynamic quota**: Disabled
 
     ![](./media/image17.png)
 
@@ -170,8 +170,6 @@ You need two models to implement your solution:
 
 The data for your copilot consists of a set of travel brochures in PDF format from the fictitious travel agency *Margie’s Travel*. Let’s add them to the project.
 
-1.  Navigate to folder named **brochures** in the C:\Lab files of your system.
-
 2.  In Azure AI Foundry portal, in your project, in the navigation pane on the left, under **My assets**, select the **Data + indexes** page.
 
     ![](./media/image21.png)
@@ -186,7 +184,7 @@ The data for your copilot consists of a set of travel brochures in PDF format fr
     ![](./media/image23.png)
 
 
-5.  Select **Upload folder** and select the **brochures** folder.
+5.  Select **Upload folder** and select the **brochures** folder from **C:\LabFiles**.
 
     ![](./media/image24.png)
 
@@ -208,7 +206,7 @@ The data for your copilot consists of a set of travel brochures in PDF format fr
 
 Now that you’ve added a data source to your project, you can use it to create an index in your Azure AI Search resource.
 
-1.  In Azure AI Foundry portal, in your project, in the navigation pane on the left, under **My assets**, select the **Data + indexes** page.
+1.	From the **Data + indexes** (in the navigation pane on the left, under **My assets**, select the **Data + indexes**)  page, select the **Indexes** tab.
 
     ![](./media/image28.png)
 
@@ -264,14 +262,18 @@ Before using your index in a RAG-based prompt flow, let’s verify that it can b
 
     ![](./media/image35.png)
 
-2.  On the Chat page, in the Setup pane, ensure that your **gpt-35-turbo-16k** model deployment is selected. Then, in the main chat session panel, submit the prompt +++**Where can I stay in New York?**+++
+2.	Click on **Show setup** if it is not visible by default.
+
+    ![](./media/img45.png)
+  	
+3.  On the Chat page, in the Setup pane, ensure that your **gpt-35-turbo-16k** model deployment is selected. Then, in the main chat session panel, submit the prompt +++**Where can I stay in New York?**+++
 
     ![](./media/image36.png)
 
 
-3.  Review the response, which should be a generic answer from the model without any data from the index.
+4.  Review the response, which should be a generic answer from the model without any data from the index.
 
-4.  In the Setup pane, expand the **Add your data** field, and then add the **brochures-index** project index and select the **hybrid (vector + keyword)** search type.
+5.  In the Setup pane, expand the **Add your data** field, select **brochures-index** project index and select the **hybrid (vector + keyword)** search type.
 
     ![](./media/image37.png)
 
@@ -291,14 +293,14 @@ Your vector index has been saved in your Azure AI Foundry project, enabling you 
 
     ![](./media/image39.png)
 
-2.  Create a new prompt flow by cloning the **Multi-Round Q&A on Your Data** sample in the gallery. Save your clone of this sample in a folder named **brochure-flow**.
+2.  Create a new prompt flow by cloning the **Multi-Round Q&A on Your Data** sample in the gallery. Save your clone of this sample in a folder named +++**brochure-flow**+++.
 
     ![](./media/image40.png)
 
     ![](./media/image41.png)
 
 
-    > Note: if Permissions error, retry with a new name after 2 minutes and the flow will get cloned.
+    > Note: If you face permissions error, retry with a new name after 2 minutes and the flow will get cloned.
 
     ![](./media/image42.png)
 
@@ -436,15 +438,3 @@ Then ensure that the **inputs** for this tool include the following parameters
 
 
 19. Review the outputs for each tool in the flow, noting how each tool in the flow operated on its inputs to prepare a contextualized prompt and get an appropriate response.
-
-## Task 8: Challenge
-
-Now you’ve experienced how to integrate your own data in a copilot built with the Azure AI Foundry portal, let’s explore further!
-
-Try adding a new data source through the Azure AI Foundry portal, index it, and integrate the indexed data in a prompt flow. Some data sets you could try are:
-
-- A collection of (research) articles you have on your computer.
-
-- A set of presentations from past conferences.
-
-Be as resourceful as you can to create your data source and integrate it in your prompt flow. Try out the new prompt flow and submit prompts that could only be answered by the data set you chose!
