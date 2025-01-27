@@ -29,7 +29,7 @@ enhance user engagement through intuitive and efficient interactions.
 
     - **Subscription**: Select your Azure subscription.
 
-    - **Resource group**: Click on **Create New** ->  +++**RG4OpenAI**+++
+    - **Resource group**: Select  +++**RG4OpenAI**+++
 
     - **Service name**: Enter a unique service name, here we name it as +++**copilotXXXX**+++
 
