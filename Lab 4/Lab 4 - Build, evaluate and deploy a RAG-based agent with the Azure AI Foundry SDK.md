@@ -1479,7 +1479,7 @@ python evaluate.py
 ![](./media/image90.png)
 
 
-### task 5: Interpret the evaluation output
+### Task 5: Interpret the evaluation output
 
 In the console output, you see an answer for each question, followed by a table with summarized metrics. (You might see different columns in your output.)
 
@@ -1559,6 +1559,9 @@ Notice that the responses are not well grounded. In many cases, the model replie
 
 Try other modifications to the prompt template, or try different models, to see how the changes affect the evaluation results.
 
-## Clean up resources
 
-To avoid incurring unnecessary Azure costs, you should delete the resources you created in this tutorial if they're no longer needed. To manage resources, you can use the Azure portal.
+**Summary:**
+
+In this lab, we have learnt to build, evaluate and deploy a RAG based application.
+
+
