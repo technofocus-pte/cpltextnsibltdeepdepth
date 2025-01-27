@@ -42,7 +42,7 @@ these steps:
 
     ![](./media/image2.png)
 
-4.  Enter a **ProjectXXXX** as name for the project, click on Customize.
+4.  Enter a +++**ProjectXXXX**+++ as name for the project, click on Customize.
 
     ![](./media/image3.png)
 
