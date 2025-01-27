@@ -43,7 +43,7 @@ applications.
 
 2.	Enter the **Administrative Username** from the **Office 365 Tenant** section of the **Resources** tab into the email field and click on the **Start free** button.
 
-    ![](./media/image16.png)
+    ![](./media/img41.png)
 
 
 3.  Enter Country/ Region, Phone number, select box check box and click
@@ -83,8 +83,8 @@ applications.
     ![](./media/image22.png)
 
 
-4.  Click on the select form device option and select **Support Ticket**
-    excel file from **Lab Files** folder.
+4.  Click on the **Select form device** option and select **Support Ticket**
+    excel file from **C:\LabFiles** folder.
 
     ![](./media/image23.png)
 
@@ -96,25 +96,27 @@ applications.
     ![](./media/image24.png)
 
 
-6.  Go to table data, select **Technical Issue Description down arrow**,
+6.  Go to table data, select the drop down next to the **Technical Issue Description** field,
     select **Edit column**, Set the data type as **Text** 🡪 **Multiple
     line** 🡪 **Plain Text** and click on the **Update**. The column name
     may be different in each case.
 
+    >[!Note] **Note:** The column name might be slightly different, but it will be something similar to the issue description since it is Copilot generated.
+    
     ![](./media/image25.png)
 
 
     ![](./media/image26.png)
 
 
-7.  Select **Current Status down arrow**, select **Edit column**, Set
+7.	Select the drop down next to the  **Current Status** field, select **Edit column**, Set
     the Choices as +++**Unresolved**+++, +++**Resolved**+++, +++**Processing**+++. Set Default
-    choices as **Unresolved** and click on the **Update**.
+    choice as **Unresolved** and click on the **Update**.
 
     ![](./media/image27.png)
 
 
-8.  From top right side click on **Save and exit** to save the table.
+9.  From top right side click on **Save and exit** to save the table.
 
     ![](./media/image28.png)
 
@@ -145,7 +147,7 @@ agent to streamline IT workflows.
     ![](./media/image2.png)
 
 
-2.  Enter **office 365 admin tenant** credentials in the respected field and click on the **Next** button.
+2.	Enter the **Administrative Username** from the **Office 365 Tenant** section of the **Resources** tab into the email field and click on the **Start free** button. 
 
     ![](./media/image3.png)
 
@@ -158,12 +160,13 @@ agent to streamline IT workflows.
 
     ![](./media/image5.png)
 
+5.	Select **Get Started** in the Copilot Studio welcome screen.
 
+    ![](./media/img42.png)
+  	
 ##  Task 2: Creating and Configuring Contoso IT Support Agent 
 
-1.  In copilot studio home section from top select the environment
-    development environment. In our case its **Dev One** participant
-    chooses their environment.
+1.	In Copilot Studio home section from top right, select the **environment** and choose **Dev One** environment. 
 
     ![](./media/image6.png)
 
@@ -187,13 +190,13 @@ agent to streamline IT workflows.
 5.  Enter **Name, Description and Instruction** of the agent as given
     below and click on **Create** button.
 
-**Name:** +++Contoso IT Support Agent+++
-
-**Description:** +++Create a Contoso IT Support Agent which transforms IT support at Contoso Solutions by providing instant troubleshooting for common issues, automating ticket creation for unresolved problems, and storing all interactions in Dataverse. This solution enhances response times, reduces manual workloads, and boosts employee productivity.+++
-
-**Instruction:** +++Create the Copilot Agent and configure it to handle IT support operations. Add a knowledge source containing solutions for common IT issues like hardware troubleshooting, connectivity, and software glitches. Set up a trigger to detect incoming emails from employees describing unresolved issues. Create an action to save these technical issues into a Dataverse table, ensuring all details are stored for tracking and reporting. Test the agent to validate its troubleshooting accuracy and ticket automation workflow before deployment.+++
-
-![](./media/image10.png)
+    **Name:** +++Contoso IT Support Agent+++
+    
+    **Description:** +++Create a Contoso IT Support Agent which transforms IT support at Contoso Solutions by providing instant troubleshooting for common issues, automating ticket creation for unresolved problems, and storing all interactions in Dataverse. This solution enhances response times, reduces manual workloads, and boosts employee productivity.+++
+    
+    **Instruction:** +++Create the Copilot Agent and configure it to handle IT support operations. Add a knowledge source containing solutions for common IT issues like hardware troubleshooting, connectivity, and software glitches. Set up a trigger to detect incoming emails from employees describing unresolved issues. Create an action to save these technical issues into a Dataverse table, ensuring all details are stored for tracking and reporting. Test the agent to validate its troubleshooting accuracy and ticket automation workflow before deployment.+++
+    
+    ![](./media/image10.png)
 
 
 6.  On overview page of Contoso IT Support Agent, **Enable** the
@@ -250,7 +253,7 @@ ensure it effectively assists users in troubleshooting and escalation.
     ![](./media/image29.png)
 
 
-2.  Select **Click to browse** button to add the lab file **Contoso IT Support Issue** from Lab Files folder and then click on **Add** to save the file.
+2.  Select **Click to browse** button to add the lab file **Contoso IT Support Issue** from **C:\LabFiles** folder and then click on **Add** to save the file.
 
     ![](./media/image30.png)
 
@@ -272,6 +275,8 @@ ensure it effectively assists users in troubleshooting and escalation.
     on the **Next, Next** and **Add** button to add the knowledge
     source.
 
+    >[!Note] **Note:** The table name might be different in your case since it is a Copilot generated one.
+    
     ![](./media/image34.png)
 
 
@@ -341,7 +346,7 @@ handles prompts using the knowledge base and fallback topics to ensure
 seamless interaction and escalation.
 
 1.  From top right corner click on the **Test** button. Then in test
-    section click on **Map** turn it on and then click **Refresh**.
+    section click on **Map** turn it **On** and then click **Refresh**.
 
     ![](./media/image42.png)
 
@@ -431,7 +436,7 @@ data in Dataverse, and notify support engineers via email.
     ![](./media/image54.png)
 
 
-8.  In **Table Name** section search and select +++**Employee Technical Support Record**+++ .
+8.  In **Table Name** section search and select +++**Employee Technical Support Record**+++ (or your corresponding table name created).
 
     ![](./media/image55.png)
 
@@ -441,17 +446,17 @@ data in Dataverse, and notify support engineers via email.
     bolt) as per the below given field. The **Current Status** field
     should be selected with drop down as **Unresolved**.
 
-| Section                     | Input Variable          |
-|-----------------------------|-------------------------|
-| Employee Name               | Name (Dynamic Input)    |
-| Email Address               | Email (Dynamic Input)   |
-| Employee ID                 | ID (Dynamic Input)      |
-| Technical Issue Description | Details (Dynamic Input) |
-
-![](./media/image56.png)
-
-
-![](./media/image57.png)
+    | Section                     | Input Variable          |
+    |-----------------------------|-------------------------|
+    | Employee Name               | Name (Dynamic Input)    |
+    | Email Address               | Email (Dynamic Input)   |
+    | Employee ID                 | ID (Dynamic Input)      |
+    | Technical Issue Description | Details (Dynamic Input) |
+    
+    ![](./media/image56.png)
+    
+    
+    ![](./media/image57.png)
 
 
 10. Below Add a new row action click on (+) and select **Add an action**.
@@ -468,34 +473,34 @@ data in Dataverse, and notify support engineers via email.
 12. In send an email section, Enter the below given detail in the
     respected section:
 
-**To**
+    **To**
+    
+    
+    Enter support engineer email (**Use any email ID** - It will be to this id, the mail will be sent by the agent to when Support Ticket is raised)) 
+    
+    
+    **Subject**
+    
+    ```
+    New Technical Support Ticket Raised 
+    ```
+    
+    **Body**
+    
+    ```
+    A new technical support ticket has been raised and requires your attention. Please find details below:
+    
+    Employee Name: Name (Replace with Name dynamic content variable (Thunder bolt))
+    Employee ID: ID (Replace with ID dynamic content variable (Thunder bolt))
+    Technical Issue: Details (Replace with Details dynamic content variable (Thunder Bolt))
+    
+    Thank you for your prompt attention to this matter.'
+    
+    Best Regards
+    ```
 
-```
-Enter support engineer email (Use any email ID) 
-```
 
-**Subject**
-
-```
-New Technical Support Ticket Raised 
-```
-
-**Body**
-
-```
-A new technical support ticket has been raised and requires your attention. Please find details below:
-
-Employee Name: Name (Use Name dynamic content variable (Thunder bolt))
-Employee ID: ID (Use Name dynamic content variable (Thunder bolt))
-Technical Issue: Details (Use Name dynamic content variable (Thunder Bolt))
-
-Thank you for your prompt attention to this matter.'
-
-Best Regards
-```
-
-
-![](./media/image60.png)
+    ![](./media/image60.png)
 
 
 13. From top left corner rename the flow as +++**Employee Data**+++ .
@@ -533,20 +538,16 @@ Best Regards
 20. Enter the given description in the respected input, after entering
     the description click on **Save** button. 
 
-| Section | Details |
-|----|----|
-| Name -- Description | +++Enter the name of the employee.+++ |
-| ID -- Description | +++Enter the employee ID in the field.+++ |
-| Email -- Description | +++Enter the email address of the employee from whom the email is received.+++ |
-| Details -- Description | +++Enter the email details of the employee.+++ |
-
-![](./media/imaged.png)
-
- ![](./media/imagee.png)
-
-
-
-
+    | Section | Details |
+    |----|----|
+    | Name -- Description | +++Enter the name of the employee.+++ |
+    | ID -- Description | +++Enter the employee ID in the field.+++ |
+    | Email -- Description | +++Enter the email address of the employee from whom the email is received.+++ |
+    | Details -- Description | +++Enter the email details of the employee.+++ |
+    
+    ![](./media/imaged.png)
+    
+    ![](./media/imagee.png)
 
 ## Conclusion
 
@@ -594,7 +595,7 @@ configure triggers and finalize the agent for deployment.
     ![](./media/image74.png)
 
 
-5.  On Support agent overview page scroll down, on trigger section click on three dots **(…)** and select **Edit in Power Automate.**
+5.  **Close** the **Time to test your trigger** prompt. On Support agent overview page scroll down, on trigger section click on three dots **(…)** and select **Edit in Power Automate.**
 
     ![](./media/image75.png)
 
@@ -666,12 +667,10 @@ trigger automated workflows effectively.
 
     ![](./media/image83.png)
 
-
     ![](./media/image84.png)
 
 
-3.  Open outlook or other email service provider login and send email on
-    same credentials which is using in copilot and power automate login.
+3.	**Send an email** to the 365 admin tenant mail id from any other mail box in order to **trigger the action**. The mail should be describing an issue and should have your details like employee id in it, similar to the one in the below screenshot.
 
     ![](./media/image85.png)
 
