@@ -163,7 +163,7 @@ Toolkit.
 
 2.  A panel opens up where you need to select **Agent** from the list of project types.
 
-    ![](./media/image7.png)
+    ![](./media/img43.png)
 
 
 3.  Next, you will be asked to choose the app feature of Copilot Agent Choose **declarative agent** and press **Enter**.
@@ -176,11 +176,7 @@ Toolkit.
     ![](./media/image9.png)
 
 
-**Why not create one with API plugin here?**
-
-You will build API plugins in the next lab, and you will also learn how to integrate an API plugin with a declarative agent in the following one in this same path. Here we are just going to create a declarative agent.
-
-5.  Next, type in the directory where the project folder has to be created or choose the default location.
+5.	Next, select the **Default folder** option for specifying where the project folder has to be created.
 
     ![](./media/image10.png)
 
@@ -201,7 +197,7 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
 ### Task 2: Set up accounts in Teams Toolkit
 
-1.  Now select the Teams Toolkit icon in the left Under **Accounts** click **Sign in to Microsoft 365** and log in with your **User1 credentials**.
+1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials** under the **Azure Portal** section in the **Resources** tab.
 
     ![](./media/image14.png)
 
@@ -211,9 +207,13 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
     ![](./media/image16.png)
 
-3.  Verify that the "Custom App Upload Enabled" checker has a green checkmark.
+3.	Select **Allow access** in the Security Alert dialog.
 
-4.  Verify that the "Copilot Access Enabled" checker has a green checkmark.
+    ![](./media/img44.png)
+  	
+5.  Verify that the **Custom App Upload Enabled** checker has a green checkmark.
+
+6.  Verify that the **Copilot Access Enabled** checker has a green checkmark.
 
     ![](./media/image17.png)
 
@@ -257,7 +257,7 @@ Here's how the base project looks:
 
 3.  Another important file is the **appPackage/manifest.json** file, which contains crucial metadata, including the package name, the developer’s name, and references to the copilot agents utilized by the application. The following section from the manifest.json file illustrates these details:
 
-    ```
+    ```nocopy
     "copilotAgents": {
             "declarativeAgents": [            
                 {
@@ -277,7 +277,9 @@ Here's how the base project looks:
 
 ### Task 1: Update icons and manifests
 
-1.  First, we will do the easy bit which is replacing the logo. Copy the image located in lab files and replace it with the image of same name in the folder **appPackage** in your root project.
+1.	First, we will replace the logo. We will replace the image **color.png** in the project with a new one.
+Copy the image **color.png** located in **C:\LabFiles** and replace the image of same name in the folder **appPackage** in your root project(The path should be **C:\Users\Student\TeamsApps\Geo Locator Game\appPackage**).
+
 
     ![](./media/image21.png)
 
@@ -286,9 +288,9 @@ Here's how the base project looks:
     ![](./media/image23.png)
 
 
-2.  Next, go to the file **appPackage/manifest.json** in your root project and find the node **copilotAgents**. Update the id value of the declarativeAgents array's first entry from declarativeAgent to dcGeolocator to make this ID unique.
+2.  Next, go to the file **appPackage/manifest.json** in your root project and find the node **copilotAgents**. Update the id value of the declarativeAgents array's first entry from declarativeAgent to +++dcGeolocator+++ to make this ID unique.
 
-    ```
+    ```nocopy
     "copilotAgents": {
             "declarativeAgents": [            
                 {
@@ -373,11 +375,7 @@ Here's how the base project looks:
     ![](./media/image26.png)
 
 
-5.  Follow the next step to make sure our agent can help user engage with it by giving conversation starters.
-
-    **Include your own files in appPackage files**
-
-    Notice this line in **appPackage/declarativeAgent.json**:
+5.  Notice this line in **appPackage/declarativeAgent.json**:
 
     "instructions": "\$\[file('instruction.txt')\]",
 
@@ -433,7 +431,7 @@ Some of the benefits of having conversation starters are:
 
 ### Task 3: Test the app
 
-1.  To test the app, go to the Teams Toolkit extension in Visual Studio Code. This will open up the left pane. Under "LIFECYCLE" select "Provision". You can see the value of Teams Toolkit here, as it makes publishing so simple.
+1.  To test the app, go to the Teams Toolkit extension in Visual Studio Code. This will open up the left pane. Under "**LIFECYCLE**" select "**Provision**". You can see the value of Teams Toolkit here, as it makes publishing so simple.
 
     ![](./media/image30.png)
 
@@ -470,3 +468,9 @@ Some of the benefits of having conversation starters are:
 7.  Select one of the conversation starters and it will fill your compose message box with the starter prompt, just waiting for you to hit "Enter". It is still only your assistant and will wait for you to take action.
 
     ![](./media/image37.png)
+
+8.	Try answering the question and exploring the game that you developed.
+
+**Summary:**
+
+In this lab, we have learnt to build a declarative agent using the Teams Toolkit and test the agent’s functionality.
