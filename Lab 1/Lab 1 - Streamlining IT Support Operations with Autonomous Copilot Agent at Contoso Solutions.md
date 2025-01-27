@@ -41,7 +41,7 @@ applications.
     ![](./media/image15.png)
 
 
-2.  Enter **office 365 admin tenant**, check the box and click on **Start free** .
+2.	Enter the **Administrative Username** from the **Office 365 Tenant** section of the **Resources** tab into the email field and click on the **Start free** button.
 
     ![](./media/image16.png)
 
