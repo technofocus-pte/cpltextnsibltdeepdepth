@@ -42,18 +42,18 @@ these steps:
 
     ![](./media/image2.png)
 
-4.  Enter a +++**ProjectXXXX**+++ as name for the project, click on Customize.
+4.  Enter a +++**ProjectXXXX**+++ (replace xxxx with a random number) as name for the project, click on Customize.
 
     ![](./media/image3.png)
 
 
 5.  On the next page, enter the following details and click on **Next.**
 
-    - Hub name: hubXXXX
+    - Hub name: hubXXXX (replace xxxx with a random number)
 
     - Subscription: Select your subscription
 
-    - Create new Resource group: +++RG4OpenAI+++
+    - Create new Resource group: +++rgxxxx+++ (replace xxxx with a random number)
 
     - Location: East US 2, or Sweden Central
 
