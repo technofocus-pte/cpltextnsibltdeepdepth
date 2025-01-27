@@ -32,7 +32,7 @@ The solution aims to enhance user experience by providing personalized
 and responsive travel assistance. It automates common travel tasks to
 optimize workflows and streamline travel planning processes.
 
-## Exercise 1: Cloning and configuring the AI Travel Agent Project with Azure OpenAI Services
+## Exercise 1: Setting up the AI Travel Agent Project with Azure OpenAI Services
 
 In this exercise, you will clone a guided project repository from GitHub
 into Visual Studio Code and configure it to integrate with Azure OpenAI
