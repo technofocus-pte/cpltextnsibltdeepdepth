@@ -36,7 +36,7 @@ these steps:
 
     ![](./media/image1.png)
 
-2.  When prompted enter the tenant details and do the login.
+2.  When prompted enter the tenant details and login.
 
 3.  Select **+ Create project**.
 
