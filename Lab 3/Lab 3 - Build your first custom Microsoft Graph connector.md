@@ -37,7 +37,7 @@ authentication](https://learn.microsoft.com/en-us/graph/auth-v2-service).
 Microsoft Graph connectors use app-only authentication to access the
 connector APIs.
 
-### Task 0: Sync Host environment time
+### Task 0: Sync Host environment time and Redeem Azure Pass
 
 1.  Login to the Lab Virtual Machine using the credentials provided on
     the Home tab of the Lab interface. 
@@ -81,7 +81,7 @@ connector APIs.
     > **Note**: Do not use your Company/Work Account to login to redeem the Azure Pass, another Azure Pass will not be issued. 
 
 8.  In the **Sign in** window, enter the **Office 365 Tenant ID** -
-    <admin@WWLxxxx.onmicrosoft.com> and click on the **Next** button. 
+    from the **Resources** tab and click on the **Next** button. 
 
     ![](./media/image08.png)
 
@@ -92,26 +92,26 @@ connector APIs.
 
 10.  On **Stayed signed in?** dialog box, click on **Yes** button. 
 
-![](./media/image010.png)
+     ![](./media/image010.png)
 
 
 11.  On **The following Microsoft Account will be used for Azure pass**
     page, click on **Confirm Microsoft Account** button. 
 
-![](./media/image011.png)
+     ![](./media/image011.png)
 
 
-12.  Enter the Promocode provided in the lab environment in the **Enter
+12. Enter the **Promocode** provided in the Resources tab, into the **Enter
     Promo code** field, then enter the characters under the **Enter the
     characters you see** field and click on the **Submit** button.  
 
-![](./media/image012.png)
+     ![](./media/image012.png)
 
 
 13.  **We are processing your request** page will appear, it may take few
     seconds to process the redemption. 
 
-![](./media/image013.png)
+     ![](./media/image013.png)
 
 
 14. Enter correct details in **Your Profile** page, tick all the check
