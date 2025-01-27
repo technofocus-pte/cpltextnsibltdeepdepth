@@ -26,7 +26,7 @@ email notifications for unresolved issues. Finally, participants will
 test the agent to validate its troubleshooting accuracy and workflow
 automation, ensuring seamless IT support operations.
 
->!danger] **Important**
+>[!danger] **Important**
 The **Lab VM** you have logged into has got the credentials that will be used throughout the labs under the **Resources** tab.
 >
 1.	This tab has got 2 sets of credentials,   
