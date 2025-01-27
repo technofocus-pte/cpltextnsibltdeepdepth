@@ -438,3 +438,7 @@ Then ensure that the **inputs** for this tool include the following parameters
 
 
 19. Review the outputs for each tool in the flow, noting how each tool in the flow operated on its inputs to prepare a contextualized prompt and get an appropriate response.
+
+**Summary:**
+
+In this lab, we have learnt to create a custom agent that uses your own data from Azure AI Foundry.
