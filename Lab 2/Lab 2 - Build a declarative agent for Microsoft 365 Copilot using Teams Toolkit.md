@@ -199,15 +199,17 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
 1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials** under the **Azure Portal** section in the **Resources** tab.
 
-    ![](./media/image14.png)
+   ![](./media/image14.png)
 
-2.  A browser window will pop up and offer to log into Microsoft 365. When it says "You are signed in now and close this page", please do so.
+   ![](./media/img50.png)
+
+3.  A browser window will pop up and offer to log into Microsoft 365. When it says "You are signed in now and close this page", please do so.
 
     ![](./media/image15.png)
 
     ![](./media/image16.png)
 
-3.	Select **Allow access** in the Security Alert dialog.
+4.	Select **Allow access** in the Security Alert dialog.
 
     ![](./media/img44.png)
   	
