@@ -26,6 +26,28 @@ email notifications for unresolved issues. Finally, participants will
 test the agent to validate its troubleshooting accuracy and workflow
 automation, ensuring seamless IT support operations.
 
+>!Alert] **Important**
+The Lab VM you have logged into has got the credentials that will be used throughout the labs under the Resources tab.
+>
+1.	This tab has got 2 sets of credentials,   
+>    -    Azure Portal
+>    -    Office 365 Tenant
+>
+>    ![](./media/img46.png)
+>  	
+3.	The credentials under Azure Portal section are the user copilot license enabled credentials, and we will be using this in the Lab 2 - Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit.
+>   
+>    ![](./media/img47.png)
+>  	
+4.	For all other labs, we will be using the O365 Admin tenant credentials which is under the Office 365 Tenant section.
+>   
+>    ![](./media/img48.png)
+>  	
+5.	We will redeem the Azure Promo Code on the 365 tenant creds for the Azure credits that are required for the Azure related labs.
+>   
+>    ![](./media/img49.png)
+
+
 # Exercise 1: Getting Started with Power Apps
 
 This exercise introduces participants to Power Apps and Dataverse. The
