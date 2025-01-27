@@ -565,3 +565,7 @@ working as intended and providing accurate, context-sensitive outputs.
 
       3.  Discover the Picasso Museum: A wheelchair-accessible art
           venue.
+
+**Summary:**
+
+In this lab, we have learnt to create an agent using Semantic Kernel and Azure OpenAI Service.
