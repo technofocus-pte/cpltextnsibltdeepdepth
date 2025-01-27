@@ -242,7 +242,7 @@ First you need to create a new Python environment to use to install the package 
 
 **Create a virtual environment**
 
-1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**, by entering the following command in your powershell.
+1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**(This should be your Project name), by entering the following command in your powershell.
 
 
 ```
@@ -258,8 +258,7 @@ mkdir ProjectXXXX
 ![](./media/image32.png)
 
 
-3.  If you already have Python 3.10 or higher installed, you can create a virtual environment using the following commands:
-
+3.  Create a virtual environment using the following commands,
 
 ```
 py -3 -m venv .venv
