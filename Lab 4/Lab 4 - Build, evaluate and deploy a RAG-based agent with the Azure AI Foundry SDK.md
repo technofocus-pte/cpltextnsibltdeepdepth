@@ -102,8 +102,6 @@ These steps deploy a model to a real-time endpoint from the AI Foundry portal:
 
 4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect**.
 
-    ![](./media/image12.png)
-
     ![](./media/image13za.png)
 
 
