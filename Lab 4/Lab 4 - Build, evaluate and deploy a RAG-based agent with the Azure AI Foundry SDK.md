@@ -503,7 +503,7 @@ The goal with this RAG-based application is to ground the model responses in you
 ![](./media/image50.png)
 
 
-2.  Copy **products.csv** file from Lab files and paste it in **Project0612/src/assets** folder.
+2.  Copy **products.csv** file from Lab files and paste it in **ProjectXXXX/src/assets** folder.
 
 ![](./media/image51.png)
 
