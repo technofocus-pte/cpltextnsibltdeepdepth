@@ -1230,13 +1230,6 @@ pip install azure-monitor-opentelemetry
 ![](./media/image78.png)
 
 
-3.  Add the --enable --telemetry flag when you use the chat_with_products.py script:
-
-
-```
-python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable--telemetry
-```
-
 
 ## Exercise 3: Evaluate a custom chat application with the Azure AI Foundry SDK
 
