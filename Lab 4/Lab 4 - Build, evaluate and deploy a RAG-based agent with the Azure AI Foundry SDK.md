@@ -104,7 +104,7 @@ These steps deploy a model to a real-time endpoint from the AI Foundry portal:
 
     ![](./media/image12.png)
 
-    ![](./media/image13z.png)
+    ![](./media/image13za.png)
 
 
 5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
