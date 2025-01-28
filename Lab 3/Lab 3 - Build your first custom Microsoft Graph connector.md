@@ -419,8 +419,7 @@ dotnet user-secrets set settings:clientSecret <client-secret>
 ![](./media/image30.png)
 
 
-2.  Open **PartsInventoryConnector** in VS code editor and create a directory
-    named +++**settings.cs**+++ and add the following code.
+2.  Open **PartsInventoryConnector** in VS code editor and create file named +++**settings.cs**+++ and add the following code.
 
 ```
 using Microsoft.Extensions.Configuration;
