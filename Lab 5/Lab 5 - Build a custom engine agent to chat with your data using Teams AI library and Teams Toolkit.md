@@ -44,7 +44,7 @@ organizational workflows.
 
     ![](./media/image3.png)
 
-2.  Create Azure OpenAI Window will open, if prompted sign in again.
+3.  Create Azure OpenAI Window will open, if prompted sign in again.
     Enter the below given details into respected fields and click on
     **Next**.
 
@@ -52,7 +52,7 @@ organizational workflows.
     |-------------------|-------------------------------------|
     | **Resource group** | Click on 🡪 Create new<br>Enter name +++**RG4OpenAI**+++ then press<br>Ok |
     | **Region**         | East US 2                         |
-    | **Name**           | +++ContosoAgent+++                      |
+    | **Name**           | +++ContosoAgentXXXX+++                      |
     | **Pricing tier**    | Standard S0                       |
 
 
@@ -110,7 +110,7 @@ organizational workflows.
 
     ![](./media/image15.png)
 
-2.  Select the Azure OpenAI service **ContosoAgent** that you created in
+2.  Select the Azure OpenAI service **ContosoAgentxxxx** that you created in
     exercise 1, task 4.
 
     ![](./media/image16.png)
@@ -170,7 +170,7 @@ organizational workflows.
 
     Resource group – RG4OpenAI
 
-    Storage account name - +++contosostorage4+++
+    Storage account name - +++contosostorageX+++
 
     Region – West US
 
@@ -225,7 +225,7 @@ organizational workflows.
 
     Resource Group: RG4OpenAI
 
-    Service name: +++contoso-ai-search-01+++
+    Service name: +++contoso-ai-search-XX+++
 
     Location: Central US
 
@@ -347,7 +347,7 @@ organizational workflows.
     ![](./media/image56.png)
 
 
-    - **Deployment name** -- +++**ContosoAgent+++**
+    - **Deployment name** -- +++**gpt-35-turbo-16k**+++
 
     ![](./media/image57.png)
 
@@ -425,9 +425,8 @@ Let's customize the prompt for your custom engine agent.
         "temperature": 0.9,
         "top_p": 1.0,
         "presence_penalty": 0.6,
-        "frequency_penalty": 0.0
-    },
-    "data_sources": [
+        "frequency_penalty": 0.0,
+        "data_sources": [
         {
         "type": "azure_search",
         "parameters": {
@@ -440,6 +439,8 @@ Let's customize the prompt for your custom engine agent.
         }
         }
     ]
+    }
+    
     }
     ```
 
