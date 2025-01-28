@@ -191,7 +191,7 @@ You install the Azure CLI and sign in from your local development
 environment, so that you can use your user credentials to call the Azure
 OpenAI service.
 
-1. Open windows power shell and paste the below given command and run it.
+1. Open windows power shell as adminstartor and paste the below given command and run it. After run the command close the power shell.
 
 ```
 $progressPreference = 'silentlyContinue'
@@ -206,7 +206,7 @@ Write-Host "Done."
 ![](./media/imagez.png)
 
 
-2.  In most cases you can install the Azure CLI from your command line terminal using the following command:
+2.  Again open power shell without adminstrator, In most cases you can install the Azure CLI from your command line terminal using the following command:
 
 
 ```
@@ -284,7 +284,7 @@ Activating the Python environment means that when you run python or pip from
 
 Install **azure-ai-projects(preview) and azure-ai-inference (preview)**,along with other required packages.
 
-5.  Create a file named +++**requirements.txt**+++ in your **ProjectXXXX** folder and add the following packages. After adding packages go to files and select **Save All**:
+5.  Create a file named +++**requirements.txt**+++ in your **ProjectXXXX** folder and add the following packages. After adding packages go to **files** and select **Save All**:
 
 
 ```
@@ -499,8 +499,7 @@ CompleteExercise 1 - Create resources for building a custom chat application wit
 
 The goal with this RAG-based application is to ground the model responses in your custom data. You use an Azure AI Search index that stores vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
 
-1.  Create an +++**assets**+++
-2.   directory in your project folder\src.
+1.  Create an +++**assets**+++ directory in your project folder\src.
 
 
 ![](./media/image50.png)
