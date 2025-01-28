@@ -100,11 +100,11 @@ These steps deploy a model to a real-time endpoint from the AI Foundry portal:
     ![](./media/image11.png)
 
 
-4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect and deploy**.
+4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect**.
 
     ![](./media/image12.png)
 
-    ![](./media/image13.png)
+    ![](./media/image13z.png)
 
 
 5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
