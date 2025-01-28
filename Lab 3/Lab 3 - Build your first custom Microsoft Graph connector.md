@@ -894,7 +894,7 @@ public class ApplianceDbContext : DbContext
 
 ![](./media/image47.png)
 
-4.  Create a file in the **Data** directory named +++**CsvDataLoader.cs**+++ and add the following code.
+4.  Create a file in the **Data** directory named +++**CsvDataLoader.cs**+++ and add the following code. After adding the code go to files from top bar and click on **Save all**
 
 ```
 using System.Globalization;
@@ -942,6 +942,9 @@ public class AppliancePartMap : ClassMap<AppliancePart>
 ![](./media/image48.png)
 
 ![](./media/image49.png)
+
+![](./media/image49a.png)
+
 
 ### Task 2: Initialize the database
 
