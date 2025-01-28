@@ -972,7 +972,7 @@ connections](https://learn.microsoft.com/en-us/graph/connecting-external-content
 
 ### Task 1: Create a connection
 
-1.  Add the following function to the GraphHelper class in **GraphHelper.cs**.
+1.  Add the following function to the GraphHelper class in **GraphHelper.cs**, press **cntrl + s** to save the file.
 
 ```
 public static async Task<ExternalConnection?> CreateConnectionAsync(string id, string name, string? description)
