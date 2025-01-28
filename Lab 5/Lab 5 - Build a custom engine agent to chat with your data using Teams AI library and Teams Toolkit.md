@@ -349,15 +349,15 @@ organizational workflows.
 
     - **Deployment name** -- +++**gpt-35-turbo-16k**+++
 
-    ![](./media/image57.png)
+    ![](./media/image57a.png)
 
 
 9.  Create a new folder to contain the data related to teams and
     navigate to that location by clicking on **Browse**.
 
-    ![](./media/image58.png)
+    ![](./media/image58a.png)
 
-    ![](./media/image59.png)
+    ![](./media/image59a.png)
 
 10. Enter a +++**TeamsContosoAgent**+++ as name for your custom engine agent,
     select **Enter**. Custom engine agent is created in a few seconds.
@@ -447,8 +447,7 @@ Let's customize the prompt for your custom engine agent.
 
     ![](./media/image63.png)
 
-3.  Go to src/app/app.js file and add the following variable
-    inside OpenAIModel:
+3.  Go to src/app/app.js file and add the following variable inside OpenAIModel. Press cntrl + S to save the file.
 
     ```
     azureApiVersion: '2024-02-15-preview',
