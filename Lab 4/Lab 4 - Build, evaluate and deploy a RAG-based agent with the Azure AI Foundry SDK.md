@@ -240,7 +240,7 @@ First you need to create a new Python environment to use to install the package 
 
 **Create a virtual environment**
 
-1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**(This should be your Project name), by entering the following command in your powershell.
+1.  Create a folder in **C:\Users\Student** as **ProjectXXXX**(This should be your Project name), by entering the following command in your powershell.
 
 
 ```
@@ -251,7 +251,7 @@ mkdir ProjectXXXX
 ![](./media/image31.png)
 
 
-2.  In your terminal enter the following command to navigate to the new folder location **cd C:\Users\Admin\ProjectXXXX**
+2.  In your terminal enter the following command to navigate to the new folder location **cd C:\Users\Student\ProjectXXXX**
 
 ![](./media/image32.png)
 
