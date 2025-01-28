@@ -1555,7 +1555,7 @@ and Microsoft Search in Bing.
     ![](./media/image82.png)
 
 
-4.  Enter **Appliance Parts** in the **Name** field and select **Next**.
+4.  Enter +++**Appliance Parts**+++ in the **Name** field and select **Next**.
 
     ![](./media/image83.png)
 
@@ -1605,7 +1605,7 @@ To create a result type:
 
     ![](./media/image92.png)
 
-3.  Enter Appliance Part in the +++**Name**+++ field and select **Next**.
+3.  Enter +++Appliance Part+++ in the **Name** field and select **Next**.
 
     ![](./media/image93.png)
 
