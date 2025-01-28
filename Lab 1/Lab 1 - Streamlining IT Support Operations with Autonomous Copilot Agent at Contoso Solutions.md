@@ -530,9 +530,9 @@ data in Dataverse, and notify support engineers via email.
     ![](./media/image61.png)
 
 
-14. From top bar click on **Save draft** and then click **Publish**.
+14. From top bar click on **Save** button.
 
-    ![](./media/image62.png)
+    ![](./media/image62z.png)
 
 
 15. Go back to Copilot window and click on **Refresh** button.
@@ -640,10 +640,10 @@ configure triggers and finalize the agent for deployment.
     ![](./media/image78.png)
 
 
-9.  **Save** and **Publish** the flow, close power automate window and
+9.  **Save** the flow, close power automate window and
     go back to copilot window.
 
-    ![](./media/image79.png)
+    ![](./media/image79z.png)
 
 
 10. Go to overview section and from top right corner click on
