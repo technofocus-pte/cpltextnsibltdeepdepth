@@ -233,11 +233,11 @@ organizational workflows.
 
     ![](./media/image36.png)
 
-3.  On the search-service-contoso-ai-search-01overview click on **Go to resources**.
+3.  On the search-service-contoso-ai-search-XX overview click on **Go to resources**.
 
     ![](./media/image37.png)
 
-4.  On contoso-ai-search-01 overview, save URL endpoint for future use.
+4.  On contoso-ai-search-XX overview, save URL endpoint for future use.
     Then from left navigation bar under **Settings** select **key** and save **primary and
     secondary key** for future use.
     
@@ -267,7 +267,7 @@ organizational workflows.
 
     Select storage container – source
 
-    Select Azure AI Search resource – contoso-ai-search-01
+    Select Azure AI Search resource – contoso-ai-search-XX
 
     Index Name - +++contosoindex01+++
 
