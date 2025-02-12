@@ -25,93 +25,130 @@ chat interface is developed to provide grounded responses by leveraging
 the search results, and the chat app's performance is evaluated using
 predefined datasets and metrics to enhance its effectiveness.
 
+## Exercise 0: Understand the VM and the credentials
+
+In this exercise, we will identify and understand the credentials that
+we will be using throughout the lab.
+
+**Important:** Do go through each step in this exercise to get to know
+the generic terms and the credentials that will be used for the lab
+execution.
+
+1.  **Instructions** tab hold the lab guide with the instructions to be
+    followed throughout the lab.
+
+2.  **Resources** tab has got the credentials that will be needed for
+    executing the lab.
+
+    - **URL** – URL to the Azure portal
+
+    - **Subscription** – This is the **ID** of the **subscription** assigned
+    to you
+
+    - **Username** – The **user id** with which you need to **login** to the
+    **Azure services**.
+
+    - **Password** – **Password** to the **Azure login**.
+
+    Let us call this Username and password as **Azure login credentials**. We will use these creds wherever we mention **Azure login credentials**.
+
+    - **Resource Group** – The **Resource group** assigned to you.
+
+    >[!Alert] **Important**: Make sure you create all your resources under this Resource group
+
+    ![A screenshot of a computer Description automatically generated](./media/image1.png)
+
+3.  **Help** tab holds the Support information. The **ID** value here is
+    the **Lab instance ID** which will be used during the lab execution.
+
+    ![A screenshot of a computer Description automatically generated](./media/image2.png)
+
 ## Exercise 1 - Set up project and development environment to build a custom knowledge retrieval (RAG) app with the Azure AI Foundry SDK
 
 ### Task 1 Create a project
 
-To create a project in Azure AI Foundry, follow
-these steps:
+To create a project in Azure AI Foundry, follow these steps:
 
-1.  Go to the **Home** page of Azure AI Foundry, by navigating to the following link +++https://ai.azure.com/+++ and click on **Sign in** with office 365 admin tenant credentials.
-
-    ![](./media/image1.png)
-
-2.  When prompted enter the tenant details and do the login.
-
-3.  Select **+ Create project**.
-
-    ![](./media/image2.png)
-
-4.  Enter a **ProjectXXXX** as name for the project, click on Customize.
+1.  Login to the Azure AI Foundry at +++https://ai.azure.com/+++
+    **sign in** using the **Azure login credentials**.
 
     ![](./media/image3.png)
 
-
-5.  On the next page, enter the following details and click on **Next.**
-
-    - Hub name: hubXXXX
-
-    - Subscription: Select your subscription
-
-    - Create new Resource group: +++rg+++XXXX
-
-    - Location: East US 2, or Sweden Central
-
-    - Leave the rest as default and click on Next.
+2.  Select **+ Create project**.
 
     ![](./media/image4.png)
 
+3.  Enter **+++RAGproj@lab.LabInstance.Id+++** as name for the project,
+    click on **Customize**.
 
-6.  On the **Review and finish** page, click on **Create.**
+    ![A screenshot of a computer Description automatically generated](./media/image5.png)
 
-    ![](./media/image5.png)
+4.  On the next page, enter the following details and click on **Next.**
 
+    -   Hub name - **+++hub@lab.LabInstance.Id+++**
 
-7.  The resource creation will take a few minutes.
+    -   Subscription - Select your assigned subscription
 
-    ![](./media/image6.png)
+    -   Create new Resource group - Select your assigned Resource Group(ResourceGroup1)
 
-8.  Close the pop-up windows, if any appears.
+    -   Location - Select Region (We have used East US 2 while executing this lab)
 
-9.  From the home page of the project, note down the Project connection string on the notepad to be used in next task of this exercise.
+    Leave the rest as default and click on **Next**.
 
-    ![](./media/image7.png)
+    ![A screenshot of a computer Description automatically generated](./media/image6.png)
 
-    ![](./media/image8.png)
+5.  On the **Review and finish** page, click on **Create.**
 
+    ![A screenshot of a computer Description automatically generated](./media/image7.png)
 
-### Task 2: Deploy models
+6.  The resource creation will take a few minutes.
 
-You need two models to build a RAG-based chat app: an Azure OpenAI chat model (gpt-4o-mini) and an Azure OpenAI embedding model (text-embedding-ada-002). Deploy these models in your Azure AI Foundry project, using this set of steps for each model.
+    ![A screenshot of a computer Description automatically generated](./media/image8.png)
 
-These steps deploy a model to a real-time endpoint from the AI Foundry portal:
+7.  Close the pop-up windows, if any appears.
 
-1.  On the left navigation pane, select **Model catalogue**.
+8.  From the home page of the project, note down the **Project
+    connection string** in a notepad to be used in next task of this
+    exercise.
 
     ![](./media/image9.png)
 
-2.  Select the **gpt-4o-mini** model from the list of models. You can use the search bar to find it.
+### Task 2: Deploy models
+
+You need two models to build a RAG-based chat app: an Azure OpenAI chat
+model (gpt-4o-mini) and an Azure OpenAI embedding model
+(text-embedding-ada-002). Deploy these models in your Azure AI Foundry
+project, using this set of steps for each model.
+
+These steps deploy a model to a real-time endpoint from the AI Foundry
+portal model catalog
+
+1.  From the left navigation pane, select **Model catalog**.
 
     ![](./media/image10.png)
 
+2.  Select the **gpt-4o-mini** model from the list of models. You can
+    use the search bar to find it.
+
+    ![A screenshot of a computer Description automatically generated](./media/image11.png)
 
 3.  On the model details page, select **Deploy**.
 
-    ![](./media/image11.png)
+    ![A screenshot of a computer Description automatically generated](./media/image12.png)
 
+4.  Leave the default **Deployment name**. select **Deploy**. Or, if the
+    model isn't available in your region, a different region is selected
+    for you and connected to your project. In this case, select **Create
+    resource and deploy**.
 
-4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect and deploy**.
-
-    ![](./media/image12.png)
-
-    ![](./media/image13.png)
-
-
-5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
-    the **text-embedding-ada-002** model.
+    ![A screenshot of a computer Description automatically generated](./media/image13.png)
 
     ![](./media/image14.png)
 
+5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
+    the +++**text-embedding-ada-002**+++ model.
+
+    ![A screenshot of a computer Description automatically generated](./media/image15.png)
 
 ### Task 3: Create an Azure AI Search service
 
@@ -122,68 +159,68 @@ based on the user's question.
 You need an Azure AI Search service and connection to create a search
 index.
 
-If you already have an Azure AI Search service, you can skip to the next section.
+1.  Login to the Azure portal at +++https://portal.azure.com+++ using
+    the Azure login credentials.
 
-Otherwise, you can create an Azure AI Search service using the Azure
-portal.
+2.  From the home page search bar, search for +++**AI search**+++ and
+    select it.
 
-1.  Create an Azure AI Search
-    service +++https://portal.azure.com/#create/Microsoft.Search+++ in the Azure portal, search for +++**AI search**+++ and click on icon.
+    ![A screenshot of a computer Description automatically generated](./media/image16.png)
 
-    ![](./media/image15.png)
-
-
-2.  Click on **+ Create** icon and fill in the following details.
-
-    ![](./media/image16.png)
-
-
-3.  Select your resource group, enter the service name as
-    **aiserviceXXXX,** select the region as **Sweden Central or East us2** or any region closer to your location.
-
-4.  Continue through the wizard and select **Review + assign** to create
-    the resource.
+3.  Click on **+ Create** icon and fill in the following details.
 
     ![](./media/image17.png)
 
-5.  Confirm the details of your Azure AI Search service, including
-    estimated cost.
+4.  Enter the below details and select **Review + create**.
 
-6.  Select **Create** to create the Azure AI Search service.
+    - Subscription – Select your assigned subscription
 
-    ![](./media/image18.png)
+    - Resource Group – Select your assigned Resource group
 
-    ![](./media/image19.png)
+    - Service name – Enter **+++aisearch@lab.LabInstance.Id+++** 
 
+    - Region - Select Region (We are using East US 2 here)
+
+    - Pricing tier – Select **Standard**
+
+    ![A screenshot of a computer Description automatically generated](./media/image18.png)
+
+5.  Review the details and select **Create**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image19.png)
+
+6.  Wait until the deployment succeeds, as in the below screenshot
+    before proceeding with the next step.
+
+    ![A screenshot of a computer Description automatically generated](./media/image20.png)
 
 ### Task 4: Connect the Azure AI Search to your project
 
 In the Azure AI Foundry portal, check for an Azure AI Search connected
 resource.
 
-1.  In Azure AI Foundry +++https://ai.azure.com/+++, go to your project and
-    select **Management center** from the left pane.
+1.  From your project in Azure AI Foundry, select **Management
+    center** from the left pane.
 
-    ![](./media/image20.png)
+    ![A screenshot of a computer Description automatically generated](./media/image21.png)
 
-
-2.  In the **Connected resources** section, look to see if you have a
-    connection of type +++**Azure AI Search**+++. Otherwise, select **New connection** and then **Azure AI Search**.
-
-    ![](./media/image21.png)
+2.  In the **Connected resources** section, select **New
+    connection** and then select **Azure AI Search**.
 
     ![](./media/image22.png)
 
-3.  Use **API key** for **Authentication** and select **Add connection**.
-
     ![](./media/image23.png)
 
+3.  Select **API key** under **Authentication** and select **Add
+    connection**.
 
-    ![](./media/image24.png)
+    ![A screenshot of a search engine Description automatically generated](./media/image24.png)
 
+    ![A screenshot of a search engine Description automatically generated](./media/image25.png)
 
-    ![](./media/image25.png)
-
+4.	From the **Connected resources** page, you can now see the added resource connection.
+   
+    ![](./media/image26.png)
 
 ### Task 5: Install the Azure CLI and sign in
 
@@ -191,202 +228,202 @@ You install the Azure CLI and sign in from your local development
 environment, so that you can use your user credentials to call the Azure
 OpenAI service.
 
-1. Open windows power shell and paste the below given command and run it.
+1.  Search for +++**PowerShell**+++ from the Windows search bar and open
+    it in the Administrator mode. Accept if prompted for the launch to continue.
 
-```
-$progressPreference = 'silentlyContinue'
-Write-Host "Installing WinGet PowerShell module from PSGallery..."
-Install-PackageProvider -Name NuGet -Force | Out-Null
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
-Repair-WinGetPackageManager
-Write-Host "Done."
-```
+    ![A screenshot of a computer Description automatically generated](./media/image27.png)
 
-![](./media/imagez.png)
+2.  Open windows power shell and paste the below given command and run
+    it.
 
+    ```
+    $progressPreference = 'silentlyContinue'
+    Write-Host "Installing WinGet PowerShell module from PSGallery..."
+    Install-PackageProvider -Name NuGet -Force | Out-Null
+    Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+    Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
+    Repair-WinGetPackageManager
+    Write-Host "Done."
+    ```
 
-2.  In most cases you can install the Azure CLI from your command line terminal using the following command:
+3.  Install the Azure CLI from your terminal using the following
+    command:
 
+    ```
+    winget install -e --id Microsoft.AzureCLI
+    ```
 
-```
-winget install -e --id Microsoft.AzureCLI
-```
+    Select **Y** and then **Enter** when prompted for acceptance.
 
+    ![A screenshot of a computer Description automatically generated](./media/image28.png)
 
-![](./media/image26.png)
+    ![](./media/image29.png)
 
-![](./media/image27.png)
+    ![](./media/image30.png)
 
-![](./media/image28.png)
+4.  After you install the Azure CLI, sign in using the az login command
+    and sign-in using the browser:
 
-3.  After you install the Azure CLI, sign in using the az login command and sign-in using the browser:
+    ```
+    az login
+    ```
 
+    Select **Work or school account** and click on **Continue**.
 
-```
-Az login
-```
+    ![A screenshot of a computer screen Description automatically generated](./media/image31.png)
 
+5.  Login with your **Azure login credentials**.
 
-select the tenant that your intent to login in with and click on **Continue**.
+    ![A computer screen shot of a program Description automatically generated](./media/image32.png)
 
-![](./media/image29.png)
+6.  Enter **1** for the **Select a subscription** prompt and click
+    **Enter**.
 
-
-![](./media/image30.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image33.png)
 
 ### Task 6: Create a new Python environment
 
-First you need to create a new Python environment to use to install the package you need for this tutorial. DO NOT install packages into your global python installation. You should always use a virtual or conda environment when installing python packages, otherwise you can break your global install of Python.
+First you need to create a new Python environment to use to install the
+package you need for this tutorial. DO NOT install packages into your
+global python installation. You should always use a virtual or conda
+environment when installing python packages, otherwise you can break
+your global install of Python.
+
+>[Alert] **Important:** If the commands below are not pastable, try pasting them to a notepad and then copy and paste it to the PowerShell. Or copy and paste directly to the PowerShell. The T button does not work at times in the PowerShell.
 
 **Create a virtual environment**
 
-1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**, by entering the following command in your powershell.
+1.  From your Power Shell, navigate to **C:\Users\Admin** by executing
+    the below commands.
 
+    ```
+    cd\\
+    ```
+    ```
+    cd Users\Admin
+    ```
+    
+1.  Create a folder with your project name, **+++RAGproj@lab.LabInstance.Id+++**, by entering the following command in your powershell.
 
-```
-mkdir ProjectXXXX
-```
+    >[!Note] **Note:** Replace < Project name > with your project’s name in the command below and execute it.
 
+    +++**mkdir < Project name >**+++
 
-![](./media/image31.png)
+    ![A computer screen with white and green text Description automatically generated](./media/image34.png)
 
+2.  In your terminal enter the following command to navigate to the new
+    folder location
 
-2.  In your terminal enter the following command to navigate to the new folder location **cd C:\Users\Admin\ProjectXXXX**
+    +++**cd < Project name >**+++
 
-![](./media/image32.png)
+    Replace < Project name > with the folder name you created in the previous step.
 
+    ![A blue screen with white text Description automatically generated](./media/image35.png)
 
-3.  If you already have Python 3.10 or higher installed, you can create a virtual environment using the following commands:
+3.  Create a virtual environment using the following commands
 
+    ```
+    py -3 -m venv .venv
+    ```
 
-```
-py -3 -m venv .venv
-```
+    ```
+    .venv\scripts\activate
+    ```
 
+    ![A computer screen shot of a code Description automatically generated](./media/image36.png)
 
+    Activating the Python environment means that when you run python or pip from the command line, you then use the Python interpreter contained in the .venv folder of your application.
 
-```
-.venv\scripts\activate
-```
+5.  Open **VS Code**. Select **File -\> Open Folder** and select
+    **RAGproject** folder that we created in the previous steps (from **C:\Users\Admin**).
 
+    >[!Note] **Note:**  Click on Yes, I trust the folder and content and then proceed if prompted.
+    
+    ![A screenshot of a computer Description automatically generated](./media/image37.png)
 
-![](./media/image33.png)
+    ![A screenshot of a computer Description automatically generated](./media/image38.png)
 
-Activating the Python environment means that when you run python or pip from the command line, you then use the Python interpreter contained in the .venv folder of your application.
-
-4.  Open the project folder in VS Code
-
-    ![](./media/image34.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image39.png)
 
 ### Task 7: Install packages
 
-Install **azure-ai-projects(preview) and azure-ai-inference (preview)**,along with other required packages.
+Install azure-ai-projects(preview) and azure-ai-inference (preview),
+along with other required packages.
 
-5.  Create a file named +++**requirements.txt**+++ in your **ProjectXXXX** folder and add the following packages. After adding packages go to files and select **Save All**:
+1.  Create a file named +++**requirements.txt**+++ in your **Project**
+    folder and add the following packages to the file:
 
+    ```
+    azure-ai-projects
+    azure-ai-inference[prompts]
+    azure-identity
+    azure-search-documents
+    pandas
+    python-dotenv
+    opentelemetry-api
+    marshmallow==3.23.2
+    ```
 
-```
-azure-ai-projects
-azure-ai-inference[prompts]
-azure-identity
-azure-search-documents
-pandas
-python-dotenv
-opentelemetry-api
-marshmallow==3.23.2
-```
+    ![](./media/img53.png)
 
+    ![](./media/img54.png)
 
-![](./media/image35.png)
+2.  On the top navigation bar click on **File** and **Save All**.
 
+3.  Right click on the requirements.txt and select **Open in Integrated
+    Terminal**.
 
-![](./media/image36.png)
+    ![](./media/img55.png)
 
+    ![A screenshot of a computer Description automatically generated](./media/image43.png)
 
-6.  On the top navigation bar click on file and save all , the right clicks on the project and open the integrated terminal.
+4.  Run the following command to get into the virtual environment
 
-    ![](./media/image37.png)
+    +++py -3 -m venv .venv+++
 
+    +++.venv\scripts\activate+++
 
-    ![](./media/image38.png)
+    ![A screenshot of a computer Description automatically generated](./media/image44.png)
 
+5.  Run the +++az login+++ command and login with your Azure login
+    credentials. Select **1** to select the subscription.
 
-7.  Run the following command to get into the virtual environment
+    >[!note] **Note:** Minimize the VS Code to view the login prompt if not automatically visible.
+    
+    ![A screenshot of a computer Description automatically generated](./media/image45.png)
 
+    ![A screenshot of a computer Description automatically generated](./media/image46.png)
 
-```
-py -3 -m venv .venv
-```
+7.  To Install the required packages, run the following code.
 
+    +++pip install -r requirements.txt+++
 
+    ![A screenshot of a computer Description automatically generated](./media/image47.png)
 
-```
-.venv\scripts\activate
-```
+    ![A screenshot of a computer Description automatically generated](./media/image48.png)
 
-
-![](./media/image39.png)
-
-
-8.  Run the +++**az login**+++ command and do the login with your credentials.
-
-    ![](./media/image40.png)
-
-
-9.  To Install the required packages, run the following code.
-
-
-```
-pip install -r requirements.txt
-```
-
-
-![](./media/image41.png)
-
-
-![](./media/image42.png)
-
-
-> **Note:** if you get a notice to of new release of pip, kindly run the following command to upgrade pip and then re-run
-
-
-```
-pip install -r requirements.txt
-```
-
-
-
-```
-python.exe -m pip install --upgrade pip
-```
-
-
-![](./media/image43.png)
-
+    >[!Note] **Note:** if you get a notice to of new release of pip, execute the below commands to upgrade pip
+    >
+    +++pip install -r requirements.txt+++
+    >
+    +++python.exe -m pip install --upgrade pip+++
+    >
+    ![A screenshot of a computer program Description automatically generated](./media/image49.png)
 
 ### Task 8: Create helper script
 
-1.  Create a new folder named **src**. By running the following command in the terminal.
+1.  Create a new folder named **src**. By running the following command
+    in the terminal.
 
+    +++mkdir src+++
 
-```
-mkdir src
-```
+    ![A screenshot of a computer Description automatically generated](./media/image50.png)
 
+2.  Create a new file in **src** folder and name it +++**config.py**+++
 
-![](./media/image44.png)
-
-
-2.  Create a new file in **src** folder and name it +++**config.py**+++ 
-
-![](./media/image45.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image51.png)
 
 3.  Add the following code to **config.py** and save it.
-
 
 ```
 # ruff: noqa: ANN201, ANN001
@@ -447,89 +484,72 @@ def enable_telemetry(log_to_project: bool = False):
 
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image52.png)
 
-![](./media/image46.png)
-
-
-> **Note**: this newly created config.py file script will be used in the next exercise.
+>[!Note] **Note**: this newly created config.py file script will be used in the next exercise.
 
 ### Task 9: Configure environment variables
 
-Your project connection string is required to call the Azure OpenAI service from your code. In this quickstart, you save this value in a .env file, which is a file that contains environment variables that your application can read.
+Your project connection string is required to call the Azure OpenAI
+service from your code. In this quickstart, you save this value in
+a .env file, which is a file that contains environment variables that
+your application can read.
 
-1.  Create new file **.env** in the src directory, and paste the following code:
+1.  Create a new file **+++.env+++** in the **src** directory, and
+    paste the following code:
 
-Replace the connection string with the value saved on notepad in task 1 step 9 and save it.
+    Replace  **< your-connection-string >** with the project connection string value saved in the notepad in task 1.
 
+    ```
+    AIPROJECT_CONNECTION_STRING="<your-connection-string>"
+    AISEARCH_INDEX_NAME="example-index"
+    EMBEDDINGS_MODEL="text-embedding-ada-002"
+    INTENT_MAPPING_MODEL="gpt-4o-mini"
+    CHAT_MODEL="gpt-4o-mini"
+    EVALUATION_MODEL="gpt-4o-mini"
+    ```
 
-```
-AIPROJECT_CONNECTION_STRING=<your-connection-string>
-AISEARCH_INDEX_NAME="example-index"
-EMBEDDINGS_MODEL="text-embedding-ada-002"
-INTENT_MAPPING_MODEL="gpt-4o-mini"
-CHAT_MODEL="gpt-4o-mini"
-EVALUATION_MODEL="gpt-4o-mini"
-```
+    ![](./media/image53.png)
 
-
-![](./media/image47.png)
-
-
-![](./media/image48.png)
-
-
-> **Note**: Your connection string can be found in the Azure AI Foundry project homepage under **Overview**.
-
-![](./media/image49.png)
-
-AISEARCH_INDEX_NAME : you'll create one in the next exercise.
+    >[!Note] **Note**: Your connection string can be found in the Azure AI Foundry project homepage under **Overview**.
 
 ## Exercise 2: Build a custom knowledge retrieval (RAG) app with the Azure AI Foundry SDK
 
-**Prerequisites**
-
-CompleteExercise 1 - Create resources for building a custom chat application with the Azure AI SDK to:
-
-- Create a project with a connected Azure AI Search index
-
-- Install the Azure CLI, Python, and required packages
-
-- Configure your environment variables
-
 ### Task 1: Create example data for your chat app
 
-The goal with this RAG-based application is to ground the model responses in your custom data. You use an Azure AI Search index that stores vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
+The goal with this RAG-based application is to ground the model
+responses in your custom data. You use an Azure AI Search index that
+stores vectorized data from the embeddings model. The search index is
+used to retrieve relevant documents based on the user's question.
 
-1.  Create an +++**assets**+++
-2.   directory in your project folder\src.
+1.  From your VS Code set up that is open, create a folder
+    named +++**assets**+++ under the **src** folder.
 
+    ![A screenshot of a computer Description automatically generated](./media/image54.png)
 
-![](./media/image50.png)
+2.  Copy **products.csv** file from **C:\LabFiles** and paste it in
+    **C:\Users\Admin\< Your Project Name>\src\assets** folder.
 
+    >[!Note] **Note:** This needs to be done in the File Explorer and then it will get reflected in the VS Code.
 
-2.  Copy **products.csv** file from Lab files and paste it in +++**Project0612/src/assets**+++ folder.
+    ![A screenshot of a computer Description automatically generated](./media/image55.png)
 
-![](./media/image51.png)
+3.  Navigate to **File** on the top navigation bar and click on **Save All.**
 
-![](./media/image52.png)
-
-
-3.  Navigate to **File** on the top navigation bar and click on **Save all.**
-
-![](./media/image53.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image56.png)
 
 ### Task 2: Create a search index
 
 The search index is used to store vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
 
-1.  On your VS code create the file +++**create_search_index.py**+++ in your src folder here it is (that is, the same directory where you placed your **assets** folder, not inside the **assets** folder).
+1.  In VS code, create a file named +++**create_search_index.py**+++ in
+    your **src** folder.
 
-![](./media/image54.png)
+    ![A screenshot of a computer Description automatically generated](./media/image57.png)
 
-
-2.  Open **create_search_index.py** file in Visual studio and add the following code to import the required libraries, create a project client, and configure some settings:
-
+2.  Open the created file, **create_search_index.py** file and add the
+    following code to import the required libraries, create a project
+    client, and configure some settings:
 
 ```
 import os
@@ -564,12 +584,10 @@ index_client = SearchIndexClient(
 )
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image58.png)
 
-![](./media/image55.png)
-
-
-3.  Now add the function at the end of the create_search_index.py to define a search index:
-
+3.  Now add the function at the end of the **create_search_index.py** to
+    define a search index:
 
 ```
 import pandas as pd
@@ -672,11 +690,10 @@ def create_index_definition(index_name: str, model: str) -> SearchIndex:
     )
 ```
 
-![](./media/image56.png)
+![A screenshot of a computer Description automatically generated](./media/image59.png)
 
-
-4.  Now add the function in create_search_index.py to create the function to add a csv file to the index:
-
+4.  Now add the function in create_search_index.py to create the
+    function to add a csv file to the index:
 
 ```
 # define a function for indexing a csv file, that adds each row as a document
@@ -730,12 +747,11 @@ def create_index_from_csv(index_name, csv_file):
     logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}' index")
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image60.png)
 
-![](./media/image57.png)
-
-
-5.  Finally, Add the below functions in create_search_index.py to build the index and register it to the cloud project. After adding the code go to Files from top bar and click on **Save all.**
-
+5.  Finally, Add the below functions in create_search_index.py to build
+    the index and register it to the cloud project. After adding the
+    code go to Files from top bar and click on **Save all.**
 
 ```
 if __name__ == "__main__":
@@ -757,46 +773,40 @@ if __name__ == "__main__":
 
     create_index_from_csv(index_name, csv_file)
 ```
-
-
-![](./media/image58.png)
-
-
-6.  Right click on the create_search_index.py and select **Open in integrated terminal** option.
-
-![](./media/image59.png)
-
-
-7.  From your terminal, log in to your Azure account and follow instructions for authenticating your account:
-
-
-```
-az login
-```
-
-
-![](./media/image60.png)
-
+    
 ![](./media/image61.png)
 
+6.  Right click on the **create_search_index.py** and select **Open in
+    integrated terminal** option.
 
-8.  Run the code to build your index locally and register it to the cloud project:
+    ![](./media/image62.png)
 
+7.  From your terminal, log in to your Azure login credential and follow
+    instructions for authenticating your account:
 
-```
-python create_search_index.py
-```
+    +++az login+++
 
+    ![](./media/image63.png)
 
-![](./media/image62.png)
+    ![](./media/image64.png)
 
+8.  Run the code to build your index locally and register it to the
+    cloud project:
 
-9.  Once the script is run, you can view your newly created index in **Home/All resources/aiservice0612/indexes** on the Azure portal.
+    +++python create_search_index.py+++
 
-![](./media/image63.png)
+    ![](./media/image65.png)
 
+9.  Once the script is run, you can view your newly created index in
+    from Azure portal.
 
-10. If you run the script again with the same index name, it creates a new version of the same index.
+10. Navigate to the assigned **Resource Group -> Your search service
+    created(aisearchLabinstanceID) -> Search management -> Indexes**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image66.png)
+
+11. If you run the script again with the same index name, it creates a
+    new version of the same index.
 
 ### Task 3: Get product documents
 
@@ -806,14 +816,14 @@ Next, you create a script to get product documents from the search index. The sc
 
 When the chat gets a request, it searches through your data to find relevant information. This script uses the Azure AI SDK to query the search index for documents that match a user's question. It then returns the documents to the chat app.
 
+1.  From VS Code, create a file named +++**get_product_documents.py**+++
+    in the **src** folder.
 
-1.  Create the +++**get_product_documents.py**+++ file in your main directory(src directory). Copy and paste the following code into the file.
+    ![A screenshot of a computer Description automatically generated](./media/image67.png)
 
-![](./media/image64.png)
-
-
-2.  Start with code to import the required libraries, create a project client, and configure settings:
-
+2.  Copy and paste the following code into the file. Start with code to
+    import the required libraries, create a project client, and
+    configure settings.
 
 ```
 import os
@@ -853,9 +863,8 @@ search_client = SearchClient(
 )
 ```
 
-
-3.  Add the function in get_product-documents.py to get product documents:
-
+3.  Add the function in get_product-documents.py to **get product
+    documents**.
 
 ```
 from azure.ai.inference.prompts import PromptTemplate
@@ -924,9 +933,8 @@ def get_product_documents(messages: list, context: dict = None) -> dict:
     return documents
 ```
 
-
-4.  Finally, add code to test the function when you run the script directly:
-
+4.  Finally, add code to **test the function** when you run the script
+    directly:
 
 ```
 if __name__ == "__main__":
@@ -951,26 +959,23 @@ if __name__ == "__main__":
     result = get_product_documents(messages=[{"role": "user", "content": query}])
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image68.png)
 
-![](./media/image65.png)
+5.  Click on **File**> **Save all**.
 
-
-5.  Click on File --> Save all.
-
-![](./media/image66.png)
-
+    ![](./media/image69.png)
 
 ### Task 4: Create prompt template for intent mapping
 
-The **get_product_documents.py** script uses a prompt template to convert the conversation to a search query. The template instructs how to extract the user's intent from the conversation.
+The **get_product_documents.py** script uses a prompt template to convert the conversation to a search query. The template instructs how to extract the user's intent from the conversation.
 
-1. Before you run the script, create the prompt template. Add the file +++**intent_mapping.prompty**+++ to your assets folder:
+1.  Before you run the script, create the prompt template. Create a file
+    named +++**intent_mapping.prompty**+++ under your **assets** folder:
 
-![](./media/image67.png)
+    ![](./media/image70.png)
 
-
-4.  Copy the following code to the intent_mapping_prompty file and the from top bar go to Files and click on **Save all.**
-
+4.  Copy the following code to the intent_mapping_prompty file and the
+    from top bar go to Files and click on **Save all.**
 
 ```
 ---
@@ -1033,21 +1038,17 @@ Return the search query for the messages in the following conversation:
 
 ```
 
-![](./media/image68.png)
-
+![A screenshot of a computer Description automatically generated](./media/image71.png)
 
 ### Task 5: Test the product document retrieval script
 
-1.  Now that you have both the script and template, run the script to test out what documents the search index returns from a query. In a terminal window run:
+1.  Now that you have both the script and template, run the script to
+    test out what documents the search index returns from a query. From
+    the terminal window run,
 
+    +++python get_product_documents.py --query "I need a new tent for 4 people, what would you recommend?"+++
 
-```
-python get_product_documents.py --query "I need a new tent for 4 people, what would you recommend?"
-```
-
-
-![](./media/image69.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image72.png)
 
 ### Task 6: Develop custom knowledge retrieval (RAG) code
 
@@ -1055,14 +1056,13 @@ Next you create custom code to add retrieval augmented generation (RAG) capabili
 
 **Create a chat script with RAG capabilities**
 
-1.  In your src folder, create a new file
-    called +++**chat_with_products.py**+++. This script retrieves product documents and generates a response to a user's question.
+1.  In your **src** folder, create a new file called +++**chat_with_products.py**+++. This script retrieves
+    product documents and generates a response to a user's question.
 
-![](./media/image70.png)
+    ![A screenshot of a computer Description automatically generated](./media/image73.png)
 
-
-2.  Add the code to import the required libraries, create a project client, and configure settings:
-
+2.  Add the code to import the required libraries, create a project
+    client, and configure settings:
 
 ```
 import os
@@ -1087,12 +1087,10 @@ project = AIProjectClient.from_connection_string(
 chat = project.inference.get_chat_completions_client()
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image74.png)
 
-![](./media/image71.png)
-
-
-3.  Add the code at end of chat_with_products.py to create the chat function that uses the RAG capabilities:
-
+3.  Add the code at end of chat_with_products.py to create the chat
+    function that uses the RAG capabilities.
 
 ```
 from azure.ai.inference.prompts import PromptTemplate
@@ -1120,12 +1118,10 @@ def chat_with_products(messages: list, context: dict = None) -> dict:
     return {"message": response.choices[0].message, "context": context}
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image75.png)
 
-![](./media/image72.png)
-
-
-4.  Finally, add the code to run the chat function and then go to files and click on save all.
-
+4.  Finally, add the code to run the **chat** **function** and then go
+    to files and click on S**ave all**.
 
 ```
 if __name__ == "__main__":
@@ -1152,21 +1148,18 @@ if __name__ == "__main__":
     response = chat_with_products(messages=[{"role": "user", "content": args.query}])
 ```
 
-
-![](./media/image73.png)
-
+![A screenshot of a computer Description automatically generated](./media/image76.png)
 
 ### Task 7: Create a grounded chat prompt template
 
-The chat_with_products.py script calls a prompt template to generate a response to the user's question. The template instructs how to generate a response based on the user's question and the retrieved documents. Create this template now.
+The **chat_with_products.py** script calls a prompt template to generate a response to the user's question. The template instructs how to generate a response based on the user's question and the retrieved documents. Create this template now.
 
-1.  In your **assets** folder, add the file +++**grounded_chat.prompty**+++
+1.  In your **assets** folder, add the
+    file +++**grounded_chat.prompty**+++
 
-![](./media/image74.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image77.png)
 
 2.  Add the following code grounded_chat.prompty.
-
 
 ```
 ---
@@ -1197,71 +1190,94 @@ Do not add documentation reference in the response.
 {{/documents}}
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image78.png)
 
-![](./media/image75.png)
+3.  Click on **File> Save all.**
 
-
-3.  Click on **File -->Save all.**
-
-![](./media/image76.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image79.png)
 
 ### Task 8: Run the chat script with RAG capabilities
 
-1.  Now that you have both the script and the template, run the script to test your chat app with RAG capabilities:
+1.  Now that you have both the script and the template, run the script
+    to test your chat app with RAG capabilities:
 
+    +++python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?"+++
 
-```
-python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?"
-```
+    ![A screenshot of a computer Description automatically generated](./media/image80.png)
 
+### Task 9: Add telemetry logging
 
-![](./media/image77.png)
+1.  From the Azure portal, select **Subscriptions**, select your subscription and then select
+    **Resource providers** under **Settings** from the left navigation
+    pane.
 
+2.  Search for and select +++**Microsoft.OperationalInsights**+++ and
+    click on the three dots for this resource provider and select
+    **Register**.
 
-2.  To enable logging of telemetry to your project,
-    Install azure-monitor-opentelemetry:
+    ![A screenshot of a computer Description automatically generated](./media/image81.png)
 
+3.  Follow the same procedure to register +++microsoft.insights+++
 
-```
-pip install azure-monitor-opentelemetry
-```
+4.  Wait for a success message on the registration before proceeding to
+    the next step.
 
+    ![A screenshot of a computer Description automatically generated](./media/image82.png)
 
-![](./media/image78.png)
+5.  From your Project in the Azure AI Foundry, select **Tracing** under
+    **Access and improve** from the left pane. Select **Create New**.
 
+    ![A screenshot of a computer Description automatically generated](./media/image83.png)
 
-3.  Add the --enable --telemetry flag when you use the chat_with_products.py script:
+6.	Provide the name as **+++appinsight@lab.LabInstance.Id+++**
 
+    ![A screenshot of a computer screen Description automatically generated](./media/image84.png)
 
-```
-python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable--telemetry
-```
+6.  Ensure that the resource gets created.
 
+    ![A screenshot of a computer Description automatically generated](./media/image85.png)
 
-## Exercise 3: Evaluate a custom chat application with the Azure AI Foundry SDK
+7.  Back in the VS Code, to enable logging of telemetry to your project,
+    install azure-monitor-opentelemetry.
+
+    +++pip install azure-monitor-opentelemetry+++
+
+    ![A screenshot of a computer program Description automatically generated](./media/image86.png)
+
+8.  Add the --enable-telemetry flag when you use
+    the chat_with_products.py script:
+
+    +++python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable-telemetry+++
+
+    ![A screenshot of a computer Description automatically generated](./media/image87.png)
+
+## Exercise 3: Evaluate the custom chat application with the Azure AI Foundry SDK
 
 ### Task 1: Evaluate the quality of the chat app responses
 
-Now that you know your chat app responds well to your queries, including with chat history, it's time to evaluate how it does across a few different metrics and more data.
+Now that you know your chat app responds well to your queries, including
+with chat history, it's time to evaluate how it does across a few
+different metrics and more data.
 
-You use an evaluator with an evaluation dataset and the get_chat_response() target function, then assess the evaluation results.
+You use an evaluator with an evaluation dataset and
+the get_chat_response() target function, then assess the evaluation
+results.
 
-Once you run an evaluation, you can then make improvements to your logic, like improving your system prompt, and observing how the chat app responses change and improve.
+Once you run an evaluation, you can then make improvements to your
+logic, like improving your system prompt, and observing how the chat app
+responses change and improve.
 
 **Create evaluation dataset**
 
-Use the following evaluation dataset, which contains example questions and expected answers (truth).
-
+Use the following evaluation dataset, which contains example questions
+and expected answers (truth).
 
 1.  Create a file called +++**chat_eval_data.jsonl**+++ in
     your **assets** folder.
 
-![](./media/image79.png)
+    ![](./media/image88.png)
 
-
-2.  Paste this dataset into the file and the save the file.
-
+2.  Paste this dataset into the file and the **save** the file.
 
 ```
 {"query": "Which tent is the most waterproof?", "truth": "The Alpine Explorer Tent has the highest rainfly waterproof rating at 3000m"}
@@ -1279,8 +1295,7 @@ Use the following evaluation dataset, which contains example questions and expec
 {"query": "Is France in Europe?", "truth": "Sorry, I can only queries related to outdoor/camping gear and equipment"}
 ```
 
-
-![](./media/image80.png)
+![A screenshot of a computer Description automatically generated](./media/image89.png)
 
 ### Task 2: Evaluate with Azure AI evaluators
 
@@ -1304,12 +1319,12 @@ results in the command line, and to a json file.
 The script also logs the evaluation results to the cloud project so that
 you can compare evaluation runs in the UI.
 
-1.  Create a file called +++**evaluate.py**+++ in your main folder(src folder).
+1.  Create a file called +++**evaluate.py**+++ under **src** folder.
 
-![](./media/image81.png)
+    ![A screenshot of a computer Description automatically generated](./media/image90.png)
 
-2.  Add the following code to import the required libraries, create a project client, and configure some settings:
-
+2.  Add the following code to import the required libraries, create a
+    project client, and configure some settings:
 
 ```
 import os
@@ -1343,12 +1358,10 @@ evaluator_model = {
 groundedness = GroundednessEvaluator(evaluator_model)
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image91.png)
 
-![](./media/image82.png)
-
-
-3.  Add code to create a wrapper function that implements the evaluation interface for query and response evaluation:
-
+3.  Add code to create a wrapper function that implements the evaluation
+    interface for query and response evaluation:
 
 ```
 def evaluate_chat_with_products(query):
@@ -1356,12 +1369,10 @@ def evaluate_chat_with_products(query):
     return {"response": response["message"].content, "context": response["context"]["grounding_data"]}
 ```
 
+![A screenshot of a computer Description automatically generated](./media/image92.png)
 
-![](./media/image83.png)
-
-
-4.  Finally, add code to run the evaluation, view the results locally, and gives you a link to the evaluation results in AI Foundry portal:
-
+4.  Finally, add code to run the evaluation, view the results locally,
+    and gives you a link to the evaluation results in AI Foundry portal.
 
 ```
 # Evaluate must be called inside of __main__, not on import
@@ -1405,147 +1416,96 @@ if __name__ == "__main__":
     pprint(f"View evaluation results in AI Studio: {result['studio_url']}")
 ```
 
-
-![](./media/image84.png)
-
+![A screenshot of a computer Description automatically generated](./media/image93.png)
 
 5.  Click on **Save all** under **File** in the top navigation bar.
 
 ### Task 3: Configure the evaluation model
 
-Since the evaluation script calls the model many times, you might want to increase the number of tokens per minute for the evaluation model.
+Since the evaluation script calls the model many times, you might want
+to increase the number of tokens per minute for the evaluation model.
 
-In Part 1 of this tutorial series, you created an **.env** file that specifies the name of the evaluation model, gpt-4o-mini. Try to increase the tokens per minute limit for this model, if you have available quota.
+Initially, you created a **.env** file that specifies the name of the
+evaluation model, gpt-4o-mini. Try to increase the tokens per minute
+limit for this model, if you have available quota. If you don't have
+enough quota to increase the value, don't worry. The script is designed
+to handle limit errors.
 
-If you don't have enough quota to increase the value, don't worry. The script is designed to handle limit errors.
+1.  From your project in Azure AI Foundry portal, select **Models +
+    endpoints** and select **gpt-4o-mini**.
 
-1.  In your project in Azure AI Foundry portal, select **Models + endpoints**.
-
-![](./media/image85.png)
-
+    ![A screenshot of a computer Description automatically generated](./media/image94.png)
 
 2.  Select **gpt-4o-mini**, click on **Edit.**
 
-![](./media/image86.png)
+    ![A screenshot of a computer Description automatically generated](./media/image95.png)
 
+3.  Set the value of **Tokens per Minute Rate Limit** to the maximum
+    allowed limit and select **Save and close**.
 
-> Note: increase quota if your limit is less than 30
+    ![A screenshot of a computer Description automatically generated](./media/image96.png)
 
-3.  If you have quota to increase the **Tokens per Minute Rate Limit**, try increasing it to 30.
+### Task 4: Run the evaluation 
 
-4.  Select **Save and close**.
+1.  From the Azure AI Foundry, select **Evaluations** from the left pane
+    and select **+ New Evaluation**. Click on **Create a new evaluation**.
 
-![](./media/image87.png)
+    ![A screenshot of a computer Description automatically generated](./media/image97.png)
 
+2.  Select **Dataset**.
 
-### Task 4: Run the evaluation script
+    ![A screenshot of a computer Description automatically generated](./media/image98.png)
 
-1.  From your console, sign in to your Azure account with the Azure CLI:
+3.  Accept the defaults in the Basic information page and click
+    **Next**.
 
+    ![A screenshot of a computer Description automatically generated](./media/image99.png)
 
-```
-az login
-```
+4.  Select **Add your** **dataset** -\> **Upload file** and upload the
+    **chat_eval_data.jsonl** that we created in the **assets** folder
+    and click on **Next**.
 
+    ![A screenshot of a computer Description automatically generated](./media/image100.png)
 
-![](./media/image88.png)
+5.  Select the **Metrics** under AI quality and Risk and safety metrics as in the screenshots below. Also, under the Ai quality, select your connection and the deployment name.
 
+    ![A screenshot of a computer Description automatically generated](./media/image101.png)
 
-2.  Install the required package:
+    ![A screenshot of a survey Description automatically generated](./media/image102.png)
 
+6.  Select the Data source types as in the below screenshot and click
+    **Next**.
 
-```
-pip install azure_ai-evaluation[prompts]
-```
+    ![A screenshot of a computer Description automatically generated](./media/image103.png)
 
+7.  Select **Submit** to submit the evaluation.
 
+    ![A screenshot of a computer Description automatically generated](./media/image104.png)
 
-```
-pip install azure-ai-evaluation[remote]
-```
+8.  Once the evaluation completes, explore the results.
 
+    ![A screenshot of a computer Description automatically generated](./media/image105.png)
 
-![](./media/image89.png)
+    ![A screenshot of a computer Description automatically generated](./media/image106.png)
 
+    ![A screenshot of a computer Description automatically generated](./media/image107.png)
 
-3.  Now run the evaluation script.
+## Exercise 4: Delete the resources
 
+1.  From the Azure portal home page, select the assigned Resouce group.
+    Select all the resources under the Resource group and select Delete.
 
-```
-python evaluate.py
-```
+    ![A screenshot of a computer Description automatically generated](./media/image108.png)
 
+2.  Enter +++**delete**+++ and click on the **Delete** button to confirm
+    deletion. Click on **Delete** in the Delete confirmation dialog box.
 
-![](./media/image90.png)
+    ![A screenshot of a computer Description automatically generated](./media/image109.png)
 
+3.  Confirm the deletion of all the resources with a success message.
 
-### task 5: Interpret the evaluation output
-
-In the console output, you see an answer for each question, followed by a table with summarized metrics. (You might see different columns in your output.)
-
-If you weren't able to increase the tokens per minute limit for your model, you might see some time-out errors, which are expected. The evaluation script is designed to handle these errors and continue running.
-
-**Note**: You may also see many WARNING:opentelemetry.attributes: - these can be safely ignored and do not affect the evaluation results.
-
-```
-====================================================
-
-'-----Summarized Metrics-----'
-
-{'groundedness.gpt_groundedness': 1.6666666666666667,
-
-'groundedness.groundedness': 1.6666666666666667}
-
-'-----Tabular Result-----'
-
-outputs.response ... line_number
-
-0 Could you specify which tent you are referring... ... 0
-
-1 Could you please specify which camping table y... ... 1
-
-2 Sorry, I only can answer queries related to ou... ... 2
-
-3 Could you please clarify which aspects of care... ... 3
-
-4 Sorry, I only can answer queries related to ou... ... 4
-
-5 The TrailMaster X4 Tent comes with an included... ... 5
-
-6 (Failed) ... 6
-
-7 The TrailBlaze Hiking Pants are crafted from h... ... 7
-
-8 Sorry, I only can answer queries related to ou... ... 8
-
-9 Sorry, I only can answer queries related to ou... ... 9
-
-10 Sorry, I only can answer queries related to ou... ... 10
-
-11 The PowerBurner Camping Stove is designed with... ... 11
-
-12 Sorry, I only can answer queries related to ou... ... 12
-
-\[13 rows x 8 columns\]
-
-('View evaluation results in AI Foundry portal: '
-
-'https://xxxxxxxxxxxxxxxxxxxxxxx')
-```
-
-### Task 6: View evaluation results in AI Foundry portal(optional)
-
-Once the evaluation run completes, follow the link to view the evaluation results on the **Evaluation** page in the Azure AI Foundry portal.
-
-![](./media/image91.png)
-
-
-You can also look at the individual rows and see metric scores per row, and view the full context/documents that were retrieved. These metrics can be helpful in interpreting and debugging evaluation results.
-
-![](./media/image92.png)
+    ![A screenshot of a computer screen Description automatically generated](./media/image110.png)
 
 **Summary:**
 
-In this lab, we have learnt to build, evaluate, and deploy a
-Retrieval-Augmented Generation (RAG)-based agent using the Azure AI
-Foundry SDK.
+In this lab, we have learnt to build, evaluate and deploy a RAG based application.
