@@ -36,24 +36,24 @@ these steps:
 
     ![](./media/image1.png)
 
-2.  When prompted enter the tenant details and login.
+2.  When prompted enter the tenant details and do the login.
 
 3.  Select **+ Create project**.
 
     ![](./media/image2.png)
 
-4.  Enter a +++**ProjectXXXX**+++ (replace xxxx with a random number) as name for the project, click on Customize.
+4.  Enter a **ProjectXXXX** as name for the project, click on Customize.
 
     ![](./media/image3.png)
 
 
 5.  On the next page, enter the following details and click on **Next.**
 
-    - Hub name: hubXXXX (replace xxxx with a random number)
+    - Hub name: hubXXXX
 
     - Subscription: Select your subscription
 
-    - Create new Resource group: +++rgxxxx+++ (replace xxxx with a random number)
+    - Create new Resource group: +++rg+++XXXX
 
     - Location: East US 2, or Sweden Central
 
@@ -100,9 +100,11 @@ These steps deploy a model to a real-time endpoint from the AI Foundry portal:
     ![](./media/image11.png)
 
 
-4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect**.
+4.  Leave the default **Deployment name** select **Deploy**. Or, if the model isn't available in your region, a different region is selected for you and connected to your project. In this case, select **Connect and deploy**.
 
-    ![](./media/image13za.png)
+    ![](./media/image12.png)
+
+    ![](./media/image13.png)
 
 
 5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
@@ -189,7 +191,7 @@ You install the Azure CLI and sign in from your local development
 environment, so that you can use your user credentials to call the Azure
 OpenAI service.
 
-1. Open windows power shell as adminstartor and paste the below given command and run it. After run the command close the power shell.
+1. Open windows power shell and paste the below given command and run it.
 
 ```
 $progressPreference = 'silentlyContinue'
@@ -204,7 +206,7 @@ Write-Host "Done."
 ![](./media/imagez.png)
 
 
-2.  Again open power shell without adminstrator, In most cases you can install the Azure CLI from your command line terminal using the following command:
+2.  In most cases you can install the Azure CLI from your command line terminal using the following command:
 
 
 ```
@@ -240,7 +242,7 @@ First you need to create a new Python environment to use to install the package 
 
 **Create a virtual environment**
 
-1.  Create a folder in **C:\Users\Student** as **ProjectXXXX**(This should be your Project name), by entering the following command in your powershell.
+1.  Create a folder in **C:\Users\Admin** as **ProjectXXXX**, by entering the following command in your powershell.
 
 
 ```
@@ -251,12 +253,13 @@ mkdir ProjectXXXX
 ![](./media/image31.png)
 
 
-2.  In your terminal enter the following command to navigate to the new folder location **cd C:\Users\Student\ProjectXXXX**
+2.  In your terminal enter the following command to navigate to the new folder location **cd C:\Users\Admin\ProjectXXXX**
 
 ![](./media/image32.png)
 
 
-3.  Create a virtual environment using the following commands,
+3.  If you already have Python 3.10 or higher installed, you can create a virtual environment using the following commands:
+
 
 ```
 py -3 -m venv .venv
@@ -282,7 +285,7 @@ Activating the Python environment means that when you run python or pip from
 
 Install **azure-ai-projects(preview) and azure-ai-inference (preview)**,along with other required packages.
 
-5.  Create a file named +++**requirements.txt**+++ in your **ProjectXXXX** folder and add the following packages. After adding packages go to **files** and select **Save All**:
+5.  Create a file named +++**requirements.txt**+++ in your **ProjectXXXX** folder and add the following packages. After adding packages go to files and select **Save All**:
 
 
 ```
@@ -497,13 +500,14 @@ CompleteExercise 1 - Create resources for building a custom chat application wit
 
 The goal with this RAG-based application is to ground the model responses in your custom data. You use an Azure AI Search index that stores vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
 
-1.  Create an +++**assets**+++ directory in your project folder\src.
+1.  Create an +++**assets**+++
+2.   directory in your project folder\src.
 
 
 ![](./media/image50.png)
 
 
-2.  Copy **products.csv** file from Lab files and paste it in **ProjectXXXX/src/assets** folder.
+2.  Copy **products.csv** file from Lab files and paste it in +++**Project0612/src/assets**+++ folder.
 
 ![](./media/image51.png)
 
@@ -1227,6 +1231,13 @@ pip install azure-monitor-opentelemetry
 ![](./media/image78.png)
 
 
+3.  Add the --enable --telemetry flag when you use the chat_with_products.py script:
+
+
+```
+python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable--telemetry
+```
+
 
 ## Exercise 3: Evaluate a custom chat application with the Azure AI Foundry SDK
 
@@ -1468,7 +1479,7 @@ python evaluate.py
 ![](./media/image90.png)
 
 
-### Task 5: Interpret the evaluation output
+### task 5: Interpret the evaluation output
 
 In the console output, you see an answer for each question, followed by a table with summarized metrics. (You might see different columns in your output.)
 
@@ -1533,24 +1544,8 @@ You can also look at the individual rows and see metric scores per row, and view
 
 ![](./media/image92.png)
 
-
-For more information about evaluation results in AI Foundry portal, see How to view evaluation results in AI Foundry portal.
-
-### Task 7: Iterate and improve(Optional)
-
-Notice that the responses are not well grounded. In many cases, the model replies with a question rather than an answer. This is a result of the prompt template instructions.
-
-- In your **assets/grounded_chat.prompty** file, find the sentence "If the question is related to outdoor/camping gear and clothing but vague, ask for clarifying questions instead of referencing documents."
-
-- Change the sentence to "If the question is related to outdoor/camping gear and clothing but vague, try to answer based on the reference documents, then ask for clarifying questions."
-
-- Save the file and re-run the evaluation script.
-
-Try other modifications to the prompt template, or try different models, to see how the changes affect the evaluation results.
-
-
 **Summary:**
 
-In this lab, we have learnt to build, evaluate and deploy a RAG based application.
-
-
+In this lab, we have learnt to build, evaluate, and deploy a
+Retrieval-Augmented Generation (RAG)-based agent using the Azure AI
+Foundry SDK.
