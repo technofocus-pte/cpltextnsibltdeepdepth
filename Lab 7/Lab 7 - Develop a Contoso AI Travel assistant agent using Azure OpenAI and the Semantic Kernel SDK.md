@@ -32,60 +32,158 @@ The solution aims to enhance user experience by providing personalized
 and responsive travel assistance. It automates common travel tasks to
 optimize workflows and streamline travel planning processes.
 
-## Exercise 1: Cloning and configuring the AI Travel Agent Project with Azure OpenAI Services
+## Exercise 1: Understand the VM and the credentials
 
-In this exercise, you will setup your project folder in
-Visual Studio Code and configure it to integrate with Azure OpenAI
-Services. By following the steps, you will learn how to set up a local
-development environment, modify project files, and prepare the
-application for execution using your Azure OpenAI deployment details.
+In this exercise, we will identify and understand the credentials that
+we will be using throughout the lab.
 
-**Important:** You must have .NET Framework 8.0 installed and a GitHub
-account to complete these steps.
+1.  **Instructions** tab hold the lab guide with the instructions to be
+    followed throughout the lab.
 
-1. Open command line editor and execute the gien below command one by one.
+2.  **Resources** tab has got the credentials that will be needed for
+    executing the lab.
 
-    ```
-    dotnet nuget list source
-    ```
-    
-    ```
-    dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
-    ```
+    - **URL** – URL to the Azure portal
 
-    ![](./media/image1a.png)
+    - **Subscription** – This is the **ID** of the **subscription** assigned
+    to you
 
+    - **Username** – The **user id** with which you need to **login** to the
+    **Azure services**.
 
-1. From **C:\LabFiles**, right click on the AITravelAgent folder and select **open with code** folder will open in VS Code or you can open VS code go to files and click on open folder. Choose the folder from lab file **AITravelAgent** and open it.
+    - **Password** – **Password** to the **Azure login**.
 
-    ![](./media/add.png)
+    Let us call this Username and password as **Azure login credentials**. We will use these creds wherever we mention **Azure login credentials**.
 
+    - **Resource Group** – The **Resource group** assigned to you.
 
-2.  In the Explorer panel, navigate to the **AITravelAgent/Starter** folder. Right-click the folder and select **Open in Integrated Terminal**.
+    >[!Alert] **Important**: Make sure you create all your resources under this Resource group
 
-    ![](./media/image8.png)
+    ![A screenshot of a computer Description automatically generated](./media/image1.png)
 
+3.  **Help** tab holds the Support information. The **ID** value here is
+    the **Lab instance ID** which will be used during the lab execution.
 
-3.  In the Explorer panel, expand the Starter folder, and you should see the **Plugins folder, Prompts folder, and Program.cs** file.
+    ![A screenshot of a computer Description automatically generated](./media/image2.png)
+
+## Exercise 2: Create Azure OpenAI resource and model deployment
+
+1.  Login to +++**https://portal.azure.com**+++ using the Azure login
+    credentials. Search for +++**Azure OpenAI**+++ from the search bar
+    and select it.
+
+    ![A screenshot of a computer Description automatically generated](./media/image4.png)
+
+2.  Select **+ Create**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image5.png)
+
+3.  Fill in the below details in the **Basics** tab and select **Next**.
+
+    - Subscription – Select your assigned **subscription**
+
+    - Resource group – Select the **Resource group** assigned to you
+
+    - Region – Select your nearest **region** (East US 2 is being used here)
+
+    - Name – **+++AOAI@lab.LabInstance.Id+++** 
+
+    - Pricing tier – **Standard**
+
+    ![A screenshot of a computer Description automatically generated](./media/image6.png)
+
+4.  Accept the defaults in the **Network** and **Tags** pages and click
+    on **Create** in the **Review + submit** page.
+
+    ![A screenshot of a computer Description automatically generated](./media/image7.png)
+
+5.  Once created, click on **Go to resource**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image8.png)
+
+6.  Select **Keys and Endpoint** under **Resource Management**. Copy the
+    **Key 1** and the **Endpoint** values to a notepad for future use in
+    this lab.
 
     ![](./media/image9.png)
 
+7.  From the Azure OpenAI resource **Overview** page, select **Go to
+    Azure AI Foundry portal**.
 
-4.  Open the **Starter/Program.cs** file and update the following variables with your Azure OpenAI Services deployment name, API key, and endpoint. After making the changes, press Ctrl + S to save the file:
+    ![A screenshot of a computer Description automatically generated](./media/image10.png)
 
-    - **string yourDeploymentName** = +++"gpt-35-turbo-16k"+++;
+8.  From the left pane, select **Deployments**.
 
-    - **string yourEndpoint** = "Which we created in Lab 3";
+    ![A screenshot of a computer Description automatically generated](./media/image11.png)
 
-    - **string yourKey** = "Which we created in Lab 3";
+9.  Select **+ Deploy model** -\> **Deploy base model**
 
-    > **Note:** For the API key and endpoint, refer to the AI Foundry and the Lab 3 project overview section.
+    ![A screenshot of a computer Description automatically generated](./media/image12.png)
 
-    ![](./media/image10.png)
+10. Search for and select +++**gpt-35-turbo-16k**+++. Click on
+    **Confirm**.
 
-    ![](./media/image11.png)
+    ![A screenshot of a chat Description automatically generated](./media/image13.png)
 
-## Exercise 2: Creating and Testing a Currency Converter Plugin with Semantic Kernel
+11. Accept the defaults and select **Deploy**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image14.png)
+
+## Exercise 3: Setting up the AI Travel Agent Project with Azure OpenAI Services
+
+In this exercise, you will setup your project folder in Visual Studio
+Code and configure it to integrate with Azure OpenAI Services. By
+following the steps, you will learn how to set up a local development
+environment, modify project files, and prepare the application for
+execution using your Azure OpenAI deployment details.
+
+1.  Open the **Command Prompt.**
+
+    ![A screenshot of a computer Description automatically generated](./media/image15.png)
+
+2.  Execute the below commands one by one.
+
+    +++dotnet nuget list source+++
+
+    +++dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org+++
+
+    ![A screenshot of a computer Description automatically generated](./media/Picture8.png)
+    
+4.  Open Visual Studio Code. Select **File** -\> **Open folder**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image16.png)
+
+5.  Navigate to **C:\LabFiles** and select **AITravelAgent** folder and
+    click **Select Folder**. The folder will open in VS Code.
+
+    >[!Note] **Note:** Trust the contents if prompted.
+    
+    ![A screenshot of a computer Description automatically generated](./media/image17.png)
+
+6.  In the Explorer pane, navigate to the **AITravelAgent/Starter**
+    folder. Right-click the folder and select **Open in Integrated
+    Terminal**.
+
+    ![A screenshot of a computer Description automatically generated](./media/image18.png)
+
+7.  In the Explorer panel, expand the Starter folder, and you should see
+    the Plugins folder, Prompts folder, and Program.cs file.
+
+    ![A screenshot of a computer Description automatically generated](./media/image19.png)
+
+8.  Open the **Starter/Program.cs** file and update the following variables
+    with your Azure OpenAI Services deployment name, API key, and
+    endpoint. After making the changes, press Ctrl + S to save the file:
+
+    -   string yourDeploymentName = +++**gpt-35-turbo-16k**+++
+
+    -   string yourEndpoint = The Azure OpenAI resource Endpoint value we saved earlier
+
+    -   string yourKey = The Key1 of the AOAI resource that we saved earlier
+
+    ![](./media/image20.png)
+
+## Exercise 4: Creating and Testing a Currency Converter Plugin with Semantic Kernel
 
 In this exercise, you will create a currency converter plugin using
 Semantic Kernel. You will write and test a function that converts an
@@ -94,39 +192,38 @@ This exercise will help you understand how to build and invoke custom
 plugins, utilize decorators for functionality and descriptions, and
 integrate plugins into a larger application.
 
-**Important:** You need to complete the Setup instructions in the previous exercise, Prepare, before you begin this exercise.
+>[!Alert] **Important:** Errors that appear in the VS Code on adding the code in the following steps can be safely ignored. Make sure to follow the steps below.
 
-1.  Create a new file named +++**CurrencyConverter.cs**+++ in the **Stater/Plugins/ConvertCurrency** folder
+1.  Create a new file named +++CurrencyConverter.cs+++ in
+    the **Stater/Plugins/ConvertCurrency** folder
 
-    ![](./media/image12.png)
+    ![A screenshot of a computer Description automatically generated](./media/image21.png)
 
+2.  In the **CurrencyConverter.cs** file, add the following code to create a
+    plugin function
 
-2.  In the **CurrencyConverter.cs** file, add the following code to create a plugin function:
-
-
-```
-using Microsoft.SemanticKernel;
-using System.ComponentModel;
-using AITravelAgent;
-
-class CurrencyConverter
-{
-    [KernelFunction, 
-    Description("Convert an amount from one currency to another")]
-    public static string ConvertAmount(
+    ```
+    using Microsoft.SemanticKernel;
+    using System.ComponentModel;
+    using AITravelAgent;
+    
+    class CurrencyConverter
     {
-        var currencyDictionary = Currency.Currencies;
+        [KernelFunction, 
+        Description("Convert an amount from one currency to another")]
+        public static string ConvertAmount(
+        {
+            var currencyDictionary = Currency.Currencies;
+        }
     }
-}
-```
+    ```
 
+    ![](./media/image22.png)
 
-![](./media/image13.png)
+    In this code, you use the KernelFunction decorator to declare your native function. You also use the Description decorator to add a description of what the function does. You can use Currency.Currencies to get a dictionary of currencies and their exchange rates. Next, add some logic to convert a given amount from one currency to another.
 
-In this code, you use the KernelFunction decorator to declare your native function. You also use the Description decorator to add a description of what the function does. You can use Currency.Currencies to get a dictionary of currencies and their exchange rates. Next, add some logic to convert a given amount from one currency to another.
-
-3.  Modify your **ConvertAmount** function, the full code is looks like:
-
+3.  Modify your **ConvertAmount** function. Replace the existing code with
+    the below code.
 
 ```
 using Microsoft.SemanticKernel;
@@ -162,56 +259,53 @@ class CurrencyConverter
         }
     }
 }
-```
-
+```  
 
 In this code, you use the Currency.Currencies dictionary to get the Currency object for the target and base currencies. You then use the Currency object to convert the amount from the base currency to the target currency. Finally, you return a string with the converted amount. Next, let's test your plugin.
 
-![](./media/image14.png)
+![](./media/image23.png)
 
+>[!Note] **Note:** When using the Semantic Kernel SDK in your own projects, you don't need to hardcode data into files if you have access to RESTful APIs. Instead, you can use the Plugins.Core.HttpClient plugin to retrieve data from APIs.
 
-> **Note:** When using the Semantic Kernel SDK in your own projects, you don't need to hardcode data into files if you have access to RESTful APIs. Instead, you can use the Plugins.Core.HttpClient plugin to retrieve data from APIs.
+4.  In the Starter/Program.cs file, import and invoke your new plugin
+    function with the following code. (Delete the code below var kernel
+    = builder.Build(); and replace it with the given below code. )
 
-4.  In the **Starter/Program.cs** file, import and invoke your new plugin function with the following code. (Delete the code below var kernel = builder.Build(); and replace it with the given below code. )
+    ```
+    kernel.ImportPluginFromType<CurrencyConverter>();
+    kernel.ImportPluginFromType<ConversationSummaryPlugin>();
+    var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
+    
+    var result = await kernel.InvokeAsync("CurrencyConverter", 
+        "ConvertAmount", 
+        new() {
+            {"targetCurrencyCode", "USD"}, 
+            {"amount", "52000"}, 
+            {"baseCurrencyCode", "VND"}
+        }
+    );
+    
+    Console.WriteLine(result);
+    ```
 
+    In this code, you use the ImportPluginFromType method to import your plugin. Then you use the InvokeAsync method to invoke your plugin function. The InvokeAsync method takes the plugin name, function name, and a dictionary of parameters. Finally, you print the result to the console. Next, run the code to make sure it's working.
 
-```
-kernel.ImportPluginFromType<CurrencyConverter>();
-kernel.ImportPluginFromType<ConversationSummaryPlugin>();
-var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
-
-var result = await kernel.InvokeAsync("CurrencyConverter", 
-    "ConvertAmount", 
-    new() {
-        {"targetCurrencyCode", "USD"}, 
-        {"amount", "52000"}, 
-        {"baseCurrencyCode", "VND"}
-    }
-);
-
-Console.WriteLine(result);
-```
-
-
-In this code, you use the ImportPluginFromType method to import your plugin. Then you use the InvokeAsync method to invoke your plugin function. The InvokeAsync method takes the plugin name, function name, and a dictionary of parameters. Finally, you print the result to the console. Next, run the code to make sure it's working.
-
-![](./media/image15.png)
-
+    ![](./media/image24.png)
 
 5.  Go to files from top bar and select **Save all.**
 
-    ![](./media/image16.png)
+    ![](./media/image25.png)
 
+6.  In the terminal, enter +++**dotnet run**+++. You should see the following
+    output:
 
-6.  In the terminal, enter +++**dotnet run**+++. You should see the following output:
+    Output: $52000 VND is approximately $2.13 in US Dollars (USD)
 
-    Output: \$52000 VND is approximately \$2.13 in US Dollars (USD)
+    ![](./media/image26.png)
 
-    ![](./media/image17.png)
+    Now that your plugin is working correctly, let's create a natural language prompt that can detect what currencies and amount the user wants to convert.
 
-Now that your plugin is working correctly, let's create a natural language prompt that can detect what currencies and amount the user wants to convert.
-
-## Exercise 3: Configuring a Target Currency Prompt for Semantic Processing
+## Exercise 5: Configuring a Target Currency Prompt for Semantic Processing
 
 In this exercise, you will configure a prompt system to identify target
 currencies, base currencies, and amounts from user input. By creating
@@ -219,84 +313,82 @@ and setting up configuration and prompt files, you will define how the
 AI interprets and processes natural language requests for currency
 conversions.
 
-1.  Open your project directory in Visual Studio Code or File Explorer and locate the **Starter/Prompt** folder. Navigate into this folder to prepare for the next steps.
+1.  From Visual Studio Code, locate the **Starter/Prompts** folder. Navigate
+    into this folder to prepare for the next steps.
 
-    ![](./media/image18.png)
+    ![](./media/image27.png)
 
+2.  Inside the **Starter/Prompts** folder, create a new folder named
+    +++**GetTargetCurrencies**+++. This folder will contain all the
+    files related to this exercise.
 
-2.  Inside the **Starter/Prompt** folder, create a new folder named +++**GetTargetCurrencies**+++. This folder will contain all the files related to this exercise.
+    ![](./media/image28.png)
 
-    ![](./media/image19.png)
+3.  Within the **GetTargetCurrencies** folder, create a new file named
+    +++**config.json**+++.
 
+    ![](./media/image29.png)
 
-3.  Within the **GetTargetCurrencies** folder, create a new file named +++**config.json**+++.
+4.  Open the newly created **config.json** file in Visual Studio Code.
+    Copy and paste the following code into the file.
 
-    ![](./media/image20.png)
+    ```
+    {
+        "schema": 1,
+        "type": "completion",
+        "description": "Identify the target currency, base currency, and amount to convert",
+        "execution_settings": {
+            "default": {
+                "max_tokens": 800,
+                "temperature": 0
+            }
+        },
+        "input_variables": [
+            {
+                "name": "input",
+                "description": "Text describing some currency amount to convert",
+                "required": true
+            }
+        ]
+    }
+    ```
 
+    ![](./media/image30.png)
 
-4.  Open the newly created **config.json** file in Visual Studio Code. Copy and paste the following code into the file:
+    Save the file by pressing **Ctrl + S**. This configuration defines how the AI system should interpret and process user input.
 
+5.  Still inside the **GetTargetCurrencies** folder, create another new
+    file named +++**skprompt.txt**+++.
 
-```
-{
-    "schema": 1,
-    "type": "completion",
-    "description": "Identify the target currency, base currency, and amount to convert",
-    "execution_settings": {
-        "default": {
-            "max_tokens": 800,
-            "temperature": 0
-        }
-    },
-    "input_variables": [
-        {
-            "name": "input",
-            "description": "Text describing some currency amount to convert",
-            "required": true
-        }
-    ]
-}
-```
+    ![](./media/image31.png)
 
+6.  Open the **skprompt.txt** file in your text editor and paste the
+    following content:
 
-![](./media/image21.png)
+    ```
+    <message role="system">Identify the target currency, base currency, and 
+    amount from the user's input in the format target|base|amount</message>
+    
+    For example: 
+    
+    <message role="user">How much in GBP is 750.000 VND?</message>
+    <message role="assistant">GBP|VND|750000</message>
+    
+    <message role="user">How much is 60 USD in New Zealand Dollars?</message>
+    <message role="assistant">NZD|USD|60</message>
+    
+    <message role="user">How many Korean Won is 33,000 yen?</message>
+    <message role="assistant">KRW|JPY|33000</message>
+    
+    <message role="user">{{$input}}</message>
+    <message role="assistant">target|base|amount</message>
+    ```
 
-Save the file by pressing Ctrl + S. This configuration defines how the AI system should interpret and process user input.
+    ![](./media/image32.png)
 
-5.  Still inside the **GetTargetCurrencies** folder, create another new file named +++**skprompt.txt**+++.
+    Save the file by pressing **Ctrl + S**. This script defines the prompt logic for processing currency conversion requests.
 
-    ![](./media/image22.png)
-
-
-6.  Open the **skprompt.txt** file in your text editor and paste the following content:
-
-
-```
-<message role="system">Identify the target currency, base currency, and 
-amount from the user's input in the format target|base|amount</message>
-
-For example: 
-
-<message role="user">How much in GBP is 750.000 VND?</message>
-<message role="assistant">GBP|VND|750000</message>
-
-<message role="user">How much is 60 USD in New Zealand Dollars?</message>
-<message role="assistant">NZD|USD|60</message>
-
-<message role="user">How many Korean Won is 33,000 yen?</message>
-<message role="assistant">KRW|JPY|33000</message>
-
-<message role="user">{{$input}}</message>
-<message role="assistant">target|base|amount</message>
-```
-
-
-
-![](./media/image23.png)
-
-Save the file by pressing **Ctrl + S**. This script defines the prompt logic for processing currency conversion requests.
-
-## Exercise 4: Configuring a Prompt System for Travel Activity Recommendations
+## Exercise 6: Configuring a Prompt System for Travel Activity Recommendations
 
 In this exercise, you will set up and customize a prompt system to
 suggest activities and points of interest based on a user's travel
@@ -304,72 +396,70 @@ destination. By editing configuration and prompt files, you will define
 the system's behavior, tone, and input requirements to generate
 personalized and creative travel recommendations.
 
-1.  Open your project directory in Visual Studio Code or File Explorer. Navigate to the folder **Starter/Prompts/SuggestActivities**.
+1.  From Visual Studio Code, navigate to the folder
+    **Starter/Prompts/SuggestActivities**.
 
-    ![](./media/image24.png)
+    ![](./media/image33.png)
 
+2.  Locate the **config.json** file inside the SuggestActivities folder
+    and open it.
 
-2.  Locate the **config.json** file inside the SuggestActivities folder and open it.
+    ![](./media/image34.png)
 
-    ![](./media/image25.png)
+3.  Replace the existing code in the **config.json** file with the
+    following:
 
-
-3.  Replace the existing code in the **config.json** file with the following:
-
-
-```
-{
-    "schema": 1,
-    "type": "completion",
-    "description": "Suggest activities and points of interest at a given destination",
-    "execution_settings": {
-        "default": {
-            "max_tokens": 4000,
-            "temperature": 0.5
-        }
-    },
-    "input_variables": [
-        {
-            "name": "history",
-            "description": "Some background information about the user",
-            "required": false
+    ```
+    {
+        "schema": 1,
+        "type": "completion",
+        "description": "Suggest activities and points of interest at a given destination",
+        "execution_settings": {
+            "default": {
+                "max_tokens": 4000,
+                "temperature": 0.5
+            }
         },
-        {
-            "name": "destination",
-            "description": "The destination a user wants to visit",
-            "required": true
-        }
-    ]
-  }
-```
+        "input_variables": [
+            {
+                "name": "history",
+                "description": "Some background information about the user",
+                "required": false
+            },
+            {
+                "name": "destination",
+                "description": "The destination a user wants to visit",
+                "required": true
+            }
+        ]
+      }
+    ```
 
+![](./media/image35.png)
 
-![](./media/image26.png)
+Save the file after making the changes by pressing **Ctrl + S**. This file configures the system to process user inputs and generate suggestions for activities.
 
-Save the file after making the changes by pressing Ctrl + S. This file configures the system to process user inputs and generate suggestions for activities.
+4.  Stay within the SuggestActivities folder and locate the
+    **skprompt.txt** file. Open this file in editor.
 
-4.  Stay within the SuggestActivities folder and locate the **skprompt.txt** file. Open this file in editor.
+    ![](./media/image36.png)
 
-    ![](./media/image27.png)
+5.  Replace the existing content of **skprompt.txt** with the following
+    text:
 
+    ```
+    You are an experienced travel agent. 
+    You are helpful, creative, and very friendly. 
+    Consider the traveler's background: {{$history}}
+    The traveler would like some activity recommendations for their trip to {{$destination}}.
+    Please suggest a list of things to do, see, and points of interest.
+    ```
 
-5.  Replace the existing content of **skprompt.txt** with the following text:
+    ![](./media/image37.png)
 
+    Save the file by pressing **Ctrl + S**. This script sets the behaviour and tone of the system when generating activity recommendations.
 
-```
-You are an experienced travel agent. 
-You are helpful, creative, and very friendly. 
-Consider the traveler's background: {{$history}}
-The traveler would like some activity recommendations for their trip to {{$destination}}.
-Please suggest a list of things to do, see, and points of interest.
-```
-
-
-![](./media/image28.png)
-
-Save the file by pressing **Ctrl + S**. This script sets the behaviour and tone of the system when generating activity recommendations.
-
-## Exercise 5: Configuring the Main Program for AI Workflow
+## Exercise 7: Configuring the Main Program for AI Workflow
 
 In this exercise, you will configure the main Program.cs file to
 integrate with Azure OpenAI services and the Microsoft Semantic Kernel.
@@ -378,15 +468,15 @@ currency conversion, activity suggestions, and travel recommendations.
 This setup establishes a robust AI-powered workflow for user interaction
 and intent recognition, leveraging plugins and prompt-based logic.
 
-1.  Open your project folder in Visual Studio Code or your preferred code editor. Navigate to the **Starter/Program.cs** file and open it for editing.
+1.  From your project in Visual Studio Code, navigate to the
+    **Starter/Program.cs** file and open it for editing.
 
-![](./media/image29.png)
+    ![](./media/image38.png)
 
+2.  Replace the entire content of the **Program.cs** file with the
+    following code and then **press ctrl + S** to save the code.
 
-2.  Replace the entire content of the **Program.cs** file with the following code and then **press cntrl + S** to save the code.
-
-    > **Note:** After replacing code, please again add endpoint, Key and deployment name in the respected part of code.
-
+    >[!Note] **Note:** After replacing code, please again add endpoint, **Key** and **deployment** name as done earlier.
 
 ```
 using System.Text;
@@ -490,24 +580,36 @@ do {
 while (!string.IsNullOrWhiteSpace(input));
 ```
 
-
 The program begins by importing essential namespaces such as System.Text for text handling and Microsoft.SemanticKernel for AI-powered conversational workflows. It integrates Microsoft Azure OpenAI services through the Microsoft.SemanticKernel.Connectors.OpenAI namespace, allowing communication with the GPT model (gpt-35-turbo-16k). The configuration involves setting up variables like yourDeploymentName, yourEndpoint, and yourApiKey to authenticate and connect to the Azure OpenAI endpoint.
 
-The Semantic Kernel is initialized using a builder pattern. Plugins for additional functionalities, such as CurrencyConverter and ConversationSummaryPlugin, are imported. Furthermore, prompts stored in a directory (Prompts) are dynamically loaded to facilitate intent recognition and task execution.
+   The Semantic Kernel is initialized using a builder pattern. Plugins for additional functionalities, such as CurrencyConverter and ConversationSummaryPlugin, are imported. Furthermore, prompts stored in a directory (Prompts) are dynamically loaded to facilitate intent recognition and task execution.
 
-The main loop of the program interacts with the user by asking for input and determining the intent using the GetIntent prompt. Based on the intent, the program branches into different functionalities:
+ The main loop of the program interacts with the user by asking for input and determining the intent using the GetIntent prompt. Based on the intent, the program branches into different functionalities:
 
-1.	Currency Conversion: If the intent is to convert currency, the program extracts details (target currency, base currency, and amount) using the GetTargetCurrencies prompt. It then calls the CurrencyConverter plugin's ConvertAmount method and displays the result.
+1.  **Currency Conversion**: If the intent is to convert currency, the
+    program extracts details (target currency, base currency, and
+    amount) using the GetTargetCurrencies prompt. It then calls the
+    CurrencyConverter plugin's ConvertAmount method and displays the
+    result.
 
-2.	Destination Suggestions: If the intent is to suggest destinations, the program uses the Semantic Kernel's InvokePromptAsync method to provide recommendations based on user input.
+2.  **Destination Suggestions**: If the intent is to suggest
+    destinations, the program uses the Semantic Kernel's
+    InvokePromptAsync method to provide recommendations based on user
+    input.
 
-3.	Activity Suggestions: This functionality leverages conversation summarization through the ConversationSummaryPlugin to provide contextually relevant activity suggestions. The conversation history is maintained using a StringBuilder object for continuous dialogue flow.
+3.  **Activity Suggestions**: This functionality leverages conversation
+    summarization through the ConversationSummaryPlugin to provide
+    contextually relevant activity suggestions. The conversation history
+    is maintained using a StringBuilder object for continuous dialogue
+    flow.
 
-4.	Helpful Phrases and Translation: For intents like "HelpfulPhrases" or "Translate," the kernel automatically invokes relevant functions based on the input and settings.
+4.  **Helpful Phrases and Translation**: For intents like
+    "HelpfulPhrases" or "Translate," the kernel automatically invokes
+    relevant functions based on the input and settings.
 
 Other user intents are handled generically by invoking the prompt system, ensuring flexibility in responses. The interaction loop continues until the user provides no input (an empty string).
 
-## Exercise 6: Testing the Application
+## Exercise 8: Testing the Application
 
 In this exercise, you will test the functionality of your application by
 running queries for currency conversion, destination suggestions, and
@@ -518,23 +620,28 @@ working as intended and providing accurate, context-sensitive outputs.
 
 1.  **Run the Application**
 
-    - Right-click on the Starter folder and select **Open in Integrated Terminal**.
+    - Right-click on the Starter folder and select **Open in Integrated
+      Terminal**.
 
-    - In the terminal, enter the following command to execute the application
+    - In the terminal, enter the following command to execute the
+      application:
 
-    - +++dotnet run+++
+    +++dotnet run+++
 
 2.  **Test Currency Conversion**
 
-    - When prompted, enter a currency conversion query, such as: +++**How much is 60 USD in New Zealand dollars?**+++
+    - When prompted, enter a currency conversion query, such as:  
+      +++How much is 60 USD in New Zealand dollars?+++
 
-    - Expected Output: **\$60 USD is approximately \$97.88 in New Zealand Dollars (NZD).**
+    - Expected Output:  
+      "$60 USD is approximately $97.88 in New Zealand Dollars (NZD)."
+
+    ![](./media/img56.png)
 
 3.  **Test Destination Suggestions**
 
     - Enter a query for destination suggestions, providing context. For
       example:  
-      
       +++I'm planning an anniversary trip with my spouse, but they are currently using a wheelchair and accessibility is a must. What are some destinations that would be romantic for us?+++
 
     - Expected Output: A list of accessible romantic destinations, such
@@ -551,7 +658,6 @@ working as intended and providing accurate, context-sensitive outputs.
 
     - Enter a query for activity recommendations in a specific
       destination. For example:  
-      
       +++What are some things to do in Barcelona?+++
 
     - Expected Output: Recommendations tailored to the destination, such
@@ -565,3 +671,24 @@ working as intended and providing accurate, context-sensitive outputs.
 
       3.  Discover the Picasso Museum: A wheelchair-accessible art
           venue.
+
+## Exercise 9: Clean up the resources
+
+1.  From the Azure portal (+++https://portal.azure.com+++), select the
+    Resource group that is assigned to you.
+
+2.  Select the resources under it and click on **Delete**.
+
+    ![](./media/image39.png)
+
+3.  Type +++delete+++ in the confirm deletion text box and click on
+    **Delete**.
+
+4.  Select **Delete** in the Delete confirmation dialog box.
+
+5.  Look for a resource deleted confirmation notification.
+
+**Summary:**
+
+In this lab, we have learnt to create an agent using Semantic Kernel and
+Azure OpenAI Service.
