@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "dgSpecHash": "6cm6FlW9SXU=",
+  "success": true,
+  "projectFilePath": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/GHCAgent.Core.csproj",
+  "expectedPackageFiles": [
+    "/Users/lokinfey/.nuget/packages/azure.ai.inference/1.0.0-beta.2/azure.ai.inference.1.0.0-beta.2.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/azure.ai.projects/1.0.0-beta.2/azure.ai.projects.1.0.0-beta.2.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/azure.core/1.44.1/azure.core.1.44.1.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/azure.identity/1.13.2/azure.identity.1.13.2.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/microsoft.identity.client/4.67.2/microsoft.identity.client.4.67.2.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/microsoft.identity.client.extensions.msal/4.67.2/microsoft.identity.client.extensions.msal.4.67.2.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/microsoft.identitymodel.abstractions/6.35.0/microsoft.identitymodel.abstractions.6.35.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.clientmodel/1.1.0/system.clientmodel.1.1.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.memory.data/6.0.0/system.memory.data.6.0.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.security.cryptography.protecteddata/4.5.0/system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.text.encodings.web/6.0.0/system.text.encodings.web.6.0.0.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.text.json/6.0.10/system.text.json.6.0.10.nupkg.sha512",
+    "/Users/lokinfey/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}

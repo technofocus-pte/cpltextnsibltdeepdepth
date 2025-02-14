@@ -1,0 +1,175 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Orchestration.API/GHCAgent.Orchestration.API.csproj": {}
+  },
+  "projects": {
+    "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/GHCAgent.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/GHCAgent.Core.csproj",
+        "projectName": "GHCAgent.Core",
+        "projectPath": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/GHCAgent.Core.csproj",
+        "packagesPath": "/Users/lokinfey/.nuget/packages/",
+        "outputPath": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/lokinfey/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Azure.AI.Inference": {
+              "target": "Package",
+              "version": "[1.0.0-beta.2, )"
+            },
+            "Azure.AI.Projects": {
+              "target": "Package",
+              "version": "[1.0.0-beta.2, )"
+            },
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.13.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Orchestration.API/GHCAgent.Orchestration.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Orchestration.API/GHCAgent.Orchestration.API.csproj",
+        "projectName": "GHCAgent.Orchestration.API",
+        "projectPath": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Orchestration.API/GHCAgent.Orchestration.API.csproj",
+        "packagesPath": "/Users/lokinfey/.nuget/packages/",
+        "outputPath": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Orchestration.API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/lokinfey/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/GHCAgent.Core.csproj": {
+                "projectPath": "/Users/lokinfey/Desktop/MultiAIAgent/ghext/GHCAgent/GHCAgent.Core/GHCAgent.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.13.2, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "Microsoft.SemanticKernel.Abstractions": {
+              "target": "Package",
+              "version": "[1.33.0, )"
+            },
+            "Microsoft.SemanticKernel.Agents.Core": {
+              "target": "Package",
+              "version": "[1.33.0-alpha, )"
+            },
+            "Microsoft.SemanticKernel.Agents.OpenAI": {
+              "target": "Package",
+              "version": "[1.33.0-alpha, )"
+            },
+            "Microsoft.SemanticKernel.Connectors.AzureOpenAI": {
+              "target": "Package",
+              "version": "[1.33.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
