@@ -5,14 +5,19 @@ Welcome to the lab guide repository for the course **Build and Extend Your Own A
 
 ## Labs Included
 
-### 1. Build a Declarative Agent for Microsoft 365 Copilot Using Teams Toolkit
+### Lab 1 - Streamlining IT Support Operations with Autonomous Copilot Agent using Copilot Studio
 
-### 2. Streamlining IT Support Operations with Autonomous Copilot Agent at Contoso Solutions
+### Lab 2: Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit
 
-### 3. Creating a Custom AI Agent with Azure AI Foundry and Search Integration
+### Lab 3 - Build your first custom Microsoft Graph connector
 
-### 4. Build, Evaluate, and Deploy a RAG-Based Agent with the Azure AI Foundry SDK
+### Lab 4 - Build, evaluate and deploy a RAG-based agent with the Azure AI Foundry SDK
 
-### 5. Develop a Contoso AI Travel Assistant Agent Using Azure OpenAI and the Semantic Kernel SDK
+### Lab 5: Build a Custom Contoso Agent to Chat with Your Data Using Teams AI Library and Teams Toolkit
+
+### Lab 6 - Creating a Custom AI Agent with Azure AI Foundry and search integration
+
+### Lab 7 - Develop a Contoso AI Travel assistant agent using Azure OpenAI and the Semantic Kernel SDK
+
 
 Explore the labs to unleash the full potential of building and extending AI agents with pro-code capabilities!
