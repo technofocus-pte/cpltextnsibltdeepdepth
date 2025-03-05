@@ -69,8 +69,9 @@ execution.
 
 To create a project in Azure AI Foundry, follow these steps:
 
-1.  Login to the Azure AI Foundry at +++https://ai.azure.com/+++
-    **sign in** using the **Azure login credentials**.
+1.  Login to the Azure AI Foundry at +++https://ai.azure.com/+++.
+    Select **Sign in** and login using +++@lab.CloudPortalCredential(User1).Username+++ and
+    +++@lab.CloudPortalCredential(User1).Password+++.
 
     ![](./media/image3.png)
 
@@ -127,7 +128,7 @@ portal model catalog
 
     ![](./media/image10.png)
 
-2.  Select the **gpt-4o-mini** model from the list of models. You can
+2.  Select the +++**gpt-4o-mini**+++ model from the list of models. You can
     use the search bar to find it.
 
     ![A screenshot of a computer Description automatically generated](./media/image11.png)
