@@ -70,21 +70,24 @@ execution.
 To create a project in Azure AI Foundry, follow these steps:
 
 1.  Login to the Azure AI Foundry at +++https://ai.azure.com/+++.
-    Select **Sign in** and login using +++@lab.CloudPortalCredential(User1).Username+++ and
-    +++@lab.CloudPortalCredential(User1).Password+++.
+    Select **Sign in** and login using,
+    
+    - Username - +++@lab.CloudPortalCredential(User1).Username+++
+      
+    - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
     ![](./media/image3.png)
 
-2.  Select **+ Create project**.
+3.  Select **+ Create project**.
 
     ![](./media/image4.png)
 
-3.  Enter **+++RAGproj@lab.LabInstance.Id+++** as name for the project,
+4.  Enter **+++RAGproj@lab.LabInstance.Id+++** as name for the project,
     click on **Customize**.
 
     ![A screenshot of a computer Description automatically generated](./media/image5.png)
 
-4.  On the next page, enter the following details and click on **Next.**
+5.  On the next page, enter the following details and click on **Next.**
 
     -   Hub name - **+++hub@lab.LabInstance.Id+++**
 
@@ -98,17 +101,17 @@ To create a project in Azure AI Foundry, follow these steps:
 
     ![A screenshot of a computer Description automatically generated](./media/image6.png)
 
-5.  On the **Review and finish** page, click on **Create.**
+6.  On the **Review and finish** page, click on **Create.**
 
     ![A screenshot of a computer Description automatically generated](./media/image7.png)
 
-6.  The resource creation will take a few minutes.
+7.  The resource creation will take a few minutes.
 
     ![A screenshot of a computer Description automatically generated](./media/image8.png)
 
-7.  Close the pop-up windows, if any appears.
+8.  Close the pop-up windows, if any appears.
 
-8.  From the home page of the project, note down the **Project
+9.  From the home page of the project, note down the **Project
     connection string** in a notepad to be used in next task of this
     exercise.
 
