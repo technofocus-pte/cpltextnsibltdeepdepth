@@ -174,20 +174,16 @@ incorrect.](./media/image22.png)
       does not work, click on it and then use Shift+Right/Left arrow key
       to adjust the limit)
 
-    &nbsp;
-
     - **Content Filter**: defaultv2
 
-> ![A screenshot of a computer AI-generated content may be
-> incorrect.](./media/image23.png)
->
-> ![A screenshot of a computer AI-generated content may be
-> incorrect.](./media/image24.png)
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
 
 8.  You can check the deployment under **Shared resources** à
     **Deployments**
 
-![A screenshot of a computer AI-generated content may be
+    ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
 ### Task 2: Creating a storage account
@@ -195,7 +191,7 @@ incorrect.](./media/image25.png)
 1.  From the Azure portal, +++https://portal.azure.com/+++ Home page,
     search for and select +++Storage accounts+++.
 
-![A screenshot of a computer AI-generated content may be
+    ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
 2.  Click on **Create,** enter the following details and click
@@ -262,7 +258,7 @@ incorrect.](./media/image36.png)
 1.  From the Azure portal +++https://portal.azure.com/+++ Home page,
     search for and select +++**AI search**+++.
 
-![A screenshot of a computer AI-generated content may be
+    ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
 2.  Click on **+ Create** to create a new Azure AI Search resource.
