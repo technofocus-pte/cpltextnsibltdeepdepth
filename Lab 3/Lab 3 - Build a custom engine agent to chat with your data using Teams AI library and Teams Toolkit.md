@@ -607,6 +607,12 @@ incorrect.](./media/image71.png)
     
     ```
 
+    ```
+    Console.WriteLine("Sure, I can help with that.");
+    var otherIntentResult = await kernel.InvokePromptAsync(input);
+    Console.WriteLine(otherIntentResult);
+    break;
+    ```
 ## Conclusion
 
 By completing this lab, participants have gained hands-on experience in
