@@ -28,9 +28,9 @@ to develop a Multi-Agent solution using Azure AI Agent Service.
 1.  From a browser, open +++**https://ai.azure.com/**+++, click on
     **Sign in** and login using your **login** **credentials**
 
-    - User name – @lab.CloudPortalCredential(User1).Username
+    - User name – +++@lab.CloudPortalCredential(User1).Username+++
     
-    - Password – @lab.CloudPortalCredential(User1).Password
+    - Password – +++@lab.CloudPortalCredential(User1).Password+++
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image2.png)
@@ -39,7 +39,7 @@ incorrect.](./media/image2.png)
 
     ![](./media/image3.png)
 
-3.  Provide the Project name as +++**multiagent@lab.LabInstanceId**+++
+3.  Provide the Project name as +++**multiagent@lab.LabInstance.Id**+++
     and click on **Customize**.
 
     ![A screenshot of a computer project AI-generated content may be
@@ -48,7 +48,7 @@ incorrect.](./media/image4.png)
 4.  In the Customization pane, fill in the below details and select
     **Next**.
 
-    - Hub - +++hub@lab.LabInstanceId+++
+    - Hub - +++hub@lab.LabInstance.Id+++
     
     - Subscription – Select the **assigned subscription**
     
