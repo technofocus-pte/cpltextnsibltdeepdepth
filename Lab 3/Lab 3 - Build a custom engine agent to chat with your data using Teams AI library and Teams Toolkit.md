@@ -52,7 +52,7 @@ organizational workflows.
     | Subscription   |   Select the assigned subscription |
     |  Resource group  |  Select your assigned Resource Group  |
     | Region   |  East US 2  |
-    |  Name  |  +++ContosoAgent@lab.LabInstanceId+++  |
+    |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
     |  Pricing tier  |  Standard S0  |    
 
     ![A screenshot of a computer AI-generated content may be
@@ -136,7 +136,7 @@ incorrect.](./media/image15.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
 
-2.  Select the Azure OpenAI service **ContosoAgent@lab.LabInstanceId** that you created earlier.
+2.  Select the Azure OpenAI service **ContosoAgent@lab.LabInstance.Id** that you created earlier.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
 
@@ -273,7 +273,7 @@ incorrect.](./media/image37.png)
 
     -    Resource Group: Select your assigned Resource group
     
-    -    Service name: contoso-ai-search-@lab.LabInstanceId
+    -    Service name: contoso-ai-search-@lab.LabInstance.Id
     
     -    Location: Central US
 
@@ -288,7 +288,7 @@ incorrect.](./media/image37.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image41.png)
 
-4.  On contoso-ai-search-@lab.LabInstanceId overview, save **URL**
+4.  On contoso-ai-search-@lab.LabInstance.Id overview, save **URL**
     endpoint for future use. Then from left navigation bar select
     **key** and save **primary** and **secondary** **key** for future
     use.
@@ -315,13 +315,13 @@ incorrect.](./media/image37.png)
 
     -    Subscription - Select your subscription
     
-    -    Select Azure Blob storage resource – contosostorage@lab.LabInstanceId
+    -    Select Azure Blob storage resource – contosostorage@lab.LabInstance.Id
     
     -    Select storage container – source
     
-    -    Select Azure AI Search resource – contoso-ai-search-@lab.LabInstanceId
+    -    Select Azure AI Search resource – contoso-ai-search-@lab.LabInstance.Id
     
-    -    Index Name - contosoindex@lab.LabInstanceId
+    -    Index Name - contosoindex@lab.LabInstance.Id
     
     -    Indexer schedule - Once
 
