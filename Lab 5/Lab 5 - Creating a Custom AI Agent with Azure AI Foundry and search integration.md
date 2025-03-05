@@ -27,7 +27,7 @@ enhance user engagement through intuitive and efficient interactions.
 ## Task 1: Create an Azure AI Search resource
 
 1.  In a web browser, open the Azure
-    portal at +++<https://portal.azure.com>+++ and **Sign in** using
+    portal at +++https://portal.azure.com+++ and **Sign in** using
 
   - Username - +++@lab.CloudPortalCredential(User1).Username+++
   
@@ -58,7 +58,7 @@ enhance user engagement through intuitive and efficient interactions.
     - **Resource group**: Select the Resource group assigned to your
       subscription (ResourceGroup1)
 
-    - **Service name**: *+++*aisearch@lab.LabInstanceId+++
+    - **Service name**: +++aisearch@lab.LabInstance.Id+++
 
     - **Location**: Select **Canada East** region
 
@@ -66,22 +66,22 @@ enhance user engagement through intuitive and efficient interactions.
 
   ![A screenshot of a computer Description automatically generated](./media/image5.png)
 
-6.  Review the settings in the click on **Create**.
+6.  Review the settings and click on **Create**.
 
   ![A screenshot of a search service Description automatically generated](./media/image6.png)
 
 7.  Wait for your Azure AI Search resource deployment to be completed.
 
-  ![A screenshot of a computer Description automatically generated](./media/image7.png)
+   ![A screenshot of a computer Description automatically generated](./media/image7.png)
 
-  >[!Note] **Note:** Later, you’re going to create an Azure AI Hub (which includes an Azure OpenAI service) in the same region as your Azure AI Search resource. Azure OpenAI resources are constrained at the tenant level by regional quotas. In the event of a quota limit being reached later in the exercise, there’s a possibility you may need to create another Azure AI hub in a different region.
+   >[!Note] **Note:** Later, you’re going to create an Azure AI Hub (which includes an Azure OpenAI service) in the same region as your Azure AI Search resource. Azure OpenAI resources are constrained at the tenant level by regional quotas. In the event of a quota limit being reached later in the exercise, there’s a possibility you may need to create another Azure AI hub in a different region.
 
 ## Task 2: Create an Azure AI project
 
 1.  In a web browser, open **Azure AI Foundry portal** at +++https://ai.azure.com+++ and
     **sign in** using
 
-    - Username - <+++@lab.CloudPortalCredential(User1).Username>+++
+    - Username - +++@lab.CloudPortalCredential(User1).Username+++
     
     - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
@@ -95,7 +95,7 @@ enhance user engagement through intuitive and efficient interactions.
     ![](./media/image9.png)
 
 4.  In the **Create a project** wizard enter project name as
-    +++**ragpfproject@lab.LabInstanceId**+++ and click on **Customize**.
+    +++**ragpfproject@lab.LabInstance.Id**+++ and click on **Customize**.
 
     ![](./media/image10.png)
 
@@ -103,7 +103,7 @@ enhance user engagement through intuitive and efficient interactions.
     the following details, select **Next** and review your
     configuration.
 
-    - **Hub name**: +++**hub@lab.LabInstanceId**+++
+    - **Hub name**: +++**hub@lab.LabInstance.Id**+++
 
     - **Azure Subscription**: Select the assigned Azure subscription
 
@@ -116,7 +116,7 @@ enhance user engagement through intuitive and efficient interactions.
       with your hub name
 
     - **Connect Azure AI Search**: Select your Azure AI Search resource,
-      **aisearch@lab.LabInstanceId**
+      **aisearch@lab.LabInstance.Id**
 
     ![](./media/image11.png)
 
@@ -224,7 +224,7 @@ them to the project.
     ![A screenshot of a computer Description automatically generated](./media/image28.png)
 
 5.  On the next page of name and finish, enter the data name as
-    +++**data@lab.LabInstanceId**+++ and click on **Create.**
+    +++**data@lab.LabInstance.Id**+++ and click on **Create.**
 
     ![A screenshot of a computer Description automatically generated](./media/image29.png)
 
