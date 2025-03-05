@@ -423,21 +423,21 @@ incorrect.](./media/image51.png)
 Have a look at what's inside this custom engine agent \> Basic AI
 Chatbot template.
 
-    | Folder name   | Contents   |
-    |:---|:------|
-    | .vscode   |   VS Code files for debugging. |
-    |  appPackage  |  Templates for the Teams application manifest.  |
-    | env   |  Name or value pairs are stored in environment files and used by teamsapp.yml to customize the provisioning and deployment rules.  |
-    |  src/  |  The source code for the notification Teams application.  |
-    |  src/index.js  |  Sets up the bot app server. |  
-    | src/adapter.js   |  Sets up the bot adapter.  |
-    |  src/config.js  |  Defines the environment variables.  |
-    |  src/prompts/chat/skprompt.txt  |  Defines the prompt.  |
-    |  src/prompts/chat/config.json  |  Configures the prompt.  |
-    | src/app/app.js   |  Handles business logics for the Basic AI Chatbot.  |
-    | teamsapp.yml   |  Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages.  |
-    | teamsapp.local.yml   |  This override teamsapp.yml with actions that enable local execution and debugging.  |
-    |   teamsapp.testtool.yml |  This override teamsapp.yml with actions that enable local execution and debugging in Teams App Test Tool.  |
+| Folder name   | Contents   |
+|:---|:------|
+| .vscode   |   VS Code files for debugging. |
+|  appPackage  |  Templates for the Teams application manifest.  |
+| env   |  Name or value pairs are stored in environment files and used by teamsapp.yml to customize the provisioning and deployment rules.  |
+|  src/  |  The source code for the notification Teams application.  |
+|  src/index.js  |  Sets up the bot app server. |  
+| src/adapter.js   |  Sets up the bot adapter.  |
+|  src/config.js  |  Defines the environment variables.  |
+|  src/prompts/chat/skprompt.txt  |  Defines the prompt.  |
+|  src/prompts/chat/config.json  |  Configures the prompt.  |
+| src/app/app.js   |  Handles business logics for the Basic AI Chatbot.  |
+| teamsapp.yml   |  Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages.  |
+| teamsapp.local.yml   |  This override teamsapp.yml with actions that enable local execution and debugging.  |
+|   teamsapp.testtool.yml |  This override teamsapp.yml with actions that enable local execution and debugging in Teams App Test Tool.  |
     
 ### Task 2: Configure your custom agent
 
