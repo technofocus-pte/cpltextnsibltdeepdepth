@@ -74,15 +74,15 @@ generated](./media/image2.png)
 If you do not have an account, create one from here
 +++https://github.com/+++ by selecting **Sign up**.
 
-    ![A screenshot of a computer Description automatically
+![A screenshot of a computer Description automatically
 generated](./media/image3.png)
 
 1.  Login to +++**https://portal.azure.com**+++ using the Azure login
     credentials,
 
-    - Username - @lab.CloudPortalCredential(User1).Username
+    - Username - +++@lab.CloudPortalCredential(User1).Username+++
     
-    - Password - @lab.CloudPortalCredential(User1).Password
+    - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
     ![](./media/image4.png)
 
@@ -104,7 +104,7 @@ generated](./media/image6.png)
     
     - Region – Select **East US 2**
     
-    - Name – +++**AOAI@lab.LabInstanceId**+++
+    - Name – +++**AOAI@lab.LabInstance.Id**+++
     
     - Pricing tier – **Standard**
 
