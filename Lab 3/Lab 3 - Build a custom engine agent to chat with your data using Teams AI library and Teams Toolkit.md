@@ -33,12 +33,15 @@ organizational workflows.
 ### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
 
 1.  Navigate to the following the URL +++https://oai.azure.com/portal+++ and
-    login using +++@lab.CloudPortalCredential(User1).Username+++ and
-    +++@lab.CloudPortalCredential(User1).Password+++.
+    login using,
+
+    - Username - +++@lab.CloudPortalCredential(User1).Username+++
+      
+    - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
     ![](./media/image1.png)
 
-2.  On the **Azure AI Foundry** home page Click on **Create new Azure
+3.  On the **Azure AI Foundry** home page Click on **Create new Azure
     OpenAI resource**.
 
     ![](./media/image2.png)
