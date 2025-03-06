@@ -54,7 +54,7 @@ organizational workflows.
     |:---|:------|
     | Subscription   |   Select the assigned subscription |
     |  Resource group  |  Select your assigned Resource Group  |
-    | Region   |  East US 2  |
+    | Region   |  @lab.LabInstance.Id  |
     |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
     |  Pricing tier  |  Standard S0  |    
 
