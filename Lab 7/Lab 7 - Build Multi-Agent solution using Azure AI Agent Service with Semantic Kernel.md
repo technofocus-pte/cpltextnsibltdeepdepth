@@ -54,7 +54,7 @@ incorrect.](./media/image4.png)
     
     - Resource Group – Select the **assigned Resource Group**
     
-    - Location – **East US**
+    - Location – @lab.CloudResourceGroup(ResourceGroup1).Location
     
     - Connect Azure AI Services or Azure OpenAI Service – Select the
       **(new)** resource name that gets listed.
