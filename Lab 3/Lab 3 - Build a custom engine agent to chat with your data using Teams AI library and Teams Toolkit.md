@@ -32,7 +32,7 @@ organizational workflows.
 
 ### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
 
-1.  Navigate to the following the URL +++https://oai.azure.com/portal+++ and
+1.  Open a browser, navigate to the following the URL +++https://oai.azure.com/portal+++ and
     login using,
 
     - Username - +++@lab.CloudPortalCredential(User1).Username+++
