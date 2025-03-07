@@ -90,20 +90,22 @@ incorrect.](./media/image8.png)
 
 ### Task 2: Assign Cognitive contributor role.
 
-1.  Select **Access control (IAM)** from the left pane of the Resource
+1.  Navigate to the **Resource Group** page.
+   
+2.  Select **Access control (IAM)** from the left pane of the Resource
     group page. Then select **+** **Add** and click **Add role
     assignment**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-2.  Search and select +++**cognitive service contributor+++**, click
+3.  Search and select +++**cognitive service contributor+++**, click
     **Next**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-3.  Click on **Select members** to assign members. Search for
+4.  Click on **Select members** to assign members. Search for
     +++@lab.CloudPortalCredential(User1).Username+++ and click on
     **Select**. Click **Next**.
 
@@ -113,7 +115,7 @@ incorrect.](./media/image11.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-4.  On the assignment type tab, select assignment type as **Active**,
+5.  On the assignment type tab, select assignment type as **Active**,
     duration as **Permanent**, and click on **Review +Assign** and again
     **Review + Assign**.
 
@@ -123,7 +125,7 @@ incorrect.](./media/image13.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-5.  You will get a success message once the role assignment is
+6.  You will get a success message once the role assignment is
     successful.
 
     ![A screenshot of a computer AI-generated content may be
@@ -149,7 +151,7 @@ incorrect.](./media/image15.png)
 
     ![A screenshot of a chat AI-generated content may be incorrect.](./media/image19.png)
 
-4.  If the Cht playground is not automatically selected, from the left
+4.  If the Chat playground is not automatically selected, from the left
     navigation pane, under **Playgrounds,** Select **Chat.**
 
     ![A screenshot of a chat AI-generated content may be incorrect.](./media/image20.png)
@@ -157,20 +159,22 @@ incorrect.](./media/image15.png)
 5.  In the **Chat playground** page, click on **Create new deployment**
     and select **From base models**.
 
+    Select **Show setup** to see Create new deployment option if not visible.
+
     ![A screenshot of a chat play AI-generated content may be incorrect.](./media/image21.png)
 
-6.  On the **Select a chat completion model** page, search for
+7.  On the **Select a chat completion model** page, search for
     +++gpt-4o+++, select it and click on **Confirm.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-7.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
+8.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
     enter the following details, and click on **Deploy.**
 
     - **Deployment type**: Standard
 
-    - **Deployment name**: gpt-35-turbo-16k
+    - **Deployment name**: gpt-4o
 
     - **Token per Minute Rate**: 5K (Scroll to adjust the limit. If it
       does not work, click on it and then use Shift+Right/Left arrow key
@@ -182,7 +186,7 @@ incorrect.](./media/image22.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
 
-8.  You can check the deployment under **Shared resources** à
+9.  You can check the deployment under **Shared resources** à
     **Deployments**
 
     ![A screenshot of a computer AI-generated content may be
@@ -196,16 +200,16 @@ incorrect.](./media/image25.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-2.  Click on **Create,** enter the following details and click
+2.  Click on **+ Create,** enter the following details and click
     **Review + create.**
 
     -    Subscription - Select your subscription
     
     -    Resource group – Select your assigned Resourcegroup
     
-    -    Storage account name - +++contosostorage@lab.LabInstaceId+++
+    -    Storage account name - +++contosostorage@lab.LabInstace.Id+++
     
-    -    Region – West US
+    -    Region – @lab.CloudResourceGroup(ResourceGroup1).Location
     
     -    Primary service – Azure Blob storage or Azure Data Lake Storage Gen 2
     
@@ -232,7 +236,7 @@ incorrect.](./media/image30.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-5.  Enter the container name as **source** and click on **create.**
+5.  Enter the container name as +++**source**+++ and click on **create.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
@@ -271,7 +275,7 @@ incorrect.](./media/image37.png)
 
     -    Resource Group: Select your assigned Resource group
     
-    -    Service name: contoso-ai-search-@lab.LabInstance.Id
+    -    Service name: +++contoso-ai-search-@lab.LabInstance.Id+++
     
     -    Location: Central US
 
@@ -282,13 +286,13 @@ incorrect.](./media/image37.png)
     ![A screenshot of a search engine AI-generated content may be incorrect.](./media/image40.png)
 
 3.  On the search-service-contoso-ai-search-01overview click on **Go to
-    resources**.
+    resource**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image41.png)
 
 4.  On contoso-ai-search-@lab.LabInstance.Id overview, save **URL**
     endpoint for future use. Then from left navigation bar select
-    **key** and save **primary** and **secondary** **key** for future
+    **keys** under **Settings** and save **primary** and **secondary** **key** for future
     use.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image42.png)
@@ -319,7 +323,7 @@ incorrect.](./media/image37.png)
     
     -    Select Azure AI Search resource – contoso-ai-search-@lab.LabInstance.Id
     
-    -    Index Name - contosoindex@lab.LabInstance.Id
+    -    Index Name - +++contosoindex@lab.LabInstance.Id+++
     
     -    Indexer schedule - Once
 
@@ -360,12 +364,12 @@ with 16-MB size limit.
 incorrect.](./media/image51.png)
 
 2.  On the VS home page, on the left navigation pane click on the
-    **Extensions** icon, search for **Teams Toolkit** and click on
+    **Extensions** icon, search for +++**Teams Toolkit**+++ and click on
     **Install.**
 
     ![](./media/image52.png)
 
-3.  Select the Teams Toolkit ![](./media/image53.png) icon in the Visual
+3.  Once the installation is complete, select the Teams Toolkit ![](./media/image53.png) icon in the Visual
     Studio Code Activity Bar and select **Create a New App**.
 
     ![](./media/image54.png)
@@ -408,7 +412,7 @@ incorrect.](./media/image51.png)
 
     ![](./media/image63.png)
 
-10. Enter a **TeamsContosoAgent** as name for your custom engine agent,
+10. Enter +++**TeamsContosoAgent**+++ as the name for your custom engine agent,
     select **Enter**. Custom engine agent is created in a few seconds.
 
     ![](./media/image64.png)
