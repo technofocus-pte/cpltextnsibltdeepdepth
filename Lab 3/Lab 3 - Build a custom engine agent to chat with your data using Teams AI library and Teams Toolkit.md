@@ -82,8 +82,7 @@ incorrect.](./media/image6.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-6.  From the left pane, select **Keys and Endpoint** under **Resource
-    Management** and copy and **save** the **Key** and **Endpoint**
+6.  Select the created Azure OpenAI resource. In the AzureOpenAI resource page, from the left pane, select **Keys and Endpoint** under **Resource Management** and copy and **save** the **Key** and **Endpoint**
     values to a notepad for future reference.
 
     ![A screenshot of a computer AI-generated content may be
