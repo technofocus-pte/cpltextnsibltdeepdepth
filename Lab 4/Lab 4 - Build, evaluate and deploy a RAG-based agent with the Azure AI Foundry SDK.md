@@ -95,7 +95,7 @@ To create a project in Azure AI Foundry, follow these steps:
 
     -   Create new Resource group - Select your assigned Resource Group(ResourceGroup1)
 
-    -   Location - Select Region (We have used East US 2 while executing this lab)
+    -   Location - @lab.CloudResourceGroup(ResourceGroup1).Location
 
     Leave the rest as default and click on **Next**.
 
