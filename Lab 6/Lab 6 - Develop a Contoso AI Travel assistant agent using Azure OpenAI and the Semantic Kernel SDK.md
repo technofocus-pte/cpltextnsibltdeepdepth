@@ -102,7 +102,7 @@ generated](./media/image6.png)
     
     - Resource group – Select the **Resource group** assigned to you
     
-    - Region – Select **East US 2**
+    - Region – @lab.CloudResourceGroup(ResourceGroup1).Location
     
     - Name – +++**AOAI@lab.LabInstance.Id**+++
     
