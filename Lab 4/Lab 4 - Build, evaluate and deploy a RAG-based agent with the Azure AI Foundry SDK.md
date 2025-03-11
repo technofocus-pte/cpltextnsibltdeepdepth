@@ -1475,21 +1475,21 @@ to handle limit errors.
 
     The evaluation will take around 5 to 10 minutes to complete.
    
-    ![](./media/ima45.png)
+    ![](./media/img45.png)
 
 ### Task 5: View evaluation results in Azure AI Foundry portal
 
 1.  Once the evaluation run completes, follow the link to view the evaluation results on the Evaluation page in the Azure AI Foundry portal.
 
-    ![](./media/ima46.png)
+    ![](./media/img46.png)
 
-    ![](./media/ima47.png)
+    ![](./media/img47.png)
     
 2.  Check the **Evaluation results** and the **Metrics dashboard**.
    
-    ![](./media/ima48.png)
+    ![](./media/img48.png)
     
-    ![](./media/ima49.png)
+    ![](./media/img49.png)
     
 ## Exercise 4: Delete the resources
 
