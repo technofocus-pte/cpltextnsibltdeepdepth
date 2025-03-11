@@ -78,7 +78,7 @@ To create a project in Azure AI Foundry, follow these steps:
 
     ![](./media/image3.png)
 
-3.  Select **+ Create project**.
+3.  Close the pop ups that comes up and select **+ Create project**.
 
     ![](./media/image4.png)
 
@@ -95,7 +95,7 @@ To create a project in Azure AI Foundry, follow these steps:
 
     -   Create new Resource group - Select your assigned Resource Group(ResourceGroup1)
 
-    -   Location - @lab.CloudResourceGroup(ResourceGroup1).Location
+    -   Location - Select @lab.CloudResourceGroup(ResourceGroup1).Location
 
     Leave the rest as default and click on **Next**.
 
@@ -183,7 +183,7 @@ index.
 
     - Service name – Enter **+++aisearch@lab.LabInstance.Id+++** 
 
-    - Region - Select Region (We are using East US 2 here)
+    - Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
 
     - Pricing tier – Select **Standard**
 
@@ -233,7 +233,7 @@ environment, so that you can use your user credentials to call the Azure
 OpenAI service.
 
 1.  Search for +++**PowerShell**+++ from the Windows search bar and open
-    it in the Administrator mode. Accept if prompted for the launch to continue.
+    it in the **Administrator** mode. Accept if prompted for the launch to continue.
 
     ![A screenshot of a computer Description automatically generated](./media/image27.png)
 
@@ -293,7 +293,7 @@ global python installation. You should always use a virtual or conda
 environment when installing python packages, otherwise you can break
 your global install of Python.
 
->[Alert] **Important:** If the commands below are not pastable, try pasting them to a notepad and then copy and paste it to the PowerShell. Or copy and paste directly to the PowerShell. The T button does not work at times in the PowerShell.
+>[!Alert] **Important:** If the commands below are not pastable, try pasting them to a notepad and then copy and paste it to the PowerShell. Or copy and paste directly to the PowerShell. The T button does not work at times in the PowerShell.
 
 **Create a virtual environment**
 
@@ -301,30 +301,34 @@ your global install of Python.
     the below commands.
 
     ```
-    cd\\
+    cd\
     ```
     ```
     cd Users\Admin
     ```
     
-1.  Create a folder with your project name, **+++RAGproj@lab.LabInstance.Id+++**, by entering the following command in your powershell.
+2.  Create a folder with your project name, **RAGproj@lab.LabInstance.Id**, by entering the following command in your powershell.
 
     >[!Note] **Note:** Replace < Project name > with your project’s name in the command below and execute it.
 
-    +++**mkdir < Project name >**+++
+    ```
+    mkdir RAGproj@lab.LabInstance.Id
+    ```
 
     ![A computer screen with white and green text Description automatically generated](./media/image34.png)
 
-2.  In your terminal enter the following command to navigate to the new
+3.  In your terminal enter the following command to navigate to the new
     folder location
 
-    +++**cd < Project name >**+++
+    ```
+    cd RAGproj@lab.LabInstance.Id
+    ```
 
     Replace < Project name > with the folder name you created in the previous step.
 
     ![A blue screen with white text Description automatically generated](./media/image35.png)
 
-3.  Create a virtual environment using the following commands
+4.  Create a virtual environment using the following commands
 
     ```
     py -3 -m venv .venv
@@ -349,6 +353,8 @@ your global install of Python.
 
     ![A screenshot of a computer Description automatically generated](./media/image39.png)
 
+6.  Select **Yes, I trust the authors** when prompted **Do you trust the authors of the files in this folder?**
+   
 ### Task 7: Install packages
 
 Install azure-ai-projects(preview) and azure-ai-inference (preview),
@@ -593,6 +599,8 @@ index_client = SearchIndexClient(
 3.  Now add the function at the end of the **create_search_index.py** to
     define a search index:
 
+    Keep the cursor at the end of the file, select **Enter** twice and then paste the below code.
+    
 ```
 import pandas as pd
 from azure.search.documents.indexes.models import (
@@ -697,8 +705,10 @@ def create_index_definition(index_name: str, model: str) -> SearchIndex:
 ![A screenshot of a computer Description automatically generated](./media/image59.png)
 
 4.  Now add the function in create_search_index.py to create the
-    function to add a csv file to the index:
+    function to add a csv file to the index.
 
+    Keep the cursor at the end of the file, select **Enter** twice and then paste the below code. Ensure that the last line of the code pasted in the last step and the first line of the code being pasted below are in the same position(1 tab space from the left margin)
+    
 ```
 # define a function for indexing a csv file, that adds each row as a document
 # and generates vector embeddings for the specified content_column
@@ -757,6 +767,10 @@ def create_index_from_csv(index_name, csv_file):
     the index and register it to the cloud project. After adding the
     code go to Files from top bar and click on **Save all.**
 
+    Keep the index at the end of the file, select **Enter** twice. Move the cursor in the new line towards the left margin and then paste the code.(There should be no tab space)
+    
+    >[!Alert] **Important:** Ensure that the import argparse in the second line of the code below is aligned with a tab space from the margin. Else, keep the cursor before **import** and click on **Tab**.
+    
 ```
 if __name__ == "__main__":
     import argparse
@@ -1451,49 +1465,32 @@ to handle limit errors.
 
 ### Task 4: Run the evaluation 
 
-1.  From the Azure AI Foundry, select **Evaluations** from the left pane
-    and select **+ New Evaluation**. Click on **Create a new evaluation**.
+1.  Back in the VS Code terminal, execute the below command to install the required packages.
 
-    ![A screenshot of a computer Description automatically generated](./media/image97.png)
+    +++pip install azure-ai-evaluation[remote]+++
+   
+2.  Execute the below code to run the evaluation script.
 
-2.  Select **Dataset**.
+    +++python evaluate.py+++
 
-    ![A screenshot of a computer Description automatically generated](./media/image98.png)
+    The evaluation will take around 5 to 10 minutes to complete.
+   
+    ![](./media/ima45.png)
 
-3.  Accept the defaults in the Basic information page and click
-    **Next**.
+### Task 5: View evaluation results in Azure AI Foundry portal
 
-    ![A screenshot of a computer Description automatically generated](./media/image99.png)
+1.  Once the evaluation run completes, follow the link to view the evaluation results on the Evaluation page in the Azure AI Foundry portal.
 
-4.  Select **Add your** **dataset** -\> **Upload file** and upload the
-    **chat_eval_data.jsonl** that we created in the **assets** folder
-    and click on **Next**.
+    ![](./media/ima46.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image100.png)
-
-5.  Select the **Metrics** under AI quality and Risk and safety metrics as in the screenshots below. Also, under the Ai quality, select your connection and the deployment name.
-
-    ![A screenshot of a computer Description automatically generated](./media/image101.png)
-
-    ![A screenshot of a survey Description automatically generated](./media/image102.png)
-
-6.  Select the Data source types as in the below screenshot and click
-    **Next**.
-
-    ![A screenshot of a computer Description automatically generated](./media/image103.png)
-
-7.  Select **Submit** to submit the evaluation.
-
-    ![A screenshot of a computer Description automatically generated](./media/image104.png)
-
-8.  Once the evaluation completes, explore the results.
-
-    ![A screenshot of a computer Description automatically generated](./media/image105.png)
-
-    ![A screenshot of a computer Description automatically generated](./media/image106.png)
-
-    ![A screenshot of a computer Description automatically generated](./media/image107.png)
-
+    ![](./media/ima47.png)
+    
+2.  Check the **Evaluation results** and the **Metrics dashboard**.
+   
+    ![](./media/ima48.png)
+    
+    ![](./media/ima49.png)
+    
 ## Exercise 4: Delete the resources
 
 1.  From the Azure portal home page, select the assigned Resouce group.
