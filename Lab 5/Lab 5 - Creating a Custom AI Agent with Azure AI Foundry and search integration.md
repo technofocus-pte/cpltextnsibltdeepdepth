@@ -164,10 +164,9 @@ You need two models to implement your solution:
 
     ![A screenshot of a computer Description automatically generated](./media/image18.png)
 
-  - **Model version**: *Select the default version*
+  - **Model version**: Select the default version
   
-  - **AI resource**: *Select the resource created previously that gets
-    listed*
+  - **AI resource**: Select the resource created previously (That is the resource that gets listed in the drop down)
   
   - **Tokens per Minute Rate Limit (thousands)**: 5K
   
@@ -181,7 +180,7 @@ You need two models to implement your solution:
 
   ![A screenshot of a computer Description automatically generated](./media/image21.png)
 
-5.  Repeat the previous steps to deploy a **gpt-35-turbo-16k** model
+5.  Repeat the previous steps to deploy a +++**gpt-35-turbo-16k**+++ model
     with the deployment name gpt-35-turbo-16k.
 
   ![A screenshot of a computer Description automatically generated](./media/image22.png)
@@ -253,8 +252,7 @@ generated](./media/image33.png)
 4.  Enter the below details in the Create a vector index – Index
     configuration page and click on **Next.**
 
-    - **Select Azure AI Search service**: Select **AzureAISearch** **Vector
-      index**: brochures-index
+    - **Select Azure AI Search service**: Select **AzureAISearch**
     
     - Vector index - +++**brochures-index**+++
     
@@ -307,8 +305,7 @@ can be used to affect generative AI responses.
     ![A screenshot of a computer Description automatically generated](./media/image40.png)
 
 3.  Ensure that your **gpt-35-turbo** model deployment is selected.
-    Then, in the main chat session panel, submit the prompt +++**Where
-    can I stay in New York?**+++
+    Then, in the main chat session panel, submit the prompt +++**Where can I stay in New York?**+++
 
     ![A screenshot of a computer program Description automatically generated](./media/image41.png)
 
@@ -345,7 +342,7 @@ enabling you to use it easily in a prompt flow.
 
     ![](./media/image46.png)
 
-2.  Select **Clone** under Multi-Round Q&A on Your Data.
+2.  Select **Clone** under **Multi-Round Q&A on Your Data**.
 
     ![A screenshot of a computer Description automatically generated](./media/image47.png)
 
