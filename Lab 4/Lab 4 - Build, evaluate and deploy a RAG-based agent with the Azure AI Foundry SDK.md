@@ -1139,7 +1139,7 @@ def chat_with_products(messages: list, context: dict = None) -> dict:
 ![A screenshot of a computer Description automatically generated](./media/image75.png)
 
 4.  Finally, add the code to run the **chat** **function** and then go
-    to files and click on S**ave all**.
+    to files and click on **Save all**.
 
 ```
 if __name__ == "__main__":
