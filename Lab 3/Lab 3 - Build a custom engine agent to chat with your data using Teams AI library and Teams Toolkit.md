@@ -207,7 +207,7 @@ incorrect.](./media/image26.png)
     
     -    Resource group – Select your assigned Resourcegroup
     
-    -    Storage account name - +++contosostorage@lab.LabInstace.Id+++
+    -    Storage account name - +++contosostorage@lab.LabInstance.Id+++
     
     -    Region – @lab.CloudResourceGroup(ResourceGroup1).Location
     
@@ -277,7 +277,7 @@ incorrect.](./media/image37.png)
     
     -    Service name: +++contoso-ai-search-@lab.LabInstance.Id+++
     
-    -    Location: Central US
+    -    Location: @lab.CloudResourceGroup(ResourceGroup1).Location
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image38.png)
 
@@ -507,7 +507,9 @@ Responses should be in a short journalistic style with no more than 80 words.
 4.  Open Powershell as an administrator and run the following command,
     and enter A.
 
-    +++Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned+++
+    ```
+    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+    ```
     
     ![](./media/image69.png)
 
