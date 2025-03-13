@@ -15,7 +15,7 @@ builder.Services.AddAzureOpenAIChatCompletion(
     yourDeploymentName,
     yourEndpoint,
     yourApiKey,
-    "gpt-35-turbo-16k");
+    "gpt-35-turbo");
 var kernel = builder.Build();
 
 // Note: ChatHistory isn't working correctly as of SemanticKernel v 1.4.0
