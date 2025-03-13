@@ -143,8 +143,7 @@ generated](./media/image13.png)
 
 12. Accept the defaults and select **Deploy**.
 
-    ![A screenshot of a computer Description automatically
-generated](./media/image15.png)
+    ![](./media/image45.png)
 
 ## Exercise 3: Setting up the AI Travel Agent Project with Azure OpenAI Services
 
