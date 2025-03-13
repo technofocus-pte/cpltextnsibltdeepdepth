@@ -139,8 +139,7 @@ generated](./media/image13.png)
 
 11. Search for and select +++**gpt-35-turbo**+++. Click on **Confirm**.
 
-    ![A screenshot of a chat Description automatically
-generated](./media/image14.png)
+    !](./media/image41.png)
 
 12. Accept the defaults and select **Deploy**.
 
@@ -155,7 +154,7 @@ following the steps, you will learn how to set up a local development
 environment, modify project files, and prepare the application for
 execution using your Azure OpenAI deployment details.
 
-1.  Open the **Command Prompt.**
+1.	Search for +++**Command Prompt**+++ from the Windows Search bar and open the **Command prompt**.
 
     ![A screenshot of a computer Description automatically
 generated](./media/image16.png)
@@ -166,7 +165,9 @@ generated](./media/image16.png)
     
     +++dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org+++
 
-3.  Open **Visual Studio Code**. Select **File** -\> **Open folder**.
+    ![](./media/image42.png)
+
+3.  Open **Visual Studio Code** that is pinned to the Windows Taskbar. Select **File** -> **Open folder**.
 
     ![A screenshot of a computer Description automatically
 generated](./media/image17.png)
@@ -177,28 +178,32 @@ generated](./media/image17.png)
     ![A screenshot of a computer Description automatically
 generated](./media/image18.png)
 
-5.  In the Explorer pane, navigate to the **AITravelAgent/Starter**
+5. Select **Yes, I trust the authors** option in the Do you want to trust the authors of the files in this folder?
+
+    ![](./media/image43.png)
+   
+6.  In the Explorer pane, navigate to the **AITravelAgent/Starter**
     folder. Right-click the folder and select **Open in Integrated
     Terminal**.
 
     ![A screenshot of a computer Description automatically generated](./media/image19.png)
 
-6.  In the Explorer panel, expand the Starter folder, and you should see
+8.  In the Explorer panel, expand the Starter folder, and you should see
     the Plugins folder, Prompts folder, and Program.cs file.
 
     ![A screenshot of a computer Description automatically generated](./media/image20.png)
 
-7.  Open the Starter/Program.cs file and update the following variables
+9.  Open the Starter/Program.cs file and update the following variables
     with your Azure OpenAI Services deployment name, API key, and
     endpoint. After making the changes, press Ctrl + S to save the file:
 
-    string yourDeploymentName = +++**gpt-35-turbo-16k**+++
+    string yourDeploymentName = +++**gpt-35-turbo**+++
 
     string yourEndpoint = The Azure OpenAI resource Endpoint value we saved earlier
 
     string yourKey = The Key1 of the AOAI resource that we saved earlier
 
-    ![](./media/image21.png)
+    ![](./media/image44.png)
 
 ## Exercise 4: Creating and Testing a Currency Converter Plugin with Semantic Kernel
 
