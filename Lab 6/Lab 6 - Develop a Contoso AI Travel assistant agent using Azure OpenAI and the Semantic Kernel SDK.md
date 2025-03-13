@@ -139,7 +139,7 @@ generated](./media/image13.png)
 
 11. Search for and select +++**gpt-35-turbo**+++. Click on **Confirm**.
 
-    !](./media/image41.png)
+    ![](./media/image41.png)
 
 12. Accept the defaults and select **Deploy**.
 
