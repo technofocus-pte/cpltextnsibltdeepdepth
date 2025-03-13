@@ -707,7 +707,7 @@ def create_index_definition(index_name: str, model: str) -> SearchIndex:
 4.  Now add the function in create_search_index.py to create the
     function to add a csv file to the index.
 
-    Keep the cursor at the end of the file, select **Enter** twice and then paste the below code. Ensure that the last line of the code pasted in the last step and the first line of the code being pasted below are in the same position(1 tab space from the left margin)
+    Keep the cursor at the end of the file, select **Enter** twice and then paste the below code.
     
 ```
 # define a function for indexing a csv file, that adds each row as a document
@@ -767,7 +767,7 @@ def create_index_from_csv(index_name, csv_file):
     the index and register it to the cloud project. After adding the
     code go to Files from top bar and click on **Save all.**
 
-    Keep the index at the end of the file, select **Enter** twice. Move the cursor in the new line towards the left margin and then paste the code.(There should be no tab space)
+    Keep the cursor at the end of the file, select **Enter** twice. Move the cursor in the new line towards the left margin and then paste the code.(There should be no tab space)
     
     >[!Alert] **Important:** Ensure that the import argparse in the second line of the code below is aligned with a tab space from the margin. Else, keep the cursor before **import** and click on **Tab**.
     
