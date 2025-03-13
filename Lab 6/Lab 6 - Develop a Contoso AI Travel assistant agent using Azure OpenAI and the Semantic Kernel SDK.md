@@ -137,8 +137,7 @@ generated](./media/image12.png)
     ![A screenshot of a computer Description automatically
 generated](./media/image13.png)
 
-11. Search for and select +++**gpt-35-turbo-16k**+++. Click on
-    **Confirm**.
+11. Search for and select +++**gpt-35-turbo**+++. Click on **Confirm**.
 
     ![A screenshot of a chat Description automatically
 generated](./media/image14.png)
@@ -307,14 +306,14 @@ In this code, you use the Currency.Currencies dictionary to get the Currency�
 
     ![](./media/image25.png)
 
-5.  Go to files from top bar and select **Save all.**
+5.  Go to **File** from top bar and select **Save all.**
 
     ![](./media/image26.png)
 
-6.  In the terminal, enter **dotnet run**. You should see the following
+6.  In the terminal, enter +++**dotnet run**+++. You should see the following
     output:
 
-Output: $52000 VND is approximately $2.13 in US Dollars (USD)
+    **Output:** $52000 VND is approximately $2.13 in US Dollars (USD)
 
     ![](./media/image27.png)
 
@@ -328,12 +327,12 @@ and setting up configuration and prompt files, you will define how the
 AI interprets and processes natural language requests for currency
 conversions.
 
-1.  From Visual Studio Code, locate the Starter/Prompt folder. Navigate
+1.  From Visual Studio Code, locate the **Starter/Prompts** folder. Navigate
     into this folder to prepare for the next steps.
 
     ![](./media/image28.png)
 
-2.  Inside the Starter/Prompt folder, create a new folder named
+2.  Inside the **Starter/Prompts** folder, create a new folder named
     +++**GetTargetCurrencies**+++. This folder will contain all the
     files related to this exercise.
 
@@ -641,25 +640,23 @@ working as intended and providing accurate, context-sensitive outputs.
     - In the terminal, enter the following command to execute the
       application:
 
-> +++dotnet run+++
+    +++dotnet run+++
 
 2.  **Test Currency Conversion**
 
-    - When prompted, enter a currency conversion query, such as:  
-      *+++*How much is 60 USD in New Zealand dollars?*+++*
+    - When prompted **What would you like to do?** enter a currency conversion query as below  
+      +++**How much is 60 USD in New Zealand dollars?**+++
 
     - Expected Output:  
-      *"$60 USD is approximately $97.88 in New Zealand Dollars (NZD)."*
+      **$60 USD is approximately $97.88 in New Zealand Dollars (NZD)**
 
 3.  **Test Destination Suggestions**
 
-    - Enter a query for destination suggestions, providing context. For
-      example:  
-      *+++*I'm planning an anniversary trip with my spouse, but they are
-      currently using a wheelchair and accessibility is a must. What are
-      some destinations that would be romantic for us?+++
+    - Enter a query for destination suggestions, providing context like below,
+        
+      **+++I'm planning an anniversary trip with my spouse, but they are currently using a wheelchair and accessibility is a must. What are some destinations that would be romantic for us?+++**
 
-    - Expected Output: A list of accessible romantic destinations, such
+    - **Expected Output:** A list of accessible romantic destinations, such
       as:
 
       1.  Santorini, Greece: Romantic sunsets and wheelchair-accessible
@@ -673,7 +670,7 @@ working as intended and providing accurate, context-sensitive outputs.
 
     - Enter a query for activity recommendations in a specific
       destination. For example:  
-      *+++*What are some things to do in Barcelona?+++
+      **+++What are some things to do in Barcelona?+++**
 
     - Expected Output: Recommendations tailored to the destination, such
       as:
