@@ -506,7 +506,7 @@ using Microsoft.SemanticKernel.Plugins.Core;
 #pragma warning disable SKEXP0050 
 #pragma warning disable SKEXP0060
 
-string yourDeploymentName = "gpt-35-turbo-16k";
+string yourDeploymentName = "gpt-35-turbo";
 string yourEndpoint = "EndPoint";
 string yourApiKey = "API Key";
 
@@ -515,7 +515,7 @@ builder.Services.AddAzureOpenAIChatCompletion(
     yourDeploymentName,
     yourEndpoint,
     yourApiKey,
-    "gpt-35-turbo-16k");
+    "gpt-35-turbo");
 var kernel = builder.Build();
 
 kernel.ImportPluginFromType<CurrencyConverter>();
@@ -599,7 +599,7 @@ do {
 while (!string.IsNullOrWhiteSpace(input));
 ```
 
-The program begins by importing essential namespaces such as System.Text for text handling and Microsoft.SemanticKernel for AI-powered conversational workflows. It integrates Microsoft Azure OpenAI services through the Microsoft.SemanticKernel.Connectors.OpenAI namespace, allowing communication with the GPT model (gpt-35-turbo-16k). The configuration involves setting up variables like yourDeploymentName, yourEndpoint, and yourApiKey to authenticate and connect to the Azure OpenAI endpoint.
+The program begins by importing essential namespaces such as System.Text for text handling and Microsoft.SemanticKernel for AI-powered conversational workflows. It integrates Microsoft Azure OpenAI services through the Microsoft.SemanticKernel.Connectors.OpenAI namespace, allowing communication with the GPT model (gpt-35-turbo). The configuration involves setting up variables like yourDeploymentName, yourEndpoint, and yourApiKey to authenticate and connect to the Azure OpenAI endpoint.
 
    The Semantic Kernel is initialized using a builder pattern. Plugins for additional functionalities, such as CurrencyConverter and ConversationSummaryPlugin, are imported. Furthermore, prompts stored in a directory (Prompts) are dynamically loaded to facilitate intent recognition and task execution.
 
