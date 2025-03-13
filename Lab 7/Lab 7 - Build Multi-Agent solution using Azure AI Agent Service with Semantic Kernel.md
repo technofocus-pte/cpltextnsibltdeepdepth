@@ -155,7 +155,7 @@ incorrect.](./media/image20.png)
 incorrect.](./media/image21.png)
 
 9.  **Close** the **Terminal**. Select **Extensions** from the left pane
-    pf the **Visual Studio Code**. Search and select **Jupyter** and
+    pf the **Visual Studio Code**. Search and select +++**Jupyter**+++ and
     click on **Install** to install the Jupyter extension.
 
     ![A screenshot of a computer AI-generated content may be
