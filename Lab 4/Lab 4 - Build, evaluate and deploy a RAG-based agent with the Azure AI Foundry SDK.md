@@ -149,8 +149,8 @@ portal model catalog
 
     ![](./media/image14.png)
 
-5.  After you deploy the **gpt-4o-mini**, repeat the steps to deploy
-    the +++**text-embedding-ada-002**+++ model.
+5.  After you deploy the **gpt-4o-mini**, deploy
+    the +++**text-embedding-ada-002**+++ model. Select the **Deployment Type** as **Standard**.
 
     ![A screenshot of a computer Description automatically generated](./media/image15.png)
 
