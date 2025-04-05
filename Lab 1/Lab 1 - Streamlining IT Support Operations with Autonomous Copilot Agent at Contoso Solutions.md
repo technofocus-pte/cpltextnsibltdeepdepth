@@ -153,27 +153,8 @@ agent to streamline IT workflows.
 
 1.	Navigate to the url +++https://copilotstudio.microsoft.com+++ and click on Start free trial to start the Copilot Studio trial.
 
-1.  Navigate to copilot studio website +++https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio+++ and click on the **Try free.**
+    ![](./media/image100.png)
 
-    ![](./media/image2.png)
-
-
-2.	Enter the **Administrative Username** from the **Office 365 Tenant** section of the **Resources** tab into the email field and click on the **Start free** button. 
-
-    ![](./media/image3.png)
-
-
-3.  Enter **Country or Region** and **Business phone number** in the respected fields. Select the check box and click on **Get started** button.
-
-    ![](./media/image4.png)
-
-4.  In the confirmation section again click on the **Get Started** button.
-
-    ![](./media/image5.png)
-
-5.	Select **Get Started** in the Copilot Studio welcome screen.
-
-    ![](./media/img42.png)
   	
 ##  Task 2: Creating and Configuring Contoso IT Support Agent 
 
@@ -228,11 +209,9 @@ agent to streamline IT workflows.
     ![](./media/image13.png)
 
 
-9.  Then go to Generative AI section, select the Generative AI
-    (Preview), set content moderation as **Medium** and click on
-    **Save** to save the setting.
+9.	Then go to **Generative AI** section, select **Generative**, set content moderation as **Medium** and click on **Save** to save the setting.
 
-    ![](./media/image14.png)
+    ![](./media/image101.png)
 
 
 ##  Conclusion
@@ -317,7 +296,7 @@ ensure it effectively assists users in troubleshooting and escalation.
 
 ##  Task 3: Update the Fallback Topic 
 
-1.  From the top bar option click on **Topics** and then click and open
+1.  From the top bar option click on **Topics** and then open
     **Fallback** topic.
 
     ![](./media/image39.png)
@@ -397,7 +376,7 @@ Power Automate and integrate it with the Contoso IT Support Agent.
 Participants will create a flow to streamline issue reporting, record
 data in Dataverse, and notify support engineers via email.
 
-1.  Go to overview page of the agent, scroll down and click on the **+ Add action**.
+1.  Go to overview page of the agent, scroll down and click on **+ Add action**.
 
     ![](./media/image46.png)
 
@@ -422,13 +401,13 @@ data in Dataverse, and notify support engineers via email.
 
 5.  With same procedure create more input as per given below details.
 
-| **Input Name** | **Data Type** |
-|----------------|---------------|
-| +++ID+++             | Text          |
-| +++Email+++          | Text          |
-| +++Details+++        | Text          |
-
-![](./media/image51.png)
+    | **Input Name** | **Data Type** |
+    |----------------|---------------|
+    | +++ID+++             | Text          |
+    | +++Email+++          | Text          |
+    | +++Details+++        | Text          |
+    
+    ![](./media/image51.png)
 
 
 6.  Below Run a flow from copilot, click on **(+)** sign and select **Add an action**.
@@ -484,6 +463,8 @@ data in Dataverse, and notify support engineers via email.
 12. In send an email section, Enter the below given detail in the
     respected section:
 
+    Replace the place holders for **Name**, **ID**, **Details** with the variables using dynamic content
+    
     **To**
     
     
@@ -514,32 +495,32 @@ data in Dataverse, and notify support engineers via email.
     ![](./media/image60.png)
 
 
-13. From top left corner rename the flow as +++**Employee Data**+++ .
+14. From top left corner rename the flow as +++**Employee Data**+++ .
 
     ![](./media/image61.png)
 
 
-14. From top bar click on **Save** button.
+15. From top bar click on **Save** button.
 
     ![](./media/image62z.png)
 
 
-15. Go back to Copilot window and click on **Refresh** button.
+16. Go back to Copilot window and click on **Refresh** button.
 
     ![](./media/image63a.png)
 
 
-16. In Choose an action window, select **Employee Data** flow.
+17. In Choose an action window, select **Employee Data** flow.
 
     ![](./media/image64a.png)
 
 
-17. Click on **Add action** button to add a flow
+18. Click on **Add action** button to add a flow
 
     ![](./media/imagea.png)
 
 
-18. Click on the **Employee Data** flow and open it, after opening select inputs option.
+19. Click on the **Employee Data** flow and open it, after opening select inputs option.
 
     ![](./media/imageb.png)
     
