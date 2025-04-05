@@ -59,7 +59,7 @@ enhance user engagement through intuitive and efficient interactions.
 
     - **Service name**: +++aisearch@lab.LabInstance.Id+++
 
-    - **Location**: @lab.CloudResourceGroup(ResourceGroup1).Location
+    - **Location**: Select @lab.CloudResourceGroup(ResourceGroup1).Location
 
     - **Pricing tier**: Standard
 
@@ -108,7 +108,7 @@ enhance user engagement through intuitive and efficient interactions.
 
     - **Resource group**: Select the assigned Resource Group
 
-    - **Location**: @lab.CloudResourceGroup(ResourceGroup1).Location
+    - **Location**: Select @lab.CloudResourceGroup(ResourceGroup1).Location
 
     - **Connect Azure AI Services or Azure OpenAI**: (New) Autofill’s
       with your hub name
