@@ -68,20 +68,7 @@ applications.
     ![](./media/img41.png)
 
 
-3.  Enter Country/ Region, Phone number, select box check box and click
-    on the **Get started**.
-
-    ![](./media/image17.png)
-
-
-4.  Confirm the account details and then click on the **Get started**.
-
-    ![](./media/image18.png)
-
-
-5.  On the Stay signed in tab select **Yes**.
-
-    ![](./media/image19.png)
+3.	Enter the **Administrative Password** and you will be taken to the Power Apps Home page.
 
 
 ## Task 2: Setting Up a Dataverse Table
@@ -163,6 +150,8 @@ Copilot Studio, configuring environments, and building an AI-powered
 agent to streamline IT workflows.
 
 ## Task 1: Logging into Microsoft Copilot Studio
+
+1.	Navigate to the url +++https://copilotstudio.microsoft.com+++ and click on Start free trial to start the Copilot Studio trial.
 
 1.  Navigate to copilot studio website +++https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio+++ and click on the **Try free.**
 
