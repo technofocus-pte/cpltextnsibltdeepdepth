@@ -158,8 +158,8 @@ You need two models to implement your solution:
     ![A screenshot of a computer Description automatically generated](./media/image17.png)
 
 4.  On the **Deploy model text-embedding-ada-002** pane, accept the pre-
-    populated values for the **Deployment name** and **Deployment
-    type**. Click on **Customize** and enter the following details in
+    populated value for the **Deployment name** Select **Deployment
+    type** as **standard**. Click on **Customize** and enter the following details in
     the Deploy model wizard.
 
     ![A screenshot of a computer Description automatically generated](./media/image18.png)
