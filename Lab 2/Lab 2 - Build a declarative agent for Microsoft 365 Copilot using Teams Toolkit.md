@@ -197,7 +197,11 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
 ### Task 2: Set up accounts in Teams Toolkit
 
-1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials** under the **Azure Portal** section in the **Resources** tab.
+1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials**.
+
+  - Username - +++@lab.CloudPortalCredential(User1).Username+++
+  
+  - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
     ![](./media/image14.png)
 
@@ -439,7 +443,7 @@ Some of the benefits of having conversation starters are:
 
     ![](./media/image31.png)
 
-2.  When prompted sign in with your credentials.
+2.  If prompted, sign in with your credentials.
 
     ![](./media/image32.png)
 
