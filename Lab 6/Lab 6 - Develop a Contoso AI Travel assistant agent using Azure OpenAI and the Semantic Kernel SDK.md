@@ -375,7 +375,7 @@ conversions.
 
   Save the file by pressing **Ctrl + S**. This configuration defines how the AI system should interpret and process user input.
 
-5.  Still inside the **GetTargetCurrencies** folder, create another new
+5.  Under **Prompts** folder, create another new
     file named +++**skprompt.txt**+++.
 
     ![](./media/image32.png)
