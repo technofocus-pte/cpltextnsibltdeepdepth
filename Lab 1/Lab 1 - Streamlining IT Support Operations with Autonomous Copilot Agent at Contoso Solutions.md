@@ -48,6 +48,7 @@ applications.
 
 3.	Enter the **Administrative Password** and you will be taken to the Power Apps Home page.
 
+    >[!Note] **Note:** If it agains prompts for the user name, password or any information to login, please provide the same and login.
 
 ## Task 2: Setting Up a Dataverse Table
 
