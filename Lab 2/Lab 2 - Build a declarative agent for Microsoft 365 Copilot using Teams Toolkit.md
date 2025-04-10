@@ -31,17 +31,27 @@ seamlessly with Microsoft 365.
 These labs are based on Teams Toolkit version 5.0.
 Follow the steps as shown in the screen shot below.
 
-1.  Open Visual Studio Code and click on the Extensions toolbar button. (Close the Appliances.csv that ia already opened)
+1.  Open Visual Studio Code and close the **Appliances.csv** that ia already opened.
+
+2. In the Restricted Mode is intended message, select **Manage**.
+
+    ![](./media/img1.png)
+
+3. Select **Trust** in the You are in Restricted mode dialog.
+
+    ![](./media/img2.png)
+   
+4.  Click on the Extensions toolbar button. ()
 
     ![](./media/image1.png)
 
 
-2.  Search for +++**Teams**+++ and locate Teams **Toolkit** and click **Install.**
+5.  Search for +++**Teams**+++ and locate Teams **Toolkit** and click **Install.**
 
     ![](./media/image2.png)
 
 
-3.  Once the installation is complete, the **Teams Toolkit** icon will appear on the left navigation bar.
+6.  Once the installation is complete, the **Teams Toolkit** icon will appear on the left navigation bar.
     ![](./media/image3.png)
 
 
