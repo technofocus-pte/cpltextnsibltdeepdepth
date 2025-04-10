@@ -209,7 +209,7 @@ incorrect.](./media/image26.png)
     
     -    Storage account name - +++contosostorage@lab.LabInstance.Id+++
     
-    -    Region – @lab.CloudResourceGroup(ResourceGroup1).Location
+    -    Region – Select @lab.CloudResourceGroup(ResourceGroup1).Location
     
     -    Primary service – Azure Blob storage or Azure Data Lake Storage Gen 2
     
@@ -317,13 +317,13 @@ incorrect.](./media/image37.png)
 
     -    Subscription - Select your subscription
     
-    -    Select Azure Blob storage resource – contosostorage@lab.LabInstance.Id
+    -    Select Azure Blob storage resource – Select **contosostorage@lab.LabInstance.Id**
     
-    -    Select storage container – source
+    -    Select storage container – Select **source**
     
-    -    Select Azure AI Search resource – contoso-ai-search-@lab.LabInstance.Id
+    -    Select Azure AI Search resource – Select **contoso-ai-search-@lab.LabInstance.Id**
     
-    -    Index Name - +++contosoindex@lab.LabInstance.Id+++
+    -    Index Name - Type +++contosoindex@lab.LabInstance.Id+++
     
     -    Indexer schedule - Once
 
