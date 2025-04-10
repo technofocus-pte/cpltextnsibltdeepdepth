@@ -41,7 +41,7 @@ Follow the steps as shown in the screen shot below.
 
     ![](./media/img2.png)
    
-4.  Click on the Extensions toolbar button. ()
+4.  Click on the Extensions toolbar button.
 
     ![](./media/image1.png)
 
@@ -200,19 +200,17 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
 ### Task 2: Set up accounts in Teams Toolkit
 
-1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials**.
+1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials**. Click on Sign in in the Visual Studio Code popup.
 
   - Username - +++@lab.CloudPortalCredential(User1).Username+++
   
   - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
+    ![](./media/image15.png)
+    
     ![](./media/image14.png)
 
-    ![](./media/img50.png)
-
-3.  A browser window will pop up and offer to log into Microsoft 365. When it says "You are signed in now and close this page", please do so.
-
-    ![](./media/image15.png)
+3.  Once logged in, a browser opens with a message, "You are signed in now and close this page". Please do so.
 
     ![](./media/image16.png)
 
@@ -457,7 +455,7 @@ Some of the benefits of having conversation starters are:
     ![](./media/image33.png)
 
 
-4.  Go to Teams in browser +++https://teams.microsoft.com/v2/+++ logged into your developer tenant. If you have a Microsoft 365 Copilot, the new app will be automatically pinned above your chats. Just open Teams, select “chats” and you’ll see Copilot.
+4.  Go to Teams in browser +++https://teams.microsoft.com/v2/+++ logged into your developer tenant. The new app will be automatically pinned above your chats. Just open Teams, select “chats” and you’ll see **Copilot**. Select it.
 
     ![](./media/image34.png)
 
