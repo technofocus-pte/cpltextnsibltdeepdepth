@@ -455,7 +455,7 @@ Some of the benefits of having conversation starters are:
 
 4.  Once you get a message stating, **5/5 actions in provision stage executed succedssfully**, the process is complete.
 
-    ![](./media/image3.png)
+    ![](./media/img3.png)
     
 4.  Go to Teams in browser +++https://teams.microsoft.com/v2/+++ logged into your developer tenant. The new app will be automatically pinned above your chats. Just open Teams, select “chats” and you’ll see **Copilot**. Select it.
 
