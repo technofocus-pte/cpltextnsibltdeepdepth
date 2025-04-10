@@ -54,7 +54,7 @@ organizational workflows.
     |:---|:------|
     | Subscription   |   Select the assigned subscription |
     |  Resource group  |  Select your assigned Resource Group  |
-    | Region   |  @lab.CloudResourceGroup(ResourceGroup1).Location  |
+    | Region   |  Select @lab.CloudResourceGroup(ResourceGroup1).Location  |
     |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
     |  Pricing tier  |  Standard S0  |    
 
