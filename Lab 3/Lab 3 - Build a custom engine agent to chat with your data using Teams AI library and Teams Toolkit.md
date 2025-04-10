@@ -145,11 +145,11 @@ incorrect.](./media/image15.png)
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
 
 3.  Select **Go to Azure AI Foundry portal**, it will take you to the
-    Foundry Chat playground page.
+    Foundry Chat playground page. Select **Show setup**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
 
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/image19.png)
+    ![A screenshot of a chat AI-generated content may be incorrect.](./media/img1.png)
 
 4.  If the Chat playground is not automatically selected, from the left
     navigation pane, under **Playgrounds,** Select **Chat.**
