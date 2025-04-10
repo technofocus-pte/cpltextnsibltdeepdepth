@@ -358,7 +358,7 @@ with 16-MB size limit.
 
 ### Task 1: Adding a Teams Toolkit extension
 
-1.  Open **Visual Studio Code,** on your PC.
+1.  Open **Visual Studio Code,** on your PC. Select **Trust** to remove the restricted mode in the Visual Studio Code. 
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
