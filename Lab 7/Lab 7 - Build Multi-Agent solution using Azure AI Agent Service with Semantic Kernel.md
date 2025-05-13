@@ -106,7 +106,7 @@ incorrect.](./media/image11.png)
 incorrect.](./media/image12.png)
 
 2.  Select **File** -> **Open Folder** and select the folder
-    **MultiAgents** from **C:\LabFiles** and click **Select Folder**.
+    **MultiAgent** from **C:\LabFiles** and click **Select Folder**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
