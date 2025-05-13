@@ -457,7 +457,7 @@ Some of the benefits of having conversation starters are:
 
     ![](./media/img3.png)
     
-4.  Go to Teams in browser +++https://teams.microsoft.com/v2/+++ logged into your developer tenant. The new app will be automatically pinned above your chats. Just open Teams, select “chats” and you’ll see **Copilot**. Select it.
+4.  Navigate to +++https://teams.microsoft.com/v2/+++ from a browser and log into your tenant if prompted. The new app will be automatically pinned above your chats. Just open Teams, select “chats” and you’ll see **Copilot**. Select it.
 
     ![](./media/image34.png)
 
