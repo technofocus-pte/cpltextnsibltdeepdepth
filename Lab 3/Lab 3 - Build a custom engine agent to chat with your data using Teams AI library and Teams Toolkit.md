@@ -90,7 +90,7 @@ incorrect.](./media/image8.png)
 
 ### Task 2: Assign Cognitive contributor role.
 
-1.  Navigate to the **Resource Group** page.
+1.  Select the **ResourceGroup1** to go to the Resource Group overview page.
    
 2.  Select **Access control (IAM)** from the left pane of the Resource
     group page. Then select **+** **Add** and click **Add role
