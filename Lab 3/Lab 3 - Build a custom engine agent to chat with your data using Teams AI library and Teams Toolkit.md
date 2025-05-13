@@ -144,32 +144,19 @@ incorrect.](./media/image15.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
 
-3.  Select **Go to Azure AI Foundry portal**, it will take you to the
-    Foundry Chat playground page. Select **Show setup**.
+3.  Select **Go to Azure AI Foundry portal**.
+   
+4.  Select **Model Catalog** from the left pane.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
+    <img width="504" alt="image" src="https://github.com/user-attachments/assets/9c9e6e8a-caab-41b7-bcbb-3df9ac62b9ed" />
 
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/img1.png)
-
-4.  If the Chat playground is not automatically selected, from the left
-    navigation pane, under **Playgrounds,** Select **Chat.**
-
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/image20.png)
-
-5.  In the **Chat playground** page, click on **Create new deployment**
-    and select **From base models**.
-
-    Select **Show setup** to see Create new deployment option if not visible.
-
-    ![A screenshot of a chat play AI-generated content may be incorrect.](./media/image21.png)
-
-7.  On the **Select a chat completion model** page, search for
+8.  On the **Select a chat completion model** page, search for
     +++gpt-4o+++, select it and click on **Confirm.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-8.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
+9.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
     enter the following details, and click on **Deploy.**
 
     - **Deployment type**: Standard
@@ -186,7 +173,7 @@ incorrect.](./media/image22.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
 
-9.  You can check the deployment under **Shared resources** à
+10.  You can check the deployment under **Shared resources** à
     **Deployments**
 
     ![A screenshot of a computer AI-generated content may be
