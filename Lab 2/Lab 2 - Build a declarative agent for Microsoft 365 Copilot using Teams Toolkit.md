@@ -190,7 +190,7 @@ Toolkit.
 
 The project will be created in a few seconds in the folder you mentioned and will open in a new project window of Visual Studio Code. This is your working folder.
 
-7.  Click on **Yes, I trust the authors.**
+7.  Click on **Yes, I trust the authors** if prompted.
 
     ![](./media/image12.png)
 
@@ -200,23 +200,23 @@ Well done! You have successfully set up the base declarative agent! Now, proceed
 
 ### Task 2: Set up accounts in Teams Toolkit
 
-1.	Now select the Teams Toolkit icon in the left Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials**. Click on Sign in in the Visual Studio Code popup.
+1.	Now select the Teams Toolkit icon from the left pane. Under "Accounts" click "Sign in to Microsoft 365" and log in with your **User1 credentials**. Click on Sign in in the Visual Studio Code popup.
 
   - Username - +++@lab.CloudPortalCredential(User1).Username+++
   
   - Password - +++@lab.CloudPortalCredential(User1).Password+++
 
+    ![](./media/image14.png)
+    
     ![](./media/image15.png)
     
-    ![](./media/image14.png)
-
-3.  Once logged in, a browser opens with a message, "You are signed in now and close this page". Please do so.
-
-    ![](./media/image16.png)
-
-4.	Select **Allow access** in the Security Alert dialog.
+3.	Select **Allow access** in the Security Alert dialog.
 
     ![](./media/img44.png)
+
+4.  Once logged in, a browser opens with a message, "You are signed in now and close this page". Please do so.
+
+    ![](./media/image16.png)
   	
 5.  Verify that the **Custom App Upload Enabled** checker has a green checkmark.
 
