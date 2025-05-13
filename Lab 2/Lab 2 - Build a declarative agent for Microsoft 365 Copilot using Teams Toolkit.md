@@ -31,7 +31,7 @@ seamlessly with Microsoft 365.
 These labs are based on Teams Toolkit version 5.0.
 Follow the steps as shown in the screen shot below.
 
-1.  Open Visual Studio Code and close the **Appliances.csv** that ia already opened.
+1.  Open Visual Studio Code and close the **Appliances.csv** that is already opened.
 
 2. In the Restricted Mode is intended message, select **Manage**.
 
