@@ -248,7 +248,7 @@ incorrect.](./media/image33.png)
 
 7.  To add data into the source container, Click on **Upload** --\_
     **Browse for files** and then from C:\Labfiles select
-    **TF-AzureOpenAI.** After selecting file click on **upload** button.
+    **TF-AzureOpenAI.pdf** After selecting file click on **upload** button.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
