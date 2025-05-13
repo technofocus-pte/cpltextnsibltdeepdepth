@@ -461,6 +461,7 @@ Some of the benefits of having conversation starters are:
 
     ![](./media/image34.png)
 
+>[!Alert] If you get a message stating Copilot is currently not available in this region, use this link +++https://m365.cloud.microsoft/chat/+++ and follow the same steps to test the app.
 
 5.  Once the Copilot app is loaded, Find the +++Geo Locator Game+++ from the right panel as shown.
 
