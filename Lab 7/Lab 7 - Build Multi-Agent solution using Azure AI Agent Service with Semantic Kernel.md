@@ -25,6 +25,8 @@ to develop a Multi-Agent solution using Azure AI Agent Service.
 
 ## Exercise 1: Create the Azure AI Agent Service
 
+In this exercise, we will create the project in the Azure AI Foundry and deploy the model and create the agent required for the execution
+
 1.  From a browser, open +++**https://ai.azure.com/**+++, click on
     **Sign in** and login using your **login** **credentials**
 
@@ -100,6 +102,7 @@ incorrect.](./media/image11.png)
 
 ## Exercise 2: Multi Agent Orchestration 
 
+In this exercise, we will set up the Visual Studio Code and install the pre requisites that are needed for the execution.
 1.  From your VM, open the **Visual Studio Code**.
 
     ![A screenshot of a computer AI-generated content may be
