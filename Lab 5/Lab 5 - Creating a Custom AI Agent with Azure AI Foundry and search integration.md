@@ -73,61 +73,57 @@ enhance user engagement through intuitive and efficient interactions.
 
    ![A screenshot of a computer Description automatically generated](./media/image7.png)
 
-   >[!Note] **Note:** Later, you’re going to create an Azure AI Hub (which includes an Azure OpenAI service) in the same region as your Azure AI Search resource. Azure OpenAI resources are constrained at the tenant level by regional quotas. In the event of a quota limit being reached later in the exercise, there’s a possibility you may need to create another Azure AI hub in a different region.
+## Task 2: Create an Azure AI Hub resource aand project
 
-## Task 2: Create an Azure AI project
+1. Select **Azure AI Foundry** from the Azure portal Home page.
 
-1.  In a web browser, open **Azure AI Foundry portal** at +++https://ai.azure.com+++ and
-    **sign in** using
+   ![image](https://github.com/user-attachments/assets/98874868-93c2-4f81-88ac-89dfc2517de1)
 
-    - Username - +++@lab.CloudPortalCredential(User1).Username+++
-    
-    - Password - +++@lab.CloudPortalCredential(User1).Password+++
+2. Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**
 
-   ![](./media/image8.png)
+    ![image](https://github.com/user-attachments/assets/ce61ee78-571b-418b-a7a7-117708b5a053)
 
-2.  **Close** the **Help** tab and select **Got it** in the
-    **Streamlined from the start** pop up.
+3. Enter the below details, accept the other defaults and select **Review + create**.
 
-3.  In the home page, select **+ Create project**.
+   -    Subscription - Select your assigned subscription
+   
+   -    Resource group - Select your assigned Resource group (ResourceGroup1)
+     
+   -    Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
+     
+   -    Name - +++**hub@lab.LabInstance.Id**+++
+   
+    ![image](https://github.com/user-attachments/assets/a0a97ed5-8a30-462b-8478-df7c4ce6623d)
 
-    ![](./media/image9.png)
+    ![image](https://github.com/user-attachments/assets/19b9e8be-dbb1-4b73-a79d-18494dab7573)
 
-4.  In the **Create a project** wizard enter project name as
-    +++**ragpfproject@lab.LabInstance.Id**+++ and click on **Customize**.
+4. Once the valiation passes, select **Create**.
 
-    ![](./media/image10.png)
+    ![image](https://github.com/user-attachments/assets/186aa02b-2ade-4174-a33a-b9d54a5cfb0d)
 
-5.  **In Customize**, connect to your Azure AI Search resource, enter
-    the following details, select **Next** and review your
-    configuration.
+5. Once the deployment is complete, click on **Go to resource**.
 
-    - **Hub name**: +++**hub@lab.LabInstance.Id**+++
+    ![image](https://github.com/user-attachments/assets/0d817499-ccc6-4142-afa7-d69321bba83e)
 
-    - **Azure Subscription**: Select the assigned Azure subscription
+6.  Select **Launch Azure AI Foundry** from the hub resource page.
 
-    - **Resource group**: Select the assigned Resource Group
+    ![image](https://github.com/user-attachments/assets/fe099937-34ce-45fc-afab-a8ef1fccf3b8)
 
-    - **Location**: Select @lab.CloudResourceGroup(ResourceGroup1).Location
+7.  From the launched hub resource, scroll down and select **+ New project**
 
-    - **Connect Azure AI Services or Azure OpenAI**: (New) Autofill’s
-      with your hub name
+    ![image](https://github.com/user-attachments/assets/61579444-f7b0-46a9-8fb7-315a9a4ad5b2)
 
-    - **Connect Azure AI Search**: Select your Azure AI Search resource,
-      **aisearch@lab.LabInstance.Id**
+    ![image](https://github.com/user-attachments/assets/e7db51ad-f425-4fca-a13d-6b92b15dd9f6)
 
-    ![](./media/image11.png)
+8.  Enter the name as +++**ragpfproject@lab.LabInstance.Id**+++ and select **Create**.
 
-6.  Review the details and click on **Create** and wait for the process
-    to complete.
+    ![image](https://github.com/user-attachments/assets/851f4175-a2c6-434b-bf71-f7c5a0884271)
 
-    ![](./media/image12.png)
-
-7.  **Close** the Explore and experiment pop up.
+9.  **Close** the Explore and experiment pop up.
 
     ![](./media/image13.png)
 
-8.  You will land in the created project page.
+10.  You will land in the created project page.
 
     ![](./media/image14.png)
 
