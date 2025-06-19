@@ -73,7 +73,7 @@ enhance user engagement through intuitive and efficient interactions.
 
    ![A screenshot of a computer Description automatically generated](./media/image7.png)
 
-## Task 2: Create an Azure AI Hub resource aand project
+## Task 2: Create an Azure AI Hub resource and project
 
 1. Select **Azure AI Foundry** from the Azure portal **Home** page.
 
@@ -85,9 +85,9 @@ enhance user engagement through intuitive and efficient interactions.
 
 3. Enter the below details, accept the other defaults and select **Review + create**.
 
-   -    Subscription - Select your assigned subscription
+   -    Subscription - Select your **assigned subscription**
    
-   -    Resource group - Select your assigned Resource group (ResourceGroup1)
+   -    Resource group - Select your assigned Resource group (**ResourceGroup1**)
      
    -    Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
      
