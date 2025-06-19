@@ -75,7 +75,7 @@ enhance user engagement through intuitive and efficient interactions.
 
 ## Task 2: Create an Azure AI Hub resource aand project
 
-1. Select **Azure AI Foundry** from the Azure portal Home page.
+1. Select **Azure AI Foundry** from the Azure portal **Home** page.
 
    ![image](https://github.com/user-attachments/assets/98874868-93c2-4f81-88ac-89dfc2517de1)
 
@@ -117,7 +117,7 @@ enhance user engagement through intuitive and efficient interactions.
 
 8.  Enter the name as +++**ragpfproject@lab.LabInstance.Id**+++ and select **Create**.
 
-    ![image](https://github.com/user-attachments/assets/851f4175-a2c6-434b-bf71-f7c5a0884271)
+    <img width="697" alt="image" src="https://github.com/user-attachments/assets/6aec7bac-cb5f-4ec9-9dfa-86eae5e8dd0f" />
 
 9.  **Close** the Explore and experiment pop up.
 
@@ -125,7 +125,7 @@ enhance user engagement through intuitive and efficient interactions.
 
 10.  You will land in the created project page.
 
-    ![](./media/image14.png)
+     ![](./media/image14.png)
 
 ## Task 3: Deploy models
 
