@@ -360,7 +360,7 @@ along with other required packages.
     folder and add the following packages to the file:
 
     ```
-    azure-ai-projects
+    azure-ai-projects==1.0.0b10
     azure-ai-inference[prompts]
     azure-identity
     azure-search-documents
