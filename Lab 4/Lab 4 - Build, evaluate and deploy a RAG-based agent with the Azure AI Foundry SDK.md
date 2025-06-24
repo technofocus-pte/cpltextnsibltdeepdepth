@@ -133,7 +133,7 @@ In this exercise, we will create the hub in the Azure portal, then a project in 
 
 13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
 
-     ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+     <img width="457" alt="image" src="https://github.com/user-attachments/assets/d42c101b-4d6f-4eb1-baa4-93b1c120a561" />
 
 14.  Select **Azure AI Foundry** from the available external assets.
 
