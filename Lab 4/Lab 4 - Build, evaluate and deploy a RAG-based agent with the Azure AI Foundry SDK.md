@@ -121,7 +121,7 @@ In this exercise, we will create the hub in the Azure portal, then a project in 
 
 10.  You will land in the created project page.
 
-     ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+     <img width="582" alt="image" src="https://github.com/user-attachments/assets/3ace2195-3027-41ca-a68a-932db6671072" />
 
 11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
 
