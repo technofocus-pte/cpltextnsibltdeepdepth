@@ -155,7 +155,7 @@ In this exercise, we will create the hub in the Azure portal, then a project in 
 
 18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
 
-     ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+     <img width="415" alt="image" src="https://github.com/user-attachments/assets/afdafbfd-4bc8-44c5-a22e-1bbcf12431fe" />
 
 19.  Now, we have the Azure resources ready.
 
