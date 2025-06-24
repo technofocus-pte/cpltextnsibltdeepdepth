@@ -23,72 +23,113 @@ Agents be combined in the workflow? We need to use AutoGen or Semantic
 Kernel to orchestrate the AI Agents. In this lab, we use Semantic Kernel
 to develop a Multi-Agent solution using Azure AI Agent Service.
 
-## Exercise 1: Create the Azure AI Agent Service
+## Exercise 1: Create an Azure AI Hub resource and project
 
-In this exercise, we will create the project in the Azure AI Foundry and deploy the model and create the agent required for the execution
+In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
 
-1.  From a browser, open +++**https://ai.azure.com/**+++, click on
-    **Sign in** and login using your **login** **credentials**
+1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
 
     - User name – +++@lab.CloudPortalCredential(User1).Username+++
     
     - Password – +++@lab.CloudPortalCredential(User1).Password+++
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image2.png)
-
-2.  **Close** the pop ups and click on **+ Create project**
-
-    ![](./media/image3.png)
-
-3.  Provide the Project name as +++**multiagent@lab.LabInstance.Id**+++
-    and click on **Customize**.
-
-    ![A screenshot of a computer project AI-generated content may be
-incorrect.](./media/image4.png)
-
-4.  In the Customization pane, fill in the below details and select
-    **Next**.
-
-    - Hub - +++hub@lab.LabInstance.Id+++
+    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
     
-    - Subscription – Select the **assigned subscription**
-    
-    - Resource Group – Select the **assigned Resource Group**
-    
-    - Location – @lab.CloudResourceGroup(ResourceGroup1).Location
-    
-    - Connect Azure AI Services or Azure OpenAI Service – Select the
-      **(new)** resource name that gets listed.
+2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image5.png)
+   ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
 
-5.  Select **Create** from the Review and finish screen to create the
-    project.
+3.	Enter the below details, accept the other defaults and select **Review + create**.
+   
+   -	Subscription - Select your **assigned subscription**
+     
+   -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
+     
+   -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
+     
+   -	Name - +++hub@lab.LabInstance.Id+++
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image6.png)
+   ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
 
-6.  Once the project is created, copy the **API Key**, **Azure OpenAI
-    Service Endpoint** and **Project connection string** to a notepad.
+   ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image7.png)
+4.	 Once the validation passes, select **Create**.
 
-7.  Select **Agents** under **Build and customize** from the left pane.
+   ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
+
+5.	 Once the deployment is complete, click on **Go to resource**.
+
+   ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
+
+6.	Select **Launch Azure AI Foundry** from the hub resource page.
+
+   ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
+
+7.	From the launched hub resource, scroll down and select **+ New project**.
+
+   ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
+
+   ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
+
+8.	Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
+
+   ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
+
+9.	**Close** the Explore and experiment pop up.
+
+   ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
+
+10. You will land in the created project page.
+
+    ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+
+11. Scroll down the page and copy the value of the **Project connection string** to a notepad.
+
+   ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+
+12. Scroll down in the left pane and select **Management center**.
+
+   ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+
+13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+
+   ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+
+14. Select **Azure AI Foundry** from the available external assets.
+
+   ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+
+15. Select **Add connection** to add the connection.
+
+    ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+
+    ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+
+16. Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+
+    ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+
+17. Select **Go to project** from the left pane.
+
+   ![image](https://github.com/user-attachments/assets/9062a254-ce3a-4a64-8a0b-4e0b5abec790)
+
+18. From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+
+   ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+
+19.  Select **Agents** under **Build and customize** from the left pane.
     In the **Azure AI Agent Service** page, select your **Azure OpenAI
     Service** that was created, and then click on **Let’s go**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-8.  Select **gpt-4o-mini** and click on **Confirm**.
+20.  Select **gpt-4o-mini** and click on **Confirm**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Accept the deployment name as +++**gpt-4o-mini**+++, select the
+21.  Accept the deployment name as +++**gpt-4o-mini**+++, select the
     Deployment type to be **Standard**. Accept the other defaults and
     click on **Deploy** to deploy the model.
 
@@ -98,7 +139,7 @@ incorrect.](./media/image10.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-10. Now, we have the Azure resources ready.
+22. Now, we have the Azure resources ready.
 
 ## Exercise 2: Multi Agent Orchestration 
 
