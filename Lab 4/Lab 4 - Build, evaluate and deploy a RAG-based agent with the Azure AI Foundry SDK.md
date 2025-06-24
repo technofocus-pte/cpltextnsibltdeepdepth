@@ -63,59 +63,101 @@ execution.
 
     ![A screenshot of a computer Description automatically generated](./media/image2.png)
 
-## Exercise 1 - Set up project and development environment to build a custom knowledge retrieval (RAG) app with the Azure AI Foundry SDK
+## Exercise 1: Create an Azure AI Hub resource and project
 
-### Task 1 Create a project
+In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
 
-To create a project in Azure AI Foundry, follow these steps:
+1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
 
-1.  Login to the Azure AI Foundry at +++https://ai.azure.com/+++.
-    Select **Sign in** and login using,
+    - User name – +++@lab.CloudPortalCredential(User1).Username+++
     
-    - Username - +++@lab.CloudPortalCredential(User1).Username+++
-      
-    - Password - +++@lab.CloudPortalCredential(User1).Password+++
+    - Password – +++@lab.CloudPortalCredential(User1).Password+++
 
-    ![](./media/image3.png)
+    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
+    
+2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
 
-3.  Close the pop ups that comes up and select **+ Create project**.
+    ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
 
-    ![](./media/image4.png)
+3.	 Enter the below details, accept the other defaults and select **Review + create**.
+   
+     -	Subscription - Select your **assigned subscription**
+     
+     -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
+     
+     -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
+     
+     -	Name - +++hub@lab.LabInstance.Id+++
 
-4.  Enter **+++RAGproj@lab.LabInstance.Id+++** as name for the project,
-    click on **Customize**.
+     ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
+ 
+     ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
 
-    ![A screenshot of a computer Description automatically generated](./media/image5.png)
+4.	 Once the validation passes, select **Create**.
 
-5.  On the next page, enter the following details and click on **Next.**
+     ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
 
-    -   Hub name - **+++hub@lab.LabInstance.Id+++**
+5.	 Once the deployment is complete, click on **Go to resource**.
 
-    -   Subscription - Select your assigned subscription
+     ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
 
-    -   Create new Resource group - Select your assigned Resource Group(ResourceGroup1)
+6.	 Select **Launch Azure AI Foundry** from the hub resource page.
 
-    -   Location - Select @lab.CloudResourceGroup(ResourceGroup1).Location
+     ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
 
-    Leave the rest as default and click on **Next**.
+7.	 From the launched hub resource, scroll down and select **+ New project**.
 
-    ![A screenshot of a computer Description automatically generated](./media/image6.png)
+     ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
 
-6.  On the **Review and finish** page, click on **Create.**
+     ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
 
-    ![A screenshot of a computer Description automatically generated](./media/image7.png)
+8.	 Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
 
-7.  The resource creation will take a few minutes.
+     ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
 
-    ![A screenshot of a computer Description automatically generated](./media/image8.png)
+9.	 **Close** the Explore and experiment pop up.
 
-8.  Close the pop-up windows, if any appears.
+     ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
 
-9.  From the home page of the project, note down the **Project
-    connection string** in a notepad to be used in next task of this
-    exercise.
+10.  You will land in the created project page.
 
-    ![](./media/image9.png)
+     ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+
+11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
+
+     ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+
+12.  Scroll down in the left pane and select **Management center**.
+
+     ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+
+13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+
+     ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+
+14.  Select **Azure AI Foundry** from the available external assets.
+
+     ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+
+15.  Select **Add connection** to add the connection.
+
+     ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+
+     ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+
+16.  Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+
+     ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+
+17.  Select **Go to project** from the left pane.
+
+     ![image](https://github.com/user-attachments/assets/9062a254-ce3a-4a64-8a0b-4e0b5abec790)
+
+18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+
+     ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+
+19.  Now, we have the Azure resources ready.
 
 ### Task 2: Deploy models
 
