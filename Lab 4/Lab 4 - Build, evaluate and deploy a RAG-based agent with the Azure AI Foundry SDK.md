@@ -111,9 +111,9 @@ In this exercise, we will create the hub in the Azure portal, then a project in 
 
      ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
 
-8.	 Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
+8.	 Enter the name as +++RAGproj@lab.LabInstance.Id+++ and select **Create**.
 
-     ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
+     <img width="693" alt="image" src="https://github.com/user-attachments/assets/d166598d-5da5-4a04-b59c-721c94d032d8" />
 
 9.	 **Close** the Explore and experiment pop up.
 
