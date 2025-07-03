@@ -438,9 +438,8 @@ Let's customize the prompt for your custom engine agent.
     file.
 
     ```
-    The following is a conversation with an AI assistant, who is an expert on answering questions over the given context.
-Responses should be in a short journalistic style with no more than 80 words.
-
+    The following is a conversation with an AI assistant, who is an expert on answering questions         over the given context.
+    Responses should be in a short journalistic style with no more than 80 words.
     ```
     
     ![](./media/image66.png)
