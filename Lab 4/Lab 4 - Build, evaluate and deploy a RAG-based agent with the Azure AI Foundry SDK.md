@@ -1,1751 +1,2452 @@
-# Lab 4 - Build, evaluate and deploy a RAG-based agent with the Azure AI Foundry SDK
+# ラボ 4 - Azure AI Foundry SDK を使用して RAG-basedエージェントを構築、評価、展開する
 
-**Estimated Time: 120 mins**
+**所要時間：120分**
 
-## Objective
+## 目的
 
-The objective of this lab is to build, evaluate, and deploy a
-Retrieval-Augmented Generation (RAG)-based agent using the Azure AI
-Foundry SDK. The lab guides you through setting up the project and
-development environment, deploying AI models (e.g., GPT-4 and
-text-embedding-ada-002), integrating Azure AI Search for document
-retrieval, and creating a custom knowledge retrieval (RAG) chat
-application. The focus is on grounding AI model responses with relevant
-product data, developing a custom chat interface, and evaluating the
-performance of the generated responses.
+このラボの目的は、Azure AI Foundry
+SDKを使用して、検索拡張生成（RAG）ベースのエージェントを構築、評価、展開することです。このラボでは、プロジェクトと開発環境の設定、AIモデル（GPT-4、text-embedding-ada-002など）の展開、ドキュメント検索のためのAzure
+AI
+Searchの統合、カスタム知識検索（RAG）チャットアプリケーションの作成について解説します。特に、AIモデルの応答を関連する製品データと関連付け、カスタムチャットインターフェースを開発し、生成された応答のパフォーマンスを評価することに重点を置きます。
 
-## Solution
+## 解決
 
-The solution involves setting up a project in Azure AI Foundry,
-deploying AI models (GPT-4 and text-embedding-ada-002), and integrating
-Azure AI Search to store and retrieve custom product data. It includes
-creating Python scripts to generate vector embeddings, build search
-indexes, and query them for relevant product information. A RAG-based
-chat interface is developed to provide grounded responses by leveraging
-the search results, and the chat app's performance is evaluated using
-predefined datasets and metrics to enhance its effectiveness.
+このソリューションでは、Azure AI Foundry
+でのプロジェクトのセットアップ、AI モデル（GPT-4 および
+text-embedding-ada-002）のデプロイ、そして Azure AI Search
+の統合によるカスタム製品データの保存と取得が行われます。これには、ベクター埋め込みの生成、検索インデックスの構築、そして関連する製品情報のクエリを実行する
+Python
+スクリプトの作成も含まれます。検索結果を活用して根拠のある応答を提供する
+RAG ベースのチャット
+インターフェイスが開発され、定義済みのデータセットとメトリックを用いてチャット
+アプリのパフォーマンスが評価され、その有効性が向上します。
 
-## Exercise 0: Understand the VM and the credentials
+## 演習0: VMと資格情報を理解する
 
-In this exercise, we will identify and understand the credentials that
-we will be using throughout the lab.
+この演習では、ラボ全体で使用する資格情報を特定し、理解します。
 
-**Important:** Do go through each step in this exercise to get to know
-the generic terms and the credentials that will be used for the lab
-execution.
+**重要:**
+この演習の各ステップを通して、一般的な用語とラボの実行に使用される資格情報を分かるように知なります。
 
-1.  **Instructions** tab hold the lab guide with the instructions to be
-    followed throughout the lab.
+1.  **Instructions **タブには、ラボ全体にわたって従うべき手順が記載されたラボ
+    ガイドが含まれています。
 
-2.  **Resources** tab has got the credentials that will be needed for
-    executing the lab.
+2.  **Resources** タブには、ラボの実行に必要な資格情報が表示されます。
 
-    - **URL** – URL to the Azure portal
+    - **URL** – Azure ポータルへの URL
 
-    - **Subscription** – This is the **ID** of the **subscription** assigned
-    to you
+    - **Subscription ** –
+      これはあなたに割り当てられた**サブスクリプション**の**IDです**
 
-    - **Username** – The **user id** with which you need to **login** to the
-    **Azure services**.
+    - **User name**– **Azure
+      サービス**に**ログイン**するために必要な**ユーザー ID** 。
 
-    - **Password** – **Password** to the **Azure login**.
+    - Password– **Azure ログイン**の**パスワード**。
 
-    Let us call this Username and password as **Azure login credentials**. We will use these creds wherever we mention **Azure login credentials**.
+**Azureログイン資格情報**と呼びます。Azure**ログイン資格情報**について言及する際には、必ずこの資格情報を使用します。
 
-    - **Resource Group** – The **Resource group** assigned to you.
+- **リソース グループ**–割り当てられた**リソース グループ。**
 
-    >[!Alert] **Important**: Make sure you create all your resources under this Resource group
+**重要**: すべてのリソースをこのリソース
+グループの下に作成してください。
 
-    ![A screenshot of a computer Description automatically generated](./media/image1.png)
+![A screenshot of a computer Description automatically
+generated](./media/image1.png)
 
-3.  **Help** tab holds the Support information. The **ID** value here is
-    the **Lab instance ID** which will be used during the lab execution.
+3.  **Help**タブにはサポート情報が表示されます。ここで表示される**ID**値は、ラボ実行時に使用される**Lab
+    instance ID**です。
 
-    ![A screenshot of a computer Description automatically generated](./media/image2.png)
+![A screenshot of a computer Description automatically
+generated](./media/image2.png)
 
-## Exercise 1: Create an Azure AI Hub resource and project
+## 演習 1: Azure AI Hub リソースとプロジェクトを作成する
 
-In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
+この演習では、Azure ポータルでハブを作成し、Azure AI Foundry
+でプロジェクトを作成し、モデルをデプロイして、実行に必要なエージェントを作成します。
 
-1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
+### タスク1: プロジェクトを作成する
 
-    - User name – +++@lab.CloudPortalCredential(User1).Username+++
-    
-    - Password – +++@lab.CloudPortalCredential(User1).Password+++
+1.  ブラウザから、+++\*\*<https://portal.azure.com/**+++>を開き、**ログイン情報**を使用してログインします**。** **ホーム**ページから**Azure
+    AI Foundry**を選択します。
 
-    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
-    
-2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
+    - ユーザー名 – <+++@lab.CloudPortalCredential> (User1).Username+++
 
-    ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
+    - パスワード – <+++@lab.CloudPortalCredential> (User1).Password+++
 
-3.	 Enter the below details, accept the other defaults and select **Review + create**.
-   
-     -	Subscription - Select your **assigned subscription**
-     
-     -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
-     
-     -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
-     
-     -	Name - +++hub@lab.LabInstance.Id+++
+![image](./media/image3.png)
 
-     ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
- 
-     ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
+2.  **Use AI Foundry** -\> **AI ハブ**を選択します。 **+ Create **
+    -\>**Hub**を選択します。
 
-4.	 Once the validation passes, select **Create**.
+![image](./media/image4.png)
 
-     ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
+3.  以下の詳細を入力し、他のデフォルトを受け入れて、 **Review +
+    create**を選択します。
 
-5.	 Once the deployment is complete, click on **Go to resource**.
+    - Subscription -**割り当てられたサブスクリプション**を選択します
 
-     ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
+    - Resource group- 割り当てられたリソース グループ (
+      **ResourceGroup1** )を選択します。
 
-6.	 Select **Launch Azure AI Foundry** from the hub resource page.
+    - Region- @lab.CloudResourceGroup(ResourceGroup1).Location
+      を選択します。
 
-     ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
+    - Name - <+++hub@lab.LabInstance.Id> +++
 
-7.	 From the launched hub resource, scroll down and select **+ New project**.
+![image](./media/image5.png)
 
-     ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
+![image](./media/image6.png)
 
-     ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
+4.  検証に合格したら**Create** を選択します。
 
-8.	 Enter the name as +++RAGproj@lab.LabInstance.Id+++ and select **Create**.
+![image](./media/image7.png)
 
-     <img width="693" alt="image" src="https://github.com/user-attachments/assets/d166598d-5da5-4a04-b59c-721c94d032d8" />
+5.  デプロイが完了したら、 **Go to resource**をクリックします。
 
-9.	 **Close** the Explore and experiment pop up.
+![image](./media/image8.png)
 
-     ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
+6.  ハブ リソース ページから**Launch Azure AI Foundry **を選択します。
 
-10.  You will land in the created project page.
+![image](./media/image9.png)
 
-     <img width="582" alt="image" src="https://github.com/user-attachments/assets/3ace2195-3027-41ca-a68a-932db6671072" />
+7.  起動したハブ リソースから下にスクロールして、 **+ New
+    project**を選択します。
 
-11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
+![image](./media/image10.png)
 
-     ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+![image](./media/image11.png)
 
-12.  Scroll down in the left pane and select **Management center**.
+8.  名前を<+++RAGproj@lab.LabInstance.Id> +++ と入力し、
+    **Create**を選択します。
 
-     ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+![image](./media/image12.png)
 
-13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+9.  Explore and experimentポップアップをClose**します。**
 
-     <img width="457" alt="image" src="https://github.com/user-attachments/assets/d42c101b-4d6f-4eb1-baa4-93b1c120a561" />
+![image](./media/image13.png)
 
-14.  Select **Azure AI Foundry** from the available external assets.
+10. 作成されたプロジェクト ページに移動します。
 
-     ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+![image](./media/image14.png)
 
-15.  Select **Add connection** to add the connection.
+11. ページを下にスクロールし、**Project connection
+    string **の値をメモ帳にコピーします。
 
-     ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+![image](./media/image15.png)
 
-     ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+12. 左側のペインで下にスクロールし、**Management center**を選択します。
 
-16.  Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+![image](./media/image16.png)
 
-     ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+13. ハブ リソースの下にある **Connected resources** を選択し、 **+ New
+    connection **をクリックして、Azure AI Foundry
+    リソースとの接続を作成します。
 
-17.  Select **Go to project** from the left pane.
+![image](./media/image17.png)
 
-     <img width="456" alt="image" src="https://github.com/user-attachments/assets/3c77ee49-002b-4a78-86a5-b57e9bd37167" />
+14. 利用可能な外部アセットから**Azure AI Foundry** を選択します。
 
-18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+![image](./media/image18.png)
 
-     <img width="415" alt="image" src="https://github.com/user-attachments/assets/afdafbfd-4bc8-44c5-a22e-1bbcf12431fe" />
+15. **Add connection **を選択します。
 
-19.  Now, we have the Azure resources ready.
+![image](./media/image19.png)
 
-### Task 2: Deploy models
+![image](./media/image20.png)
 
-You need two models to build a RAG-based chat app: an Azure OpenAI chat
-model (gpt-4o-mini) and an Azure OpenAI embedding model
-(text-embedding-ada-002). Deploy these models in your Azure AI Foundry
-project, using this set of steps for each model.
+16. 接続したら、 **Close**をクリックします。
+    **Close**ボタンが表示されない場合は、ブラウザの**ズームサイズ**を縮小してから**Close**を選択してください。
 
-These steps deploy a model to a real-time endpoint from the AI Foundry
-portal model catalog
+![image](./media/image21.png)
 
-1.  From the left navigation pane, select **Model catalog**.
+17. 左側のペインから**Go to project **を選択します。
 
-    ![](./media/image10.png)
+![image](./media/image22.png)
 
-2.  Select the +++**gpt-4o-mini**+++ model from the list of models. You can
-    use the search bar to find it.
+18. **API Key **と**Azure OpenAI
+    endpoint**の値をコピーし、メモ帳に保存します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image11.png)
+![image](./media/image23.png)
 
-3.  On the model details page, select **Deploy**.
+19. これで、Azure リソースの準備が整いました。
 
-    ![A screenshot of a computer Description automatically generated](./media/image12.png)
+### タスク2: モデルのデプロイ
 
-4.  Leave the default **Deployment name**. select **Deploy**. Or, if the
-    model isn't available in your region, a different region is selected
-    for you and connected to your project. In this case, select **Create
-    resource and deploy**.
+RAGベースのチャットアプリを構築するには、Azure
+OpenAIチャットモデル（gpt-4o-mini）とAzure
+OpenAI埋め込みモデル（text-embedding-ada-002）の2つのモデルが必要です。これらのモデルをAzure
+AI
+Foundryプロジェクトにデプロイし、各モデルごとに以下の手順に従ってください。
 
-    ![A screenshot of a computer Description automatically generated](./media/image13.png)
+カタログからリアルタイムエンドポイントにモデルをデプロイします。
 
-    ![](./media/image14.png)
+1.  左側のナビゲーション ペインから、**Model catalog**を選択します。
 
-5.  After you deploy the **gpt-4o-mini**, deploy
-    the +++**text-embedding-ada-002**+++ model. Select the **Deployment Type** as **Standard**.
+![](./media/image24.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image15.png)
+2.  モデルリストから+++ **gpt-4o-mini
+    +++**モデルを選択してください**。**検索バーを使って検索することもできます。
 
-### Task 3: Create an Azure AI Search service
+![A screenshot of a computer Description automatically
+generated](./media/image25.png)
 
-The goal with this application is to ground the model responses in your
-custom data. The search index is used to retrieve relevant documents
-based on the user's question.
+3.  モデルの詳細ページで、 **Deploy**を選択します。
 
-You need an Azure AI Search service and connection to create a search
-index.
+![A screenshot of a computer Description automatically
+generated](./media/image26.png)
 
-1.  Login to the Azure portal at +++https://portal.azure.com+++ using
-    the Azure login credentials.
+4.  デフォルトの**Deployment name**のままにし**、
+    Deploy**を選択します。または、現リージョンでモデルが利用不可能の場合、別のリージョンが自動的に選択され、プロジェクトに接続されます。その場合は、**Create
+    resource and deploy**を選択します。
 
-2.  From the home page search bar, search for +++**AI search**+++ and
-    select it.
+![A screenshot of a computer Description automatically
+generated](./media/image27.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image16.png)
+![](./media/image28.png)
 
-3.  Click on **+ Create** icon and fill in the following details.
+5.  **gpt-4o-mini**をデプロイしたら、 +++ **text-embedding-ada-002** +++
+    モデルをデプロイします。**Deployment
+    Type **は**Standard**を選択します。
 
-    ![](./media/image17.png)
+![A screenshot of a computer Description automatically
+generated](./media/image29.png)
 
-4.  Enter the below details and select **Review + create**.
+### タスク 3: Azure AI Search サービスを作成する
 
-    - Subscription – Select your assigned subscription
+このアプリケーションの目標は、モデルの応答をカスタムデータに基づいて構築することです。検索インデックスは、ユーザーの質問に基づいて関連するドキュメントを取得するために使用されます。
 
-    - Resource Group – Select your assigned Resource group
+検索インデックスを作成するには、Azure AI Search
+サービスと接続が必要です。
 
-    - Service name – Enter **+++aisearch@lab.LabInstance.Id+++** 
+1.  Azure ログイン資格情報を使用して、 +++
+    [https://portal.azure.com+++](https://portal.azure.com+++/)の Azure
+    ポータルにログインします。
 
-    - Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
+2.  ホームページの検索バーから+++ **AI search**
+    +++を検索して選択します。
 
-    - Pricing tier – Select **Standard**
+![A screenshot of a computer Description automatically
+generated](./media/image30.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image18.png)
+3.  **+ Create **アイコンをクリックし、次の詳細を入力します。
 
-5.  Review the details and select **Create**.
+![](./media/image31.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image19.png)
+4.  以下の詳細を入力し、 **Review + create**を選択します。
 
-6.  Wait until the deployment succeeds, as in the below screenshot
-    before proceeding with the next step.
+    - Subscription – 割り当てられたサブスクリプションを選択します
 
-    ![A screenshot of a computer Description automatically generated](./media/image20.png)
+    - Resource Group – 割り当てられたリソースグループを選択します
 
-### Task 4: Connect the Azure AI Search to your project
+    - Service name –
+      [**+++aisearch@lab.LabInstance.Id**](mailto:+++aisearch@lab.LabInstance.Id)
+      **+++と入力**
 
-In the Azure AI Foundry portal, check for an Azure AI Search connected
-resource.
+    - Region - @lab.CloudResourceGroup(ResourceGroup1).Location
+      を選択します。
 
-1.  From your project in Azure AI Foundry, select **Management
-    center** from the left pane.
+    - Pricing tier – **Standard**を選択
 
-    ![A screenshot of a computer Description automatically generated](./media/image21.png)
+![A screenshot of a computer Description automatically
+generated](./media/image32.png)
 
-2.  In the **Connected resources** section, select **New
-    connection** and then select **Azure AI Search**.
+5.  詳細を確認し、 **Create**を選択します。
 
-    ![](./media/image22.png)
+![A screenshot of a computer Description automatically
+generated](./media/image33.png)
 
-    ![](./media/image23.png)
+6.  次の手順に進む前に、以下のスクリーンショットのように、デプロイメントが成功するまで待機します。
 
-3.  Select **API key** under **Authentication** and select **Add
-    connection**.
+![A screenshot of a computer Description automatically
+generated](./media/image34.png)
 
-    ![A screenshot of a search engine Description automatically generated](./media/image24.png)
+### タスク 4: Azure AI Search をプロジェクトに接続する
 
-    ![A screenshot of a search engine Description automatically generated](./media/image25.png)
+Azure AI Foundry ポータルで、Azure AI Search
+に接続されたリソースを確認します。
 
-4.	From the **Connected resources** page, you can now see the added resource connection.
-   
-    ![](./media/image26.png)
+1.  Azure AI Foundry のプロジェクトで、左側のペインから**Management
+    center **を選択します。
 
-### Task 5: Install the Azure CLI and sign in
+![A screenshot of a computer Description automatically
+generated](./media/image35.png)
 
-You install the Azure CLI and sign in from your local development
-environment, so that you can use your user credentials to call the Azure
-OpenAI service.
+2.  **Connected resources **セクションで、 **New connection **を選択し、
+    **Azure AI Search**を選択します。
 
-1.  Search for +++**PowerShell**+++ from the Windows search bar and open
-    it in the **Administrator** mode. Accept if prompted for the launch to continue.
+![](./media/image36.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image27.png)
+![](./media/image37.png)
 
-2.  Open windows power shell and paste the below given command and run
-    it.
+3.  **Authentication **の下の**API key **を選択し、 **Add
+    connection**を選択します。
 
-    ```
-    $progressPreference = 'silentlyContinue'
-    Write-Host "Installing WinGet PowerShell module from PSGallery..."
-    Install-PackageProvider -Name NuGet -Force | Out-Null
-    Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-    Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
-    Repair-WinGetPackageManager
-    Write-Host "Done."
-    ```
+![A screenshot of a search engine Description automatically
+generated](./media/image38.png)
 
-3.  Install the Azure CLI from your terminal using the following
-    command:
+![A screenshot of a search engine Description automatically
+generated](./media/image39.png)
 
-    ```
-    winget install -e --id Microsoft.AzureCLI
-    ```
+4.  **Connected
+    resources **ページで、追加されたリソース接続を確認できるようになりました。
 
-    Select **Y** and then **Enter** when prompted for acceptance.
+![](./media/image40.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image28.png)
+### タスク 5: Azure CLI をインストールしてサインインする
 
-    ![](./media/image29.png)
+Azure CLI
+をインストールし、ローカル開発環境からサインインすると、ユーザー資格情報を使用して
+Azure OpenAI サービスを呼び出すことができます。
 
-    ![](./media/image30.png)
+1.  Windowsの検索バーで+++ **PowerShell
+    +++**を検索し、**Administrator **モードで開きます。起動を続行するには、プロンプトが表示されたら承認してください。
 
-4.  After you install the Azure CLI, sign in using the az login command
-    and sign-in using the browser:
+![A screenshot of a computer Description automatically
+generated](./media/image41.png)
 
-    ```
-    az login
-    ```
+2.  Windows Power Shell を開き、以下のコマンドを貼り付けて実行します。
 
-    Select **Work or school account** and click on **Continue**.
+> $progressPreference = 'silentlyContinue'
+>
+> Write-Host "Installing WinGet PowerShell module from PSGallery..."
+>
+> Install-PackageProvider -Name NuGet -Force | Out-Null
+>
+> Install-Module -Name Microsoft.WinGet.Client -Force -Repository
+> PSGallery | Out-Null
+>
+> Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap
+> WinGet..."
+>
+> Repair-WinGetPackageManager
+>
+> Write-Host "Done."
 
-    ![A screenshot of a computer screen Description automatically generated](./media/image31.png)
+3.  次のコマンドを使用して、ターミナルから Azure CLI
+    をインストールします。
 
-5.  Login with your **Azure login credentials**.
+> +++ winget install -e --id Microsoft.AzureCLI +++
 
-    ![A computer screen shot of a program Description automatically generated](./media/image32.png)
+**Y**を選択して**Enter** キーを押します。
 
-6.  Enter **1** for the **Select a subscription** prompt and click
-    **Enter**.
+![A screenshot of a computer Description automatically
+generated](./media/image42.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image33.png)
+![](./media/image43.png)
 
-### Task 6: Create a new Python environment
+![](./media/image44.png)
 
-First you need to create a new Python environment to use to install the
-package you need for this tutorial. DO NOT install packages into your
-global python installation. You should always use a virtual or conda
-environment when installing python packages, otherwise you can break
-your global install of Python.
+4.  Azure CLI をインストールしたら、 az login
+    コマンドを使用してサインインし、ブラウザーを使用してサインインします。
 
->[!Alert] **Important:** If the commands below are not pastable, try pasting them to a notepad and then copy and paste it to the PowerShell. Or copy and paste directly to the PowerShell. The T button does not work at times in the PowerShell.
+> +++ azログイン+++
 
-**Create a virtual environment**
+**Work or school account **を選択し、 **Continue**をクリックします。
 
-1.  From your Power Shell, navigate to **C:\Users\Admin** by executing
-    the below commands.
+![A screenshot of a computer screen Description automatically
+generated](./media/image45.png)
 
-    ```
-    cd\
-    ```
-    ```
-    cd Users\Admin
-    ```
-    
-2.  Create a folder with your project name, **RAGproj@lab.LabInstance.Id**, by entering the following command in your powershell.
+5.  **Azure login credentials**を使用してログインします。
 
-    ```
-    mkdir RAGproj@lab.LabInstance.Id
-    ```
+![A computer screen shot of a program Description automatically
+generated](./media/image46.png)
 
-    ![A computer screen with white and green text Description automatically generated](./media/image34.png)
+6.  **Select a subscription **プロンプトに**1** と入力し、 **Enter**
+    キーを押します。
 
-3.  In your terminal enter the following command to navigate to the new
-    folder location
+![A screenshot of a computer Description automatically
+generated](./media/image47.png)
 
-    ```
-    cd RAGproj@lab.LabInstance.Id
-    ```
+### タスク6: 新しいPython環境を作成する
 
-    ![A blue screen with white text Description automatically generated](./media/image35.png)
+まず、このチュートリアルに必要なパッケージをインストールするための新しいPython環境を作成する必要があります。グローバルPythonインストールにパッケージをインストールしないでください。Pythonパッケージをインストールする際は、必ず仮想環境またはconda環境を使用してください。そうしないと、Pythonのグローバルインストールが壊れる可能性があります。
 
-4.  Create a virtual environment using the following commands
+**重要:**以下のコマンドが貼り付けられない場合は、メモ帳に貼り付けてからコピーしてPowerShellに貼り付けてください。または、PowerShellに直接コピーして貼り付けてください。PowerShellでは、Tボタンが機能しない場合があります。
 
-    ```
-    py -3 -m venv .venv
-    ```
+**仮想環境を作成する**
 
-    ```
-    .venv\scripts\activate
-    ```
+1.  Power Shell
+    から以下のコマンドを実行して**C:\Users\Admin**に移動します。
 
-    ![A computer screen shot of a code Description automatically generated](./media/image36.png)
+> CD**\\**
+>
+> cd Users\Admin
 
-    Activating the Python environment means that when you run python or pip from the command line, you then use the Python interpreter contained in the .venv folder of your application.
+2.  PowerShellで次のコマンドを入力して、プロジェクト名[**RAGproj@lab.LabInstance.Id**](mailto:RAGproj@lab.LabInstance.Id)のフォルダーを作成します。
 
-5.  Open **VS Code**. Select **File -\> Open Folder** and select
-    **RAGproject** folder that we created in the previous steps (from **C:\Users\Admin**).
+> mkdir RAGproj@lab.LabInstance.Id
 
-    >[!Note] **Note:**  Click on Yes, I trust the folder and content and then proceed if prompted.
-    
-    ![A screenshot of a computer Description automatically generated](./media/image37.png)
+![A computer screen with white and green text Description automatically
+generated](./media/image48.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image38.png)
+3.  ターミナルで次のコマンドを入力して、新しいフォルダの場所に移動します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image39.png)
+> cd RAGproj@lab.LabInstance.Id
 
-6.  Select **Yes, I trust the authors** when prompted **Do you trust the authors of the files in this folder?**
-   
-### Task 7: Install packages
+![A blue screen with white text Description automatically
+generated](./media/image49.png)
 
-Install azure-ai-projects(preview) and azure-ai-inference (preview),
-along with other required packages.
+4.  次のコマンドを使用して仮想環境を作成します
 
-1.  Create a file named +++**requirements.txt**+++ in your **Project**
-    folder and add the following packages to the file:
+> py -3 -m venv . venv
+>
+> . venv\scripts\activate
 
-    ```
-    azure-ai-projects==1.0.0b10
-    azure-ai-inference[prompts]
-    azure-identity
-    azure-search-documents
-    pandas
-    python-dotenv
-    opentelemetry-api
-    marshmallow==3.23.2
-    ```
+![A computer screen shot of a code Description automatically
+generated](./media/image50.png)
 
-    ![](./media/img53.png)
+Python 環境をアクティブ化すると、コマンド ラインから python または pip
+を実行するときに、アプリケーションの.venvフォルダーに含まれる Python
+インタープリターが使用されるようになります。
 
-    ![](./media/img54.png)
+5.  **VS Code**を開きます。 **File -\> Open
+    Folder **を選択し、前の手順で作成した**RAGprojectフ**ォルダー**（ C:
+    \Users\Admin** ）を選択します。
 
-2.  On the top navigation bar click on **File** and **Save All**.
+**注:** プロンプトが表示されたら \[Yes, I trust the folder and content\]
+をクリックし、続行します。
 
-3.  Right click on the requirements.txt and select **Open in Integrated
-    Terminal**.
+![A screenshot of a computer Description automatically
+generated](./media/image51.png)
 
-    ![](./media/img55.png)
+![A screenshot of a computer Description automatically
+generated](./media/image52.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image43.png)
+![A screenshot of a computer Description automatically
+generated](./media/image53.png)
 
-4.  Run the following command to get into the virtual environment
+6.  **Do you trust the authors of the files in this
+    folder?**というメッセージが表示されたら、 **Yes, I trust the
+    authors **を選択します。
 
-    +++py -3 -m venv .venv+++
+### タスク7: パッケージをインストールする
 
-    +++.venv\scripts\activate+++
+azure-ai-projects(preview) と azure-ai-inference (preview)
+を他の必要なパッケージとともにインストールします。
 
-    ![A screenshot of a computer Description automatically generated](./media/image44.png)
+1.  **Project** フォルダーに+++ **requirements.txt
+    +++**という名前のファイルを作成し、次のパッケージをファイルに追加します。
 
-5.  Run the +++az login+++ command and login with your Azure login
-    credentials. Select **1** to select the subscription.
+> azure-ai-projects==1.0.0b10  
+> azure-ai-inference\[prompts\]
+>
+> azure-identity
+>
+> azure-search-documents
+>
+> pandas
+>
+> python-dotenv
+>
+> opentelemetry-api
+>
+> marshmallow==3.23.2
 
-    >[!note] **Note:** Minimize the VS Code to view the login prompt if not automatically visible.
-    
-    ![A screenshot of a computer Description automatically generated](./media/image45.png)
+![](./media/image54.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image46.png)
+![](./media/image55.png)
 
-7.  To Install the required packages, run the following code.
+2.  上部のナビゲーション バーで、 **File **、 **Save
+    All**をクリックします。
 
-    +++pip install -r requirements.txt+++
+3.  requirements.txt を右クリックし、**Open in Integrated
+    Terminal**を選択します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image47.png)
+![](./media/image56.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image48.png)
+![A screenshot of a computer Description automatically
+generated](./media/image57.png)
 
-    >[!Note] **Note:** if you get a notice to of new release of pip, execute the below commands to upgrade pip
-    >
-    +++pip install -r requirements.txt+++
-    >
-    +++python.exe -m pip install --upgrade pip+++
-    >
-    ![A screenshot of a computer program Description automatically generated](./media/image49.png)
+4.  仮想環境に入るには次のコマンドを実行します
 
-### Task 8: Create helper script
+> +++ py -3 -m venv . venv +++
+>
+> +++. venv \scripts\activate+++
 
-1.  Create a new folder named **src**. By running the following command
-    in the terminal.
+![A screenshot of a computer Description automatically
+generated](./media/image58.png)
 
-    +++mkdir src+++
+5.  +++ az login+++ コマンドを実行し、Azure
+    ログイン資格情報でログインします。サブスクリプションを選択するには、
+    **1**を選択します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image50.png)
+**注:**ログイン プロンプトが自動的に表示されない場合は、VS Code
+を最小化して表示してください。
 
-2.  Create a new file in **src** folder and name it +++**config.py**+++
+![A screenshot of a computer Description automatically
+generated](./media/image59.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image51.png)
+![A screenshot of a computer Description automatically
+generated](./media/image60.png)
 
-3.  Add the following code to **config.py** and save it.
+6.  必要なパッケージをインストールするには、次のコードを実行します。
 
-```
-# ruff: noqa: ANN201, ANN001
++++pip install -r requirements.txt+++
 
-import os
-import sys
-import pathlib
-import logging
-from azure.identity import DefaultAzureCredential
-from azure.ai.projects import AIProjectClient
-from azure.ai.inference.tracing import AIInferenceInstrumentor
+![A screenshot of a computer Description automatically
+generated](./media/image61.png)
 
-# load environment variables from the .env file
-from dotenv import load_dotenv
+![A screenshot of a computer Description automatically
+generated](./media/image62.png)
 
-load_dotenv()
+**注:** pip
+の新しいリリースの通知を受け取った場合は、以下のコマンドを実行して pip
+をアップグレードしてください。
 
-# Set "./assets" as the path where assets are stored, resolving the absolute path:
-ASSET_PATH = pathlib.Path(__file__).parent.resolve() / "assets"
++++pip install -r requirements.txt+++
 
-# Configure an root app logger that prints info level logs to stdout
-logger = logging.getLogger("app")
-logger.setLevel(logging.INFO)
-logger.addHandler(logging.StreamHandler(stream=sys.stdout))
++++python.exe -m pip install --upgrade pip+++
 
+![A screenshot of a computer program Description automatically
+generated](./media/image63.png)
 
-# Returns a module-specific logger, inheriting from the root app logger
-def get_logger(module_name):
-    return logging.getLogger(f"app.{module_name}")
+### タスク8: ヘルパースクリプトを作成する
 
+1.  ターミナルで次のコマンドを実行して、
+    **src**という名前の新しいフォルダを作成します。
 
-# Enable instrumentation and logging of telemetry to the project
-def enable_telemetry(log_to_project: bool = False):
-    AIInferenceInstrumentor().instrument()
++++mkdir src+++
 
-    # enable logging message contents
-    os.environ["AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED"] = "true"
+![A screenshot of a computer Description automatically
+generated](./media/image64.png)
 
-    if log_to_project:
-        from azure.monitor.opentelemetry import configure_azure_monitor
+2.  **src**フォルダに新しいファイルを作成し、+++ **config.py**
+    +++という名前を付けます。
 
-        project = AIProjectClient.from_connection_string(
-            conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
-        )
-        tracing_link = f"https://ai.azure.com/tracing?wsid=/subscriptions/{project.scope['subscription_id']}/resourceGroups/{project.scope['resource_group_name']}/providers/Microsoft.MachineLearningServices/workspaces/{project.scope['project_name']}"
-        application_insights_connection_string = project.telemetry.get_connection_string()
-        if not application_insights_connection_string:
-            logger.warning(
-                "No application insights configured, telemetry will not be logged to project. Add application insights at:"
-            )
-            logger.warning(tracing_link)
+![A screenshot of a computer Description automatically
+generated](./media/image65.png)
 
-            return
+3.  次のコードを**config.py**に追加して保存します。
 
-        configure_azure_monitor(connection_string=application_insights_connection_string)
-        logger.info("Enabled telemetry logging to project, view traces at:")
-        logger.info(tracing_link)
+> \# ruff: noqa: ANN201, ANN001
+>
+> import os
+>
+> import sys
+>
+> import pathlib
+>
+> import logging
+>
+> from azure.identity import DefaultAzureCredential
+>
+> from azure.ai.projects import AIProjectClient
+>
+> from azure.ai.inference.tracing import AIInferenceInstrumentor
+>
+> \# load environment variables from the .env file
+>
+> from dotenv import load_dotenv
+>
+> load_dotenv()
+>
+> \# Set "./assets" as the path where assets are stored, resolving the
+> absolute path:
+>
+> ASSET_PATH = pathlib.Path(\_\_file\_\_).parent.resolve() / "assets"
+>
+> \# Configure an root app logger that prints info level logs to stdout
+>
+> logger = logging.getLogger("app")
+>
+> logger.setLevel(logging.INFO)
+>
+> logger.addHandler(logging.StreamHandler(stream=sys.stdout))
+>
+> \# Returns a module-specific logger, inheriting from the root app
+> logger
+>
+> def get_logger(module_name):
+>
+> return logging.getLogger(f"app.{module_name}")
+>
+> \# Enable instrumentation and logging of telemetry to the project
+>
+> def enable_telemetry(log_to_project: bool = False):
+>
+> AIInferenceInstrumentor().instrument()
+>
+> \# enable logging message contents
+>
+> os.environ\["AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED"\] =
+> "true"
+>
+> if log_to_project:
+>
+> from azure.monitor.opentelemetry import configure_azure_monitor
+>
+> project = AIProjectClient.from_connection_string(
+>
+> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
+> credential=DefaultAzureCredential()
+>
+> )
+>
+> tracing_link =
+> f"https://ai.azure.com/tracing?wsid=/subscriptions/{project.scope\['subscription_id'\]}/resourceGroups/{project.scope\['resource_group_name'\]}/providers/Microsoft.MachineLearningServices/workspaces/{project.scope\['project_name'\]}"
+>
+> application_insights_connection_string =
+> project.telemetry.get_connection_string()
+>
+> if not application_insights_connection_string:
+>
+> logger.warning(
+>
+> "No application insights configured, telemetry will not be logged to
+> project. Add application insights at:"
+>
+> )
+>
+> logger.warning(tracing_link)
+>
+> return
+>
+> configure_azure_monitor(connection_string=application_insights_connection_string)
+>
+> logger.info("Enabled telemetry logging to project, view traces at:")
+>
+> logger.info(tracing_link)
 
-```
+![A screenshot of a computer Description automatically
+generated](./media/image66.png)
 
-![A screenshot of a computer Description automatically generated](./media/image52.png)
+**注**: この新しく作成された config.py ファイル
+スクリプトは、次の演習で使用されます。
 
->[!Note] **Note**: this newly created config.py file script will be used in the next exercise.
+### タスク9: 環境変数を構成する
 
-### Task 9: Configure environment variables
+コードからAzure
+OpenAIサービスを呼び出すには、プロジェクトの接続文字列が必要です。このクイックスタートでは、この値を.envファイルに保存します。.envファイルは、アプリケーションが読み取れる環境変数を含むファイルです。
 
-Your project connection string is required to call the Azure OpenAI
-service from your code. In this quickstart, you save this value in
-a .env file, which is a file that contains environment variables that
-your application can read.
+1.  **src**ディレクトリに新しいファイル**+++. env
+    +++**を作成し、次のコードを貼り付けます。
 
-1.  Create a new file **+++.env+++** in the **src** directory, and
-    paste the following code:
+**\< your-connection-string \>**を、タスク 1
+でメモ帳に保存したプロジェクト接続文字列の値に置き換えます。
 
-    Replace  **< your-connection-string >** with the project connection string value saved in the notepad in task 1.
+> AIPROJECT_CONNECTION_STRING="\<your-connection-string\>"
+>
+> AISEARCH_INDEX_NAME="example-index"
+>
+> EMBEDDINGS_MODEL="text-embedding-ada-002"
+>
+> INTENT_MAPPING_MODEL="gpt-4o-mini"
+>
+> CHAT_MODEL="gpt-4o-mini"
+>
+> EVALUATION_MODEL="gpt-4o-mini"
 
-    ```
-    AIPROJECT_CONNECTION_STRING="<your-connection-string>"
-    AISEARCH_INDEX_NAME="example-index"
-    EMBEDDINGS_MODEL="text-embedding-ada-002"
-    INTENT_MAPPING_MODEL="gpt-4o-mini"
-    CHAT_MODEL="gpt-4o-mini"
-    EVALUATION_MODEL="gpt-4o-mini"
-    ```
+![](./media/image67.png)
 
-    ![](./media/image53.png)
+**注**: 接続文字列は、Azure AI Foundry
+プロジェクトのホームページの**Overview**に記載されています。
 
-    >[!Note] **Note**: Your connection string can be found in the Azure AI Foundry project homepage under **Overview**.
+## 演習 2: Azure AI Foundry SDK を使用してカスタム知識検索 (RAG) アプリを構築する
 
-## Exercise 2: Build a custom knowledge retrieval (RAG) app with the Azure AI Foundry SDK
+### タスク 1: チャット アプリのサンプル データを作成する
 
-### Task 1: Create example data for your chat app
+このRAG-basedアプリの目標は、カスタムデータにモデルの応答を組み込むことです。埋め込みモデルからのベクトル化されたデータを格納する
+Azure AI Search
+インデックスを使用します。この検索インデックスは、ユーザーの質問に基づいて関連ドキュメントを取得するために使用されます。
 
-The goal with this RAG-based application is to ground the model
-responses in your custom data. You use an Azure AI Search index that
-stores vectorized data from the embeddings model. The search index is
-used to retrieve relevant documents based on the user's question.
+1.  開いている VS Code セットアップから、 **src**フォルダーの下に **+++
+    assets** +++という名前のフォルダーを作成します。
 
-1.  From your VS Code set up that is open, create a folder
-    named +++**assets**+++ under the **src** folder.
+![A screenshot of a computer Description automatically
+generated](./media/image68.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image54.png)
+2.  **C: \LabFiles**から**products.csv**ファイルをコピーし、 **C:
+    \Users\Admin\< Your Project Name \>\\ src
+    \assets**フォルダーに貼り付けます。
 
-2.  Copy **products.csv** file from **C:\LabFiles** and paste it in
-    **C:\Users\Admin\< Your Project Name>\src\assets** folder.
+**注:**これはファイル エクスプローラーで実行する必要があり、その後 VS
+Code に反映されます。
 
-    >[!Note] **Note:** This needs to be done in the File Explorer and then it will get reflected in the VS Code.
+![A screenshot of a computer Description automatically
+generated](./media/image69.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image55.png)
+3.  上部のナビゲーション バーの**File **に移動し、**Save
+    All**をクリックします。
 
-3.  Navigate to **File** on the top navigation bar and click on **Save All.**
+![A screenshot of a computer Description automatically
+generated](./media/image70.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image56.png)
+### タスク2: 検索インデックスを作成する
 
-### Task 2: Create a search index
+検索インデックスは、埋め込みモデルからのベクトル化されたデータを保存するために使用されます。検索インデックスは、ユーザーの質問に基づいて関連するドキュメントを検索するために使用されます。
 
-The search index is used to store vectorized data from the embeddings model. The search index is used to retrieve relevant documents based on the user's question.
+1.  **src**フォルダ**ー**に+++ **create_search_index.py
+    +++**という名前のファイルを作成します。
 
-1.  In VS code, create a file named +++**create_search_index.py**+++ in
-    your **src** folder.
+![A screenshot of a computer Description automatically
+generated](./media/image71.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image57.png)
+2.  作成されたファイル**create_search_index.py**ファイルを開き、次のコードを追加して、必要なライブラリをインポートし、プロジェクト
+    クライアントを作成し、いくつかの設定を構成します。
 
-2.  Open the created file, **create_search_index.py** file and add the
-    following code to import the required libraries, create a project
-    client, and configure some settings:
+> import os
+>
+> from azure.ai.projects import AIProjectClient
+>
+> from azure.ai.projects.models import ConnectionType
+>
+> from azure.identity import DefaultAzureCredential
+>
+> from azure.core.credentials import AzureKeyCredential
+>
+> from azure.search.documents import SearchClient
+>
+> from azure.search.documents.indexes import SearchIndexClient
+>
+> from config import get_logger
+>
+> \# initialize logging object
+>
+> logger = get_logger(\_\_name\_\_)
+>
+> \# create a project client using environment variables loaded from the
+> .env file
+>
+> project = AIProjectClient.from_connection_string(
+>
+> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
+> credential=DefaultAzureCredential()
+>
+> )
+>
+> \# create a vector embeddings client that will be used to generate
+> vector embeddings
+>
+> embeddings = project.inference.get_embeddings_client()
+>
+> \# use the project client to get the default search connection
+>
+> search_connection = project.connections.get_default(
+>
+> connection_type=ConnectionType.AZURE_AI_SEARCH,
+> include_credentials=True
+>
+> )
+>
+> \# Create a search index client using the search connection
+>
+> \# This client will be used to create and delete search indexes
+>
+> index_client = SearchIndexClient(
+>
+> endpoint=search_connection.endpoint_url,
+> credential=AzureKeyCredential(key=search_connection.key)
+>
+> )
 
-```
-import os
-from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import ConnectionType
-from azure.identity import DefaultAzureCredential
-from azure.core.credentials import AzureKeyCredential
-from azure.search.documents import SearchClient
-from azure.search.documents.indexes import SearchIndexClient
-from config import get_logger
+![A screenshot of a computer Description automatically
+generated](./media/image72.png)
 
-# initialize logging object
-logger = get_logger(__name__)
+3.  **create_search_index.py**の最後に関数を追加して、検索インデックスを定義します。
 
-# create a project client using environment variables loaded from the .env file
-project = AIProjectClient.from_connection_string(
-    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
-)
-
-# create a vector embeddings client that will be used to generate vector embeddings
-embeddings = project.inference.get_embeddings_client()
-
-# use the project client to get the default search connection
-search_connection = project.connections.get_default(
-    connection_type=ConnectionType.AZURE_AI_SEARCH, include_credentials=True
-)
-
-# Create a search index client using the search connection
-# This client will be used to create and delete search indexes
-index_client = SearchIndexClient(
-    endpoint=search_connection.endpoint_url, credential=AzureKeyCredential(key=search_connection.key)
-)
-```
-
-![A screenshot of a computer Description automatically generated](./media/image58.png)
-
-3.  Now add the function at the end of the **create_search_index.py** to
-    define a search index:
-
-    Keep the cursor at the end of the file, select **Enter** twice and then paste the below code.
-    
-```
-import pandas as pd
-from azure.search.documents.indexes.models import (
-    SemanticSearch,
-    SearchField,
-    SimpleField,
-    SearchableField,
-    SearchFieldDataType,
-    SemanticConfiguration,
-    SemanticPrioritizedFields,
-    SemanticField,
-    VectorSearch,
-    HnswAlgorithmConfiguration,
-    VectorSearchAlgorithmKind,
-    HnswParameters,
-    VectorSearchAlgorithmMetric,
-    ExhaustiveKnnAlgorithmConfiguration,
-    ExhaustiveKnnParameters,
-    VectorSearchProfile,
-    SearchIndex,
-)
-
-
-def create_index_definition(index_name: str, model: str) -> SearchIndex:
-    dimensions = 1536  # text-embedding-ada-002
-    if model == "text-embedding-3-large":
-        dimensions = 3072
-
-    # The fields we want to index. The "embedding" field is a vector field that will
-    # be used for vector search.
-    fields = [
-        SimpleField(name="id", type=SearchFieldDataType.String, key=True),
-        SearchableField(name="content", type=SearchFieldDataType.String),
-        SimpleField(name="filepath", type=SearchFieldDataType.String),
-        SearchableField(name="title", type=SearchFieldDataType.String),
-        SimpleField(name="url", type=SearchFieldDataType.String),
-        SearchField(
-            name="contentVector",
-            type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
-            searchable=True,
-            # Size of the vector created by the text-embedding-ada-002 model.
-            vector_search_dimensions=dimensions,
-            vector_search_profile_name="myHnswProfile",
-        ),
-    ]
-
-    # The "content" field should be prioritized for semantic ranking.
-    semantic_config = SemanticConfiguration(
-        name="default",
-        prioritized_fields=SemanticPrioritizedFields(
-            title_field=SemanticField(field_name="title"),
-            keywords_fields=[],
-            content_fields=[SemanticField(field_name="content")],
-        ),
-    )
-
-    # For vector search, we want to use the HNSW (Hierarchical Navigable Small World)
-    # algorithm (a type of approximate nearest neighbor search algorithm) with cosine
-    # distance.
-    vector_search = VectorSearch(
-        algorithms=[
-            HnswAlgorithmConfiguration(
-                name="myHnsw",
-                kind=VectorSearchAlgorithmKind.HNSW,
-                parameters=HnswParameters(
-                    m=4,
-                    ef_construction=1000,
-                    ef_search=1000,
-                    metric=VectorSearchAlgorithmMetric.COSINE,
-                ),
-            ),
-            ExhaustiveKnnAlgorithmConfiguration(
-                name="myExhaustiveKnn",
-                kind=VectorSearchAlgorithmKind.EXHAUSTIVE_KNN,
-                parameters=ExhaustiveKnnParameters(metric=VectorSearchAlgorithmMetric.COSINE),
-            ),
-        ],
-        profiles=[
-            VectorSearchProfile(
-                name="myHnswProfile",
-                algorithm_configuration_name="myHnsw",
-            ),
-            VectorSearchProfile(
-                name="myExhaustiveKnnProfile",
-                algorithm_configuration_name="myExhaustiveKnn",
-            ),
-        ],
-    )
-
-    # Create the semantic settings with the configuration
-    semantic_search = SemanticSearch(configurations=[semantic_config])
-
-    # Create the search index definition
-    return SearchIndex(
-        name=index_name,
-        fields=fields,
-        semantic_search=semantic_search,
-        vector_search=vector_search,
-    )
-```
-
-![A screenshot of a computer Description automatically generated](./media/image59.png)
-
-4.  Now add the function in create_search_index.py to create the
-    function to add a csv file to the index.
-
-    Keep the cursor at the end of the file, select **Enter** twice and then paste the below code.
-    
-```
-# define a function for indexing a csv file, that adds each row as a document
-# and generates vector embeddings for the specified content_column
-def create_docs_from_csv(path: str, content_column: str, model: str) -> list[dict[str, any]]:
-    products = pd.read_csv(path)
-    items = []
-    for product in products.to_dict("records"):
-        content = product[content_column]
-        id = str(product["id"])
-        title = product["name"]
-        url = f"/products/{title.lower().replace(' ', '-')}"
-        emb = embeddings.embed(input=content, model=model)
-        rec = {
-            "id": id,
-            "content": content,
-            "filepath": f"{title.lower().replace(' ', '-')}",
-            "title": title,
-            "url": url,
-            "contentVector": emb.data[0].embedding,
-        }
-        items.append(rec)
-
-    return items
-
-
-def create_index_from_csv(index_name, csv_file):
-    # If a search index already exists, delete it:
-    try:
-        index_definition = index_client.get_index(index_name)
-        index_client.delete_index(index_name)
-        logger.info(f"🗑️  Found existing index named '{index_name}', and deleted it")
-    except Exception:
-        pass
-
-    # create an empty search index
-    index_definition = create_index_definition(index_name, model=os.environ["EMBEDDINGS_MODEL"])
-    index_client.create_index(index_definition)
-
-    # create documents from the products.csv file, generating vector embeddings for the "description" column
-    docs = create_docs_from_csv(path=csv_file, content_column="description", model=os.environ["EMBEDDINGS_MODEL"])
-
-    # Add the documents to the index using the Azure AI Search client
-    search_client = SearchClient(
-        endpoint=search_connection.endpoint_url,
-        index_name=index_name,
-        credential=AzureKeyCredential(key=search_connection.key),
-    )
-
-    search_client.upload_documents(docs)
-    logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}' index")
-```
-
-![A screenshot of a computer Description automatically generated](./media/image60.png)
-
-5.  Finally, Add the below functions in create_search_index.py to build
-    the index and register it to the cloud project. After adding the
-    code go to Files from top bar and click on **Save all.**
-
-    Keep the cursor at the end of the file, select **Enter** twice. Move the cursor in the new line towards the left margin and then paste the code.(There should be no tab space)
-    
-    >[!Alert] **Important:** Ensure that the import argparse in the second line of the code below is aligned with a tab space from the margin. Else, keep the cursor before **import** and click on **Tab**.
-    
-```
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--index-name",
-        type=str,
-        help="index name to use when creating the AI Search index",
-        default=os.environ["AISEARCH_INDEX_NAME"],
-    )
-    parser.add_argument(
-        "--csv-file", type=str, help="path to data for creating search index", default="assets/products.csv"
-    )
-    args = parser.parse_args()
-    index_name = args.index_name
-    csv_file = args.csv_file
-
-    create_index_from_csv(index_name, csv_file)
-```
-    
-![](./media/image61.png)
-
-6. The file should now have the content as below.
-
-```
-import os
-from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import ConnectionType
-from azure.identity import DefaultAzureCredential
-from azure.core.credentials import AzureKeyCredential
-from azure.search.documents import SearchClient
-from azure.search.documents.indexes import SearchIndexClient
-from config import get_logger
-
-# initialize logging object
-logger = get_logger(__name__)
-
-# create a project client using environment variables loaded from the .env file
-project = AIProjectClient.from_connection_string(
-    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
-)
-
-# create a vector embeddings client that will be used to generate vector embeddings
-embeddings = project.inference.get_embeddings_client()
-
-# use the project client to get the default search connection
-search_connection = project.connections.get_default(
-    connection_type=ConnectionType.AZURE_AI_SEARCH, include_credentials=True
-)
-
-# Create a search index client using the search connection
-# This client will be used to create and delete search indexes
-index_client = SearchIndexClient(
-    endpoint=search_connection.endpoint_url, credential=AzureKeyCredential(key=search_connection.key)
-)
+カーソルをファイルの末尾に置き、 **Enter** キーを2
+回押して、以下のコードを貼り付けます。
 
 import pandas as pd
-from azure.search.documents.indexes.models import (
-    SemanticSearch,
-    SearchField,
-    SimpleField,
-    SearchableField,
-    SearchFieldDataType,
-    SemanticConfiguration,
-    SemanticPrioritizedFields,
-    SemanticField,
-    VectorSearch,
-    HnswAlgorithmConfiguration,
-    VectorSearchAlgorithmKind,
-    HnswParameters,
-    VectorSearchAlgorithmMetric,
-    ExhaustiveKnnAlgorithmConfiguration,
-    ExhaustiveKnnParameters,
-    VectorSearchProfile,
-    SearchIndex,
-)
 
-def create_index_definition(index_name: str, model: str) -> SearchIndex:
-    dimensions = 1536  # text-embedding-ada-002
-    if model == "text-embedding-3-large":
-        dimensions = 3072
+> from azure.search.documents.indexes.models import (
+>
+> SemanticSearch,
+>
+> SearchField,
+>
+> SimpleField,
+>
+> SearchableField,
+>
+> SearchFieldDataType,
+>
+> SemanticConfiguration,
+>
+> SemanticPrioritizedFields,
+>
+> SemanticField,
+>
+> VectorSearch,
+>
+> HnswAlgorithmConfiguration,
+>
+> VectorSearchAlgorithmKind,
+>
+> HnswParameters,
+>
+> VectorSearchAlgorithmMetric,
+>
+> ExhaustiveKnnAlgorithmConfiguration,
+>
+> ExhaustiveKnnParameters,
+>
+> VectorSearchProfile,
+>
+> SearchIndex,
+>
+> )
+>
+> def create_index_definition(index_name: str, model: str) -\>
+> SearchIndex:
+>
+> dimensions = 1536 \# text-embedding-ada-002
+>
+> if model == "text-embedding-3-large":
+>
+> dimensions = 3072
+>
+> \# The fields we want to index. The "embedding" field is a vector
+> field that will
+>
+> \# be used for vector search.
+>
+> fields = \[
+>
+> SimpleField(name="id", type=SearchFieldDataType.String, key=True),
+>
+> SearchableField(name="content", type=SearchFieldDataType.String),
+>
+> SimpleField(name="filepath", type=SearchFieldDataType.String),
+>
+> SearchableField(name="title", type=SearchFieldDataType.String),
+>
+> SimpleField(name="url", type=SearchFieldDataType.String),
+>
+> SearchField(
+>
+> name="contentVector",
+>
+> type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+>
+> searchable=True,
+>
+> \# Size of the vector created by the text-embedding-ada-002 model.
+>
+> vector_search_dimensions=dimensions,
+>
+> vector_search_profile_name="myHnswProfile",
+>
+> ),
+>
+> \]
+>
+> \# The "content" field should be prioritized for semantic ranking.
+>
+> semantic_config = SemanticConfiguration(
+>
+> name="default",
+>
+> prioritized_fields=SemanticPrioritizedFields(
+>
+> title_field=SemanticField(field_name="title"),
+>
+> keywords_fields=\[\],
+>
+> content_fields=\[SemanticField(field_name="content")\],
+>
+> ),
+>
+> )
+>
+> \# For vector search, we want to use the HNSW (Hierarchical Navigable
+> Small World)
+>
+> \# algorithm (a type of approximate nearest neighbor search algorithm)
+> with cosine
+>
+> \# distance.
+>
+> vector_search = VectorSearch(
+>
+> algorithms=\[
+>
+> HnswAlgorithmConfiguration(
+>
+> name="myHnsw",
+>
+> kind=VectorSearchAlgorithmKind.HNSW,
+>
+> parameters=HnswParameters(
+>
+> m=4,
+>
+> ef_construction=1000,
+>
+> ef_search=1000,
+>
+> metric=VectorSearchAlgorithmMetric.COSINE,
+>
+> ),
+>
+> ),
+>
+> ExhaustiveKnnAlgorithmConfiguration(
+>
+> name="myExhaustiveKnn",
+>
+> kind=VectorSearchAlgorithmKind.EXHAUSTIVE_KNN,
+>
+> parameters=ExhaustiveKnnParameters(metric=VectorSearchAlgorithmMetric.COSINE),
+>
+> ),
+>
+> \],
+>
+> profiles=\[
+>
+> VectorSearchProfile(
+>
+> name="myHnswProfile",
+>
+> algorithm_configuration_name="myHnsw",
+>
+> ),
+>
+> VectorSearchProfile(
+>
+> name="myExhaustiveKnnProfile",
+>
+> algorithm_configuration_name="myExhaustiveKnn",
+>
+> ),
+>
+> \],
+>
+> )
+>
+> \# Create the semantic settings with the configuration
+>
+> semantic_search = SemanticSearch(configurations=\[semantic_config\])
+>
+> \# Create the search index definition
+>
+> return SearchIndex(
+>
+> name=index_name,
+>
+> fields=fields,
+>
+> semantic_search=semantic_search,
+>
+> vector_search=vector_search,
+>
+> )
 
-    # The fields we want to index. The "embedding" field is a vector field that will
-    # be used for vector search.
-    fields = [
-        SimpleField(name="id", type=SearchFieldDataType.String, key=True),
-        SearchableField(name="content", type=SearchFieldDataType.String),
-        SimpleField(name="filepath", type=SearchFieldDataType.String),
-        SearchableField(name="title", type=SearchFieldDataType.String),
-        SimpleField(name="url", type=SearchFieldDataType.String),
-        SearchField(
-            name="contentVector",
-            type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
-            searchable=True,
-            # Size of the vector created by the text-embedding-ada-002 model.
-            vector_search_dimensions=dimensions,
-            vector_search_profile_name="myHnswProfile",
-        ),
-    ]
+![A screenshot of a computer Description automatically
+generated](./media/image73.png)
 
-    # The "content" field should be prioritized for semantic ranking.
-    semantic_config = SemanticConfiguration(
-        name="default",
-        prioritized_fields=SemanticPrioritizedFields(
-            title_field=SemanticField(field_name="title"),
-            keywords_fields=[],
-            content_fields=[SemanticField(field_name="content")],
-        ),
-    )
+4.  次に、create_search_index.py に関数を追加して、インデックスに csv
+    ファイルを追加する関数を作成します。
 
-    # For vector search, we want to use the HNSW (Hierarchical Navigable Small World)
-    # algorithm (a type of approximate nearest neighbor search algorithm) with cosine
-    # distance.
-    vector_search = VectorSearch(
-        algorithms=[
-            HnswAlgorithmConfiguration(
-                name="myHnsw",
-                kind=VectorSearchAlgorithmKind.HNSW,
-                parameters=HnswParameters(
-                    m=4,
-                    ef_construction=1000,
-                    ef_search=1000,
-                    metric=VectorSearchAlgorithmMetric.COSINE,
-                ),
-            ),
-            ExhaustiveKnnAlgorithmConfiguration(
-                name="myExhaustiveKnn",
-                kind=VectorSearchAlgorithmKind.EXHAUSTIVE_KNN,
-                parameters=ExhaustiveKnnParameters(metric=VectorSearchAlgorithmMetric.COSINE),
-            ),
-        ],
-        profiles=[
-            VectorSearchProfile(
-                name="myHnswProfile",
-                algorithm_configuration_name="myHnsw",
-            ),
-            VectorSearchProfile(
-                name="myExhaustiveKnnProfile",
-                algorithm_configuration_name="myExhaustiveKnn",
-            ),
-        ],
-    )
+カーソルをファイルの末尾に置き、 **Enter** キーを2
+回押して、以下のコードを貼り付けます。
 
-    # Create the semantic settings with the configuration
-    semantic_search = SemanticSearch(configurations=[semantic_config])
+> \# define a function for indexing a csv file, that adds each row as a
+> document
+>
+> \# and generates vector embeddings for the specified content_column
+>
+> def create_docs_from_csv(path: str, content_column: str, model: str)
+> -\> list\[dict\[str, any\]\]:
+>
+> products = pd.read_csv(path)
+>
+> items = \[\]
+>
+> for product in products.to_dict("records"):
+>
+> content = product\[content_column\]
+>
+> id = str(product\["id"\])
+>
+> title = product\["name"\]
+>
+> url = f"/products/{title.lower().replace(' ', '-')}"
+>
+> emb = embeddings.embed(input=content, model=model)
+>
+> rec = {
+>
+> "id": id,
+>
+> "content": content,
+>
+> "filepath": f"{title.lower().replace(' ', '-')}",
+>
+> "title": title,
+>
+> "url": url,
+>
+> "contentVector": emb.data\[0\].embedding,
+>
+> }
+>
+> items.append(rec)
+>
+> return items
+>
+> def create_index_from_csv(index_name, csv_file):
+>
+> \# If a search index already exists, delete it:
+>
+> try:
+>
+> index_definition = index_client.get_index(index_name)
+>
+> index_client.delete_index(index_name)
+>
+> logger.info(f"🗑️ Found existing index named '{index_name}', and
+> deleted it")
+>
+> except Exception:
+>
+> pass
+>
+> \# create an empty search index
+>
+> index_definition = create_index_definition(index_name,
+> model=os.environ\["EMBEDDINGS_MODEL"\])
+>
+> index_client.create_index(index_definition)
+>
+> \# create documents from the products.csv file, generating vector
+> embeddings for the "description" column
+>
+> docs = create_docs_from_csv(path=csv_file,
+> content_column="description", model=os.environ\["EMBEDDINGS_MODEL"\])
+>
+> \# Add the documents to the index using the Azure AI Search client
+>
+> search_client = SearchClient(
+>
+> endpoint=search_connection.endpoint_url,
+>
+> index_name=index_name,
+>
+> credential=AzureKeyCredential(key=search_connection.key),
+>
+> )
+>
+> search_client.upload_documents(docs)
+>
+> logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}'
+> index")
 
-    # Create the search index definition
-    return SearchIndex(
-        name=index_name,
-        fields=fields,
-        semantic_search=semantic_search,
-        vector_search=vector_search,
-    )
+![A screenshot of a computer Description automatically
+generated](./media/image74.png)
 
-# define a function for indexing a csv file, that adds each row as a document
-# and generates vector embeddings for the specified content_column
-def create_docs_from_csv(path: str, content_column: str, model: str) -> list[dict[str, any]]:
-    products = pd.read_csv(path)
-    items = []
-    for product in products.to_dict("records"):
-        content = product[content_column]
-        id = str(product["id"])
-        title = product["name"]
-        url = f"/products/{title.lower().replace(' ', '-')}"
-        emb = embeddings.embed(input=content, model=model)
-        rec = {
-            "id": id,
-            "content": content,
-            "filepath": f"{title.lower().replace(' ', '-')}",
-            "title": title,
-            "url": url,
-            "contentVector": emb.data[0].embedding,
-        }
-        items.append(rec)
+5.  最後に、create_search_index.py
+    に以下の関数を追加してインデックスを作成し、クラウドプロジェクトに登録します。コードを追加したら、上部のバーからFilesに移動し**Save
+    all**をクリックします。
 
-    return items
+カーソルをファイルの末尾に置き、
+**Enter**キーを2回押します。新しい行の左端にカーソルを移動し、コードを貼り付けます。（タブスペースは不要です）
 
-def create_index_from_csv(index_name, csv_file):
-    # If a search index already exists, delete it:
-    try:
-        index_definition = index_client.get_index(index_name)
-        index_client.delete_index(index_name)
-        logger.info(f"🗑️  Found existing index named '{index_name}', and deleted it")
-    except Exception:
-        pass
+**重要:**下記のコードの2行目にあるimport
+argparseが、マージンからタブスペースで揃えられていることを確認してください。そうでない場合は、**import **前にカーソルを移動したまま**Tab**キーを押してください。
 
-    # create an empty search index
-    index_definition = create_index_definition(index_name, model=os.environ["EMBEDDINGS_MODEL"])
-    index_client.create_index(index_definition)
+> if \_\_name\_\_ == "\_\_main\_\_":
+>
+> import argparse
+>
+> parser = argparse.ArgumentParser()
+>
+> parser.add_argument(
+>
+> "--index-name",
+>
+> type=str,
+>
+> help="index name to use when creating the AI Search index",
+>
+> default=os.environ\["AISEARCH_INDEX_NAME"\],
+>
+> )
+>
+> parser.add_argument(
+>
+> "--csv-file", type=str, help="path to data for creating search index",
+> default="assets/products.csv"
+>
+> )
+>
+> args = parser.parse_args()
+>
+> index_name = args.index_name
+>
+> csv_file = args.csv_file
+>
+> create_index_from_csv(index_name, csv_file)
 
-    # create documents from the products.csv file, generating vector embeddings for the "description" column
-    docs = create_docs_from_csv(path=csv_file, content_column="description", model=os.environ["EMBEDDINGS_MODEL"])
+![](./media/image75.png)
 
-    # Add the documents to the index using the Azure AI Search client
-    search_client = SearchClient(
-        endpoint=search_connection.endpoint_url,
-        index_name=index_name,
-        credential=AzureKeyCredential(key=search_connection.key),
-    )
+6.  ファイルの内容は以下のようになるはずです。
 
-    search_client.upload_documents(docs)
-    logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}' index")
+> import os
+>
+> from azure.ai.projects import AIProjectClient
+>
+> from azure.ai.projects.models import ConnectionType
+>
+> from azure.identity import DefaultAzureCredential
+>
+> from azure.core.credentials import AzureKeyCredential
+>
+> from azure.search.documents import SearchClient
+>
+> from azure.search.documents.indexes import SearchIndexClient
+>
+> from config import get_logger
+>
+> \# initialize logging object
+>
+> logger = get_logger(\_\_name\_\_)
+>
+> \# create a project client using environment variables loaded from the
+> .env file
+>
+> project = AIProjectClient.from_connection_string(
+>
+> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
+> credential=DefaultAzureCredential()
+>
+> )
+>
+> \# create a vector embeddings client that will be used to generate
+> vector embeddings
+>
+> embeddings = project.inference.get_embeddings_client()
+>
+> \# use the project client to get the default search connection
+>
+> search_connection = project.connections.get_default(
+>
+> connection_type=ConnectionType.AZURE_AI_SEARCH,
+> include_credentials=True
+>
+> )
+>
+> \# Create a search index client using the search connection
+>
+> \# This client will be used to create and delete search indexes
+>
+> index_client = SearchIndexClient(
+>
+> endpoint=search_connection.endpoint_url,
+> credential=AzureKeyCredential(key=search_connection.key)
+>
+> )
+>
+> import pandas as pd
+>
+> from azure.search.documents.indexes.models import (
+>
+> SemanticSearch,
+>
+> SearchField,
+>
+> SimpleField,
+>
+> SearchableField,
+>
+> SearchFieldDataType,
+>
+> SemanticConfiguration,
+>
+> SemanticPrioritizedFields,
+>
+> SemanticField,
+>
+> VectorSearch,
+>
+> HnswAlgorithmConfiguration,
+>
+> VectorSearchAlgorithmKind,
+>
+> HnswParameters,
+>
+> VectorSearchAlgorithmMetric,
+>
+> ExhaustiveKnnAlgorithmConfiguration,
+>
+> ExhaustiveKnnParameters,
+>
+> VectorSearchProfile,
+>
+> SearchIndex,
+>
+> )
+>
+> def create_index_definition(index_name: str, model: str) -\>
+> SearchIndex:
+>
+> dimensions = 1536 \# text-embedding-ada-002
+>
+> if model == "text-embedding-3-large":
+>
+> dimensions = 3072
+>
+> \# The fields we want to index. The "embedding" field is a vector
+> field that will
+>
+> \# be used for vector search.
+>
+> fields = \[
+>
+> SimpleField(name="id", type=SearchFieldDataType.String, key=True),
+>
+> SearchableField(name="content", type=SearchFieldDataType.String),
+>
+> SimpleField(name="filepath", type=SearchFieldDataType.String),
+>
+> SearchableField(name="title", type=SearchFieldDataType.String),
+>
+> SimpleField(name="url", type=SearchFieldDataType.String),
+>
+> SearchField(
+>
+> name="contentVector",
+>
+> type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+>
+> searchable=True,
+>
+> \# Size of the vector created by the text-embedding-ada-002 model.
+>
+> vector_search_dimensions=dimensions,
+>
+> vector_search_profile_name="myHnswProfile",
+>
+> ),
+>
+> \]
+>
+> \# The "content" field should be prioritized for semantic ranking.
+>
+> semantic_config = SemanticConfiguration(
+>
+> name="default",
+>
+> prioritized_fields=SemanticPrioritizedFields(
+>
+> title_field=SemanticField(field_name="title"),
+>
+> keywords_fields=\[\],
+>
+> content_fields=\[SemanticField(field_name="content")\],
+>
+> ),
+>
+> )
+>
+> \# For vector search, we want to use the HNSW (Hierarchical Navigable
+> Small World)
+>
+> \# algorithm (a type of approximate nearest neighbor search algorithm)
+> with cosine
+>
+> \# distance.
+>
+> vector_search = VectorSearch(
+>
+> algorithms=\[
+>
+> HnswAlgorithmConfiguration(
+>
+> name="myHnsw",
+>
+> kind=VectorSearchAlgorithmKind.HNSW,
+>
+> parameters=HnswParameters(
+>
+> m=4,
+>
+> ef_construction=1000,
+>
+> ef_search=1000,
+>
+> metric=VectorSearchAlgorithmMetric.COSINE,
+>
+> ),
+>
+> ),
+>
+> ExhaustiveKnnAlgorithmConfiguration(
+>
+> name="myExhaustiveKnn",
+>
+> kind=VectorSearchAlgorithmKind.EXHAUSTIVE_KNN,
+>
+> parameters=ExhaustiveKnnParameters(metric=VectorSearchAlgorithmMetric.COSINE),
+>
+> ),
+>
+> \],
+>
+> profiles=\[
+>
+> VectorSearchProfile(
+>
+> name="myHnswProfile",
+>
+> algorithm_configuration_name="myHnsw",
+>
+> ),
+>
+> VectorSearchProfile(
+>
+> name="myExhaustiveKnnProfile",
+>
+> algorithm_configuration_name="myExhaustiveKnn",
+>
+> ),
+>
+> \],
+>
+> )
+>
+> \# Create the semantic settings with the configuration
+>
+> semantic_search = SemanticSearch(configurations=\[semantic_config\])
+>
+> \# Create the search index definition
+>
+> return SearchIndex(
+>
+> name=index_name,
+>
+> fields=fields,
+>
+> semantic_search=semantic_search,
+>
+> vector_search=vector_search,
+>
+> )
+>
+> \# define a function for indexing a csv file, that adds each row as a
+> document
+>
+> \# and generates vector embeddings for the specified content_column
+>
+> def create_docs_from_csv(path: str, content_column: str, model: str)
+> -\> list\[dict\[str, any\]\]:
+>
+> products = pd.read_csv(path)
+>
+> items = \[\]
+>
+> for product in products.to_dict("records"):
+>
+> content = product\[content_column\]
+>
+> id = str(product\["id"\])
+>
+> title = product\["name"\]
+>
+> url = f"/products/{title.lower().replace(' ', '-')}"
+>
+> emb = embeddings.embed(input=content, model=model)
+>
+> rec = {
+>
+> "id": id,
+>
+> "content": content,
+>
+> "filepath": f"{title.lower().replace(' ', '-')}",
+>
+> "title": title,
+>
+> "url": url,
+>
+> "contentVector": emb.data\[0\].embedding,
+>
+> }
+>
+> items.append(rec)
+>
+> return items
+>
+> def create_index_from_csv(index_name, csv_file):
+>
+> \# If a search index already exists, delete it:
+>
+> try:
+>
+> index_definition = index_client.get_index(index_name)
+>
+> index_client.delete_index(index_name)
+>
+> logger.info(f"🗑️ Found existing index named '{index_name}', and
+> deleted it")
+>
+> except Exception:
+>
+> pass
+>
+> \# create an empty search index
+>
+> index_definition = create_index_definition(index_name,
+> model=os.environ\["EMBEDDINGS_MODEL"\])
+>
+> index_client.create_index(index_definition)
+>
+> \# create documents from the products.csv file, generating vector
+> embeddings for the "description" column
+>
+> docs = create_docs_from_csv(path=csv_file,
+> content_column="description", model=os.environ\["EMBEDDINGS_MODEL"\])
+>
+> \# Add the documents to the index using the Azure AI Search client
+>
+> search_client = SearchClient(
+>
+> endpoint=search_connection.endpoint_url,
+>
+> index_name=index_name,
+>
+> credential=AzureKeyCredential(key=search_connection.key),
+>
+> )
+>
+> search_client.upload_documents(docs)
+>
+> logger.info(f"➕ Uploaded {len(docs)} documents to '{index_name}'
+> index")
+>
+> if \_\_name\_\_ == "\_\_main\_\_":
+>
+> import argparse
+>
+> parser = argparse.ArgumentParser()
+>
+> parser.add_argument(
+>
+> "--index-name",
+>
+> type=str,
+>
+> help="index name to use when creating the AI Search index",
+>
+> default=os.environ\["AISEARCH_INDEX_NAME"\],
+>
+> )
+>
+> parser.add_argument(
+>
+> "--csv-file", type=str, help="path to data for creating search index",
+> default="assets/products.csv"
+>
+> )
+>
+> args = parser.parse_args()
+>
+> index_name = args.index_name
+>
+> csv_file = args.csv_file
+>
+> create_index_from_csv(index_name, csv_file)
 
-if __name__ == "__main__":
-    import argparse
+6.  **create_search_index.py**を右クリックし、**Open in integrated
+    terminal**を選択します。
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--index-name",
-        type=str,
-        help="index name to use when creating the AI Search index",
-        default=os.environ["AISEARCH_INDEX_NAME"],
-    )
-    parser.add_argument(
-        "--csv-file", type=str, help="path to data for creating search index", default="assets/products.csv"
-    )
-    args = parser.parse_args()
-    index_name = args.index_name
-    csv_file = args.csv_file
+![](./media/image76.png)
 
-    create_index_from_csv(index_name, csv_file)
+7.  ターミナルから Azure
+    ログイン資格情報にログインし、アカウントを認証するための手順に従います。
 
-```
-6.  Right click on the **create_search_index.py** and select **Open in
-    integrated terminal** option.
++++az login+++
 
-    ![](./media/image62.png)
+![](./media/image77.png)
 
-7.  From your terminal, log in to your Azure login credential and follow
-    instructions for authenticating your account:
+![](./media/image78.png)
 
-    +++az login+++
+8.  コードを実行してローカルでインデックスを構築し、クラウド
+    プロジェクトに登録します。
 
-    ![](./media/image63.png)
++++python create_search_index.py+++
 
-    ![](./media/image64.png)
+![](./media/image79.png)
 
-8.  Run the code to build your index locally and register it to the
-    cloud project:
+9.  スクリプトを実行すると、Azure Portal
+    から新しく作成されたインデックスを表示できます。
 
-    +++python create_search_index.py+++
+10. 割り当てられた**Resource Group -\> Your search service
+    created(aisearchLabinstanceID) -\> Search management -\>
+    Indexes**に移動します。
 
-    ![](./media/image65.png)
+![A screenshot of a computer Description automatically
+generated](./media/image80.png)
 
-9.  Once the script is run, you can view your newly created index in
-    from Azure portal.
+11. 同じインデックス名でスクリプトを再度実行すると、同じインデックスの新しいバージョンが作成されます。
 
-10. Navigate to the assigned **Resource Group -> Your search service
-    created(aisearchLabinstanceID) -> Search management -> Indexes**.
+### タスク3: プロダクトドキュメントを取得する
 
-    ![A screenshot of a computer Description automatically generated](./media/image66.png)
+次に、検索インデックスから製品ドキュメントを取得するスクリプトを作成します。このスクリプトは、検索インデックスに対して、ユーザーの質問に一致するドキュメントをクエリします。
 
-11. If you run the script again with the same index name, it creates a
-    new version of the same index.
+**プロダクトドキュメントを取得するためのスクリプトを作成する**
 
-### Task 3: Get product documents
+チャットはリクエストを受け取ると、データを検索して関連情報を探します。このスクリプトはAzure
+AI
+SDKを使用して検索インデックスを照会し、ユーザーの質問に一致するドキュメントを検索します。そして、そのドキュメントをチャットアプリに返します。
 
-Next, you create a script to get product documents from the search index. The script queries the search index for documents that match a user's question.
+1.  **src**フォルダーに+++ **get_product_documents.py
+    +++**という名前のファイルを作成します。
 
-**Create script to get product documents**
+![A screenshot of a computer Description automatically
+generated](./media/image81.png)
 
-When the chat gets a request, it searches through your data to find relevant information. This script uses the Azure AI SDK to query the search index for documents that match a user's question. It then returns the documents to the chat app.
+2.  以下のコードをコピーしてファイルに貼り付けます。必要なライブラリをインポートし、プロジェクトクライアントを作成し、設定を構成するコードから始めます。
 
-1.  From VS Code, create a file named +++**get_product_documents.py**+++
-    in the **src** folder.
-
-    ![A screenshot of a computer Description automatically generated](./media/image67.png)
-
-2.  Copy and paste the following code into the file. Start with code to
-    import the required libraries, create a project client, and
-    configure settings.
-
-```
 import os
+
 from pathlib import Path
+
 from opentelemetry import trace
+
 from azure.ai.projects import AIProjectClient
+
 from azure.ai.projects.models import ConnectionType
+
 from azure.identity import DefaultAzureCredential
+
 from azure.core.credentials import AzureKeyCredential
+
 from azure.search.documents import SearchClient
+
 from config import ASSET_PATH, get_logger
 
-# initialize logging and tracing objects
-logger = get_logger(__name__)
-tracer = trace.get_tracer(__name__)
+\# initialize logging and tracing objects
 
-# create a project client using environment variables loaded from the .env file
+logger = get_logger(\_\_name\_\_)
+
+tracer = trace.get_tracer(\_\_name\_\_)
+
+\# create a project client using environment variables loaded from the
+.env file
+
 project = AIProjectClient.from_connection_string(
-    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+
+conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
+credential=DefaultAzureCredential()
+
 )
 
-# create a vector embeddings client that will be used to generate vector embeddings
+\# create a vector embeddings client that will be used to generate
+vector embeddings
+
 chat = project.inference.get_chat_completions_client()
+
 embeddings = project.inference.get_embeddings_client()
 
-# use the project client to get the default search connection
+\# use the project client to get the default search connection
+
 search_connection = project.connections.get_default(
-    connection_type=ConnectionType.AZURE_AI_SEARCH, include_credentials=True
+
+connection_type=ConnectionType.AZURE_AI_SEARCH, include_credentials=True
+
 )
 
-# Create a search index client using the search connection
-# This client will be used to create and delete search indexes
+\# Create a search index client using the search connection
+
+\# This client will be used to create and delete search indexes
+
 search_client = SearchClient(
-    index_name=os.environ["AISEARCH_INDEX_NAME"],
-    endpoint=search_connection.endpoint_url,
-    credential=AzureKeyCredential(key=search_connection.key),
-)
-```
 
-3.  Add the function in get_product-documents.py to **get product
+index_name=os.environ\["AISEARCH_INDEX_NAME"\],
+
+endpoint=search_connection.endpoint_url,
+
+credential=AzureKeyCredential(key=search_connection.key),
+
+)
+
+3.  Add the function in get_product-documents.py to **get product
     documents**.
 
-```
 from azure.ai.inference.prompts import PromptTemplate
+
 from azure.search.documents.models import VectorizedQuery
 
-
 @tracer.start_as_current_span(name="get_product_documents")
-def get_product_documents(messages: list, context: dict = None) -> dict:
-    if context is None:
-        context = {}
 
-    overrides = context.get("overrides", {})
-    top = overrides.get("top", 5)
+def get_product_documents(messages: list, context: dict = None) -\>
+dict:
 
-    # generate a search query from the chat messages
-    intent_prompty = PromptTemplate.from_prompty(Path(ASSET_PATH) / "intent_mapping.prompty")
+if context is None:
 
-    intent_mapping_response = chat.complete(
-        model=os.environ["INTENT_MAPPING_MODEL"],
-        messages=intent_prompty.create_messages(conversation=messages),
-        **intent_prompty.parameters,
-    )
+context = {}
 
-    search_query = intent_mapping_response.choices[0].message.content
-    logger.debug(f"🧠 Intent mapping: {search_query}")
+overrides = context.get("overrides", {})
 
-    # generate a vector representation of the search query
-    embedding = embeddings.embed(model=os.environ["EMBEDDINGS_MODEL"], input=search_query)
-    search_vector = embedding.data[0].embedding
+top = overrides.get("top", 5)
 
-    # search the index for products matching the search query
-    vector_query = VectorizedQuery(vector=search_vector, k_nearest_neighbors=top, fields="contentVector")
+\# generate a search query from the chat messages
 
-    search_results = search_client.search(
-        search_text=search_query, vector_queries=[vector_query], select=["id", "content", "filepath", "title", "url"]
-    )
+intent_prompty = PromptTemplate.from_prompty(Path(ASSET_PATH) /
+"intent_mapping.prompty")
 
-    documents = [
-        {
-            "id": result["id"],
-            "content": result["content"],
-            "filepath": result["filepath"],
-            "title": result["title"],
-            "url": result["url"],
-        }
-        for result in search_results
-    ]
+intent_mapping_response = chat.complete(
 
-    # add results to the provided context
-    if "thoughts" not in context:
-        context["thoughts"] = []
+model=os.environ\["INTENT_MAPPING_MODEL"\],
 
-    # add thoughts and documents to the context object so it can be returned to the caller
-    context["thoughts"].append(
-        {
-            "title": "Generated search query",
-            "description": search_query,
-        }
-    )
+messages=intent_prompty.create_messages(conversation=messages),
 
-    if "grounding_data" not in context:
-        context["grounding_data"] = []
-    context["grounding_data"].append(documents)
+\*\*intent_prompty.parameters,
 
-    logger.debug(f"📄 {len(documents)} documents retrieved: {documents}")
-    return documents
-```
+)
 
-4.  Finally, add code to **test the function** when you run the script
+search_query = intent_mapping_response.choices\[0\].message.content
+
+logger.debug(f"🧠 Intent mapping: {search_query}")
+
+\# generate a vector representation of the search query
+
+embedding = embeddings.embed(model=os.environ\["EMBEDDINGS_MODEL"\],
+input=search_query)
+
+search_vector = embedding.data\[0\].embedding
+
+\# search the index for products matching the search query
+
+vector_query = VectorizedQuery(vector=search_vector,
+k_nearest_neighbors=top, fields="contentVector")
+
+search_results = search_client.search(
+
+search_text=search_query, vector_queries=\[vector_query\],
+select=\["id", "content", "filepath", "title", "url"\]
+
+)
+
+documents = \[
+
+{
+
+"id": result\["id"\],
+
+"content": result\["content"\],
+
+"filepath": result\["filepath"\],
+
+"title": result\["title"\],
+
+"url": result\["url"\],
+
+}
+
+for result in search_results
+
+\]
+
+\# add results to the provided context
+
+if "thoughts" not in context:
+
+context\["thoughts"\] = \[\]
+
+\# add thoughts and documents to the context object so it can be
+returned to the caller
+
+context\["thoughts"\].append(
+
+{
+
+"title": "Generated search query",
+
+"description": search_query,
+
+}
+
+)
+
+if "grounding_data" not in context:
+
+context\["grounding_data"\] = \[\]
+
+context\["grounding_data"\].append(documents)
+
+logger.debug(f"📄 {len(documents)} documents retrieved: {documents}")
+
+return documents
+
+4.  Finally, add code to **test the function** when you run the script
     directly:
 
-```
-if __name__ == "__main__":
-    import logging
-    import argparse
+if \_\_name\_\_ == "\_\_main\_\_":
 
-    # set logging level to debug when running this module directly
-    logger.setLevel(logging.DEBUG)
+import logging
 
-    # load command line arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--query",
-        type=str,
-        help="Query to use to search product",
-        default="I need a new tent for 4 people, what would you recommend?",
-    )
+import argparse
 
-    args = parser.parse_args()
-    query = args.query
+\# set logging level to debug when running this module directly
 
-    result = get_product_documents(messages=[{"role": "user", "content": query}])
-```
+logger.setLevel(logging.DEBUG)
 
-![A screenshot of a computer Description automatically generated](./media/image68.png)
+\# load command line arguments
 
-5.  Click on **File**> **Save all**.
+parser = argparse.ArgumentParser()
 
-    ![](./media/image69.png)
+parser.add_argument(
 
-### Task 4: Create prompt template for intent mapping
+"--query",
 
-The **get_product_documents.py** script uses a prompt template to convert the conversation to a search query. The template instructs how to extract the user's intent from the conversation.
+type=str,
 
-1.  Before you run the script, create the prompt template. Create a file
-    named +++**intent_mapping.prompty**+++ under your **assets** folder:
+help="Query to use to search product",
 
-    ![](./media/image70.png)
+default="I need a new tent for 4 people, what would you recommend?",
 
-4.  Copy the following code to the intent_mapping_prompty file and the
-    from top bar go to Files and click on **Save all.**
+)
 
-```
----
+args = parser.parse_args()
+
+query = args.query
+
+result = get_product_documents(messages=\[{"role": "user", "content":
+query}\])
+
+![A screenshot of a computer Description automatically
+generated](./media/image82.png)
+
+5.  **File\> Save all**をクリックします。
+
+![](./media/image83.png)
+
+### タスク4: インテントマッピング用プロンプトテンプレートを作成する
+
+get_product_documents.pyスクリプトは、プロンプトテンプレートを使用して会話を検索クエリに変換します。このテンプレートは**、**会話からユーザーのインテントを抽出する方法を指示します。
+
+1.  スクリプトを実行する前に、プロンプトテンプレートを作成します。**assets**フォルダ内に**+++intent_mapping.prompty+++**というファイルを作成します。
+
+![](./media/image84.png)
+
+2.  次のコードをintent_mapping_promptyファイルにコピーし、上部のバーからFileに移動して**Save
+    all**をクリックします。
+
+> ---
+
 name: Chat Prompt
-description: A prompty that extract users query intent based on the current_query and chat_history of the conversation
-model:
-    api: chat
-    configuration:
-        azure_deployment: gpt-4o
-inputs:
-    conversation:
-        type: array
----
-system:
-# Instructions
-- You are an AI assistant reading a current user query and chat_history.
-- Given the chat_history, and current user's query, infer the user's intent expressed in the current user query.
-- Once you infer the intent, respond with a search query that can be used to retrieve relevant documents for the current user's query based on the intent
-- Be specific in what the user is asking about, but disregard parts of the chat history that are not relevant to the user's intent.
-- Provide responses in json format
 
-# Examples
+description: A prompty that extract users query intent based on the
+current_query and chat_history of the conversation
+
+model:
+
+api: chat
+
+configuration:
+
+azure_deployment: gpt-4o
+
+inputs:
+
+conversation:
+
+type: array
+
+---
+
+system:
+
+\# Instructions
+
+\- You are an AI assistant reading a current user query and
+chat_history.
+
+\- Given the chat_history, and current user's query, infer the user's
+intent expressed in the current user query.
+
+\- Once you infer the intent, respond with a search query that can be
+used to retrieve relevant documents for the current user's query based
+on the intent
+
+\- Be specific in what the user is asking about, but disregard parts of
+the chat history that are not relevant to the user's intent.
+
+\- Provide responses in json format
+
+\# Examples
+
 Example 1:
+
 With a conversation like below:
 
- - user: are the trailwalker shoes waterproof?
- - assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They are designed with a durable and waterproof construction to withstand various terrains and weather conditions.
- - user: how much do they cost?
+\- user: are the trailwalker shoes waterproof?
+
+\- assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They are
+designed with a durable and waterproof construction to withstand various
+terrains and weather conditions.
+
+\- user: how much do they cost?
 
 Respond with:
+
 {
-    "intent": "The user wants to know how much the Trailwalker Hiking Shoes cost.",
-    "search_query": "price of Trailwalker Hiking Shoes"
+
+"intent": "The user wants to know how much the Trailwalker Hiking Shoes
+cost.",
+
+"search_query": "price of Trailwalker Hiking Shoes"
+
 }
 
 Example 2:
+
 With a conversation like below:
 
- - user: are the trailwalker shoes waterproof?
- - assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They are designed with a durable and waterproof construction to withstand various terrains and weather conditions.
- - user: how much do they cost?
- - assistant: The TrailWalker Hiking Shoes are priced at $110.
- - user: do you have waterproof tents?
- - assistant: Yes, we have waterproof tents available. Can you please provide more information about the type or size of tent you are looking for?
- - user: which is your most waterproof tent?
- - assistant: Our most waterproof tent is the Alpine Explorer Tent. It is designed with a waterproof material and has a rainfly with a waterproof rating of 3000mm. This tent provides reliable protection against rain and moisture.
- - user: how much does it cost?
+\- user: are the trailwalker shoes waterproof?
+
+\- assistant: Yes, the TrailWalker Hiking Shoes are waterproof. They are
+designed with a durable and waterproof construction to withstand various
+terrains and weather conditions.
+
+\- user: how much do they cost?
+
+\- assistant: The TrailWalker Hiking Shoes are priced at $110.
+
+\- user: do you have waterproof tents?
+
+\- assistant: Yes, we have waterproof tents available. Can you please
+provide more information about the type or size of tent you are looking
+for?
+
+\- user: which is your most waterproof tent?
+
+\- assistant: Our most waterproof tent is the Alpine Explorer Tent. It
+is designed with a waterproof material and has a rainfly with a
+waterproof rating of 3000mm. This tent provides reliable protection
+against rain and moisture.
+
+\- user: how much does it cost?
 
 Respond with:
+
 {
-    "intent": "The user would like to know how much the Alpine Explorer Tent costs.",
-    "search_query": "price of Alpine Explorer Tent"
+
+"intent": "The user would like to know how much the Alpine Explorer Tent
+costs.",
+
+"search_query": "price of Alpine Explorer Tent"
+
 }
 
 user:
+
 Return the search query for the messages in the following conversation:
+
 {{#conversation}}
- - {{role}}: {{content}}
+
+\- {{role}}: {{content}}
+
 {{/conversation}}
 
-```
+![A screenshot of a computer Description automatically
+generated](./media/image85.png)
 
-![A screenshot of a computer Description automatically generated](./media/image71.png)
+### タスク5: プロダクトドキュメント取得スクリプトをテストする
 
-### Task 5: Test the product document retrieval script
+1.  スクリプトとテンプレートが完成されたので、スクリプトを実行して、検索インデックスがクエリに対してどのようなドキュメントを返すかをテストします。ターミナルウィンドウから以下を実行します。
 
-1.  Now that you have both the script and template, run the script to
-    test out what documents the search index returns from a query. From
-    the terminal window run,
++++python get_product_documents.py --query "I need a new tent for 4
+people, what would you recommend?"+++![A screenshot of a computer
+Description automatically generated](./media/image86.png)
 
-    +++python get_product_documents.py --query "I need a new tent for 4 people, what would you recommend?"+++
+### タスク6: カスタム知識検索(RAG)コードを開発する
 
-    ![A screenshot of a computer Description automatically generated](./media/image72.png)
+次に、基本的なチャット アプリケーションにretrieval augmented generation
+(RAG) 機能を追加するカスタム コードを作成します。
 
-### Task 6: Develop custom knowledge retrieval (RAG) code
+**RAG機能を備えたチャットスクリプトを作成する**
 
-Next you create custom code to add retrieval augmented generation (RAG) capabilities to a basic chat application.
+1.  **src**フォルダに、+++ **chat_with_products.py
+    +++**という新しいファイルを作成します。このスクリプトは製品ドキュメントを取得し、ユーザーの質問への回答を生成します。
 
-**Create a chat script with RAG capabilities**
+![A screenshot of a computer Description automatically
+generated](./media/image87.png)
 
-1.  In your **src** folder, create a new file called +++**chat_with_products.py**+++. This script retrieves
-    product documents and generates a response to a user's question.
+2.  必要なライブラリをインポートし、プロジェクト
+    クライアントを作成し、設定を構成するコードを追加します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image73.png)
+> import os
+>
+> from pathlib import Path
+>
+> from opentelemetry import trace
+>
+> from azure.ai.projects import AIProjectClient
+>
+> from azure.identity import DefaultAzureCredential
+>
+> from config import ASSET_PATH, get_logger, enable_telemetry
+>
+> from get_product_documents import get_product_documents
+>
+> \# initialize logging and tracing objects
+>
+> logger = get_logger(\_\_name\_\_)
+>
+> tracer = trace.get_tracer(\_\_name\_\_)
+>
+> \# create a project client using environment variables loaded from the
+> .env file
+>
+> project = AIProjectClient.from_connection_string(
+>
+> conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
+> credential=DefaultAzureCredential()
+>
+> )
+>
+> \# create a chat client we can use for testing
+>
+> chat = project.inference.get_chat_completions_client()
 
-2.  Add the code to import the required libraries, create a project
-    client, and configure settings:
+![A screenshot of a computer Description automatically
+generated](./media/image88.png)
 
-```
-import os
-from pathlib import Path
-from opentelemetry import trace
-from azure.ai.projects import AIProjectClient
-from azure.identity import DefaultAzureCredential
-from config import ASSET_PATH, get_logger, enable_telemetry
-from get_product_documents import get_product_documents
+3.  RAG 機能を使用するチャット機能を作成するには、chat_with_products.py
+    の最後にコードを追加します。
 
+> from azure.ai.inference.prompts import PromptTemplate
+>
+> @tracer.start_as_current_span(name="chat_with_products")
+>
+> def chat_with_products(messages: list, context: dict = None) -\> dict:
+>
+> if context is None:
+>
+> context = {}
+>
+> documents = get_product_documents(messages, context)
+>
+> \# do a grounded chat call using the search results
+>
+> grounded_chat_prompt = PromptTemplate.from_prompty(Path(ASSET_PATH) /
+> "grounded_chat.prompty")
+>
+> system_message =
+> grounded_chat_prompt.create_messages(documents=documents,
+> context=context)
+>
+> response = chat.complete(
+>
+> model=os.environ\["CHAT_MODEL"\],
+>
+> messages=system_message + messages,
+>
+> \*\*grounded_chat_prompt.parameters,
+>
+> )
+>
+> logger.info(f"💬 Response: {response.choices\[0\].message}")
+>
+> \# Return a chat protocol compliant response
+>
+> return {"message": response.choices\[0\].message, "context": context}
 
-# initialize logging and tracing objects
-logger = get_logger(__name__)
-tracer = trace.get_tracer(__name__)
+![A screenshot of a computer Description automatically
+generated](./media/image89.png)
 
-# create a project client using environment variables loaded from the .env file
-project = AIProjectClient.from_connection_string(
-    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+4.  **チャット機能**を実行するコードを追加し、 使用してファイルに移動し、**Save
+    all**をクリックします。
+
+if \_\_name\_\_ == "\_\_main\_\_":
+
+import argparse
+
+\# load command line arguments
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+
+"--query",
+
+type=str,
+
+help="Query to use to search product",
+
+default="I need a new tent for 4 people, what would you recommend?",
+
 )
 
-# create a chat client we can use for testing
-chat = project.inference.get_chat_completions_client()
-```
+parser.add_argument(
 
-![A screenshot of a computer Description automatically generated](./media/image74.png)
+"--enable-telemetry",
 
-3.  Add the code at end of chat_with_products.py to create the chat
-    function that uses the RAG capabilities.
+action="store_true",
 
-```
-from azure.ai.inference.prompts import PromptTemplate
+help="Enable sending telemetry back to the project",
 
+)
 
-@tracer.start_as_current_span(name="chat_with_products")
-def chat_with_products(messages: list, context: dict = None) -> dict:
-    if context is None:
-        context = {}
+args = parser.parse_args()
 
-    documents = get_product_documents(messages, context)
+if args.enable_telemetry:
 
-    # do a grounded chat call using the search results
-    grounded_chat_prompt = PromptTemplate.from_prompty(Path(ASSET_PATH) / "grounded_chat.prompty")
+enable_telemetry(True)
 
-    system_message = grounded_chat_prompt.create_messages(documents=documents, context=context)
-    response = chat.complete(
-        model=os.environ["CHAT_MODEL"],
-        messages=system_message + messages,
-        **grounded_chat_prompt.parameters,
-    )
-    logger.info(f"💬 Response: {response.choices[0].message}")
+\# run chat with products
 
-    # Return a chat protocol compliant response
-    return {"message": response.choices[0].message, "context": context}
-```
+response = chat_with_products(messages=\[{"role": "user", "content":
+args.query}\])![A screenshot of a computer Description automatically
+generated](./media/image90.png)
 
-![A screenshot of a computer Description automatically generated](./media/image75.png)
+### タスク7: グラウンディングされたチャットプロンプトテンプレートを作成する
 
-4.  Finally, add the code to run the **chat** **function** and then go
-    to files and click on **Save all**.
+**chat_with_products.py**スクリプトは、プロンプトテンプレートを呼び出して、ユーザーの質問への応答を生成します。このテンプレートは、ユーザーの質問と取得したドキュメントに基づいて応答を生成する方法を指示します。テンプレートを作成してください。
 
-```
-if __name__ == "__main__":
-    import argparse
+1.  **assets **フォルダに、ファイル +++ **grounded\_ chat.prompty**
+    +++を追加します。
 
-    # load command line arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--query",
-        type=str,
-        help="Query to use to search product",
-        default="I need a new tent for 4 people, what would you recommend?",
-    )
-    parser.add_argument(
-        "--enable-telemetry",
-        action="store_true",
-        help="Enable sending telemetry back to the project",
-    )
-    args = parser.parse_args()
-    if args.enable_telemetry:
-        enable_telemetry(True)
+![A screenshot of a computer Description automatically
+generated](./media/image91.png)
 
-    # run chat with products
-    response = chat_with_products(messages=[{"role": "user", "content": args.query}])
-```
+2.  次のコードgrounded\_ chat.promptyを追加します。
 
-![A screenshot of a computer Description automatically generated](./media/image76.png)
+> ---
 
-### Task 7: Create a grounded chat prompt template
-
-The **chat_with_products.py** script calls a prompt template to generate a response to the user's question. The template instructs how to generate a response based on the user's question and the retrieved documents. Create this template now.
-
-1.  In your **assets** folder, add the
-    file +++**grounded_chat.prompty**+++
-
-    ![A screenshot of a computer Description automatically generated](./media/image77.png)
-
-2.  Add the following code grounded_chat.prompty.
-
-```
----
 name: Chat with documents
-description: Uses a chat completions model to respond to queries grounded in relevant documents
+
+description: Uses a chat completions model to respond to queries
+grounded in relevant documents
+
 model:
-    api: chat
-    configuration:
-        azure_deployment: gpt-4o
+
+api: chat
+
+configuration:
+
+azure_deployment: gpt-4o
+
 inputs:
-    conversation:
-        type: array
+
+conversation:
+
+type: array
+
 ---
+
 system:
-You are an AI assistant helping users with queries related to outdoor outdooor/camping gear and clothing.
-If the question is not related to outdoor/camping gear and clothing, just say 'Sorry, I only can answer queries related to outdoor/camping gear and clothing. So, how can I help?'
+
+You are an AI assistant helping users with queries related to outdoor
+outdooor/camping gear and clothing.
+
+If the question is not related to outdoor/camping gear and clothing,
+just say 'Sorry, I only can answer queries related to outdoor/camping
+gear and clothing. So, how can I help?'
+
 Don't try to make up any answers.
-If the question is related to outdoor/camping gear and clothing but vague, ask for clarifying questions instead of referencing documents. If the question is general, for example it uses "it" or "they", ask the user to specify what product they are asking about.
-Use the following pieces of context to answer the questions about outdoor/camping gear and clothing as completely, correctly, and concisely as possible.
+
+If the question is related to outdoor/camping gear and clothing but
+vague, ask for clarifying questions instead of referencing documents. If
+the question is general, for example it uses "it" or "they", ask the
+user to specify what product they are asking about.
+
+Use the following pieces of context to answer the questions about
+outdoor/camping gear and clothing as completely, correctly, and
+concisely as possible.
+
 Do not add documentation reference in the response.
 
-# Documents
+\# Documents
 
 {{#documents}}
 
-## Document {{id}}: {{title}}
+\## Document {{id}}: {{title}}
+
 {{content}}
+
 {{/documents}}
-```
 
-![A screenshot of a computer Description automatically generated](./media/image78.png)
+![A screenshot of a computer Description automatically
+generated](./media/image92.png)
 
-3.  Click on **File> Save all.**
+3.  **File\> Save all**をクリックします。
 
-    ![A screenshot of a computer Description automatically generated](./media/image79.png)
+![A screenshot of a computer Description automatically
+generated](./media/image93.png)
 
-### Task 8: Run the chat script with RAG capabilities
+### タスク8: RAG機能を使用してチャットスクリプトを実行する
 
-1.  Now that you have both the script and the template, run the script
-    to test your chat app with RAG capabilities:
+1.  スクリプトとテンプレートの両方ができたので、スクリプトを実行して、RAG
+    機能を備えたチャット アプリをテストします。
 
-    +++python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?"+++
++++python chat_with_products.py --query " I need a new tent for 4
+people, what would you recommend?"+++
 
-    ![A screenshot of a computer Description automatically generated](./media/image80.png)
+![A screenshot of a computer Description automatically
+generated](./media/image94.png)
 
-### Task 9: Add telemetry logging
+### タスク9: テレメトリログを追加する
 
-1.  From the Azure portal, select **Subscriptions**, select your subscription and then select
-    **Resource providers** under **Settings** from the left navigation
-    pane.
+1.  Azure
+    ポータルから**Subscriptions**を選択し**、**サブスクリプションを選択して、左側のナビゲーション
+    ウィンドウの**Settings**の下にある**Resource
+    providers **を選択します。
 
-2.  Search for and select +++**Microsoft.OperationalInsights**+++ and
-    click on the three dots for this resource provider and select
-    **Register**.
+2.  **Microsoft.OperationalInsights +++**を検索して選択し、このリソース
+    プロバイダーの 3 つのドットをクリックして、
+    **Register**を選択します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image81.png)
+![A screenshot of a computer Description automatically
+generated](./media/image95.png)
 
-3.  Follow the same procedure to register +++microsoft.insights+++
+3.  同じ手順に従って+++ microsoft.insights +++を登録してください
 
-4.  Wait for a success message on the registration before proceeding to
-    the next step.
+4.  次のステップに進む前に、登録の成功メッセージをお待ちください。
 
-    ![A screenshot of a computer Description automatically generated](./media/image82.png)
+![A screenshot of a computer Description automatically
+generated](./media/image96.png)
 
-5.  From your Project in the Azure AI Foundry, select **Tracing** under
-    **Access and improve** from the left pane. Select **Create New**.
+5.  Azure AI Foundryのプロジェクトで、左側のペインから**Access and
+    improve **の**Tracing **を選択し**、 Create New**を選択します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image83.png)
+![A screenshot of a computer Description automatically
+generated](./media/image97.png)
 
-6.	Provide the name as **+++appinsight@lab.LabInstance.Id+++**
+6.  名前を[**+++appinsight@lab.LabInstance.Id**](mailto:+++appinsight@lab.LabInstance.Id)
+    **+++**として指定します。
 
-    ![A screenshot of a computer screen Description automatically generated](./media/image84.png)
+![A screenshot of a computer screen Description automatically
+generated](./media/image98.png)
 
-6.  Ensure that the resource gets created.
+7.  リソースが作成されたことを確認します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image85.png)
+![A screenshot of a computer Description automatically
+generated](./media/image99.png)
 
-7.  Back in the VS Code, to enable logging of telemetry to your project,
-    install azure-monitor-opentelemetry.
+8.  プロジェクトへのテレメトリのログ記録を有効にするには、 VS Code
+    にazure-monitor- opentelemetry をインストールします。
 
-    +++pip install azure-monitor-opentelemetry+++
++++pip install azure-monitor-opentelemetry+++![A screenshot of a
+computer program Description automatically
+generated](./media/image100.png)
 
-    ![A screenshot of a computer program Description automatically generated](./media/image86.png)
+9.  chat_with_products.py スクリプトを使用するときは、
+    --enable-telemetry フラグを追加します。
 
-8.  Add the --enable-telemetry flag when you use
-    the chat_with_products.py script:
++++python chat_with_products.py --query "I need a new tent for 4 people,
+what would you recommend?" --enable-telemetry+++![A screenshot of a
+computer Description automatically generated](./media/image101.png)
 
-    +++python chat_with_products.py --query "I need a new tent for 4 people, what would you recommend?" --enable-telemetry+++
+## 演習 3: Azure AI Foundry SDK を使用してカスタム チャット アプリを評価する
 
-    ![A screenshot of a computer Description automatically generated](./media/image87.png)
+### タスク1: チャットアプリの応答質を評価する
 
-## Exercise 3: Evaluate the custom chat application with the Azure AI Foundry SDK
+チャット履歴を含め、チャット
+アプリがクエリに適切に応答することがわかったので、次はいくつかの異なる指標とより多くのデータに基づいてチャット
+アプリのパフォーマンスを評価します。
 
-### Task 1: Evaluate the quality of the chat app responses
+評価データセットとget_chat\_ response ( )
+ターゲット関数を備えたエバリュエータを使用し、評価結果を確認します。
 
-Now that you know your chat app responds well to your queries, including
-with chat history, it's time to evaluate how it does across a few
-different metrics and more data.
+評価を実行すると、システムプロンプトの改善など、ロジックを改善したり、チャットアプリの応答がどのように変化して改善されるかを確認したりできます。
 
-You use an evaluator with an evaluation dataset and
-the get_chat_response() target function, then assess the evaluation
-results.
+**評価データセットを作成する**
 
-Once you run an evaluation, you can then make improvements to your
-logic, like improving your system prompt, and observing how the chat app
-responses change and improve.
+質問例と期待される回答 (真実) を含む次の評価データセットを使用します。
 
-**Create evaluation dataset**
+1.  **assets **フォルダーに+++ **chat_eval\_ data.jsonl
+    +++**というファイルを作成します。
 
-Use the following evaluation dataset, which contains example questions
-and expected answers (truth).
+![](./media/image102.png)
 
-1.  Create a file called +++**chat_eval_data.jsonl**+++ in
-    your **assets** folder.
+2.  このデータセットをファイルに貼り付けて、ファイルを**保存します。**
 
-    ![](./media/image88.png)
+{"query": "Which tent is the most waterproof?", "truth": "The Alpine
+Explorer Tent has the highest rainfly waterproof rating at 3000m"}
 
-2.  Paste this dataset into the file and the **save** the file.
+{"query": "Which camping table holds the most weight?", "truth": "The
+Adventure Dining Table has a higher weight capacity than all of the
+other camping tables mentioned"}
 
-```
-{"query": "Which tent is the most waterproof?", "truth": "The Alpine Explorer Tent has the highest rainfly waterproof rating at 3000m"}
-{"query": "Which camping table holds the most weight?", "truth": "The Adventure Dining Table has a higher weight capacity than all of the other camping tables mentioned"}
-{"query": "How much do the TrailWalker Hiking Shoes cost? ", "truth": "The Trailewalker Hiking Shoes are priced at $110"}
-{"query": "What is the proper care for trailwalker hiking shoes? ", "truth": "After each use, remove any dirt or debris by brushing or wiping the shoes with a damp cloth."}
+{"query": "How much do the TrailWalker Hiking Shoes cost? ", "truth":
+"The Trailewalker Hiking Shoes are priced at $110"}
+
+{"query": "What is the proper care for trailwalker hiking shoes? ",
+"truth": "After each use, remove any dirt or debris by brushing or
+wiping the shoes with a damp cloth."}
+
 {"query": "What brand is TrailMaster tent? ", "truth": "OutdoorLiving"}
-{"query": "How do I carry the TrailMaster tent around? ", "truth": " Carry bag included for convenient storage and transportation"}
-{"query": "What is the floor area for Floor Area? ", "truth": "80 square feet"}
-{"query": "What is the material for TrailBlaze Hiking Pants?", "truth": "Made of high-quality nylon fabric"}
-{"query": "What color does TrailBlaze Hiking Pants come in?", "truth": "Khaki"}
-{"query": "Can the warrenty for TrailBlaze pants be transfered? ", "truth": "The warranty is non-transferable and applies only to the original purchaser of the TrailBlaze Hiking Pants. It is valid only when the product is purchased from an authorized retailer."}
-{"query": "How long are the TrailBlaze pants under warranty for? ", "truth": " The TrailBlaze Hiking Pants are backed by a 1-year limited warranty from the date of purchase."}
-{"query": "What is the material for PowerBurner Camping Stove? ", "truth": "Stainless Steel"}
-{"query": "Is France in Europe?", "truth": "Sorry, I can only queries related to outdoor/camping gear and equipment"}
-```
 
-![A screenshot of a computer Description automatically generated](./media/image89.png)
+{"query": "How do I carry the TrailMaster tent around? ", "truth": "
+Carry bag included for convenient storage and transportation"}
 
-### Task 2: Evaluate with Azure AI evaluators
+{"query": "What is the floor area for Floor Area? ", "truth": "80 square
+feet"}
 
-Now define an evaluation script that will:
+{"query": "What is the material for TrailBlaze Hiking Pants?", "truth":
+"Made of high-quality nylon fabric"}
 
-- Generate a target function wrapper around our chat app logic.
+{"query": "What color does TrailBlaze Hiking Pants come in?", "truth":
+"Khaki"}
 
-- Load the sample .jsonl dataset.
+{"query": "Can the warrenty for TrailBlaze pants be transfered? ",
+"truth": "The warranty is non-transferable and applies only to the
+original purchaser of the TrailBlaze Hiking Pants. It is valid only when
+the product is purchased from an authorized retailer."}
 
-- Run the evaluation, which takes the target function, and merges the
-  evaluation dataset with the responses from the chat app.
+{"query": "How long are the TrailBlaze pants under warranty for? ",
+"truth": " The TrailBlaze Hiking Pants are backed by a 1-year limited
+warranty from the date of purchase."}
 
-- Generate a set of GPT-assisted metrics (relevance, groundedness, and
-  coherence) to evaluate the quality of the chat app responses.
+{"query": "What is the material for PowerBurner Camping Stove? ",
+"truth": "Stainless Steel"}  
+{"query": "Is France in Europe?", "truth": "Sorry, I can only queries
+related to outdoor/camping gear and equipment"}![A screenshot of a
+computer Description automatically generated](./media/image103.png)
 
-- Output the results locally, and logs the results to the cloud project.
+### タスク 2: Azure AI エバリュエータによる評価
 
-The script allows you to review the results locally, by outputting the
-results in the command line, and to a json file.
+次の評価スクリプトを定義します。
 
-The script also logs the evaluation results to the cloud project so that
-you can compare evaluation runs in the UI.
+- チャット アプリのロジックを囲むターゲット関数ラッパーを生成します。
 
-1.  Create a file called +++**evaluate.py**+++ under **src** folder.
+- sample.jsonlデータセットを読み込みます。
 
-    ![A screenshot of a computer Description automatically generated](./media/image90.png)
+- 評価を実行します。評価では、ターゲット関数が取得され、評価データセットがチャット
+  アプリからの応答とマージされます。
 
-2.  Add the following code to import the required libraries, create a
-    project client, and configure some settings:
+- チャット アプリの応答の品質を評価するために、 GPT -assistedメトリック
+  (relevance, groundedness, coherence) のセットを生成します。
 
-```
+- 結果をローカルに出力し、クラウド プロジェクトに結果を記録します。
+
+このスクリプトを使用すると、結果をコマンドラインおよびjsonファイルに出力して、ローカルで結果を確認できます。
+
+このスクリプトは、評価結果をクラウド プロジェクトに記録し、UI
+で評価実行を比較できるようにします。
+
+1.  **src**フォルダーの下に **+++ evaluate.py**
+    +++というファイルを作成します。
+
+![A screenshot of a computer Description automatically
+generated](./media/image104.png)
+
+2.  必要なライブラリをインポートし、プロジェクト
+    クライアントを作成し、いくつかの設定を構成するには、次のコードを追加します。
+
 import os
+
 import pandas as pd
+
 from azure.ai.projects import AIProjectClient
+
 from azure.ai.projects.models import ConnectionType
+
 from azure.ai.evaluation import evaluate, GroundednessEvaluator
+
 from azure.identity import DefaultAzureCredential
 
 from chat_with_products import chat_with_products
 
-# load environment variables from the .env file at the root of this repo
+\# load environment variables from the .env file at the root of this
+repo
+
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# create a project client using environment variables loaded from the .env file
+\# create a project client using environment variables loaded from the
+.env file
+
 project = AIProjectClient.from_connection_string(
-    conn_str=os.environ["AIPROJECT_CONNECTION_STRING"], credential=DefaultAzureCredential()
+
+conn_str=os.environ\["AIPROJECT_CONNECTION_STRING"\],
+credential=DefaultAzureCredential()
+
 )
 
-connection = project.connections.get_default(connection_type=ConnectionType.AZURE_OPEN_AI, include_credentials=True)
+connection =
+project.connections.get_default(connection_type=ConnectionType.AZURE_OPEN_AI,
+include_credentials=True)
 
 evaluator_model = {
-    "azure_endpoint": connection.endpoint_url,
-    "azure_deployment": os.environ["EVALUATION_MODEL"],
-    "api_version": "2024-06-01",
-    "api_key": connection.key,
+
+"azure_endpoint": connection.endpoint_url,
+
+"azure_deployment": os.environ\["EVALUATION_MODEL"\],
+
+"api_version": "2024-06-01",
+
+"api_key": connection.key,
+
 }
 
-groundedness = GroundednessEvaluator(evaluator_model)
-```
+groundedness = GroundednessEvaluator(evaluator_model)![A screenshot of a
+computer Description automatically generated](./media/image105.png)
 
-![A screenshot of a computer Description automatically generated](./media/image91.png)
+3.  クエリと応答の評価用の評価インターフェースを実装するラッパー関数を作成するコードを追加します。
 
-3.  Add code to create a wrapper function that implements the evaluation
-    interface for query and response evaluation:
-
-```
 def evaluate_chat_with_products(query):
-    response = chat_with_products(messages=[{"role": "user", "content": query}])
-    return {"response": response["message"].content, "context": response["context"]["grounding_data"]}
-```
 
-![A screenshot of a computer Description automatically generated](./media/image92.png)
+response = chat_with_products(messages=\[{"role": "user", "content":
+query}\])
 
-4.  Finally, add code to run the evaluation, view the results locally,
-    and gives you a link to the evaluation results in AI Foundry portal.
+return {"response": response\["message"\].content, "context":
+response\["context"\]\["grounding_data"\]}![A screenshot of a computer
+Description automatically generated](./media/image106.png)
 
-```
-# Evaluate must be called inside of __main__, not on import
-if __name__ == "__main__":
-    from config import ASSET_PATH
+4.  最後に、評価を実行し、結果をローカルで表示し、AI Foundry
+    ポータルの評価結果へのリンクを提供するコードを追加します。
 
-    # workaround for multiprocessing issue on linux
-    from pprint import pprint
-    from pathlib import Path
-    import multiprocessing
-    import contextlib
+> \# Evaluate must be called inside of \_\_main\_\_, not on import
+>
+> if \_\_name\_\_ == "\_\_main\_\_":
+>
+> from config import ASSET_PATH
+>
+> \# workaround for multiprocessing issue on linux
+>
+> from pprint import pprint
+>
+> from pathlib import Path
+>
+> import multiprocessing
+>
+> import contextlib
+>
+> with contextlib.suppress(RuntimeError):
+>
+> multiprocessing.set_start_method("spawn", force=True)
+>
+> \# run evaluation with a dataset and target function, log to the
+> project
+>
+> result = evaluate(
+>
+> data=Path(ASSET_PATH) / "chat_eval_data.jsonl",
+>
+> target=evaluate_chat_with_products,
+>
+> evaluation_name="evaluate_chat_with_products",
+>
+> evaluators={
+>
+> "groundedness": groundedness,
+>
+> },
+>
+> evaluator_config={
+>
+> "default": {
+>
+> "query": {"${data.query}"},
+>
+> "response": {"${target.response}"},
+>
+> "context": {"${target.context}"},
+>
+> }
+>
+> },
+>
+> azure_ai_project=project.scope,
+>
+> output_path="./myevalresults.json",
+>
+> )
+>
+> tabular_result = pd.DataFrame(result.get("rows"))
+>
+> pprint("-----Summarized Metrics-----")
+>
+> pprint(result\["metrics"\])
+>
+> pprint("-----Tabular Result-----")
+>
+> pprint(tabular_result)
+>
+> pprint(f"View evaluation results in AI Studio:
+> {result\['studio_url'\]}")
 
-    with contextlib.suppress(RuntimeError):
-        multiprocessing.set_start_method("spawn", force=True)
+![A screenshot of a computer Description automatically
+generated](./media/image107.png)
 
-    # run evaluation with a dataset and target function, log to the project
-    result = evaluate(
-        data=Path(ASSET_PATH) / "chat_eval_data.jsonl",
-        target=evaluate_chat_with_products,
-        evaluation_name="evaluate_chat_with_products",
-        evaluators={
-            "groundedness": groundedness,
-        },
-        evaluator_config={
-            "default": {
-                "query": {"${data.query}"},
-                "response": {"${target.response}"},
-                "context": {"${target.context}"},
-            }
-        },
-        azure_ai_project=project.scope,
-        output_path="./myevalresults.json",
-    )
+5.  上部のナビゲーション バーの**File **の下にある**Save
+    all **をクリックします。
 
-    tabular_result = pd.DataFrame(result.get("rows"))
+### タスク3: 評価モデルを構成する
 
-    pprint("-----Summarized Metrics-----")
-    pprint(result["metrics"])
-    pprint("-----Tabular Result-----")
-    pprint(tabular_result)
-    pprint(f"View evaluation results in AI Studio: {result['studio_url']}")
-```
+評価スクリプトはモデルを何度も呼び出すため、評価モデルの 1
+分あたりのトークン数を増やすことが勧められています。
 
-![A screenshot of a computer Description automatically generated](./media/image93.png)
+最初に、評価モデル名 gpt-4o-mini
+を指定した**.env**ファイルを作成しました。使用可能なクォータがある場合は、このモデルの
+1
+分あたりのトークン制限を増やしてみてください。クォータが足りず値を増やすことができない場合でも、スクリプトは制限エラーを処理するように設計されています。
 
-5.  Click on **Save all** under **File** in the top navigation bar.
+1.  Azure AI Foundry ポータルのプロジェクトから、 **Models +
+    endpoints **を選択し、 **gpt-4o-mini**を選択します。
 
-### Task 3: Configure the evaluation model
+![A screenshot of a computer Description automatically
+generated](./media/image108.png)
 
-Since the evaluation script calls the model many times, you might want
-to increase the number of tokens per minute for the evaluation model.
+2.  **gpt-4o-mini**を選択し、 **Edit**をクリックします。
 
-Initially, you created a **.env** file that specifies the name of the
-evaluation model, gpt-4o-mini. Try to increase the tokens per minute
-limit for this model, if you have available quota. If you don't have
-enough quota to increase the value, don't worry. The script is designed
-to handle limit errors.
+![A screenshot of a computer Description automatically
+generated](./media/image109.png)
 
-1.  From your project in Azure AI Foundry portal, select **Models +
-    endpoints** and select **gpt-4o-mini**.
+3.  **「Tokens per Minute Rate Limit **の値を最大許容制限に設定し、
+    **Save and close**を選択します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image94.png)
+![A screenshot of a computer Description automatically
+generated](./media/image110.png)
 
-2.  Select **gpt-4o-mini**, click on **Edit.**
+### タスク4: 評価を実行する
 
-    ![A screenshot of a computer Description automatically generated](./media/image95.png)
+1.  VS Code
+    ターミナルに、以下のコマンドを実行して必要なパッケージをインストールします。
 
-3.  Set the value of **Tokens per Minute Rate Limit** to the maximum
-    allowed limit and select **Save and close**.
++++pip install azure- ai -evaluation\[remote\]+++
 
-    ![A screenshot of a computer Description automatically generated](./media/image96.png)
+2.  評価スクリプトを実行するには、以下のコードを実行します。
 
-### Task 4: Run the evaluation 
++++python evaluate.py+++
 
-1.  Back in the VS Code terminal, execute the below command to install the required packages.
+評価が完了するまでに約 5 ～ 10 分かかります。
 
-    +++pip install azure-ai-evaluation[remote]+++
-   
-2.  Execute the below code to run the evaluation script.
+![](./media/image111.png)
 
-    +++python evaluate.py+++
+### タスク 5: Azure AI Foundry ポータルで評価結果を確認する
 
-    The evaluation will take around 5 to 10 minutes to complete.
-   
-    ![](./media/img45.png)
+1.  評価実行が完了したら、リンクからAzure AI Foundry
+    ポータルのEvaluationページで評価結果を表示します。
 
-### Task 5: View evaluation results in Azure AI Foundry portal
+![](./media/image112.png)
 
-1.  Once the evaluation run completes, follow the link to view the evaluation results on the Evaluation page in the Azure AI Foundry portal.
+![](./media/image113.png)
 
-    ![](./media/img46.png)
+2.  **評価結果**と**Metrics dashboard**を確認します。
 
-    ![](./media/img47.png)
-    
-2.  Check the **Evaluation results** and the **Metrics dashboard**.
-   
-    ![](./media/img48.png)
-    
-    ![](./media/img49.png)
-    
-## Exercise 4: Delete the resources
+![](./media/image114.png)
 
-1.  From the Azure portal home page, select the assigned Resouce group.
-    Select all the resources under the Resource group and select Delete.
+![](./media/image115.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image108.png)
+## 演習4: リソースを削除する
 
-2.  Enter +++**delete**+++ and click on the **Delete** button to confirm
-    deletion. Click on **Delete** in the Delete confirmation dialog box.
+1.  Azureポータルのホームページから、割り当てられたResource
+    groupを選択します。Resource
+    groupの下にあるすべてのリソースを選択し、Deleteを選択します。
 
-    ![A screenshot of a computer Description automatically generated](./media/image109.png)
+![A screenshot of a computer Description automatically
+generated](./media/image116.png)
 
-3.  Confirm the deletion of all the resources with a success message.
+2.  +++ **delete** +++ と入力し、
+    **Delete**ボタンをクリックして削除を確定します。削除確認ダイアログボックスで**Delete**をクリックします。
 
-    ![A screenshot of a computer screen Description automatically generated](./media/image110.png)
+![A screenshot of a computer Description automatically
+generated](./media/image117.png)
 
-**Summary:**
+3.  成功メッセージですべてのリソースの削除を確認します。
 
-In this lab, we have learnt to build, evaluate and deploy a RAG based application.
+![A screenshot of a computer screen Description automatically
+generated](./media/image118.png)
+
+## 要旨
+
+このlabでは、RAG
+を備えたアプリケーションを構築、評価、展開する方法を学びました。

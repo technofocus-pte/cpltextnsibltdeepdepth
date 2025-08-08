@@ -1,395 +1,413 @@
-# Lab 7 - Build Multi-Agent solution using Azure AI Agent Service with Semantic Kernel 
+# ラボ 7 - Semantic KernelとAzure AI Agent Solutionを使用してMulti-Agent ソリューションを構築する
 
-We can build enterprise-oriented AI agents through Azure AI Agent
-Service.
+Azure AI Agent Service を通じて、エンタープライズ向けの AI
+エージェントを構築できます。
 
-**Introduction**
+**導入**
 
-The following introduces a blog writing scenario. This scenario involves
-two AI agents: one for writing assistance, and the next for content
-storage and management. These agents can be seamlessly orchestrated
-using AutoGen or Semantic Kernel. In this lab, we are using the Semantic
-Kernel Orchestration.
+以下では、ブログ執筆のシナリオを紹介します。このシナリオには、執筆支援用とコンテンツの保存・管理用の2つのAIエージェントが関与します。これらのエージェントは、AutoGenまたはSemantic
+Kernelを使用してシームレスにオーケストレーションできます。本ラボでは、Semantic
+Kernel Orchestrationを使用します。
 
 ![A diagram of a diagram of a business AI-generated content may be
 incorrect.](./media/image1.png)
 
-**Objective:**
+## 目的：
 
-Using Azure AI Foundry SDK, developers can quickly build agents based on
-Azure AI Agent Service using Python or C#. Enterprises will have
-different AI Agents based on their business, so how should these AI
-Agents be combined in the workflow? We need to use AutoGen or Semantic
-Kernel to orchestrate the AI Agents. In this lab, we use Semantic Kernel
-to develop a Multi-Agent solution using Azure AI Agent Service.
+Azure AI Foundry
+SDKを使用すると、開発者はPythonまたはC#を使用して、Azure AI Agent
+Serviceをベースにしたエージェントを迅速に構築できます。企業は事業内容に応じて異なるAIエージェントを使用するため、どのようにこれらのAIエージェントをワークフロー内で組み合わせるべきでしょうか？AIエージェントをオーケストレーションするには、AutoGenまたはSemantic
+Kernelを使用する必要があります。本ラボでは、Semantic
+Kernelを使用してとAzure AI Agent
+Serviceを活用したマルチエージェントソリューションを開発します。
 
-## Exercise 1: Create an Azure AI Hub resource and project
+## 演習 1: Azure AI Hub リソースとプロジェクトを作成する
 
-In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
+この演習では、Azure ポータルでハブを作成し、Azure AI Foundry
+でプロジェクトを作成し、モデルをデプロイして、実行に必要なエージェントを作成します。
 
-1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
+1.  ブラウザから、++\*\*
+    <https://portal.azure.com/**>+++を開き、**ログイン資格情報**を使用してログインします**。** ログインの上、**Home ページ**から**Azure
+    AI Foundry**を選択します。
 
-    - User name – +++@lab.CloudPortalCredential(User1).Username+++
-    
-    - Password – +++@lab.CloudPortalCredential(User1).Password+++
+    - ユーザー名 – <+++@lab.CloudPortalCredential> (User1).Username+++
 
-    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
-    
-2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
+    - パスワード – <+++@lab.CloudPortalCredential> (User1).Password+++
 
-    ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
+![image](./media/image2.png)
 
-3.	 Enter the below details, accept the other defaults and select **Review + create**.
-   
-     -	Subscription - Select your **assigned subscription**
-     
-     -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
-     
-     -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
-     
-     -	Name - +++hub@lab.LabInstance.Id+++
+2.  **Use with AI Foundry ** -\> **AI Hubs**を選択します。 **+
+    Create -\> Hub**を選択します。
 
-     ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
- 
-     ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
+![image](./media/image3.png)
 
-4.	 Once the validation passes, select **Create**.
+3.  以下の詳細を入力し、他のデフォルトを受け入れて、 **Review +
+    create**を選択します。
 
-     ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
+    - Subscription -**割り当てられたサブスクリプション**を選択します
 
-5.	 Once the deployment is complete, click on **Go to resource**.
+    - Resource group - 割り当てられたリソース グループ (
+      **ResourceGroup1** )を選択します。
 
-     ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
+    - Region - @lab.CloudResourceGroup(ResourceGroup1).Location
+      を選択します。
 
-6.	 Select **Launch Azure AI Foundry** from the hub resource page.
+    - Name - <+++hub@lab.LabInstance.Id> +++
 
-     ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
+![image](./media/image4.png)
 
-7.	 From the launched hub resource, scroll down and select **+ New project**.
+![image](./media/image5.png)
 
-     ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
+4.  検証に合格したらCreateを選択します。
 
-     ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
+![image](./media/image6.png)
 
-8.	 Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
+5.  デプロイが完了したら、 **Go to resource**をクリックします。
 
-     ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
+![image](./media/image7.png)
 
-9.	 **Close** the Explore and experiment pop up.
+6.  ハブ リソース ページから**Launch Azure AI Foundry**を選択します。
 
-     ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
+![image](./media/image8.png)
 
-10.  You will land in the created project page.
+7.  起動したハブ リソースから下にスクロールして、 **+ New
+    project**を選択します。
 
-     ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+![image](./media/image9.png)
 
-11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
+![image](./media/image10.png)
 
-     ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+8.  名前を<+++multiagent@lab.LabInstance.Id> +++
+    として入力しCreateを選択します。
 
-12.  Scroll down in the left pane and select **Management center**.
+![image](./media/image11.png)
 
-     ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+9.  Explore and experimentポップアップを**Close**します**。**
 
-13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+![image](./media/image12.png)
 
-     ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+10. 作成されたプロジェクト ページに移動されます。
 
-14.  Select **Azure AI Foundry** from the available external assets.
+![image](./media/image13.png)
 
-     ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+11. ページを下にスクロールし、**Project connection
+    string の値**をメモ帳にコピーします。
 
-15.  Select **Add connection** to add the connection.
+![image](./media/image14.png)
 
-     ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+12. 左側のペインで下にスクロールし、**Management center**を選択します。
 
-     ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+![image](./media/image15.png)
 
-16.  Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+13. ハブ リソースの下にある **Connected resources** を選択し、 **+ New
+    connection **をクリックして、Azure AI Foundry
+    リソースとの接続を作成します。
 
-     ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+![image](./media/image16.png)
 
-17.  Select **Go to project** from the left pane.
+14. 利用可能な外部アセットから**Azure AI Foundry** を選択します。
 
-     ![image](https://github.com/user-attachments/assets/9062a254-ce3a-4a64-8a0b-4e0b5abec790)
+![image](./media/image17.png)
 
-18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+15. **Add connection **を選択します。
 
-     ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+![image](./media/image18.png)
 
-19.  Select **Agents** under **Build and customize** from the left pane.
-     In the **Azure AI Agent Service** page, select your **Azure OpenAI
-     Service** that was created, and then click on **Let’s go**.
+![image](./media/image19.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+16. 接続したら、 **Close**をクリックします。
+    **Close**ボタンが表示されない場合は、ブラウザの**ズームサイズ**を縮小してから**Closeを選択してください**。
 
-20.  Select **gpt-4o-mini** and click on **Confirm**.
+![image](./media/image20.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+17. 左側のペインから**Go to project **を選択します。
 
-21.  Accept the deployment name as +++**gpt-4o-mini**+++, select the Deployment type to be **Standard**. Accept the other defaults and click on **Deploy** to deploy the model.
+![image](./media/image21.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image10.png)
+18. **API Key **と**Azure OpenAI
+    endpoint**の値をコピーし、メモ帳に保存します。
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image11.png)
+![image](./media/image22.png)
 
-22.  Now, we have the Azure resources ready.
+19. 左ペインの**Build and customize **から**Agents **を選択します。Azure
+    **AI Agent Service**ページで、作成した**Azure OpenAI Service**
+    を選択し**、 Let's go**をクリックします。
 
-## Exercise 2: Multi Agent Orchestration 
-
-In this exercise, we will set up the Visual Studio Code and install the pre requisites that are needed for the execution.
-1.  From your VM, open the **Visual Studio Code**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image12.png)
-
-2.  Select **File** -> **Open Folder** and select the folder
-    **MultiAgent** from **C:\LabFiles** and click **Select Folder**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image13.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image14.png)
-
-3.  Select **Yes, I trust the authors** in the pop up.
-
-    ![A screenshot of a computer error AI-generated content may be
-incorrect.](./media/image15.png)
-
-4.  Right click on the notebook and select **Open in Integrated
-    Terminal**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
-
-5.  Execute the below commands one after another to add the **nuget
-    source**.
-
-    +++dotnet nuget list source+++
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
-
-    +++dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org+++
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
-
-6.  Execute the below command to install dotnet interacrive.
-
-    +++dotnet tool install --global Microsoft.dotnet-interactive --version 1.0.556801+++
-
-    ![](./media/image19.png)
-
-7.  Execute +++pip install jupyter+++ to install Jupyter.
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image20.png)
-
-8.  Execute the next command to jupyter interactive.
-
-    +++dotnet interactive jupyter install+++
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image21.png)
-
-9.  **Close** the **Terminal**. Select **Extensions** from the left pane
-    pf the **Visual Studio Code**. Search and select +++**Jupyter**+++ and
-    click on **Install** to install the Jupyter extension.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
-
-10. **Close** the Visual Studio Code and **open** it again.
-
-11. Open the notebook **AzureAIMultiAgentWithSK.ipynb**. Once opened,
-    click on **Select Kernel**.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image23.png)
 
-12. Select **Jupyter Kernel**.
+20. **gpt-4o-mini**を選択し、 **Confirm**をクリックします。
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image24.png)
 
-13. Select **.NET (C#) dotnet** in the next set of options.
+21. デプロイメント名は+++ **gpt-4o-mini**
+    +++とし、デプロイメントタイプは**Standard**を選択します。その他のデフォルト設定はそのままで、
+    **Deploy**をクリックしてモデルをデプロイします。
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-14. Select **Allow access** in the **Security Alert**.
-
-    ![A screenshot of a computer security alert AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-15. Execute the first cell to **install** all the required **packages**.
+22. これで、Azure リソースの準備が整いました。
 
-    ![A screen shot of a computer program AI-generated content may be incorrect.](./media/image27.png)
+## 演習2: Multi Agent Orchestration
 
-    ![A screenshot of a computer program AI-generated content may be incorrect.](./media/image28.png)
+この演習では、Visual Studio Code
+をセットアップし、実行に必要な前提条件をインストールします。
 
-16. Execute the next cell to import the namespaces.
+1.  VM から**Visual Studio Code**を開きます。
 
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
+
+2.  **File**-\> **Open Folder **を選択し、
+    **C:\LabFiles**から**MultiAgent**フォルダーを選択して、 **Select
+    Folder**をクリックします。
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-17. In the next cell, verify that the **deployment** variable value is
-    the same as the **model deployment** that you created. Replace,
+3.  ポップアップで**Yes, I trust the authors **を選択します。
 
-    - Endpoint – **Azure OpenAI Endpoint**
-    
-    - Key – The **API Key**
+![A screenshot of a computer error AI-generated content may be
+incorrect.](./media/image30.png)
 
-    Both the values above, we have saved earlier in a notepad once the
-project was created in the Azure AI Foundry.
+4.  ノートブックを右クリックし、 **Open in Integrated
+    Terminal**を選択します。
 
-    After replacing the values, **execute** the cell.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image31.png)
 
-    This sets these values to corresponding variables to be used further.
+5.  以下のコマンドを順に実行して、 **nuget source**を追加します。
 
-    ![A black screen with numbers AI-generated content may be incorrect.](./media/image30.png)
++++dotnet nuget list source+++
 
-18. The next cell creates a new **KernelBuilder** instance, adds **Azure
-    OpenAI Chat Completion** as an AI service provider to the kernel
-    with the variables from the last step as input and invokes
-    **Build**() creates an instance of Kernel.
-
-    **Execute** it to create the Kernel instance.
-
-    ![A screen shot of a computer code AI-generated content may be incorrect.](./media/image31.png)
-
-19. Execute the next cell to install the required **Azure** packages and
-    the next cell to import the references.
-
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-    ![A screen shot of a computer program AI-generated content may be
+> +++ dotnet nuget add
+> source <https://api.nuget.org/v3/index.json> --name nuget.org ++
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-20. The class in the next cell defines a **custom HTTP pipeline policy
-    for Azure SDK** requests and adds a custom HTTP header
-    (x-ms-enable-preview: true) to every outgoing request. **Execute**
-    it.
+6.  以下のコマンドを実行して、dotnet interacrive をインストールします。
 
-    ![A screen shot of a computer program AI-generated content may be
-incorrect.](./media/image34.png)
++++dotnet tool install --global Microsoft.dotnet-interactive --version
+1.0.556801+++
 
-## Exercise 3: Save Blog Agent
+![](./media/image34.png)
 
-1.  The next cell defines the **SavePlugin** class which implements a
-    method to **save blog content** using **Azure AI Projects and the
-    Semantic Kernel**.
+7.  +++pip install jupyter+++ を実行して Jupyter をインストールします。
 
-    - It receives the **blog content** as input.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image35.png)
 
-    - Interacts with **Azure AI Projects** to create an AI agent.
+8.  次のコマンドを実行、jupyter interactiveをインストール
 
-    - Generates and executes Python code to **save** the **content** as
-      a **Markdown** (.md) file.
++++dotnet interactive jupyter install+++
 
-    - **Downloads** and **stores** the generated file locally.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image36.png)
 
-    - **Returns** a **confirmation** message ("Saved").
+9.  **ターミナルを閉じ**。Visual **Studio
+    Code**の左ペインから**Extensions **を選択します**。+++ Jupyter
+    +++**を検索して選択し、
+    **Install **をクリックしてJupyter拡張機能をインストールします。
 
-    To execute this cell, replace **Your Connection String** with your
-**Project Connection String** that you saved earlier to a note pad. It
-can be accessed from the project overview page of Azure AI Foundry
-portal.
-
-    Click on **Execute** after replacing the connection string.
-
-    ![](./media/image35.png)
-
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image36.png)
-
-2.  The next cell initializes **constants** with Save specific values.
-    **Execute** it. These constants will be used in the next cells.
-
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-3.  The next cell creates a **ChatCompletionAgent** named
-    **save_blog_agent**. Execute it to create the agent.
+10. Visual Studio Code**を閉じて、**もう一度**開きます**。
 
-    ![A computer screen shot of a computer program AI-generated content may
-be incorrect.](./media/image38.png)
+11. ノートブック**AzureAIMultiAgentWithSK.ipynbを開きます**。開いたら、
+    **Select Kernel**をクリックします。
 
-## Exercise 4: Writer agent
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-1.  Execute the next cell in the notebook which declares constants with
-    Writer specific values.
+12. **Jupyter Kernel**を選択します。
 
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image39.png)
 
-2.  The next cell creates a **ChatCompletionAgent** named
-    write-blog_content which will be responsible for writing a blog post
-    using the Microsoft Semantic Kernel and Azure OpenAI chat models.
-    Execute it to create the agent.
+13. 次のオプション セットで**.NET (C#) dotnet** を選択します。
 
-    ![A computer screen shot of a black screen AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image40.png)
 
-3.  The code in the next cell makes **SavePlugin** available as a
-    function inside **save_blog_agent**. It creates a **Kernel Plugin**
-    from **SavePlugin.** **Adds** the Plugin to the **Agent's Kernel** .
-    The AI calls the **SavePlugin.Save** function when it detects a
-    save-related request.
+14. **Security Alert**で**Allow access **を選択します。
 
-    Execute it to create the Kernel Plugin.
-
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer security alert AI-generated content may be
 incorrect.](./media/image41.png)
 
-4.  The next cell contains the code for the class
-    **ApprovalTerminationStrategy**
+15. 最初のセルを実行して、必要な**パッケージ**をすべて**インストールします**。
 
-5.  This **custom termination strategy** is used to determine **when an
-    AI agent should stop running**. **Execute** it.
-
-    ![A computer screen with text on it AI-generated content may be
+![A screen shot of a computer program AI-generated content may be
 incorrect.](./media/image42.png)
 
-6.  The next cell contains the **AgentGroupChat** code. This creates a
-    **multi-agent chat** system where two AI agents
-    (**write_blog_agent** and **save_blog_agent**) collaborate. Uses
-    **ApprovalTerminationStrategy** to determine when the chat should
-    stop.
-
-    Only **save_blog_agent** can approve termination.
-    
-    **Execute** it to configure the multi agent chat.
-
-    ![A computer screen shot of a program AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image43.png)
 
-7.  The next cell contains instructions to the agent. It **adds a user
-    message to the multi-agent chat system**, instructing the AI to
-    **search for information on GraphRAG, write a blog, and save it**.
+16. 次のセルを実行して名前空間をインポートします。
 
-    ![](./media/image44.png)
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image44.png)
 
-8.  **Execute** the next cell. This **iterates over the AI-generated
-    responses** in the multi-agent chat **as they are streamed**.
+17. 次のセルで、**deployment **変数の値が、作成した**model
+    deployment **と同じであることを確認します。
 
-    On execution, it writes a blog, saves it.
+    - Endpoint – **Azure OpenAI Endpoint**
 
-    ![A screen shot of a computer AI-generated content may be
+    - Key – **API Key**
+
+上記の両方の値は、Azure AI Foundry
+でプロジェクトを作成した後、以前にメモ帳に保存したものです
+
+値を置き換えた後、セルを**実行します。**
+
+これにより、これらの値が対応する変数に設定され、さらに使用されるようになります。
+
+![A black screen with numbers AI-generated content may be
 incorrect.](./media/image45.png)
 
-    ![A screenshot of a computer AI-generated content may be
+18. 次のセルは、新しい**KernelBuilder**インスタンスを作成し、最後のステップの変数を入力として使用して**、Azure
+    OpenAI Chat Completion** をAI サービス
+    プロバイダーとしてカーネルに追加し、 **Build** () を呼び出して
+    Kernel のインスタンスを作成します。
+
+**実行する**とカーネルインスタンスが作成されます。
+
+![A screen shot of a computer code AI-generated content may be
 incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
+19. 次のセルを実行して必要な**Azure**パッケージをインストールし、次のセルを実行して参照をインポートします。
+
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image47.png)
 
-**Summary:**
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image48.png)
 
-We have implemented a Multi Agent system using Azure AI Agent Service
-with Semantic Kernel.
+20. 次のセルのクラスは、 **Azure
+    SDKリクエスト用のカスタムHTTPパイプラインポリシーを定義し**、すべての送信リクエストにカスタムHTTPヘッダー（x-ms-enable-preview:
+    true）を追加します。**実行してください**。
 
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image49.png)
+
+## 演習3: ブログエージェントを保存する
+
+1.  次のセルは、 **Azure AI Projects and the Semantic
+    Kernel**を使用して**ブログ
+    コンテンツを保存する**メソッドを実装する**SavePlugin**クラスを定義します。
+
+    - **ブログのコンテンツ**を入力として受け取ります。
+
+    - **Azure AI Projects **と対話してAI エージェントを作成します。
+
+    - Python コードを生成して実行し、コンテンツ**をMarkdown** (.md)
+      ファイルとして**保存します。**
+
+    - 生成されたファイル**をダウンロードし**てローカルに**保存します。**
+
+    - **確認**メッセージ("Saved")を**返します。**
+
+このセルを実行するには、**Your Connection
+Stringを、**先ほどメモ帳に保存した**Project Connection
+String **に置き換えてください。この接続文字列は、Azure AI
+Foundryポータルのプロジェクト概要ページからアクセスできます。
+
+接続文字列を置き換えた後、 **Execute **をクリックします。
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image50.png)
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image51.png)
+
+2.  次のセルはSave固有の値で**定数**を初期化します。**実行してください**。これらの定数は次のセルで使用されます。
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
+
+3.  次のセルは**save_blog_agent**という名前の**ChatCompletionAgent**を作成します。これを実行してエージェントを作成します。
+
+![A computer screen shot of a computer program AI-generated content may
+be incorrect.](./media/image53.png)
+
+## 練習4: Writerエージェント　
+
+1.  次のセルをノートブックの実行すると、Writer
+    固有の値を持つ定数を宣言します。
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
+
+2.  次のセルは、 write-blog_content
+    という名前の**ChatCompletionAgent**を作成します。これは、Microsoft
+    Semantic Kernel と Azure OpenAI
+    チャットモデルを使用してブログ投稿を作成する役割を担います。これを実行してエージェントを作成します。
+
+![A computer screen shot of a black screen AI-generated content may be
+incorrect.](./media/image55.png)
+
+3.  次のセルのコードは、 **SavePlugin**
+    を**save_blog_agent**内の関数として利用できるようにします。これにより、
+    SavePluginから**Kernel
+    Plugin **が作成されます**。** **エージェントのKernel **にプラグイン**を追加します**。AIは保存関連のリクエストを検出すると、
+    **SavePlugin.Save**関数を呼び出します。
+
+これを実行するとKernel Pluginが作成されます。
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image56.png)
+
+4.  **次のセールは、ApprovalTerminationStrategy**クラスのコードが含まれています。
+
+5.  この**カスタム終了戦略は、
+    AIエージェントの実行を停止するタイミング**を決定するために使用されます。**実行してください**。
+
+![A computer screen with text on it AI-generated content may be
+incorrect.](./media/image57.png)
+
+6.  次のセルには**AgentGroupChat**コードが含まれています。これは、
+    2つのAIエージェント（ **write_blog_agent**と**save_blog_agent
+    ）**が連携する**マルチエージェントチャットシステム**を作成します。チャットの終了タイミングを決定するために、
+    **ApprovalTerminationStrategy**を使用します。
+
+**save_blog_agent**のみがチャットの終了を承認できます。
+
+**実行して**マルチエージェントチャットを構成します。
+
+![A computer screen shot of a program AI-generated content may be
+incorrect.](./media/image58.png)
+
+7.  次のセルにはエージェントへの指示が含まれています。**マルチエージェントチャットシステムにユーザーメッセージを追加し**、AIに**GraphRAGに関する情報を検索し、ブログを書いて保存するように**指示します。
+
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image59.png)
+
+8.  次のセル**を実行します。**これは、マルチエージェントチャットで**AIが生成した応答がストリーミングされるたびに反復処理を行います**。
+
+実行するとブログを書いて保存します。
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
+
+## 要旨
+
+Semantic KernelとAzure AI Agent Serviceを使用して、Multi
+Agentシステムを実装しました。

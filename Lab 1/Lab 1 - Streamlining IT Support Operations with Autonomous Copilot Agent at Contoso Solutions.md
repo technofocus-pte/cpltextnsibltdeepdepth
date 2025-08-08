@@ -1,757 +1,808 @@
-# Lab 1 - Streamlining IT Support Operations with Autonomous Copilot Agent using Copilot Studio
+# Lab 1 - Copilot Studio を使用した自律型 Copilot エージェントによる IT サポート業務の効率化
 
-**Estimate Time: 60 mins**
+**所要時間：60分**
 
-## Objective
+## 目的
 
-The objective of this lab is to enable participants to streamline IT
-support operations at Contoso Solutions by creating an autonomous
-Copilot agent. Participants will learn to set up Microsoft Copilot
-Studio, configure the IT Support Agent, integrate Power Apps and
-Dataverse, enhance the bot’s capabilities with a knowledge base, and
-automate ticket creation using Power Automate. This hands-on lab will
-equip users with the skills to improve IT workflows, reduce manual
-effort, and enhance support efficiency.
+このLabの目的は、参加者が自律型Copilotエージェントを作成し、Contoso
+SolutionsにおけるITサポート業務を効率化できるようにすることです。参加者は、Microsoft
+Copilot Studioのセットアップ、ITサポートエージェントの構成、Power
+AppsとDataverseの統合、ナレッジベースによるボットの機能強化、Power
+Automateを使用してチケット作成の自動化について学習します。この実践的なLabを通して、ITワークフローの改善、手動業の削減とサポート効率性の向上に必要なスキルを習得できます
 
-## Solution
+## 解決
 
-Participants will create a customized Contoso IT Support Agent using
-Microsoft Copilot Studio, configure it to handle common IT issues, and
-integrate it with Dataverse for storing support data. They will set up a
-development environment, add knowledge sources, and refine the bot's
-conversation flows for better user interaction. By leveraging Power
-Apps, participants will create a Dataverse table to manage IT support
-records. Using Power Automate, they will automate ticket creation and
-email notifications for unresolved issues. Finally, participants will
-test the agent to validate its troubleshooting accuracy and workflow
-automation, ensuring seamless IT support operations.
+参加者は、Microsoft Copilot Studio を使用してカスタマイズされた Contoso
+IT サポートエージェントを作成し、一般的な IT
+問題に対応できるように構成し、サポートデータを保存するために Dataverse
+と統合します。開発環境を構築し、ナレッジソースを追加し、ボットの会話フローを調整してユーザーインタラクションを改善します。Power
+Apps を活用して、IT サポート記録を管理するための Dataverse
+テーブルを作成します。Power Automate
+を使用して、未解決の問題に関するチケット作成とメール通知を自動化します。最後に、参加者はエージェントのトラブルシューティング精度とワークフローの自動化を確認用、エージェントをテストし、シームレスな
+IT サポートオペレーションを実現します。
 
-# Exercise 1: Getting Started with Power Apps
+## 演習 1: Power Appsを使い始める
 
-This exercise introduces participants to Power Apps and Dataverse. The
-goal is to log in to Power Apps, set up a working environment, and
-create a Dataverse table by importing data from an Excel file.
-Participants will learn essential skills for working with data-driven
-applications.
+この演習では、Power AppsとDataverseの概要を紹介します。Power
+Appsにログインし、作業環境を構築し、ExcelファイルからデータをインポートしてDataverseテーブルを作成することを目標とします。参加者は、データ駆動型アプリケーションを操作するための基本的なスキルを習得します。
 
-## Task 1: Logging into Power Apps
+### タスク 1: Power Apps へのログイン
 
-1.  Navigate to power apps website +++https://www.microsoft.com/en-us/power-platform/products/power-apps+++ and click on the **Try for Free** button.
+1.  Lab VM からブラウザを開きます。
 
-    ![](./media/image15.png)
+2.  Power Appsのウェブサイト
+    +++<https://www.microsoft.com/en-us/power-platform/products/power-apps+++>
+    に移動し、**Try for Free**ボタンをクリックします。
 
+![](./media/image1.png)
 
-2.	Enter the **Administrative Username** from the **Office 365 Tenant** section of the **Resources** tab into the email field and click on the **Start free** button.
+3.  **Resources** タブの**Office 365
+    Tenant** **セクション**から**Administrative Username** を電子メール
+    フィールドに入力し、**checkbox** を**select** し**、 Start
+    free** ボタンをクリックします。
 
-    ![](./media/img41.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
+4.  **Administrative Password** を入力すると、Power Apps
+    のホームページに移動します。
 
-3.	Enter the **Administrative Password** and you will be taken to the Power Apps Home page.
+5.  \[サインイン状態を維持する\] ダイアログで**Yes** を選択し、
+    パスワードの保存プロンプトで **Got it** を選択し**、** Microsoft
+    Edge にサインイン ポップアップで**No, Thanks**を選択します。
 
-    >[!Note] **Note:** If it agains prompts for the user name, password or any information to login, please provide the same and login.
+**注:**
+ユーザー名、パスワード、またはログインするための情報を再度要求された場合は、同じものを入力してログインしてください。
 
-## Task 2: Setting Up a Dataverse Table
+### タスク2: Dataverseテーブルの設定
 
-1.  On the power apps home page, from top select the development
-    environment. In our case its **Dev One**, participant can choose their
-    own environment.
+1.  **Dev
+    One**環境が選択されていることを確認してください。選択されていない場合は選択してください。
 
-    ![](./media/image20.png)
+> ![](./media/image3.png)
 
+2.  左側のナビゲーションバーから**Tables**を選択します**。**テーブルセクションの上部バーで
+    **+ New table** をクリックし、 **Create new tables**を選択します。
 
-2.  From the left navigation bar select **Tables.** In the tables
-    section top bar click on the **+ New table** and then select
-    **Create new tables**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image4.png)
 
-    ![](./media/image21.png)
+3.  新しいテーブルを作成するには、 **Import an Excel file or
+    CSV** **オプション**を選択します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image5.png)
 
-3.  Select **Import an Excel file or CSV** option to create a new table.
+4.  **Select from device **オプションをクリックし、
+    **C:\LabFiles** フォルダーから**Support Ticket**
+    Excelファイルを選択します。
 
-    ![](./media/image22.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image6.png)
 
+5.  テーブルを選択し、 **View data**をクリックしてテーブルを表示します。
 
-4.  Click on the **Select form device** option and select **Support Ticket**
-    excel file from **C:\LabFiles** folder.
+**注:**この場合、テーブル名は*Employee Technical Support
+Recordです*。テーブル名は実行ごとに異なる場合があります。今後の参考のために、テーブル名を保存しておいてください。列名も実行ごとに異なる場合があります。
 
-    ![](./media/image23.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image7.png)
 
+6.  テーブルデータに移動し**、Technical Issue
+    Description **フィールドの横にあるドロップダウンを選択し、**Edit
+    column**をせんたくし**、**data typeフィールドに**Text **🡪** Multiple
+    line **🡪** Plain
+    Text を選択し、Update**をクリックします。列名はそれぞれ異なる場合があります。
 
-5.  Select the table and click on **View data** to see the table.
+**注:**列名は少し異なる場合がありますが**、** Copilot
+によって生成されるため、問題の説明に似たようなものになります。
 
-    > Note: In my case, the table is named *Employee Technical Support Record*. The name may vary with each execution. Please save the table name for future             reference.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image8.png)
 
-    ![](./media/image24.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image9.png)
 
+7.  **Current Status **フィールドの横にあるドロップダウンを選択し、
+    **Edit column**を選択して、選択肢を+++ **Unresolved** +++、+++
+    **Resolvedみ**+++、+++ **Processing**
+    +++とセットします。デフォルトの選択肢を**「Unresolved 」**とセットし、**Update**をクリックします。
 
-6.  Go to table data, select the drop down next to the **Technical Issue Description** field,
-    select **Edit column**, Set the data type as **Text** 🡪 **Multiple
-    line** 🡪 **Plain Text** and click on the **Update**. The column name
-    may be different in each case.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image10.png)
 
-    >[!Note] **Note:** The column name might be slightly different, but it will be something similar to the issue description since it is Copilot generated.
-    
-    ![](./media/image25.png)
+8.  右上の**Save and exit **をクリックしてテーブルを保存します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image11.png)
 
-    ![](./media/image26.png)
+**結論**
 
+この演習を完了した上、参加者は習得すること：
 
-7.	Select the drop down next to the  **Current Status** field, select **Edit column**, Set
-    the Choices as +++**Unresolved**+++, +++**Resolved**+++, +++**Processing**+++. Set Default
-    choice as **Unresolved** and click on the **Update**.
+- Office 365 アドミンテナント証明書を使用して Power Apps
+  にアクセスし、操作する方法。
 
-    ![](./media/image27.png)
+- データをインポートして Dataverse テーブルを作成および構成する手順。
 
+- アプリ開発ワークフローをサポートする環境を設定するための実践的な知識。
 
-9.  From top right side click on **Save and exit** to save the table.
+## 演習 2: Contoso IT サポート エージェントの作成
 
-    ![](./media/image28.png)
+この演習では、Microsoft Copilot
+Studioにログインし、Contoso社のITサポート業務用、カスタマイズされたCopilotエージェントを作成することに焦点を当てます。参加者は、Copilot
+Studio の操作、環境の設定、そして IT ワークフローを効率化する AI
+駆動エージェントの構築について、実践的な経験を習得します。
 
+### タスク 1: Microsoft Copilot Studio へのログイン
 
-## Conclusion
+1.  ブラウザから、 URL
+    +++[https://copilotstudio.microsoft.com+++](https://copilotstudio.microsoft.com+++/)へ移動します。
 
-By completing this exercise, participants will learn:
+2.  下のスクリーンショットのように**Setting up your
+    copilot**と表示されている場合は、右上のメニューから**Environments**を選択し**、
+    Dev
+    One**を選択してください。表示されない場合は、この手順を無視して手順3に進んでください。
 
-- How to access and navigate Power Apps using office 365 admin tenant credentials.
+![image](./media/image12.png)
 
-- Steps to create and configure a Dataverse table by importing data.
+3.  Copilot Studio の試用版を起動するには、 **Start free
+    trial **をクリックします。
 
-- Practical knowledge of setting up an environment to support app
-  development workflows.
+![](./media/image13.png)
 
-#  Exercise 2: Creating the Contoso IT Support Agent
+### タスク 2: Contoso IT サポート エージェントの作成と構成
 
-This exercise focuses on logging into Microsoft Copilot Studio and
-creating a customized Copilot agent tailored for IT support operations
-at Contoso. Participants will gain hands-on experience navigating
-Copilot Studio, configuring environments, and building an AI-powered
-agent to streamline IT workflows.
+1.  前のタスクのステップ2が完了している場合は、このステップを無視してください。完了していない場合は、このステップを実行します。Copilot
+    Studioのホームセクションで、右上にある**environment **を選択し、
+    **DevOne**環境を選択します。
 
-## Task 1: Logging into Microsoft Copilot Studio
+![](./media/image14.png)
 
-1.	Navigate to the url +++https://copilotstudio.microsoft.com+++ and click on Start free trial to start the Copilot Studio trial.
+2.  Welcome to Copilot Studioタブで、
+    **Skip**をクリックして先に進みます。
 
-    ![](./media/image100.png)
+![](./media/image15.png)
 
-  	
-##  Task 2: Creating and Configuring Contoso IT Support Agent 
+3.  左側のナビゲーション バーから**Create **を選択し、 **New
+    agent**を選択して新しいエージェントの作成を開始します。
 
-1.	In Copilot Studio home section from top right, select the **environment** and choose **Dev One** environment. 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-    ![](./media/image6.png)
+4.  右上にある**Skip to configure **ボタンをクリックします。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-2.  On welcome copilot studio tab, click on the **Skip** to move
-    forward.
+5.  以下のようにエージェントの**Name、Description、Instruction**を入力し、
+    **Create**ボタンをクリックします。
 
-    ![](./media/image7.png)
+> **Name:** +++Contoso IT Support Agent+++
+>
+> **Description:** +++Create a Contoso IT Support Agent which transforms
+> IT support at Contoso Solutions by providing instant troubleshooting
+> for common issues, automating ticket creation for unresolved problems,
+> and storing all interactions in Dataverse. This solution enhances
+> response times, reduces manual workloads, and boosts employee
+> productivity.+++
+>
+> **Instruction:** +++Create the Copilot Agent and configure it to
+> handle IT support operations. Add a knowledge source containing
+> solutions for common IT issues like hardware troubleshooting,
+> connectivity, and software glitches. Set up a trigger to detect
+> incoming emails from employees describing unresolved issues. Create an
+> action to save these technical issues into a Dataverse table, ensuring
+> all details are stored for tracking and reporting. Test the agent to
+> validate its troubleshooting accuracy and ticket automation workflow
+> before deployment.+++
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-3.  From left navigation bar select **Create** and then select **New agent** to start creating new agent.
+6.  Contoso IT Support
+    Agentの概要ページで、エージェントのオーケストレーターを**Enable にします。**
 
-    ![](./media/image8.png)
+![](./media/image19.png)
 
+7.  エージェントの概要ページで、 「 **Allow the AI to use its own
+    general knowledge」**オプション**をDisable **にします。
 
-4.  From top right corner click on **Skip to configure** button.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
-    ![](./media/image9.png)
+8.  エージェントの右上にある**Setting**ボタンをクリックします。
 
+![](./media/image21.png)
 
-5.  Enter **Name, Description and Instruction** of the agent as given
-    below and click on **Create** button.
+9.  **Generative AI**セクションに移動し、
+    **Generative**を選択して、コンテンツ
+    モデレーションを**Mediumに設定し**、
+    **Save **をクリックして設定を保存します。
 
-    **Name:** +++Contoso IT Support Agent+++
-    
-    **Description:** +++Create a Contoso IT Support Agent which transforms IT support at Contoso Solutions by providing instant troubleshooting for common issues, automating ticket creation for unresolved problems, and storing all interactions in Dataverse. This solution enhances response times, reduces manual workloads, and boosts employee productivity.+++
-    
-    **Instruction:** +++Create the Copilot Agent and configure it to handle IT support operations. Add a knowledge source containing solutions for common IT issues like hardware troubleshooting, connectivity, and software glitches. Set up a trigger to detect incoming emails from employees describing unresolved issues. Create an action to save these technical issues into a Dataverse table, ensuring all details are stored for tracking and reporting. Test the agent to validate its troubleshooting accuracy and ticket automation workflow before deployment.+++
-    
-    ![](./media/image10.png)
+![](./media/image22.png)
 
+**結論**
 
-6.  On overview page of Contoso IT Support Agent, **Enable** the
-    orchestrator for the agent.
+この演習を完了した上、参加者は習得すること：
 
-    ![](./media/image11.png)
+- Microsoft Copilot Studio にアクセスして設定する方法。
 
+- カスタム Copilot エージェントを作成して構成する手順。
 
-7.  On overview page of the agent, **Disable** the “**Allow the AI to
-    use its own general knowledge**” option.
+- エージェントの生成 AI
+  とオーケストレーター設定を有効にするための実践的なスキル。
 
-    ![](./media/image12.png)
+- チケット作成を自動化し、トラブルシューティングに AI を活用することで
+  IT 運用を強化する方法。
 
+## 演習3：ボットの機能強化
 
-8.  From top right corner of the agent, click on the **Settings**
-    button.
+この演習では、ナレッジベースを追加し、改良されたインタラクションのために、ボットトピックをカスタマイズすることを通じて、Contoso
+ITサポートエージェントの機能を強化することに焦点を当てます。参加者は、ボットの応答を改良し、トラブルシューティングやエスカレーションでユーザーを効果的に支援できるようにする。
 
-    ![](./media/image13.png)
+### タスク1: ナレッジベースの追加
 
+1.  Contoso エージェントの概要ページで、下にスクロールして**+ Add
+    Knowledge**ボタンをクリックします。
 
-9.	Then go to **Generative AI** section, select **Generative**, set content moderation as **Medium** and click on **Save** to save the setting.
+![](./media/image23.png)
 
-    ![](./media/image101.png)
+2.  **Upload file**を選択して、 **C:\LabFiles**フォルダーからLab
+    ファイル**Contoso Common IT Issue.docx**を追加し**、
+    Add**をクリックしてファイルを保存します。
 
+![image](./media/image24.png) ![image](./media/image25.png)
 
-##  Conclusion
+3.  もう一度、エージェント概要ページに移動し、下にスクロールして**+ Add
+    knowledge**をクリックします**。**
 
-By completing this exercise, participants will learn:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image26.png)
 
-- How to access and set up Microsoft Copilot Studio.
+4.  データ ソースとして**Dataverse (preview)**オプションを選択します。
 
-- Steps to create and configure a custom Copilot agent.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
 
-- Practical skills in enabling generative AI and orchestrator settings
-  for the agent.
+5.  右上隅の検索バーに+++**Employee**+++と入力して検索し、 **Employee
+    Technical Support Record **テーブルを選択します。
+    **Next**ボタン**、**それから**Add**ボタンをクリックして、ナレッジソースを追加します。
 
-- Ways to enhance IT operations by automating ticket creation and
-  leveraging AI for troubleshooting.
+**注:**テーブル名はCopilot
+によって生成されたものなので、**異なる場合があります。**
 
-# Exercise 3: Enhancing Bot Capabilities
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
 
-This exercise focuses on enhancing the capabilities of the Contoso IT
-Support Agent by adding a knowledge base and customizing bot topics for
-improved interaction. Participants will refine the bot's responses and
-ensure it effectively assists users in troubleshooting and escalation.
+![A screenshot of a computer screen AI-generated content may be
+incorrect.](./media/image29.png)
 
-## Task 1: Add Knowledge Base 
+**重要:**
+ナレッジページで、追加したナレッジソースが正常にアップロードされていることを確認してください。アップロードには通常10～15分かかります。
 
-1.  On Contoso agent overview page, scroll down and click on **+ Add
-    Knowledge** button.
+### タスク2: 会話開始トピックをカスタマイズする
 
-    ![](./media/image29.png)
+1.  上部バーのオプションから、 **Topics -\> System **をクリックし、
+    **Conversation Start **トピックをクリックして開きます。
 
+![image](./media/image30.png)
 
-2.  Select **Click to browse** button to add the lab file **Contoso IT Support Issue** from **C:\LabFiles** folder and then click on **Add** to save the file.
+2.  下にスクロールしてメッセージノードに移動し、ボット名の後のメッセージを以下のように更新します。
 
-    ![](./media/image30.png)
+Hello. I’m Bot Name, a virtual assistant. +++How can I help you? +++
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image31.png)
 
-    ![](./media/image31.png)
+3.  上から**Save**をクリックしてトピックを保存します。
 
-3.  Again, go to agent overview page, scroll down and click on **+ Add knowledge.**
+![](./media/image32.png)
 
-    ![](./media/image32.png)
+### タスク3: フォールバックトピックを更新する
 
+1.  上部バーのオプションから、
+    **Topics -\> System**をクリックし、**Fallback**トピックを開きま。
 
-4.  Select **Dataverse (preview)** option as data source.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image33.png)
 
-    ![](./media/image33.png)
+2.  下にスクロールしてメッセージノードに移動し、以下のようにメッセージを更新します。
 
++++I’m sorry. This information is not available in my system. You can
+raise the support ticket via mail for this issue. +++
 
-5.  In top right corner search bar, enter and search for +++**Employee**+++
-    and select **Employee Technical Support Record** table. Then click
-    on the **Next, Next** and **Add** button to add the knowledge
-    source.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image34.png)
 
-    >[!Note] **Note:** The table name might be different in your case since it is a Copilot generated one.
-    
-    ![](./media/image34.png)
+3.  トピックを保存するには、右上の**Save**ボタンをクリックします。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image35.png)
 
-    ![](./media/image35.png)
+**結論**
 
+この演習を完了した上、参加者は習得すること：
 
-## Task 2: Customize the Conversation Start Topic
+- ボットの機能を強化するためにナレッジ
+  ベースをアップロードして統合する方法。
 
-1.  From the top bar option click on **Topics** and then click and open
-    **Conversation Start** topic.
+- 魅力的なユーザー体験にとって会話開始メッセージをカスタマイズ手順。
 
-    ![](./media/image36.png)
+- サポートされていないクエリを適切に対応するためにフォールバック応答を更新する手法。
 
+## 演習4: エージェントのテスト
 
-2.  Scroll down and go to message node. Update the message after bot
-    name as given below:
+この演習では、Contoso IT
+サポートエージェントの機能を検証するために、テストを行うことに指導します。参加者は、ボットがシームレスな対話とエスカレーションのため、どのようにナレッジベースとフォールバックトピックを使用してプロンプトを処理することを検証します。
 
-    Hello. I’m Bot Name, a virtual assistant. +++How can I help you?+++
+1.  右上の**Test**ボタンをクリックします。次に、テストセクションで**Map**をクリックしてOnにし、
+    **Refresh**をクリックします。
 
-    ![](./media/image37.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image36.png)
 
+2.  +++**My printer is not working how to fix
+    it**+++プロンプトを入力してください。ナレッジソースに基づいて解決策が表示されます。
 
-3.  From top click on the **Save** to save the topic.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image37.png)
 
-    ![](./media/image38.png)
+3.  再度、+++**Two factor Authentication (2FA) issue**+++ .
+    プロンプトを入力します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-##  Task 3: Update the Fallback Topic 
+1.  2FA の問題と解決策はナレッジ ソースにないので、フォールバック
+    トピックに移動し、チケット作成に関連するプロンプトを返します。
 
-1.  From the top bar option click on **Topics** and then open
-    **Fallback** topic.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-    ![](./media/image39.png)
+**結論**
 
+この演習を完了した上、参加者は習得すること：
 
-2.  Scroll down and go to message node. Update the message as given
-    below:
+- トラブルシューティングのために AI
+  エージェントをテストとアクティブ化する方法。
 
-    +++I’m sorry. This information is not available in my system. You can raise the support ticket via mail for this issue.+++
+- ナレッジ ベースを使用してボットが応答する能力の検証。
 
-    ![](./media/image40.png)
+- フォールバック
+  トピックがどのようにサポートされていないクエリを処理し、ユーザーを効果的にリダイレクトすること。
 
+## 演習5: Power Automateを使用したサポートチケット作成の自動化
 
-3.  From top right side click on the **Save** button to save the topic.
+この演習では、Power Automate
+を使用してサポートチケット作成の自動化およびContoso IT
+サポートエージェントと統合する方法を説明します。参加者は、問題報告の効率化、Dataverse
+にデータ記録とサポートエンジニアにメールで通知するフローを作成します。
 
-    ![](./media/image41.png)
+1.  エージェントの概要ページに移動し、下にスクロールして**+ Add
+    action**をクリックします。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image40.png)
 
-##  Conclusion
+2.  アクションの選択ウィンドウで、左上から**+ New
+    Action **をクリックし、**New Power Automate Flow **を選択します。
 
-By completing this exercise, participants will learn:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-- How to upload and integrate a knowledge base to enhance the bot's
-  functionality.
+3.  Power Automate フローで、**When an agent calls the
+    flow **をクリックし、**Add an Input**を選択します。
 
-- Steps to customize conversation start messages for a more engaging
-  user experience.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image42.png)
 
-- Techniques to update fallback responses for better handling of
-  unsupported queries.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-# Exercise 4: Test the agent
+4.  データタイプのインプットとして**Text**を選択し、入力の名前を +++
+    **Name** +++ に変更します。
 
-This exercise guides participants through testing the Contoso IT Support
-Agent to validate its functionality. Participants will check how the bot
-handles prompts using the knowledge base and fallback topics to ensure
-seamless interaction and escalation.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-1.  From top right corner click on the **Test** button. Then in test
-    section click on **Map** turn it **On** and then click **Refresh**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-    ![](./media/image42.png)
+5.  同じ手順を従って、以下のようにさらにインプットを作成します。
 
+[TABLE]
 
-2.  Enter the prompt +++**My printer is not working how to fix it**+++ . It gives the solution as per knowledge source.
-    
-    ![](./media/image43.png)
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image46.png)
 
+6.  **When an agent calls the flow**の下、
+    **(+)** 記号をクリックし、**Add an action**を選択します。
 
-3.  Again, give the prompt +++**Two factor Authentication (2FA) issue**+++ .
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image47.png)
 
-    ![](./media/image44.png)
+7.  Add an action検索バーに+++**Add a new row**+++を入力します。次に、
+    Microsoft Dataverseセクションから**Add a new row**を選択します。
 
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image48.png)
 
-4.  The 2FA issue and solution is not available in the knowledge source
-    so it will go to fallback topic and return prompt related to Raise
-    Ticket.
+注: Dataverse
+接続が自動的に作成されない場合があります。その場合は、資格情報**OAuth認証**を使用して再度**sign
+in する**必要があります。
 
-    ![](./media/image45.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image49.png)
 
+8.  **Table Name **セクションで、 +++**Employee Technical Support
+    Record**+++ （または作成したテーブル名)を検索して選択します。
 
-## Conclusion
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
 
-By completing this exercise, participants will learn:
+9.  テーブル名の下で**Show
+    all**を選択し、特定のフィールドをクリックして、下の表に従って動的コンテンツボタン（サンダーボルト）を使用してインプットを追加します**Current
+    Status** フィールドのドロップダウンで**Unresolved**を選択します。
 
-- How to test and activate an AI agent for troubleshooting.
+[TABLE]
 
-- Validation of the bot’s ability to respond using its knowledge base.
+10. ![A blue line on a white background AI-generated content may be
+    incorrect.](./media/image51.png)
 
-- How fallback topics handle unsupported queries and redirect users
-  effectively.
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image52.png)
 
-# Exercise 5: Automating Support Ticket Creation with Power Automate
+11. Add a new rowアクションの下で (+)をクリックし、**Add an
+    actionを選択します**。
 
-This exercise demonstrates how to automate support ticket creation using
-Power Automate and integrate it with the Contoso IT Support Agent.
-Participants will create a flow to streamline issue reporting, record
-data in Dataverse, and notify support engineers via email.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image53.png)
 
-1.  Go to overview page of the agent, scroll down and click on **+ Add action**.
+12. アクションの追加セクションで、検索バーに+++**Send an
+    email**+++を入力し**、** Office 365 Outlook セクションから**send an
+    email (V2)** を選択します**。**
 
-    ![](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
-2.  In choose an action window, From top left side click on the **+ New Action** and select **New Power Automate Flow** . 
+13. 電子メールの送信セクションで、該当するセクションに以下の詳細を入力します。
 
-    ![](./media/image47a.png)
+> **Name, ID,
+> Details**のプレースホルダーを動的コンテンツを使用した変数に置き換えます。
+>
+> **To**
+>
+> サポート エンジニアのメール アドレスを入力します (**任意のメール ID
+> を使用します**- サポート チケットが発行されると、エージェントからこの
+> IDにメールが送信されます)
+>
+> **Subject**
+>
+> New Technical Support Ticket Raised
+>
+> **Body**
 
+A new technical support ticket has been raised and requires your
+attention. Please find details below:
 
-3.  In Power automate flow, click on **Run a flow from copilot** and then select **Add an Input**.
+Employee Name: \< Name \>
 
-    ![](./media/image48.png)
+Employee ID: \< ID \>
 
+Technical Issue: \< Details \>
 
-4.  Select **Text** as data type of input and rename the input as +++**Name**+++.
+Thank you for your prompt attention to this matter.'
 
-    ![](./media/image49.png)
+Best Regards
 
+![A screenshot of a email AI-generated content may be
+incorrect.](./media/image56.png)
 
-    ![](./media/image50.png)
+14. 左上隅から、フロー名を +++ **Create an Employee Support Ticket** +++
+    に変更します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image57.png)
 
-5.  With same procedure create more input as per given below details.
+15. 上部のバーから**Save draft **をクリックし、
+    **Publish**をクリックします。Power Automateタブを閉じます。
 
-    | **Input Name** | **Data Type** |
-    |----------------|---------------|
-    | +++ID+++             | Text          |
-    | +++Email+++          | Text          |
-    | +++Details+++        | Text          |
-    
-    ![](./media/image51.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image58.png)
 
+16. Copilot ウィンドウに戻り、 **Refresh**ボタンをクリックします。
 
-6.  Below Run a flow from copilot, click on **(+)** sign and select **Add an action**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
-    ![](./media/image52a.png)
+17. アクションの選択ウィンドウで、**Create an Employee Support
+    Ticket **フローの作成を選択します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
-7.  In Add an action search bar, enter +++**Add a new row**+++ . Then select
-    **Add a new row** from Microsoft Dataverse section.
+18. フローを追加するには、 **Add action** ボタンをクリックします。
 
-    ![](./media/image53.png)
+![A screenshot of a computer screen AI-generated content may be
+incorrect.](./media/image61.png)
 
+19. エージェントの**Overview** ページの**Action**セクションで**Edit**を選択し、アクションのパラメータを編集します。
+    **Inputs**セクションを選択します。
 
-    > Note: Sometimes Dataverse connection is not created automatically, so participant need to **sign** in with their credential, authentication should be **OAuth.**
-    
-    ![](./media/image54.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
 
+![A screenshot of a support ticket AI-generated content may be
+incorrect.](./media/image63.png)
 
-8.  In **Table Name** section search and select +++**Employee Technical Support Record**+++ (or your corresponding table name created).
+20. 該当するインプットフィールドに指定された説明を入力し、説明を入力した後に**Save**ボタンをクリックします。
 
-    ![](./media/image55.png)
+[TABLE]
 
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image64.png)
+>
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image65.png)
 
-9.  Below table name select **Show all**, then click on the particular
-    field and add input with the help of dynamic content button (Thunder
-    bolt) as per the below given field. The **Current Status** field
-    should be selected with drop down as **Unresolved**.
+**結論**
 
-    | Section                     | Input Variable          |
-    |-----------------------------|-------------------------|
-    | Employee Name               | Name (Dynamic Input)    |
-    | Email Address               | Email (Dynamic Input)   |
-    | Employee ID                 | ID (Dynamic Input)      |
-    | Technical Issue Description | Details (Dynamic Input) |
-    
-    ![](./media/image56.png)
-    
-    
-    ![](./media/image57.png)
+この演習を完了した上、参加者は習得すること：
 
+- チケット作成のために Power Automate フローを Copilot
+  エージェントと統合する方法。
 
-10. Below Add a new row action click on (+) and select **Add an action**.
+- ユーザーの操作から入力データを動的に収集してマッピングする手順。
 
-    ![](./media/image58a.png)
+- 技術的な問題のエスカレーションのための電子メール通知を自動化する手法。
 
+- 効率的なサポート チケット管理のためにワークフローを構成する機能。
 
-11. In add an action section, enter +++**Send an email**+++ in the search bar
-    and select **send an email (V2)** from office 365 outlook section.
+## 演習6: 自動アクションのためのメールベースのトリガーの設定
 
-    ![](./media/image59.png)
+サポートチケット作成の自動化の続きとなるこのセッションでは、Contoso IT
+サポートエージェントにトリガーを設定し、メール入力を自動化された Power
+Automate
+フローにリンクさせることに焦点を当てます。参加者はトリガーを設定し、エージェントの展開を完了させます。
 
+1.  エージェントの概要ページに移動し、下にスクロールして**+ Add
+    trigger**をクリックします。
 
-12. In send an email section, Enter the below given detail in the
-    respected section:
+![A screenshot of a web page AI-generated content may be
+incorrect.](./media/image66.png)
 
-    Replace the place holders for **Name**, **ID**, **Details** with the variables using dynamic content
-    
-    **To**
-    
-    
-    Enter support engineer email (**Use any email ID** - It will be to this id, the mail will be sent by the agent to when Support Ticket is raised)) 
-    
-    
-    **Subject**
-    
-    ```
-    New Technical Support Ticket Raised 
-    ```
-    
-    **Body**
-    
-    ```
-    A new technical support ticket has been raised and requires your attention. Please find details below:
-    
-    Employee Name: Name (Replace with Name dynamic content variable (Thunder bolt))
-    Employee ID: ID (Replace with ID dynamic content variable (Thunder bolt))
-    Technical Issue: Details (Replace with Details dynamic content variable (Thunder Bolt))
-    
-    Thank you for your prompt attention to this matter.'
-    
-    Best Regards
-    ```
+2.  次に、トリガーの追加ウィンドウから、**When a new email arrives
+    (V3) **トリガーを選択します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image67.png)
 
-    ![](./media/image60.png)
+3.  Copilot と Outlook
+    の接続が成功し、緑色のチェックマークが表示されたら、
+    **Next **ボタンをクリックします。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image68.png)
 
-14. From top left corner rename the flow as +++**Employee Data**+++ .
+4.  フォルダー フィールドでフォルダー
+    アイコンを選択し、**Inbox** フォルダーを選択して、**Create
+    trigger**を選択します。
 
-    ![](./media/image61.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image69.png)
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image70.png)
 
-15. From top bar click on **Save** button.
+5.  **Time to test your
+    trigger **というプロンプトを閉じます。サポートエージェントの概要ページで下にスクロールし、トリガーセクションで3つの点**（…）**をクリックして、
+    **Edit in Power Automate**選択します。
 
-    ![](./media/image62z.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image71.png)
 
+6.  When a new email arriveトリガーを右クリックし、
+    **Delete**を選択します。
 
-16. Go back to Copilot window and click on **Refresh** button.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image72.png)
 
-    ![](./media/image63a.png)
+7.  次に、Add a triggerをクリックし、+++**When new email
+    arrives**+++を検索して、 **Office 365 Outlook**セクションから**When
+    a new email arrives **トリガーを選択します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image73.png)
 
-17. In Choose an action window, select **Employee Data** flow.
+8.  **Send a prompt to the specified copilot for
+    processingる**をクリックし、本文/メッセージ セクションに+++**Run
+    Create an Employee Support Ticket flow and use content from Body
+    From.**+++プロンプトを入力します**。** +++ **Body**と**From
+    を**動的コンテンツ変数として置き換えます。
 
-    ![](./media/image64a.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image74.png)
 
+9.  フローを**Save**して**Publish**して下さい。それから、power Automate
+    ウィンドウを閉じて、Copilot ウィンドウに戻ります。
 
-18. Click on **Add action** button to add a flow
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image75.png)
 
-    ![](./media/imagea.png)
+10. 概要セクションに移動し、右上隅の**Publish **をクリックし、もう一度**Publish **をクリックしてcopilotを公開します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image76.png)
 
-19. Click on the **Employee Data** flow and open it, after opening select inputs option.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image77.png)
 
-    ![](./media/imageb.png)
-    
-    ![](./media/imagec.png)
+**結論**
 
+この演習を完了した上、参加者は習得すること：
 
-20. Enter the given description in the respected input, after entering
-    the description click on **Save** button. 
+- メール入力に基づいてワークフローを自動化するために、Copilot
+  でトリガーを設定する方法。
 
-    | Section | Details |
-    |----|----|
-    | Name -- Description | +++Enter the name of the employee.+++ |
-    | ID -- Description | +++Enter the employee ID in the field.+++ |
-    | Email -- Description | +++Enter the email address of the employee from whom the email is received.+++ |
-    | Details -- Description | +++Enter the email details of the employee.+++ |
-    
-    ![](./media/imaged.png)
-    
-    ![](./media/imagee.png)
+- 電子メールの内容を Power Automate フローに動的にマップする手順。
 
-## Conclusion
+- AI エージェントを運用用に公開し、完成させるプロセス。
 
-By completing this exercise, participants will learn:
+- Outlookなどコミュニケーションツールをと自動化されたワークフローとリンクする実践的なスキル。
 
-- How to integrate Power Automate flows with a Copilot agent for ticket
-  creation.
+## 演習7: エージェントのテスト
 
-- Steps to collect and map input data dynamically from user
-  interactions.
+この演習では、Contoso IT Support Agent と Power Automate および Outlook
+の統合をテストすること焦点を当てます。参加者は、エージェントの電子メールの処理、サポートチケットの作成及び自動化されたワークフローを効果的にトリガーする機能を検証します。
 
-- Techniques to automate email notifications for technical issue
-  escalation.
+1.  エージェントの概要ページに移動し、下にスクロールしてトリガーの**(…)**をクリックし、
+    **Edit in power automate**を選択します。
 
-- The ability to configure workflows for efficient support ticket
-  management.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image78.png)
 
-# Exercise 6: Configuring an Email-Based Trigger for Automated Actions
+2.  Power Automate Flow
+    に移動し、上部のバーから**Test**ボタンをクリックし、
+    **Manually**を選択して、もう一度**Testをクリックします。**
 
-This continuation of automating support ticket creation focuses on
-setting up a trigger in the Contoso IT Support Agent to link email
-inputs with the automated Power Automate flow. Participants will
-configure triggers and finalize the agent for deployment.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image79.png)
 
-1.  Go to overview page of the agent, scroll down and click on **+ Add trigger**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image80.png)
 
-    ![](./media/image70.png)
+3.  アクションをトリガーするために、他のメールボックスから365
+    管理者テナントのメール
+    IDにメールを送信します。メールには問題の説明と、従業員IDなどの詳細情報が記載されている必要があります。下のスクリーンショットをご覧ください。内容の例は以下の通りです。
 
+> Hi Support Team,
+>
+> I hope this message finds you well.
+>
+> I　am Mark Brown, working as a Software Engineer at Contoso. My
+> employee ID is CONTOSO099
+>
+> Issue: Monitor is completely blank and not functioning.
+>
+> Kindly raise a support ticket and assist in resolving this issue at
+> the earliest.
+>
+> Thank you for your support.
+>
+> Best Regards,  
+> Mark Brown
 
-2.  Then from Add trigger window, select **When a new email arrives (V3)** trigger.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image81.png)
 
-    ![](./media/image71.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image82.png)
 
+4.  Copilot エージェントの概要ページに移動し、下にスクロールして**Test
+    trigger**を選択します。
 
-3.  After successful connection of copilot and outlook and green tick appears click on **Next** button.
+![A screenshot of a web page AI-generated content may be
+incorrect.](./media/image83.png)
 
-    ![](./media/image72.png)
+5.  **Start testing**をクリックすると、テストが開始されます。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image84.png)
 
-4.  In folder field select folder icon and select **Inbox** folder and then select **Create trigger**. 
+6.  テスト
+    セクションで**Connect**をクリックすると、接続ウィンドウが開きます。
 
-    ![](./media/image73.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image85.png)
 
+7.  もう一度**Connect**をクリックし、 **Submit**を選択します。
 
-    ![](./media/image74.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image86.png)
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image87.png)
 
-5.  **Close** the **Time to test your trigger** prompt. On Support agent overview page scroll down, on trigger section click on three dots **(…)** and select **Edit in Power Automate.**
+8.  Copilot Studio ウィンドウに移動して、**Test**を再実行します。
 
-    ![](./media/image75.png)
+![A screenshot of a web page AI-generated content may be
+incorrect.](./media/image83.png)
 
+9.  サポート リクエストは自動的に生成されます。
 
-6.  Right click on When a new email arrives trigger and select **Delete**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image88.png)
 
-    ![](./media/image76.png)
+10. Power Apps に移動し、Employee support ticket
+    レコードテーブルに移動して、詳細を確認します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image89.png)
 
-7.  Then click on Add a trigger, search for +++**When new email arrives**+++
-    and select **When a new email arrives** trigger from **Office 365
-    outlook** section.
+11. Power Automate Flow
+    でメールを送信するように設定したサポートメールをご確認ください。メールはサポートチームに自動的に送信されます。
 
-    ![](./media/image77.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image90.png)
 
+12. テストウィンドウに移動し、ユーザー として+++**Mark Brown Ticket
+    Current
+    Status**+++クエリを記述します。問題のステータスは未解決と表示されます。
 
-8.  Click on **Send a prompt to the specified copilot for processing**,
-    in body/message section enter the prompt, +++**Run Employee Data flow and use content from Body From.**+++ Replace “Body” and “From” as dynamic content variable (Thunder bolt option).
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image91.png)
 
-    ![](./media/image78.png)
+13. サポート エンジニアとして、テスト セクションに+++**I want to know
+    about all Unresolved ticket**+++プロンプトを記述します。
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image92.png)
 
-9.  **Save** the flow, close power automate window and
-    go back to copilot window.
+**結論**
 
-    ![](./media/image79z.png)
+この演習を完了した上、参加者は習得すること：
 
+- 現実的なシナリオをシミュレートしてエージェントの機能をテストする方法。
 
-10. Go to overview section and from top right corner click on
-    **Publish** and again click **Publish** to publish the copilot.
+- Power Automate
+  でチケットの生成及び電子メールを通じてトリガーされたワークフローを検証する手順。
 
-    ![](./media/image80.png)
+- Dataverse で生成されたレコードを確認する方法、または、サポート
+  チームに通知が送信されていることの確認。
 
+- 自動化ワークフローのデバッグと最終決定に関する実践的な洞察。
 
-    ![](./media/image81.png)
+## Labガイドの最終結論
 
+このLabガイドでは、Contoso
+SolutionsのITサポートサービスデスクにAutonomous
+Copilotエージェントを導入する実践的な演習を行いました。すべての演習を一歩に従って、参加者は以下のことを実現しました。
 
-## Conclusion
+1.  **Copilot Studio のセットアップ**: 参加者は、Copilot Studio
+    にログインし、IT サポート
+    エージェントを作成して構成し、必要なトラブルシューティングとチケット自動化のために生成
+    AI
+    やオーケストレーターなどの重要な設定を有効にする方法を学びました。
 
-By completing this exercise, participants will learn:
+2.  **Power Apps の操作**: 参加者は、Power Apps へのログイン、Dataverse
+    テーブルの設定、Excel からのデータのインポートによるサポート
+    チケットの効率的な追跡と管理に関する実践的な知識を習得しました。
 
-- How to set up triggers in Copilot to automate workflows based on email
-  inputs.
+3.  **ボットの機能強化**: 演習では、ボットにナレッジ
+    ベースを追加し、会話の開始トピックとフォールバック
+    トピックをカスタマイズしてユーザー
+    インタラクションを改善し、ボットが幅広い IT サポート
+    シナリオを処理できることに焦点を当てました。
 
-- Steps to dynamically map email content to Power Automate flows.
+4.  **IT サポート タスクの自動化**: 参加者は、Power Automate
+    を使用してサポート
+    チケットの作成を自動化し、ボットの能力を強化して未解決の問題を管理し、IT
+    チームのワークフローを改善する方法も学びました。
 
-- The process of publishing and finalizing the AI agent for operational
-  use.
-
-- Practical skills in linking communication tools like Outlook with
-  automated workflows.
-
-# Exercise 7: Test the agent
-
-This exercise focuses on testing the integration of the Contoso IT
-Support Agent with Power Automate and Outlook. Participants will verify
-the agent's ability to process emails, create support tickets, and
-trigger automated workflows effectively.
-
-1.  Go to overview page of agent, scroll down, click on **(…)** on
-    trigger and select **Edit in power automate**.
-
-    ![](./media/image82.png)
-
-
-2.  It will navigate to power automate flow, from top bar click on
-    **Test** button and then select **Manually** and again click on
-    **Test**.
-
-    ![](./media/image83.png)
-
-    ![](./media/image84.png)
-
-
-3.	**Send an email** to the 365 admin tenant mail id from any other mail box in order to **trigger the action**. The mail should be describing an issue and should have your details like employee id in it, similar to the one in the below screenshot.
-
-    ![](./media/image85.png)
-
-
-    ![](./media/image86.png)
-
-
-4.  Navigate to copilot agent overview page, scroll down and select
-    **Test trigger**.
-
-    ![](./media/image87.png)
-
-
-5.  Click on **Start testing**, it will start testing.
-
-    ![](./media/image88.png)
-
-
-6.  In test section click on the **Connect**, it will open the
-    connection window.
-
-    ![](./media/image89a.png)
-
-
-7.  Click on the **Connect** again and then select **Submit.**
-
-    ![](./media/image90.png)
-
-
-    ![](./media/image91.png)
-
-
-8.  Navigate to copilot studio window and re run the **Test**.
-
-    ![](./media/image92.png)
-
-
-9.  The support request is automatically generated.
-
-    ![](./media/image93a.png)
-
-
-10. Navigate to power apps and go to Employee support ticket record
-    table, and check the details.
-
-    ![](./media/image94.png)
-
-
-11. Check the Support mail which we configure in power automate flow to
-    send an email. The email is automatically sent to the support team.
-
-    ![](./media/image95.png)
-
-
-12. Go to test window and writer query as user +++**Mark Brown Ticket Current Status**+++ . It gives the status of the issue as unresolved.
-
-    ![](./media/image96.png)
-
-
-13. As Support Engineer, write a prompt in the test section. +++**I want to know about all Unresolved ticket**+++ .
-
-    ![](./media/image97.png)
-
-
-## Conclusion
-
-By completing this exercise, participants will learn:
-
-- How to test the agent's functionality by simulating real-world
-  scenarios.
-
-- Steps to validate email-triggered workflows and ticket generation in
-  Power Automate.
-
-
-- How to review generated records in Dataverse and ensure notifications
-  are sent to the support team.
-
-- Practical insights into debugging and finalizing automation workflows.
-
-# Final Conclusion of the Lab Guide
-
-This lab guide provided participants with a hands-on experience in
-deploying an Autonomous Copilot Agent for Contoso Solutions' IT support
-service desk. By following the step-by-step exercises, participants were
-able to:
-
-1.  **Set Up Copilot Studio**: Participants learned how to log into
-    Copilot Studio, create and configure the IT support agent, and
-    enable essential settings like generative AI and orchestrator for
-    effective troubleshooting and ticket automation.
-
-2.  **Navigate Power Apps**: Participants gained practical knowledge in
-    logging into Power Apps, setting up a Dataverse table, and importing
-    data from Excel to track and manage support tickets efficiently.
-3.  **Enhance Bot Capabilities**: The exercises focused on adding a
-    knowledge base to the bot, customizing the conversation start and
-    fallback topics to improve user interaction, and ensuring the bot
-    could handle a wide range of IT support scenarios.
-
-4.  **Automate IT Support Tasks**: Participants also learned how to
-    automate the creation of support tickets using Power Automate,
-    enhancing the bot's capability to manage unresolved issues and
-    improve IT team workflows.
-
-By completing these exercises, participants were able to implement a
-robust autonomous support system that improves response times, reduces
-manual workload, and enhances overall productivity for IT support
-operations. The integration of Copilot Studio, Power Apps, and Dataverse
-ensures a seamless flow of information, automates routine tasks, and
-optimizes support workflows, providing immediate troubleshooting
-solutions to employees and automated ticket management for unresolved
-issues.
+これらの演習を完了することで、参加者は応答時間の短縮、手動の負荷軽減、そしてITサポート業務全体の生産性向上を実現する、堅牢な自律型サポートシステムを導入することができました。Copilot
+Studio、Power
+Apps、Dataverseの統合により、シームレスな情報フローが確保され、定型業務が自動化され、サポートワークフローが最適化されます。これにより、従業員は即座にトラブルシューティングの解決策を得られるようになり、未解決の問題についてはチケット管理が自動化されます。

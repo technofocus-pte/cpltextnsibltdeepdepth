@@ -1,534 +1,555 @@
-# Lab 3: Build a Custom Contoso Agent to Chat with Your Data Using Teams AI Library and Teams Toolkit
+# Lab 3: Teams AI ライブラリと Teams toolkitを使用してデータとチャットするカスタム Contoso エージェントを構築する
 
-**Estimated Time: 45 mins**
+**所要時間：45分**
 
-## Objective
+## 目的
 
-The objective of this lab is to enable participants to build a custom
-Contoso Agent leveraging the Teams AI Library and Teams Toolkit.
-Participants will configure the Azure OpenAI API to integrate GPT
-capabilities, set up and manage data using Azure OpenAI and Azure Blob
-Storage, and deploy a customized chat model tailored for AI-driven
-interactions. By the end of the lab, they will have created and
-configured a Teams AI-powered custom agent using Visual Studio Code and
-the Teams Toolkit, gaining practical experience in deploying and
-managing AI-enabled applications.
+このLabの目的は、参加者がTeams AIライブラリとTeams
+Toolkitを活用したカスタムContoso
+Agentを構築できるようにすることです。参加者は、Azure OpenAI
+APIを構成してGPT機能を統合し、Azure OpenAIとAzure Blob
+Storageを使用してデータを設定・管理し、AI主導のインタラクション向けにカスタマイズされたチャットモデルを展開します。Labの終了時には、Visual
+Studio CodeとTeams Toolkitを使用してTeams
+AIを搭載したカスタムエージェントを作成・構成し、AI対応アプリケーションの展開と管理に関する実践的な経験を習得できます。
 
-## Solution Focus Area
+## ソリューションの重点領域
 
-This lab guide focuses on enabling participants to leverage the Azure
-OpenAI API to create intelligent, context-aware chat interactions.
-Participants will configure GPT-based models and integrate with Azure
-services like Blob Storage and Azure AI Search for efficient data
-management.
+このLabガイドでは、参加者がAzure OpenAI
+APIを活用して、インテリジェントでコンテキストアウェアなチャットインタラクションを作成できるようにすることに重点を置いています。参加者はGPTベースのモデルを構成し、Blob
+StorageやAzure AI
+SearchなどのAzureサービスと統合して、効率的なデータ管理を実現します。
 
-The lab provides hands-on experience in deploying and customizing chat
-models with tailored prompts and settings to meet business needs.
-Additionally, participants will build a custom AI agent using the Teams
-AI Library and Teams Toolkit, integrating it seamlessly into
-organizational workflows.
+本Labでは、ビジネスのためにカスタマイズされたプロンプトと設定を備えたチャットモデルの導入とカスタマイズする実践的に体験を得ます。さらに、参加者はTeams
+AIライブラリとTeams
+toolkitを使用してカスタムAIエージェントを構築し、組織のワークフローにシームレスに統合します。
 
-## Exercise 1: Configuring Azure OpenAI API and Role Permissions
+## 演習 1: Azure OpenAI API とロールの権限の構成
 
-### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
+### タスク 1: OpenAI の GPT を使用するための Azure OpenAI API キーを作成する
 
-1.  Open a browser, navigate to the following the URL +++https://oai.azure.com/portal+++ and
-    login using,
+1.  ブラウザを開き、 +++
+    [https://oai.azure.com/portal+++に移動し](https://oai.azure.com/portal+++)
+    のURLへ移動し、以下を使用してログインします。
 
-    - Username - +++@lab.CloudPortalCredential(User1).Username+++
-      
-    - Password - +++@lab.CloudPortalCredential(User1).Password+++
+    - ユーザー名 - <+++@lab.CloudPortalCredential> (User1).Username+++
 
-    ![](./media/image1.png)
+    - パスワード - <+++@lab.CloudPortalCredential> (User1).Password+++
 
-3.  On the **Azure AI Foundry** home page Click on **Create new Azure
-    OpenAI resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-    ![](./media/image2.png)
+2.  **Azure AI Foundry** のホームページで、 **Create new Azure OpenAI
+    resource**をクリックします。
 
-2.  Create Azure OpenAI Window will open, if prompted sign in again.
-    Enter the below given details into respected fields and click on
-    **Next**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
-    | Property   | Value   |
-    |:---|:------|
-    | Subscription   |   Select the assigned subscription |
-    |  Resource group  |  Select your assigned Resource Group  |
-    | Region   |  Select @lab.CloudResourceGroup(ResourceGroup1).Location  |
-    |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
-    |  Pricing tier  |  Standard S0  |    
+3.  Create Azure
+    OpenAIウィンドウが開きます。プロンプトが表示されたら再度サインインしてください。以下の情報を該当のフィールドに入力し、
+    **Next**をクリックしてください。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image3.png)
+[TABLE]
 
-4.  Under **Network** tab and **Tags** tab, accept the defaults and
-    click on **Next**
+4.  ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image3.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  **Network**タブと**Tags**タブでデフォルトを受け入れて**Next**をクリックします。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image5.png)
 
-4.  On the **Review + submit** tab click on **Create.**
+6.  **Review + submit **タブで**Create**をクリックします**。**
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-5.  After Successful deployment, window automatically navigate to
-    CognitiveServiceOpenAI Page. Click on **Go to resource** to navigate
-    to the Resource Group page.
+7.  デプロイが成功すると、ウィンドウは自動的にCognitiveServiceOpenAIページに移動します。
+    **Go to
+    resource **をクリックして、リソースグループページに移動します。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-6.  Select the created Azure OpenAI resource. In the AzureOpenAI resource page, from the left pane, select **Keys and Endpoint** under **Resource Management** and copy and **save** the **Key** and **Endpoint**
-    values to a notepad for future reference.
+8.  作成したAzure
+    OpenAIリソースを選択します。AzureOpenAIリソースページの左側のペインで、
+    **Resource Management **の**Keys and
+    Endpoint **を選択し**、**参照のために、**Key**と**Endpoint**の値をメモ帳にコピーして**save** します。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-### Task 2: Assign Cognitive contributor role.
+### タスク 2: 認知貢献者ロールを割り当てます。
 
-1.  Select the **ResourceGroup1** to go to the Resource Group overview page.
-   
-2.  Select **Access control (IAM)** from the left pane of the Resource
-    group page. Then select **+** **Add** and click **Add role
-    assignment**.
+1.  **ResourceGroup1**を選択して、リソース
+    グループの概要ページに移動します。
 
-    ![A screenshot of a computer AI-generated content may be
+2.  リソースグループページの左側のペインから**Access
+    control（IAM）**を選択します。次に、 **「+ Add **を選択し、**Add
+    role assignment**をクリックします。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-3.  Search and select +++**cognitive service contributor+++**, click
-    **Next**.
+3.  +++ **Cognitive Service Contributor+++**を検索して選択し、
+    **Next**をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-4.  Click on **Select members** to assign members. Search for
-    +++@lab.CloudPortalCredential(User1).Username+++ and click on
-    **Select**. Click **Next**.
+4.  メンバーを割り当てるには、**Select members **をクリックします。
+    [+++@lab.CloudPortalCredential](mailto:+++@lab.CloudPortalCredential%20)
+    (User1).Username+++ を検索し、 **Select**をクリックします。
+    それから、**「Next」**をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-5.  On the assignment type tab, select assignment type as **Active**,
-    duration as **Permanent**, and click on **Review +Assign** and again
-    **Review + Assign**.
+5.  割り当てタイプタブで、割り当てタイプを**Active**
+    、期間を**Permanentと選択し**、 **「レビュー +
+    割り当て」をクリックして**、**Review
+    +Assign をクリックします**。もう一度**Review
+    +Assign**をクリックします。 
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-6.  You will get a success message once the role assignment is
-    successful.
+6.  ロールの割り当てが成功すると、成功メッセージが表示されます。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image15.png)
 
-## Exercise 2: Set up your data on Azure OpenAI
+## 演習 2: Azure OpenAI でデータを設定する
 
-### Task 1: Deploy chat in AI Foundary
+### タスク1: AI Foundaryにチャットを展開する
 
-1.  Select the hamburger menu in the top left and click on **All
-    resources**.
+1.  左上のハンバーガーメニューを選択し、 **All
+    resource**をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-2.  Select the Azure OpenAI service **ContosoAgent@lab.LabInstance.Id** that you created earlier.
+2.  先作成したAzure OpenAI
+    サービス**<ContosoAgent@lab.LabInstance.Id>　**を選択します。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-3.  Select **Go to Azure AI Foundry portal**.
-   
-4.  Select **Model Catalog** from the left pane.
+3.  **Go to Azure AI Foundry portal**を選択します。
 
-    <img width="504" alt="image" src="https://github.com/user-attachments/assets/9c9e6e8a-caab-41b7-bcbb-3df9ac62b9ed" />
+4.  左側のペインから**Model Catalog **を選択します。
 
-8.  On the **Select a chat completion model** page, search for
-    +++gpt-4o+++, select it and click on **Confirm.**
+![image](./media/image18.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
+5.  **Select a chat completion model **ページで、+++gpt-4o+++
+    を検索して選択し、 **Confirm**をクリックします。
 
-9.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
-    enter the following details, and click on **Deploy.**
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
+
+6.  **Deploy model gpt-4o **ペインで、
+    **Customize**タブを展開し、次の詳細を入力して、
+    **Deploy**をクリックします。
 
     - **Deployment type**: Standard
 
     - **Deployment name**: gpt-4o
 
-    - **Token per Minute Rate**: 5K (Scroll to adjust the limit. If it
-      does not work, click on it and then use Shift+Right/Left arrow key
-      to adjust the limit)
+    - **Token per Minute Rate**: 5K
+      (制限をスクロールして調整できます。できない場合は、クリックしてShift+左右矢印キーで制限を調整してください。)
 
     - **Content Filter**: defaultv2
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image21.png)
 
-10.  You can check the deployment under **Shared resources** à
-    **Deployments**
+7.  **Shared resources **\>
+    **Deployments**でデプロイメントを確認できます。
 
-    ![A screenshot of a computer AI-generated content may be
+\![コンピューターAI生成コンテンツのスクリーンショットは、正しくない可能性があります。\](./media/image25.png)
+
+### タスク 2: Storage Accountの作成
+
+1.  Azure ポータルの +++ <https://portal.azure.com/+++>ホーム
+    ページで、+++ Storage accounts +++ を検索して選択します。
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image22.png)
+
+2.  **+ Create**をクリックし**、**次の詳細を入力して**Review +
+    create**をクリックします。
+
+    - Subscription - サブスクリプションを選択してください
+
+    - Resource group – 割り当てられたリソースグループを選択します
+
+    - Storage account name - <+++contosostorage@lab.LabInstance.Id> +++
+
+    - Region – @lab.CloudResourceGroup(ResourceGroup1).Location を選択
+
+    - Primary service – Azure Blob Storage または Azure Data Lake
+      Storage Gen 2
+
+    - Performance – Standard
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image23.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image24.png)
+
+3.  **Create**をクリックし、デプロイが完了するまで待ってから、 **Go to
+    resource**をクリックします。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-### Task 2: Creating a storage account
-
-1.  From the Azure portal, +++https://portal.azure.com/+++ Home page,
-    search for and select +++Storage accounts+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-2.  Click on **+ Create,** enter the following details and click
-    **Review + create.**
+4.  新しく作成されたストレージアカウントで、データストレージの下の**Containers**に移動し、
+    **+ Container**をクリックします。
 
-    -    Subscription - Select your subscription
-    
-    -    Resource group – Select your assigned Resourcegroup
-    
-    -    Storage account name - +++contosostorage@lab.LabInstance.Id+++
-    
-    -    Region – Select @lab.CloudResourceGroup(ResourceGroup1).Location
-    
-    -    Primary service – Azure Blob storage or Azure Data Lake Storage Gen 2
-    
-    -    Performance – Standard
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  コンテナ名を +++ **source** +++
+    と入力し、**create**をクリックします。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-3.  Click on **Create** and wait for the deployment to complete and then
-    click on **Go to resource**.
+6.  **source**コンテナーをクリックして開きます。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-    ![A screenshot of a computer AI-generated content may be
+7.  ソース コンテナーにデータを追加するには、 **Upload** --\_ **Browse
+    for files** をクリックし、  
+    C: \Labfiles
+    から**TF-AzureOpenAI.pdf**を選択します。ファイルを選択したら、
+    **upload**ボタンをクリックします。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-4.  On the newly created storage account, navigate to **Containers**
-    under Data storage and click on **+ Container**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-5.  Enter the container name as +++**source**+++ and click on **create.**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-6.  Click on **source** container and open it.
+### タスク3: Azure AI searchを作成する
 
-    ![A screenshot of a computer AI-generated content may be
+1.  Azure ポータル
+    +++<https://portal.azure.com/+++>ホームページで、**+++AI
+    search+++**を検索して選択します。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-7.  To add data into the source container, Click on **Upload** --\_
-    **Browse for files** and then from C:\Labfiles select
-    **TF-AzureOpenAI.pdf** After selecting file click on **upload** button.
+2.  **+ Create**をクリックして、新しい Azure AI Search
+    リソースを作成します。
 
-    ![A screenshot of a computer AI-generated content may be
+以下の詳細を入力し、 **Review + create **をクリックして、
+**Create**を選択します。
+
+- Subscription: サブスクリプションを選択してください
+
+- Resource Group: 割り当てられたリソースグループを選択します
+
+- Service name: <+++contoso-ai-search-@lab.LabInstance.Id> +++
+
+- Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search service AI-generated content may be
 incorrect.](./media/image35.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image36.png)
 
-### Task 3: Create Azure AI search
+3.  search-service-contoso-ai-search-01overview で、 **Go to
+    resource**をクリックします。
 
-1.  From the Azure portal +++https://portal.azure.com/+++ Home page,
-    search for and select +++**AI search**+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-2.  Click on **+ Create** to create a new Azure AI Search resource.
+4.  <contoso-ai-search-@lab.LabInstance.Id>概要で、
+    **URL**エンドポイントを参照用保存します。次に、左側のナビゲーションバーから**Settings**の下にある**Keys**を選択し、**primary**と**secondar
+    key**を保存します**。** 
 
-    Enter the following details and click on **Review + create** and then select **Create**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-    -    Subscription: select your subscription
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-    -    Resource Group: Select your assigned Resource group
-    
-    -    Service name: +++contoso-ai-search-@lab.LabInstance.Id+++
-    
-    -    Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+### タスク 4: Azure AI Foundry のチャットにデータを追加する
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image38.png)
+1.  **Azure AI Foundryページ**から、 **Chat** -\> **Add your data -\>
+    Add a data source**を選択します
 
-    ![A screenshot of a search service AI-generated content may be incorrect.](./media/image39.png)
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image40.png)
 
-    ![A screenshot of a search engine AI-generated content may be incorrect.](./media/image40.png)
+2.  ドロップダウンから、 **Azure Blob Storage (preview)**を選択します。
 
-3.  On the search-service-contoso-ai-search-01overview click on **Go to
-    resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image41.png)
+3.  **Add data**ページで、次の詳細を入力し、 **Next**をクリックします。
 
-4.  On contoso-ai-search-@lab.LabInstance.Id overview, save **URL**
-    endpoint for future use. Then from left navigation bar select
-    **keys** under **Settings** and save **primary** and **secondary** **key** for future
-    use.
+    - Select data source – Azure Blob Storage(preview)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image42.png)
+    - Subscription - サブスクリプションを選択します
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image43.png)
+    - Select Azure Blob storage resource – Select
+      [**contosostorage@lab.LabInstance.Id**](mailto:contosostorage@lab.LabInstance.Id)
+      を選択します
 
-### Task 4: Add data to chat in Azure AI Foundry
+    - Select storage container –**source**を選択します
 
-1.  From the **Azure AI Foundry** page, select **Chat** -\> **Add your
-    data -\> Add a data source**.
+    - Select Azure AI Search resource
+      –　[**contoso-ai-search-@lab.LabInstance.Id**](mailto:contoso-ai-search-@lab.LabInstance.Id)を選択します
 
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/image44.png)
+    - Index name –　<+++contosoindex@lab.LabInstance.Id>
+      +++　を入力します
 
-2.  From the dropdown, select **Azure Blob Storage (preview)**.
+    - Index scheduler - Once
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image45.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image42.png)
 
-3.  On the **Add data** page, enter the following details and click on
-    **Next.**
+4.  **Data management**ページで、Search
+    Typeフィールドに**keyword**を選択し、 **Next**をクリックします。
 
-    -    Select data source – Azure Blob Storage(preview)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-    -    Subscription - Select your subscription
-    
-    -    Select Azure Blob storage resource – Select **contosostorage@lab.LabInstance.Id**
-    
-    -    Select storage container – Select **source**
-    
-    -    Select Azure AI Search resource – Select **contoso-ai-search-@lab.LabInstance.Id**
-    
-    -    Index Name - Type +++contosoindex@lab.LabInstance.Id+++
-    
-    -    Indexer schedule - Once
+5.  **Data connection **ページで、 **API
+    key**を選択し、**Next**へをクリックします。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-4.  On the **Data management** page, select search type as **keyword**
-    and click **Next**.
+6.  **Review and finish**ページで、 **Save and close**をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-5.  On the **Data connection** page, select **API key** and click on
-    **Next.**
+7.  取り込みには多少時間がかかりますが、完了された上データの詳細がパネルに反映されます。データ取り込みプロセスが完了したら、Teams
+    AI ライブラリと Teams toolkitを使用してカスタム エンジン
+    エージェントの作成を開始できます。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image48.png)
+**注:**ファイルは .txt、.md、.html、.pdf、.docx、または .pptx
+形式であり、サイズ制限は 16 MB です。
 
-6.  On the **Review and finish** page, click on **Save and close.**
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image49.png)
+## 演習3: カスタムエージェントの作成と構成
 
-7.  Ingestion will take some time, once completed the data details will
-    reflect in the pane. After the data ingestion process is complete,
-    you can start creating your custom engine agent using the Teams AI
-    library and Teams Toolkit.
+### タスク 1: Teams toolkit拡張機能の追加
 
-    >[!Note] **Note:** Files must be in .txt, .md, .html, .pdf, .docx, or .pptx format
-with 16-MB size limit.
+1.  PCで**Visual Studio Code**を開きます。 **Trust**を選択して、Visual
+    Studio Codeの制限モードを解除します。
 
-    ![](./media/image50.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image47.png)
 
-## Exercise 3: Create and configure your custom agent
+2.  VS ホームページの左側のナビゲーション
+    ペインで**拡張機能**アイコンをクリックし、+++ **Teams Toolkit**
+    +++を検索して**Install**をクリックします。
 
-### Task 1: Adding a Teams Toolkit extension
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image48.png)
 
-1.  Open **Visual Studio Code,** on your PC. Select **Trust** to remove the restricted mode in the Visual Studio Code. 
+3.  インストールが完了したら、Visual Studio Code アクティビティ バーの
+    Teams Toolkit![](./media/image49.png) アイコンを選択し、**Create a
+    New App**.を選択します。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
+
+4.  **Custom Engine Agent**を選択します。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  On the VS home page, on the left navigation pane click on the
-    **Extensions** icon, search for +++**Teams Toolkit**+++ and click on
-    **Install.**
+5.  **Basic AI Chatbot**を選択します。
 
-    ![](./media/image52.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
 
-3.  Once the installation is complete, select the Teams Toolkit ![](./media/image53.png) icon in the Visual
-    Studio Code Activity Bar and select **Create a New App**.
+6.  プログラミング言語として**JavaScript**を選択します。
 
-    ![](./media/image54.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image53.png)
 
-4.  Select **Custom Engine Agent**.
+7.  **Azure OpenAI**を選択します。
 
-    ![](./media/image55.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
-5.  Select **Basic AI Chatbot**.
-
-    ![](./media/image56.png)
-
-6.  Select **JavaScript** as the programming language.
-
-    ![](./media/image57.png)
-
-7.  Select **Azure OpenAI**.
-
-    ![](./media/image58.png)
-
-8.  Enter the values from the Azure portal, the one which we have copied
-    and saved in the notepad.
+8.  Azure ポータルからメモ帳に保存した値を入力します。
 
     - **Azure OpenAI key**
 
-    ![](./media/image59.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
-    - **Azure OpenAI endpoint**
+- **Azure OpenAI endpoint**
 
-    ![](./media/image60.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image56.png)
 
-    - **Deployment name** - +++gpt-4o+++
+- **Deployment name**- +++gpt-4o+++
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image61.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image57.png)
 
-9.  Create a new folder to contain the data related to teams and
-    navigate to that location by clicking on **Browse**.
+9.  チームに関連するデータを格納する新しいフォルダーを作成し、
+    **Browse**をクリックしてその場所に移動します。
 
-    ![](./media/image62.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image58.png)
 
-    ![](./media/image63.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
-10. Enter +++**TeamsContosoAgent**+++ as the name for your custom engine agent,
-    select **Enter**. Custom engine agent is created in a few seconds.
+10. カスタム エンジン エージェントの名前として+++ **TeamsContosoAgent
+    +++** と入力し、 **Enter** キーを押します。数秒でカスタム エンジン
+    エージェントが作成されます。
 
-    ![](./media/image64.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
-11. Select Yes, I author
+11. Yes, I trust the authorを選択します。
 
-    ![](./media/image65.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
 
-**Take a tour of the source code**
+**ソースコードツを見ましょう！**
 
-Have a look at what's inside this custom engine agent \> Basic AI
-Chatbot template.
+このカスタム エンジン エージェント \> Basic AIチャットボット
+テンプレートの内容を確認してください。
 
-| Folder name   | Contents   |
-|:---|:------|
-| .vscode   |   VS Code files for debugging. |
-|  appPackage  |  Templates for the Teams application manifest.  |
-| env   |  Name or value pairs are stored in environment files and used by teamsapp.yml to customize the provisioning and deployment rules.  |
-|  src/  |  The source code for the notification Teams application.  |
-|  src/index.js  |  Sets up the bot app server. |  
-| src/adapter.js   |  Sets up the bot adapter.  |
-|  src/config.js  |  Defines the environment variables.  |
-|  src/prompts/chat/skprompt.txt  |  Defines the prompt.  |
-|  src/prompts/chat/config.json  |  Configures the prompt.  |
-| src/app/app.js   |  Handles business logics for the Basic AI Chatbot.  |
-| teamsapp.yml   |  Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages.  |
-| teamsapp.local.yml   |  This override teamsapp.yml with actions that enable local execution and debugging.  |
-|   teamsapp.testtool.yml |  This override teamsapp.yml with actions that enable local execution and debugging in Teams App Test Tool.  |
-    
-### Task 2: Configure your custom agent
+[TABLE]
 
-Let's customize the prompt for your custom engine agent.
+### タスク2: カスタムエージェントを構成する
 
-1.  Go to src/prompts/chat/skprompt.txt and replace the existing code
-    with the below code. After updating, press **ctrl+s** to save the
-    file.
+カスタム エンジン エージェントのプロンプトをカスタマイズしましょう。
 
-    ```
-    The following is a conversation with an AI assistant, who is an expert on answering questions         over the given context.
-    Responses should be in a short journalistic style with no more than 80 words.
-    ```
-    
-    ![](./media/image66.png)
+1.  src/prompts/chat/skprompt.txt
+    に移動し、既存のコードを以下のコードに置き換えます。更新後、
+    **Ctrl+S**を押してファイルを保存します。
 
-2.  Go to the **config.json** file under prompts/chat. Replace the
-    existing code with the following code and replace the **endpoint** ,
-    **index_name**, and **key** values with your **Azure AI Search**
-    resource details. After updating, press **ctrl+s** to save the file.
+The following is a conversation with an AI assistant, who is an expert
+on answering questions over the given context.  
 
-    ```
+Responses should be in a short journalistic style with no more than 80
+words.
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
+
+2.  **config.jsonファイル**に移動します。既存のコードを以下のコードに置き換え、
+    **endpoint** 、 **index_name** 、 **key** の値を**Azure AI
+    Search**リソースの詳細に置き換えます。更新後、 **Ctrl + S**
+    キーを押してファイルを保存します。  
+    {  
+    "schema": 1.1,  
+    "description": "A bot that can chat with users",  
+    "type": "completion",  
+    "completion": {  
+    "completion_type": "chat",  
+    "include_history": true,  
+    "include_input": true,  
+    "max_input_tokens": 2800,  
+    "max_tokens": 1000,  
+    "temperature": 0.9,  
+    "top_p": 1.0,  
+    "presence_penalty": 0.6,  
+    "frequency_penalty": 0.0  
+    },  
+    "data_sources": \[  
     {
-      "schema": 1.1,
-      "description": "A bot that can chat with users",
-      "type": "completion",
-      "completion": {
-        "completion_type": "chat",
-        "include_history": true,
-        "include_input": true,
-        "max_input_tokens": 2800,
-        "max_tokens": 1000,
-        "temperature": 0.9,
-        "top_p": 1.0,
-        "presence_penalty": 0.6,
-        "frequency_penalty": 0.0
-      },
-      "data_sources": [
-        {
-          "type": "azure_search",
-          "parameters": {
-            "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
-            "index_name": "YOUR-INDEX_NAME",
-            "authentication": {
-              "type": "api_key",
-              "key": "AZURE-AI-SEARCH-KEY"
-            }
-          }
-        }
-      ]
-    }
-    ```
-    
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image67.png)
 
-3.  Go to src/app/app.js file and add the following variable
-    inside OpenAIModel – after the azureEndpoint entry.
+"type": "azure_search",  
+"parameters": {  
+"endpoint": "AZURE-AI-SEARCH-ENDPOINT",  
+"index_name": "YOUR-INDEX_NAME",  
+"authentication": {  
+"type": "api_key",  
+"key": "AZURE-AI-SEARCH-KEY"  
+}  
+}  
+}  
+\]
 
-    +++azureApiVersion: '2024-02-15-preview',+++
+}![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image63.png)
 
-    ![](./media/image68.png)
+3.  src/app/app.js ファイルに移動し、OpenAIModel 内の azureEndpoint
+    エントリの後に次の変数を追加します。
 
-4.  Open Powershell as an administrator and run the following command,
-    and enter A.
++++azureApiVersion: '2024-02-15-preview',+++
 
-    ```
-    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-    ```
-    
-    ![](./media/image69.png)
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image64.png)
 
-5.  Back in the **Visual Studio Code**, from the left pane, select **Run
-    and Debug (Ctrl+Shift+D)**. Select **Debug in Test Tool** to start
-    debugging.
+4.  管理者として Powershell を開き、次のコマンドを実行して、A
+    を入力します。
 
-    ![](./media/image70.png)
+5.  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
-6.  Select Allow access if you get a Windows Security Alert.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image65.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image71.png)
+6.  **Visual Studio Code**に、左ペインから**Run and Debug
+    (Ctrl+Shift+D)**を選択します。**Debug in Test
+    Tool **を選択してデバッグを開始します。
 
-7.  Custom engine agent runs within the Teams App Test Tool, which opens
-    in your browser.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image66.png)
 
-    ![](./media/image72.png)
+7.  Windows セキュリティアラートが表示された場合は、Allow
+    accessを選択します。
 
-8.  The browser will open a new tab, Teams App Test Tool and queries can
-    be run in the app.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image67.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image73.png)
+8.  カスタム エンジン エージェントは、ブラウザーで開く Teams App Test
+    Tool内で実行されます
 
-## Conclusion
+![A black screen with white text AI-generated content may be
+incorrect.](./media/image68.png)
 
-By completing this lab, participants have gained hands-on experience in
-building and deploying a custom AI-driven chatbot using the Teams AI
-Library and Teams Toolkit. This included setting up Azure OpenAI
-resources, integrating data storage and AI search capabilities, and
-customizing the chatbot for context-aware interactions. Through this
-exercise, participants have learned how to configure intelligent agents
-tailored to business needs and integrate them into organizational
-workflows, effectively leveraging modern AI capabilities within
-Microsoft Teams.
+9.  ブラウザで新しいタブが開き、Teams App Test
+    Toolとクエリをアプリ内で実行できるようになります。
 
+![A screenshot of a computer Description automatically
+generated](./media/image69.png)
+
+## 結論
+
+このLabを完了することで、参加者はTeams AIライブラリとTeams
+toolkitを用いてカスタムAI駆動型チャットボットを構築・展開する実践的な経験を得ました。Azure
+OpenAIリソースの設定、データストレージとAI検索機能の統合、そしてコンテキストアウェアなインタラクションのためのチャットボットのカスタマイズなどが含まれます。この演習を通して、参加者はビジネスニーズに合わせてインテリジェントエージェントを構成し、組織のワークフローに統合することで、Microsoft
+Teams内で最新のAI機能を効果的に活用する方法を習得しました。
+
+ 
