@@ -1,534 +1,556 @@
-# Lab 3: Build a Custom Contoso Agent to Chat with Your Data Using Teams AI Library and Teams Toolkit
+# 实验 3：使用 Teams AI 库和 Teams Toolkit构建自定义 Contoso 代理以与数据聊天
 
-**Estimated Time: 45 mins**
+**预计时间：45 分钟**
 
-## Objective
+## 目的
 
-The objective of this lab is to enable participants to build a custom
-Contoso Agent leveraging the Teams AI Library and Teams Toolkit.
-Participants will configure the Azure OpenAI API to integrate GPT
-capabilities, set up and manage data using Azure OpenAI and Azure Blob
-Storage, and deploy a customized chat model tailored for AI-driven
-interactions. By the end of the lab, they will have created and
-configured a Teams AI-powered custom agent using Visual Studio Code and
-the Teams Toolkit, gaining practical experience in deploying and
-managing AI-enabled applications.
+本实验室的目标是使参与者能够利用 Teams AI 库和 Teams 工具包构建自定义
+Contoso 代理。参与者将配置 Azure OpenAI API 以集成 GPT 功能，使用 Azure
+OpenAI 和 Azure Blob 存储设置和管理数据，并部署为 AI
+驱动的交互量身定制的自定义聊天模型。在实验结束时，他们将使用 Visual
+Studio Code 和 Teams 工具包创建并配置了 Teams AI
+驱动的自定义代理，从而获得部署和管理支持 AI 的应用程序的实践经验。
 
-## Solution Focus Area
+## 解决方案重点领域
 
-This lab guide focuses on enabling participants to leverage the Azure
-OpenAI API to create intelligent, context-aware chat interactions.
-Participants will configure GPT-based models and integrate with Azure
-services like Blob Storage and Azure AI Search for efficient data
-management.
+本实验室指南重点介绍如何使参与者能够利用 Azure OpenAI API
+创建智能的上下文感知聊天交互。参与者将配置基于 GPT 的模型，并与 Blob
+Storage 和 Azure AI Search 等 Azure 服务集成，以实现高效的数据管理。
 
-The lab provides hands-on experience in deploying and customizing chat
-models with tailored prompts and settings to meet business needs.
-Additionally, participants will build a custom AI agent using the Teams
-AI Library and Teams Toolkit, integrating it seamlessly into
-organizational workflows.
+该实验室提供使用定制的提示和设置来部署和自定义聊天模型以满足业务需求的实践经验。此外，参与者将使用
+Teams AI 库和 Teams 工具包构建自定义 AI
+代理，并将其无缝集成到组织工作流程中。
 
-## Exercise 1: Configuring Azure OpenAI API and Role Permissions
+## 练习 1：配置 Azure OpenAI API 和角色权限
 
-### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
+### 任务 1：创建 Azure OpenAI API 密钥以使用 OpenAI 的 GPT
 
-1.  Open a browser, navigate to the following the URL +++https://oai.azure.com/portal+++ and
-    login using,
+1.  打开浏览器，导航到以下 URL
+    +++<https://oai.azure.com/portal+++>，然后使用 
 
-    - Username - +++@lab.CloudPortalCredential(User1).Username+++
-      
-    - Password - +++@lab.CloudPortalCredential(User1).Password+++
+    - 用户名 - <+++@lab.CloudPortalCredential>(User1).Username+++
 
-    ![](./media/image1.png)
+    - 密码 - <+++@lab.CloudPortalCredential>(User1).Password+++
 
-3.  On the **Azure AI Foundry** home page Click on **Create new Azure
-    OpenAI resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-    ![](./media/image2.png)
+2.  在 **Azure AI Foundry** 主页上，单击 **Create new Azure OpenAI
+    resource**。
 
-2.  Create Azure OpenAI Window will open, if prompted sign in again.
-    Enter the below given details into respected fields and click on
-    **Next**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
-    | Property   | Value   |
-    |:---|:------|
-    | Subscription   |   Select the assigned subscription |
-    |  Resource group  |  Select your assigned Resource Group  |
-    | Region   |  Select @lab.CloudResourceGroup(ResourceGroup1).Location  |
-    |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
-    |  Pricing tier  |  Standard S0  |    
+3.  创建 Azure OpenAI
+    窗口将打开，如果出现提示，请再次登录。在尊重的字段中输入以下给定的详细信息，然后单击下**Next**。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image3.png)
+[TABLE]
 
-4.  Under **Network** tab and **Tags** tab, accept the defaults and
-    click on **Next**
+4.  ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image3.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  在 **Network** 选项卡和 **Tags** 选项卡下，接受默认值并单击 **Next**
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image5.png)
 
-4.  On the **Review + submit** tab click on **Create.**
+6.  在 **Review + submit** 选项卡上，单击 **Create。**
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-5.  After Successful deployment, window automatically navigate to
-    CognitiveServiceOpenAI Page. Click on **Go to resource** to navigate
-    to the Resource Group page.
+7.  部署成功后，窗口会自动导航到 CognitiveServiceOpenAI 页面。单击 **Go
+    to resource** 导航到 Resource Group 页面。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-6.  Select the created Azure OpenAI resource. In the AzureOpenAI resource page, from the left pane, select **Keys and Endpoint** under **Resource Management** and copy and **save** the **Key** and **Endpoint**
-    values to a notepad for future reference.
+8.  选择创建的 Azure OpenAI 资源。在 AzureOpenAI
+    资源页的左窗格中，选择“**Resource Management** ”下的“**Keys and
+    Endpoint** ”，然后将“**Key**”和“**Endpoint**”值复制并保存到记事本中，以备将来参考。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-### Task 2: Assign Cognitive contributor role.
+### 任务 2：分配 Cognitive 参与者角色。
 
-1.  Select the **ResourceGroup1** to go to the Resource Group overview page.
-   
-2.  Select **Access control (IAM)** from the left pane of the Resource
-    group page. Then select **+** **Add** and click **Add role
-    assignment**.
+1.  选择 **ResourceGroup1** 以转到 Resource Group
+    overview（资源组概览）页面。
 
-    ![A screenshot of a computer AI-generated content may be
+2.  从 Resource group （资源组） 页面的左侧窗格中选择 **Access control
+    （IAM）**。然后选择 **+ Add** 并单击 **Add role assignment**.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-3.  Search and select +++**cognitive service contributor+++**, click
-    **Next**.
+3.  搜索并选择 +++**cognitive service
+    contributor**+++，然后单击**Next**。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-4.  Click on **Select members** to assign members. Search for
-    +++@lab.CloudPortalCredential(User1).Username+++ and click on
-    **Select**. Click **Next**.
+4.  单击 **Select members** 以分配成员。搜索
+    <+++@lab.CloudPortalCredential>(User1).Username+++，然后单击
+    **Select**。单击 **Next**。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-5.  On the assignment type tab, select assignment type as **Active**,
-    duration as **Permanent**, and click on **Review +Assign** and again
-    **Review + Assign**.
+5.  在“Assignment type”选项卡上，选择“**Active**”作为“assignment
+    type”，选择“**Permanent**”作为“持续时间”，然后单击“**Review
+    +Assign**”，然后单击“**Review +Assign**”。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-6.  You will get a success message once the role assignment is
-    successful.
+6.  角色分配成功后，您将收到一条成功消息。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image15.png)
 
-## Exercise 2: Set up your data on Azure OpenAI
+## 练习 2：在 Azure OpenAI 上设置数据
 
-### Task 1: Deploy chat in AI Foundary
+### 任务 1：在 AI Foundary 中部署聊天
 
-1.  Select the hamburger menu in the top left and click on **All
-    resources**.
+1.  选择左上角的汉堡菜单，然后单击 **All resources**。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-2.  Select the Azure OpenAI service **ContosoAgent@lab.LabInstance.Id** that you created earlier.
+2.  选择您之前创建的 [Azure OpenAI 服务
+    **ContosoAgent@lab.LabInstance.Id**](mailto:ContosoAgent@lab.LabInstance.Id) 。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-3.  Select **Go to Azure AI Foundry portal**.
-   
-4.  Select **Model Catalog** from the left pane.
+3.  选择**“Go to Azure AI Foundry portal**”。
 
-    <img width="504" alt="image" src="https://github.com/user-attachments/assets/9c9e6e8a-caab-41b7-bcbb-3df9ac62b9ed" />
+4.  从 左侧窗格中选择 **Model Catalog**。
 
-8.  On the **Select a chat completion model** page, search for
-    +++gpt-4o+++, select it and click on **Confirm.**
+![image](./media/image18.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  在 **Select a chat completion model **页面上，搜索
+    +++**gpt-4o**+++，选择它，然后单击 **Confirm。**
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
+
+6.  在 **Deploy model gpt-4o** 窗格中，展开 **Customize**
+    选项卡，输入以下详细信息，然后单击 **Deploy。**
+
+    - **部署类型**: Standard
+
+    - **部署名称**: gpt-4o
+
+    - **每分钟令牌费率**：5K（滚动以调整限制。如果它不起作用，请单击它，然后使用
+      Shift+右/左箭头键调整限制)
+
+    - **内容过滤器：** defaultv2
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image21.png)
+
+7.  您可以在 **Shared resources** à **Deployments** 下检查部署
+
+\![计算机 AI 生成内容的屏幕截图可能是
+
+不正确。（./media/image25.png）
+
+### 任务 2：创建存储帐户
+
+1.  在 Azure 门户的 +++<https://portal.azure.com/+++> 主页中，搜索并选择
+    +++ Storage accounts+++。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-9.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
-    enter the following details, and click on **Deploy.**
+2.  单击 **+ Create**，输入以下详细信息，然后单击 **Review + create。**
 
-    - **Deployment type**: Standard
+    - 订阅 - 选择您的订阅
 
-    - **Deployment name**: gpt-4o
+    - Resource group – 选择分配的 Resourcegroup
 
-    - **Token per Minute Rate**: 5K (Scroll to adjust the limit. If it
-      does not work, click on it and then use Shift+Right/Left arrow key
-      to adjust the limit)
+    - 存储帐户名称 - <+++contosostorage@lab.LabInstance.Id>+++
 
-    - **Content Filter**: defaultv2
+    - Region – 选择 @lab.CloudResourceGroup(ResourceGroup1).Location
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+    - 主要服务 - Azure Blob storage或 Azure Data Lake Storage Gen 2
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
+    - 性能 – Standard标准
 
-10.  You can check the deployment under **Shared resources** à
-    **Deployments**
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image23.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image24.png)
+
+3.  单击 **Create** 并等待部署完成，然后单击 **Go to resource**。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-### Task 2: Creating a storage account
-
-1.  From the Azure portal, +++https://portal.azure.com/+++ Home page,
-    search for and select +++Storage accounts+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-2.  Click on **+ Create,** enter the following details and click
-    **Review + create.**
+4.  在新创建的存储帐户上，导航到 数据存储下的Containers，然后单击 **+
+    Container**
 
-    -    Subscription - Select your subscription
-    
-    -    Resource group – Select your assigned Resourcegroup
-    
-    -    Storage account name - +++contosostorage@lab.LabInstance.Id+++
-    
-    -    Region – Select @lab.CloudResourceGroup(ResourceGroup1).Location
-    
-    -    Primary service – Azure Blob storage or Azure Data Lake Storage Gen 2
-    
-    -    Performance – Standard
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  将容器名称输入为 +++**source**+++，然后单击 **create。**
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-3.  Click on **Create** and wait for the deployment to complete and then
-    click on **Go to resource**.
+6.  单击 **Source** container 并打开它。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-    ![A screenshot of a computer AI-generated content may be
+7.  要将数据添加到源容器中，请单击 **Upload** --\_ **Browse for
+    files** ，然后从 C：\Labfiles 中选择
+    **TF-AzureOpenAI.pdf** 选择文件后，单击**upload** 按钮。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-4.  On the newly created storage account, navigate to **Containers**
-    under Data storage and click on **+ Container**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-5.  Enter the container name as +++**source**+++ and click on **create.**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-6.  Click on **source** container and open it.
+### 任务 3：创建 Azure AI 搜索
 
-    ![A screenshot of a computer AI-generated content may be
+1.  在 Azure 门户 +++<https://portal.azure.com/+++> 主页中，搜索并选择
+    +++AI search+++。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-7.  To add data into the source container, Click on **Upload** --\_
-    **Browse for files** and then from C:\Labfiles select
-    **TF-AzureOpenAI.pdf** After selecting file click on **upload** button.
+2.  单击“**+ Create**”以创建新的 Azure AI 搜索资源。
 
-    ![A screenshot of a computer AI-generated content may be
+输入以下详细信息，然后单击 **Review + create**，然后选择 **Create**。
+
+- 订阅：选择您的订阅
+
+- 资源组：选择已分配的资源组
+
+- 服务名称：+[++contoso-ai-search-@lab.LabInstance.Id](mailto:+++contoso-ai-search-@lab.LabInstance.Id)+++
+
+&nbsp;
+
+- 位置： @lab.CloudResourceGroup(ResourceGroup1).Location
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search service AI-generated content may be
 incorrect.](./media/image35.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image36.png)
 
-### Task 3: Create Azure AI search
+1.  在 search-service-contoso-ai-search-01overview 中，单击“**Go to
+    resource**”。
 
-1.  From the Azure portal +++https://portal.azure.com/+++ Home page,
-    search for and select +++**AI search**+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-2.  Click on **+ Create** to create a new Azure AI Search resource.
+2.  在 <contoso-ai-search-@lab.LabInstance.Id> 概述中，保存 **URL**
+    端点以供将来使用。然后从左侧导航栏中选择 **Settings**下的
+    **keys**，并保存**primary
+    key** 和**secondary** **key** 以备将来使用。  
 
-    Enter the following details and click on **Review + create** and then select **Create**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-    -    Subscription: select your subscription
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-    -    Resource Group: Select your assigned Resource group
-    
-    -    Service name: +++contoso-ai-search-@lab.LabInstance.Id+++
-    
-    -    Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+### 任务 4：在 Azure AI Foundry 中向聊天添加数据
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image38.png)
+1.  在 **Azure AI Foundry** 页面中，选择 **Chat** -\> **Add your data
+    -\> Add a data source**。
 
-    ![A screenshot of a search service AI-generated content may be incorrect.](./media/image39.png)
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image40.png)
 
-    ![A screenshot of a search engine AI-generated content may be incorrect.](./media/image40.png)
+2.  从下拉列表中，选择“**Azure Blob Storage (preview)**”。
 
-3.  On the search-service-contoso-ai-search-01overview click on **Go to
-    resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image41.png)
+3.  在 **Add data** 页面上，输入以下详细信息，然后单击 **Next）。**
 
-4.  On contoso-ai-search-@lab.LabInstance.Id overview, save **URL**
-    endpoint for future use. Then from left navigation bar select
-    **keys** under **Settings** and save **primary** and **secondary** **key** for future
-    use.
+    - 选择数据源 – Azure Blob Storage(preview)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image42.png)
+    &nbsp;
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image43.png)
+    - 订阅 - 选择您的订阅
 
-### Task 4: Add data to chat in Azure AI Foundry
+    &nbsp;
 
-1.  From the **Azure AI Foundry** page, select **Chat** -\> **Add your
-    data -\> Add a data source**.
+    - 选择 Azure Blob storage 资源 –
+      Select [**contosostorage@lab.LabInstance.Id**](mailto:contosostorage@lab.LabInstance.Id)
 
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/image44.png)
+    - 选择 storage container（选择存储容器）– 选择**source**
 
-2.  From the dropdown, select **Azure Blob Storage (preview)**.
+    - 选择 Azure AI Search资源 –
+      选择[**contoso-ai-search-@lab.LabInstance.Id**](mailto:contoso-ai-search-@lab.LabInstance.Id)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image45.png)
+    - 索引名称 - 类型<+++contosoindex@lab.LabInstance.Id>+++
 
-3.  On the **Add data** page, enter the following details and click on
-    **Next.**
+    - 索引器计划 - Once
 
-    -    Select data source – Azure Blob Storage(preview)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image42.png)
 
-    -    Subscription - Select your subscription
-    
-    -    Select Azure Blob storage resource – Select **contosostorage@lab.LabInstance.Id**
-    
-    -    Select storage container – Select **source**
-    
-    -    Select Azure AI Search resource – Select **contoso-ai-search-@lab.LabInstance.Id**
-    
-    -    Index Name - Type +++contosoindex@lab.LabInstance.Id+++
-    
-    -    Indexer schedule - Once
+4.  在 **Data management**  页面上，选择 搜索类型 作为 **keyword**
+    ，然后单击 **Next**。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-4.  On the **Data management** page, select search type as **keyword**
-    and click **Next**.
+5.  在 **Data connection** 页面上，选择 **API key**，然后单击 **Next。**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-5.  On the **Data connection** page, select **API key** and click on
-    **Next.**
+6.  在 **Review and finish**页面上，单击 **Save and close。**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image48.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-6.  On the **Review and finish** page, click on **Save and close.**
+3.  摄取需要一些时间，完成后，数据详细信息将反映在窗格中。数据引入过程完成后，您可以开始使用
+    Teams AI library和 Teams Toolkit创建自定义引擎代理。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image49.png)
+\[！注意\] **注意：**文件必须为 .txt、.md、.html、.pdf、.docx 或 .pptx
+格式，大小限制为 16 MB。
 
-7.  Ingestion will take some time, once completed the data details will
-    reflect in the pane. After the data ingestion process is complete,
-    you can start creating your custom engine agent using the Teams AI
-    library and Teams Toolkit.
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image46.png)
 
-    >[!Note] **Note:** Files must be in .txt, .md, .html, .pdf, .docx, or .pptx format
-with 16-MB size limit.
+## 练习 3：创建和配置自定义代理
 
-    ![](./media/image50.png)
+### 任务 1：添加 Teams Toolkit扩展
 
-## Exercise 3: Create and configure your custom agent
+1.  在您的 PC 上打开 **Visual Studio Code**。选择 **Trust** 以删除
+    Visual Studio Code 中的受限模式。
 
-### Task 1: Adding a Teams Toolkit extension
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image47.png)
 
-1.  Open **Visual Studio Code,** on your PC. Select **Trust** to remove the restricted mode in the Visual Studio Code. 
+2.  在 VS 主页的左侧导航窗格中，单击**“Extensions**”图标，搜索 +++Teams
+    Toolkit+++，然后单击**“Install”。**
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image48.png)
+
+3.  安装完成后，选择 ![](./media/image49.png) Visual Studio Code
+    活动栏中的 Teams 工具包图标，然后选择 **“Create a New App**”。
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
+
+4.  选择 **Custom Engine Agent** 。
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  On the VS home page, on the left navigation pane click on the
-    **Extensions** icon, search for +++**Teams Toolkit**+++ and click on
-    **Install.**
+5.  选择 **Basic AI Chatbot**。
 
-    ![](./media/image52.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
 
-3.  Once the installation is complete, select the Teams Toolkit ![](./media/image53.png) icon in the Visual
-    Studio Code Activity Bar and select **Create a New App**.
+6.  选择 **JavaScript** 作为编程语言。
 
-    ![](./media/image54.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image53.png)
 
-4.  Select **Custom Engine Agent**.
+7.  选择 **Azure OpenAI**。
 
-    ![](./media/image55.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
-5.  Select **Basic AI Chatbot**.
-
-    ![](./media/image56.png)
-
-6.  Select **JavaScript** as the programming language.
-
-    ![](./media/image57.png)
-
-7.  Select **Azure OpenAI**.
-
-    ![](./media/image58.png)
-
-8.  Enter the values from the Azure portal, the one which we have copied
-    and saved in the notepad.
+8.  输入 Azure 门户中的值，即我们复制并保存在记事本中的值。
 
     - **Azure OpenAI key**
 
-    ![](./media/image59.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
-    - **Azure OpenAI endpoint**
+- **Azure OpenAI endpoint**
 
-    ![](./media/image60.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image56.png)
 
-    - **Deployment name** - +++gpt-4o+++
+- **Deployment name** - +++gpt-4o+++
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image61.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image57.png)
 
-9.  Create a new folder to contain the data related to teams and
-    navigate to that location by clicking on **Browse**.
+9.  创建一个新文件夹以包含与团队相关的数据，然后单击 **Browse**
+    导航到该位置。
 
-    ![](./media/image62.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image58.png)
 
-    ![](./media/image63.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
-10. Enter +++**TeamsContosoAgent**+++ as the name for your custom engine agent,
-    select **Enter**. Custom engine agent is created in a few seconds.
+10. 输入 +++**TeamsContosoAgent**+++ 作为自定义引擎代理的名称，然后按
+    **Enter**。自定义引擎代理将在几秒钟内创建。
 
-    ![](./media/image64.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
-11. Select Yes, I author
+11. 选择 Yes， I author ![A screenshot of a computer AI-generated
+    content may be incorrect.](./media/image61.png)
 
-    ![](./media/image65.png)
+**浏览源代码**
 
-**Take a tour of the source code**
+看看这个 custom engine agent \> Basic AI Chatbot 模板中的内容。
 
-Have a look at what's inside this custom engine agent \> Basic AI
-Chatbot template.
+[TABLE]
 
-| Folder name   | Contents   |
-|:---|:------|
-| .vscode   |   VS Code files for debugging. |
-|  appPackage  |  Templates for the Teams application manifest.  |
-| env   |  Name or value pairs are stored in environment files and used by teamsapp.yml to customize the provisioning and deployment rules.  |
-|  src/  |  The source code for the notification Teams application.  |
-|  src/index.js  |  Sets up the bot app server. |  
-| src/adapter.js   |  Sets up the bot adapter.  |
-|  src/config.js  |  Defines the environment variables.  |
-|  src/prompts/chat/skprompt.txt  |  Defines the prompt.  |
-|  src/prompts/chat/config.json  |  Configures the prompt.  |
-| src/app/app.js   |  Handles business logics for the Basic AI Chatbot.  |
-| teamsapp.yml   |  Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages.  |
-| teamsapp.local.yml   |  This override teamsapp.yml with actions that enable local execution and debugging.  |
-|   teamsapp.testtool.yml |  This override teamsapp.yml with actions that enable local execution and debugging in Teams App Test Tool.  |
-    
-### Task 2: Configure your custom agent
+### 任务 2：配置自定义代理
 
-Let's customize the prompt for your custom engine agent.
+让我们为您的自定义引擎代理自定义提示。
 
-1.  Go to src/prompts/chat/skprompt.txt and replace the existing code
-    with the below code. After updating, press **ctrl+s** to save the
-    file.
+1.  转到 src/prompts/chat/skprompt.txt
+    并将现有代码替换为以下代码。更新后，按 **ctrl+s** 保存文件。
 
-    ```
-    The following is a conversation with an AI assistant, who is an expert on answering questions         over the given context.
-    Responses should be in a short journalistic style with no more than 80 words.
-    ```
-    
-    ![](./media/image66.png)
+> 以下是与 AI 助理的对话，AI 助理是在给定上下文中回答问题的专家。
+>
+> 回复应采用简短的新闻风格，不超过 80 字。
 
-2.  Go to the **config.json** file under prompts/chat. Replace the
-    existing code with the following code and replace the **endpoint** ,
-    **index_name**, and **key** values with your **Azure AI Search**
-    resource details. After updating, press **ctrl+s** to save the file.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
 
-    ```
-    {
-      "schema": 1.1,
-      "description": "A bot that can chat with users",
-      "type": "completion",
-      "completion": {
-        "completion_type": "chat",
-        "include_history": true,
-        "include_input": true,
-        "max_input_tokens": 2800,
-        "max_tokens": 1000,
-        "temperature": 0.9,
-        "top_p": 1.0,
-        "presence_penalty": 0.6,
-        "frequency_penalty": 0.0
-      },
-      "data_sources": [
-        {
-          "type": "azure_search",
-          "parameters": {
-            "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
-            "index_name": "YOUR-INDEX_NAME",
-            "authentication": {
-              "type": "api_key",
-              "key": "AZURE-AI-SEARCH-KEY"
-            }
-          }
-        }
-      ]
-    }
-    ```
-    
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image67.png)
+2.  转到 **prompts**/chat 下的 config.json
+    文件。将现有代码替换为以下代码，并将 **endpoint** 、 **index_name**
+    和 **key** 值替换为 **Azure AI 搜索**资源详细信息。更新后，按
+    **ctrl+s** 保存文件。
 
-3.  Go to src/app/app.js file and add the following variable
-    inside OpenAIModel – after the azureEndpoint entry.
+> {
+>
+> "schema": 1.1,
+>
+> "description": "A bot that can chat with users",
+>
+> "type": "completion",
+>
+> "completion": {
+>
+> "completion_type": "chat",
+>
+> "include_history": true,
+>
+> "include_input": true,
+>
+> "max_input_tokens": 2800,
+>
+> "max_tokens": 1000,
+>
+> "temperature": 0.9,
+>
+> "top_p": 1.0,
+>
+> "presence_penalty": 0.6,
+>
+> "frequency_penalty": 0.0
+>
+> },
+>
+> "data_sources": \[
+>
+> {
+>
+> "type": "azure_search",
+>
+> "parameters": {
+>
+> "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
+>
+> "index_name": "YOUR-INDEX_NAME",
+>
+> "authentication": {
+>
+> "type": "api_key",
+>
+> "key": "AZURE-AI-SEARCH-KEY"
+>
+> }
+>
+> }
+>
+> }
+>
+> \]
+>
+> }
 
-    +++azureApiVersion: '2024-02-15-preview',+++
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image63.png)
 
-    ![](./media/image68.png)
+3.  转到 src/app/app.js 文件，并在 OpenAIModel 中添加以下变量 – 在
+    azureEndpoint 条目之后。
 
-4.  Open Powershell as an administrator and run the following command,
-    and enter A.
++++azureApiVersion: '2024-02-15-preview',+++
 
-    ```
-    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-    ```
-    
-    ![](./media/image69.png)
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image64.png)
 
-5.  Back in the **Visual Studio Code**, from the left pane, select **Run
-    and Debug (Ctrl+Shift+D)**. Select **Debug in Test Tool** to start
-    debugging.
+4.  以管理员身份打开 Powershell 并运行以下命令，然后输入 A。
 
-    ![](./media/image70.png)
+5.  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
-6.  Select Allow access if you get a Windows Security Alert.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image65.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image71.png)
+6.  返回 **Visual Studio Code**，从左侧窗格中选择**“ Run and
+    Debug”（Ctrl+Shift+D）。**在 **Test Tool** 中选择 **Debug in Test
+    Tool **。
 
-7.  Custom engine agent runs within the Teams App Test Tool, which opens
-    in your browser.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image66.png)
 
-    ![](./media/image72.png)
+7.  如果您收到 Windows 安全警报，请选择允许访问。
 
-8.  The browser will open a new tab, Teams App Test Tool and queries can
-    be run in the app.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image67.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image73.png)
+8.  自定义引擎代理在浏览器中打开的 Teams App Test Tool中运行。
 
-## Conclusion
+![A black screen with white text AI-generated content may be
+incorrect.](./media/image68.png)
 
-By completing this lab, participants have gained hands-on experience in
-building and deploying a custom AI-driven chatbot using the Teams AI
-Library and Teams Toolkit. This included setting up Azure OpenAI
-resources, integrating data storage and AI search capabilities, and
-customizing the chatbot for context-aware interactions. Through this
-exercise, participants have learned how to configure intelligent agents
-tailored to business needs and integrate them into organizational
-workflows, effectively leveraging modern AI capabilities within
-Microsoft Teams.
+9.  浏览器将打开一个新选项卡 Teams App Test
+    Tool，并且可以在应用程序中运行查询。
 
+![A screenshot of a computer Description automatically
+generated](./media/image69.png)
+
+## 结论
+
+通过完成此实验室，参与者获得了使用 Teams AI 库和 Teams
+工具包构建和部署自定义 AI 驱动型聊天机器人的实践经验。这包括设置 Azure
+OpenAI 资源、集成数据存储和 AI
+搜索功能，以及自定义聊天机器人以进行上下文感知交互。通过此练习，参与者学习了如何配置根据业务需求量身定制的智能代理并将其集成到组织工作流中，从而有效地利用
+Microsoft Teams 中的现代 AI 功能。
+
+ 
