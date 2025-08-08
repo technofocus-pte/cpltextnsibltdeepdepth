@@ -1,534 +1,581 @@
-# Lab 3: Build a Custom Contoso Agent to Chat with Your Data Using Teams AI Library and Teams Toolkit
+# 실습 3: Teams AI 라이브러리 및 Teams Toolkit를 사용하여 데이터와 채팅하는 사용자 지정 Contoso 에이전트 빌드
 
-**Estimated Time: 45 mins**
+**예상 소요 시간: 45분**
 
-## Objective
+## 목표
 
-The objective of this lab is to enable participants to build a custom
-Contoso Agent leveraging the Teams AI Library and Teams Toolkit.
-Participants will configure the Azure OpenAI API to integrate GPT
-capabilities, set up and manage data using Azure OpenAI and Azure Blob
-Storage, and deploy a customized chat model tailored for AI-driven
-interactions. By the end of the lab, they will have created and
-configured a Teams AI-powered custom agent using Visual Studio Code and
-the Teams Toolkit, gaining practical experience in deploying and
-managing AI-enabled applications.
+이 실습의 목표는 참가자가 Teams AI 라이브러리 및 Teams Toolkit를
+활용하여 사용자 지정 Contoso 에이전트를 빌드할 수 있도록 하는 것입니다.
+참가자는 GPT 기능을 통합하고, Azure OpenAI 및 Azure Blob Storage를
+사용하여 데이터를 설정 및 관리하고, AI 기반 상호 작용에 맞게 조정된
+사용자 지정 채팅 모델을 배포하도록 Azure OpenAI API를 구성합니다. 실습이
+끝날 때쯤이면 Visual Studio Code 및 Teams Toolkit을 사용하여 Teams AI
+기반 사용자 지정 에이전트를 생성하고 구성하여 AI 지원 애플리케이션을
+배포하고 관리하는 데 대한 실질적인 경험을 얻게 됩니다.
 
-## Solution Focus Area
+## 솔루션 초점 영역
 
-This lab guide focuses on enabling participants to leverage the Azure
-OpenAI API to create intelligent, context-aware chat interactions.
-Participants will configure GPT-based models and integrate with Azure
-services like Blob Storage and Azure AI Search for efficient data
-management.
+이 실습 가이드는 참가자가 Azure OpenAI API를 활용하여 지능적인 컨텍스트
+인식 채팅 상호 작용을 생성할 수 있도록 하는 데 중점을 둡니다. 참가자는
+GPT 기반 모델을 구성하고 효율적인 데이터 관리를 위해 Blob Storage 및
+Azure AI Search와 같은 Azure 서비스와 통합합니다.
 
-The lab provides hands-on experience in deploying and customizing chat
-models with tailored prompts and settings to meet business needs.
-Additionally, participants will build a custom AI agent using the Teams
-AI Library and Teams Toolkit, integrating it seamlessly into
-organizational workflows.
+이 실습은 비즈니스 요구 사항을 충족하기 위해 맞춤형 프롬프트와 설정을
+사용하여 채팅 모델을 배포하고 사용자 지정하는 실습 경험을 제공합니다.
+또한 참가자는 Teams AI 라이브러리 및 Teams Toolkit를 사용하여 사용자
+지정 AI 에이전트를 구축하여 조직 워크플로에 원활하게 통합합니다.
 
-## Exercise 1: Configuring Azure OpenAI API and Role Permissions
+## 연습 1: Azure OpenAI API 및 역할 권한 구성하기
 
-### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
+### 작업 1: OpenAI의 GPT를 사용하기 위해 Azure OpenAI API 키 생성하기
 
-1.  Open a browser, navigate to the following the URL +++https://oai.azure.com/portal+++ and
-    login using,
+1.  브라우저를 열고 다음 URL +++<https://oai.azure.com/portal+++> 로
+    이동하고 다음을 사용하여 로그인하세요.
 
-    - Username - +++@lab.CloudPortalCredential(User1).Username+++
-      
-    - Password - +++@lab.CloudPortalCredential(User1).Password+++
+    - Username - <+++@lab.CloudPortalCredential>(User1).Username+++
 
-    ![](./media/image1.png)
+    - Password - <+++@lab.CloudPortalCredential>(User1).Password+++
 
-3.  On the **Azure AI Foundry** home page Click on **Create new Azure
-    OpenAI resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-    ![](./media/image2.png)
+2.  **Azure AI Foundry** 홈페이지에서 **Create new Azure OpenAI
+    resource**를 클릭하세요.
 
-2.  Create Azure OpenAI Window will open, if prompted sign in again.
-    Enter the below given details into respected fields and click on
-    **Next**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
-    | Property   | Value   |
-    |:---|:------|
-    | Subscription   |   Select the assigned subscription |
-    |  Resource group  |  Select your assigned Resource Group  |
-    | Region   |  Select @lab.CloudResourceGroup(ResourceGroup1).Location  |
-    |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
-    |  Pricing tier  |  Standard S0  |    
+3.  Create Azure OpenAI 창이 열리고 프롬프트되면 다시 로그인하세요. 아래
+    주어진 세부 정보를 해당 필드에 입력하고 **Next**를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image3.png)
+[TABLE]
 
-4.  Under **Network** tab and **Tags** tab, accept the defaults and
-    click on **Next**
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image3.png)
 
-    ![A screenshot of a computer AI-generated content may be
+4.  **Network** 및 **Tags** 탭 아래 기본값을 수락하고 **Next**를
+    클릭하세요
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image5.png)
 
-4.  On the **Review + submit** tab click on **Create.**
+5.  **Review + submit** 탭에서 **Create**를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-5.  After Successful deployment, window automatically navigate to
-    CognitiveServiceOpenAI Page. Click on **Go to resource** to navigate
-    to the Resource Group page.
+6.  배포가 성공되면 창이 자동으로 CognitiveServiceOpenAI 페이지로
+    이동하세요. Resource Group 페이지로 이동하려면 **Go to resource**를
+    클릭하세요page.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-6.  Select the created Azure OpenAI resource. In the AzureOpenAI resource page, from the left pane, select **Keys and Endpoint** under **Resource Management** and copy and **save** the **Key** and **Endpoint**
-    values to a notepad for future reference.
+7.  생성된Azure OpenAI 리소스를 선택하세요. AzureOpenAI 리소스 페이지의
+    왼쪽 창에서 **Resource Management** 아래 있는 **Keys and
+    Endpoint**를 선택하고 나중에 참조할 수 있도록 **Key** 및
+    **Endpoint** 값을 복사하여 메모장에 저장하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-### Task 2: Assign Cognitive contributor role.
+### 작업 2: Cognitive 기여자 역할 할당하기
 
-1.  Select the **ResourceGroup1** to go to the Resource Group overview page.
-   
-2.  Select **Access control (IAM)** from the left pane of the Resource
-    group page. Then select **+** **Add** and click **Add role
-    assignment**.
+1.  Resource Group 개요 페이지에서 **ResourceGroup1**을 선택하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+2.  Resource group 페이지의 왼쪽 창에서 **Access control (IAM)**을
+    선택하세요. **+** **Add**를 선택하고 **Add role assignment**을
+    클릭하세요.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-3.  Search and select +++**cognitive service contributor+++**, click
-    **Next**.
+3.  +++**cognitive service contributor+++**를 검색하고
+    선택하고 **Next**를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-4.  Click on **Select members** to assign members. Search for
-    +++@lab.CloudPortalCredential(User1).Username+++ and click on
-    **Select**. Click **Next**.
+4.  구성원을 할당하려면 **Select members**를 클릭하세요.
+    <+++@lab.CloudPortalCredential(User1).Username>+++를 검색하고
+    **Select**를 클릭하세요. **Next**를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-5.  On the assignment type tab, select assignment type as **Active**,
-    duration as **Permanent**, and click on **Review +Assign** and again
-    **Review + Assign**.
+5.  Assignment type 탭에서assignment type을 **Active**로
+    duration을**Permanent**로 입력하고 **Review +Assign**을 클릭하고
+    다시 **Review + Assign**을 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-6.  You will get a success message once the role assignment is
-    successful.
+6.  역할 할당이 성공적으로 수행되면 성공 메시지가 표시됩니다.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image15.png)
 
-## Exercise 2: Set up your data on Azure OpenAI
+## 연습 2: Azure OpenAI에서 데이터 설정하기
 
-### Task 1: Deploy chat in AI Foundary
+### 작업 1: AI Foundry에서 채팅 배포하기
 
-1.  Select the hamburger menu in the top left and click on **All
-    resources**.
+1.  왼쪽 상단에서 햄버거 메뉴를 선택하고 **All resources**를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-2.  Select the Azure OpenAI service **ContosoAgent@lab.LabInstance.Id** that you created earlier.
+2.  이전에 생성한 Azure OpenAI
+    서비스 [**ContosoAgent@lab.LabInstance.Id**](mailto:ContosoAgent@lab.LabInstance.Id) 선택하세요.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-3.  Select **Go to Azure AI Foundry portal**.
-   
-4.  Select **Model Catalog** from the left pane.
+3.  **Go to Azure AI Foundry portal**을 선택하세요.
 
-    <img width="504" alt="image" src="https://github.com/user-attachments/assets/9c9e6e8a-caab-41b7-bcbb-3df9ac62b9ed" />
+4.  왼쪽 창에서 **Model Catalog** 를 선택하세요.
 
-8.  On the **Select a chat completion model** page, search for
-    +++gpt-4o+++, select it and click on **Confirm.**
+![image](./media/image18.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
+5.  **Select a chat completion model** 페이지에서 +++gpt-4o+++를
+    검색하고 선택하고 **Confirm**을 클릭하세요.
 
-9.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
-    enter the following details, and click on **Deploy.**
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
+
+6.  **Deploy model gpt-4o** 창에서 **Customize** 탭을 확장하고 다음 세부
+    정보를 입력하고 **Deploy**를 클릭하세요.
 
     - **Deployment type**: Standard
 
     - **Deployment name**: gpt-4o
 
-    - **Token per Minute Rate**: 5K (Scroll to adjust the limit. If it
-      does not work, click on it and then use Shift+Right/Left arrow key
-      to adjust the limit)
+    - **Token per Minute Rate**: 5K (스크롤하여 한도를 조정합니다.
+      작동하지 않으면 해당 항목을 클릭한 다음 Shift+오른쪽/왼쪽 화살표
+      키를 사용하여 제한을 조정하세요)
 
     - **Content Filter**: defaultv2
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image21.png)
 
-10.  You can check the deployment under **Shared resources** à
-    **Deployments**
+7.  YShared resources **à** Deployments(배포)에서 배포를 확인할 수
+    있습니다**.**
 
-    ![A screenshot of a computer AI-generated content may be
+\![ 컴퓨터 AI 생성 콘텐츠의 스크린샷이 올바르지 않을 수
+있습니다.\](./media/image25.png)
+
+### 작업 2: 스토리지 계정 생성하기
+
+1.  Azure portal +++<https://portal.azure.com/+++> 홈페이지에서
+    +++Storage accounts+++를 검색하고 선택하세요.
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image22.png)
+
+2.  **+ Create**를 클릭하고 다음 세부 정보를 입력하고 **Review +
+    create**를 클릭하세요.
+
+    - Subscription – 구독을 선택하세요
+
+    - Resource group – 할당된 Resourcegroup을 선택하세요
+
+    - Storage account name - <+++contosostorage@lab.LabInstance.Id>+++
+
+    - Region – @lab.CloudResourceGroup(ResourceGroup1).Location을
+      선택하세요
+
+    - Primary service – Azure Blob storage or Azure Data Lake Storage
+      Gen 2
+
+    - Performance – Standard
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image23.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image24.png)
+
+3.  **Create**를 클릭하고  배포가 완료될 때까지 기다린 후 **Go to
+    resource**를 클릭하세요.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-### Task 2: Creating a storage account
-
-1.  From the Azure portal, +++https://portal.azure.com/+++ Home page,
-    search for and select +++Storage accounts+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-2.  Click on **+ Create,** enter the following details and click
-    **Review + create.**
+4.  새로 생성한 스토리지 계정에서 데이터 스토리지 아래의
+    **Containers** 로 이동하고 **+ Containers **를 클릭하세요.
 
-    -    Subscription - Select your subscription
-    
-    -    Resource group – Select your assigned Resourcegroup
-    
-    -    Storage account name - +++contosostorage@lab.LabInstance.Id+++
-    
-    -    Region – Select @lab.CloudResourceGroup(ResourceGroup1).Location
-    
-    -    Primary service – Azure Blob storage or Azure Data Lake Storage Gen 2
-    
-    -    Performance – Standard
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  Container name을 +++**source**+++를 입력하고 **create**를
+    클릭하세요.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-3.  Click on **Create** and wait for the deployment to complete and then
-    click on **Go to resource**.
+6.  **Source** container를 클릭하고 여세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-    ![A screenshot of a computer AI-generated content may be
+7.  소스 컨테이네에 데이터를 추가하려면 **Upload** --\_ **Browse for
+    files**을 클릭하고 C:\Labfiles에서 **TF-AzureOpenAI.pdf**를
+    선택하세요. 파일을 선택한 후 **upload** 버튼을 클릭하세요.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-4.  On the newly created storage account, navigate to **Containers**
-    under Data storage and click on **+ Container**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-5.  Enter the container name as +++**source**+++ and click on **create.**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-6.  Click on **source** container and open it.
+### 작업 3: Azure AI search를 생성하기
 
-    ![A screenshot of a computer AI-generated content may be
+1.  Azure portal +++<https://portal.azure.com/+++> 홈페이지에서 +++**AI
+    search**+++를 검색하고 선택하세요.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-7.  To add data into the source container, Click on **Upload** --\_
-    **Browse for files** and then from C:\Labfiles select
-    **TF-AzureOpenAI.pdf** After selecting file click on **upload** button.
+2.  새 Azure AI Search 리소스를 셍성하려면 **+ Create** 를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+다음 세부 정보를 입력하고 **Review + create**를 클릭하고 **Create**를
+선택하세요.
+
+- Subscription: 구독을 선택하세요
+
+- Resource Group: 할당된 Resource group을 선택하세요
+
+- Service name: <+++contoso-ai-search-@lab.LabInstance.Id>+++
+
+- Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search service AI-generated content may be
 incorrect.](./media/image35.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image36.png)
 
-### Task 3: Create Azure AI search
+3.  search-service-contoso-ai-search-01overview에서 **Go to resource**를
+    클릭하세요.
 
-1.  From the Azure portal +++https://portal.azure.com/+++ Home page,
-    search for and select +++**AI search**+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-2.  Click on **+ Create** to create a new Azure AI Search resource.
+4.  <contoso-ai-search-@lab.LabInstance.Id> 개요에서 나중에 사용할 수
+    있도록 **URL** endpoint를 저장하세요. 왼쪽 탐색 모음에서
+    **Settings** 아래의 **keys**를 선택하고 나중에 사용할 수 있도록
+    **primary** 및 **secondary** **key**를 저장하세요.
 
-    Enter the following details and click on **Review + create** and then select **Create**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-    -    Subscription: select your subscription
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-    -    Resource Group: Select your assigned Resource group
-    
-    -    Service name: +++contoso-ai-search-@lab.LabInstance.Id+++
-    
-    -    Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+### 작업 4: Azure AI Foundry에서 채팅에 데이터 추가하기
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image38.png)
+1.  **Azure AI Foundry** 페이지에서 **Chat** -\> **Add your data -\> Add
+    a data source**를 선택하세요.
 
-    ![A screenshot of a search service AI-generated content may be incorrect.](./media/image39.png)
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image40.png)
 
-    ![A screenshot of a search engine AI-generated content may be incorrect.](./media/image40.png)
+2.  드롭다운에서 **Azure Blob Storage (preview)**를 선택하세요.
 
-3.  On the search-service-contoso-ai-search-01overview click on **Go to
-    resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image41.png)
+3.  **Add data** 페이지에서 다음 세부 정보를 입력하고 **Next**를
+    클릭하세요.
 
-4.  On contoso-ai-search-@lab.LabInstance.Id overview, save **URL**
-    endpoint for future use. Then from left navigation bar select
-    **keys** under **Settings** and save **primary** and **secondary** **key** for future
-    use.
+    - Select data source – Azure Blob Storage(preview)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image42.png)
+    - Subscription - subscription을 선택하세요
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image43.png)
+    - Select Azure Blob storage resource
+      –[**contosostorage@lab.LabInstance.Id**](mailto:contosostorage@lab.LabInstance.Id)를
+      선택하세요
 
-### Task 4: Add data to chat in Azure AI Foundry
+    - Select storage container – **source**를 선택하세요
 
-1.  From the **Azure AI Foundry** page, select **Chat** -\> **Add your
-    data -\> Add a data source**.
+    - Select Azure AI Search resource
+      – [**contoso-ai-search-@lab.LabInstance.Id**](mailto:contoso-ai-search-@lab.LabInstance.Id)를
+      선택하세요
 
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/image44.png)
+    - Index Name - <+++contosoindex@lab.LabInstance.Id>+++를 입력하세요
 
-2.  From the dropdown, select **Azure Blob Storage (preview)**.
+    - Indexer schedule - Once
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image45.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image42.png)
 
-3.  On the **Add data** page, enter the following details and click on
-    **Next.**
+4.  **Data management** 페이지에서search type을 **keyword**로 선택하고
+    **Next**를 클릭하세요.
 
-    -    Select data source – Azure Blob Storage(preview)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-    -    Subscription - Select your subscription
-    
-    -    Select Azure Blob storage resource – Select **contosostorage@lab.LabInstance.Id**
-    
-    -    Select storage container – Select **source**
-    
-    -    Select Azure AI Search resource – Select **contoso-ai-search-@lab.LabInstance.Id**
-    
-    -    Index Name - Type +++contosoindex@lab.LabInstance.Id+++
-    
-    -    Indexer schedule - Once
+5.  **Data connection** 페이지에서 **API key**를 선택하고 **Next**를
+    클릭하세요**.**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-4.  On the **Data management** page, select search type as **keyword**
-    and click **Next**.
+6.  **Review and finish** 페이지에서 **Save and close**를 클릭하세요.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-5.  On the **Data connection** page, select **API key** and click on
-    **Next.**
+7.  수집에는 다소 시간이 걸리며, 완료되면 데이터 세부 정보가 창에
+    반영됩니다. 데이터 수집 프로세스가 완료되면 Teams AI 라이브러리 및
+    Teams Toolkit를 사용하여 사용자 지정 엔진 에이전트 생성하기를 시작할
+    수 있습니다.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image48.png)
+\[!참고\] **참고:** 파일은 .txt, .md, .html, .pdf, .docx 또는 .pptx
+형식이어야 하며 크기는 16MB로 제한됩니다.
 
-6.  On the **Review and finish** page, click on **Save and close.**
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image49.png)
+## 연습 3: 사용자 지정 에이전트 생성하고 구성
 
-7.  Ingestion will take some time, once completed the data details will
-    reflect in the pane. After the data ingestion process is complete,
-    you can start creating your custom engine agent using the Teams AI
-    library and Teams Toolkit.
+### 작업 1: Teams Toolkit 확장 추가하기
 
-    >[!Note] **Note:** Files must be in .txt, .md, .html, .pdf, .docx, or .pptx format
-with 16-MB size limit.
+1.  PC에서 **Visual Studio Code**를 여세요. Select **Trust**를 선택하여
+    Visual Studio Code에서 제한된 모드를 제거하세요.
 
-    ![](./media/image50.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image47.png)
 
-## Exercise 3: Create and configure your custom agent
+2.  VS 홈페이지의 왼쪽 탐색 창에서 **Extensions** 아이콘을 클릭하고
+    +++**Teams Toolkit**+++을 검색한 후 **Install**를 클릭하세요.
 
-### Task 1: Adding a Teams Toolkit extension
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image48.png)
 
-1.  Open **Visual Studio Code,** on your PC. Select **Trust** to remove the restricted mode in the Visual Studio Code. 
+3.  설치가 완료되면 Visual Studio Code Activity Bar작업 표시줄에서
+    ![](./media/image49.png)Teams Toolkit 아이콘을 선택하고 **Create a
+    New App**를 선택하세요.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
+
+4.  **Custom Engine Agent**를 선택하세요.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  On the VS home page, on the left navigation pane click on the
-    **Extensions** icon, search for +++**Teams Toolkit**+++ and click on
-    **Install.**
+5.  **Basic AI Chatbot**을 선택하세요.
 
-    ![](./media/image52.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
 
-3.  Once the installation is complete, select the Teams Toolkit ![](./media/image53.png) icon in the Visual
-    Studio Code Activity Bar and select **Create a New App**.
+6.  Programming language를 **JavaScript**로 선택하세요.
 
-    ![](./media/image54.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image53.png)
 
-4.  Select **Custom Engine Agent**.
+7.  **Azure OpenAI**를 선택하세요.
 
-    ![](./media/image55.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
-5.  Select **Basic AI Chatbot**.
-
-    ![](./media/image56.png)
-
-6.  Select **JavaScript** as the programming language.
-
-    ![](./media/image57.png)
-
-7.  Select **Azure OpenAI**.
-
-    ![](./media/image58.png)
-
-8.  Enter the values from the Azure portal, the one which we have copied
-    and saved in the notepad.
+8.  메모장에 복사하여 저장한 Azure 포털의 값을 입력하세요.
 
     - **Azure OpenAI key**
 
-    ![](./media/image59.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
-    - **Azure OpenAI endpoint**
+- **Azure OpenAI endpoint**
 
-    ![](./media/image60.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image56.png)
 
-    - **Deployment name** - +++gpt-4o+++
+- **Deployment name** - +++gpt-4o+++
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image61.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image57.png)
 
-9.  Create a new folder to contain the data related to teams and
-    navigate to that location by clicking on **Browse**.
+9.  팀과 관련된 데이터를 포함할 새 폴더를 생성하고 **Browse**를 클릭하여
+    해당 위치로 이동하세요.
 
-    ![](./media/image62.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image58.png)
 
-    ![](./media/image63.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
-10. Enter +++**TeamsContosoAgent**+++ as the name for your custom engine agent,
-    select **Enter**. Custom engine agent is created in a few seconds.
+10. 사용자 지정 엔진 에이전트의 이름으로 +++**TeamsContosoAgent**+++를
+    입력하고 **Enter** 키를 선택하세요. 사용자 지정 엔진 에이전트는 몇
+    초 안에 생성해집니다.
 
-    ![](./media/image64.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
-11. Select Yes, I author
+11. Yes, I author를 선택하세요
 
-    ![](./media/image65.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
 
 **Take a tour of the source code**
 
-Have a look at what's inside this custom engine agent \> Basic AI
-Chatbot template.
+이 사용자 지정 엔진 에이전트 \> Basic AI Chatbot템플릿의 내용을
+살펴보세요.
 
-| Folder name   | Contents   |
-|:---|:------|
-| .vscode   |   VS Code files for debugging. |
-|  appPackage  |  Templates for the Teams application manifest.  |
-| env   |  Name or value pairs are stored in environment files and used by teamsapp.yml to customize the provisioning and deployment rules.  |
-|  src/  |  The source code for the notification Teams application.  |
-|  src/index.js  |  Sets up the bot app server. |  
-| src/adapter.js   |  Sets up the bot adapter.  |
-|  src/config.js  |  Defines the environment variables.  |
-|  src/prompts/chat/skprompt.txt  |  Defines the prompt.  |
-|  src/prompts/chat/config.json  |  Configures the prompt.  |
-| src/app/app.js   |  Handles business logics for the Basic AI Chatbot.  |
-| teamsapp.yml   |  Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages.  |
-| teamsapp.local.yml   |  This override teamsapp.yml with actions that enable local execution and debugging.  |
-|   teamsapp.testtool.yml |  This override teamsapp.yml with actions that enable local execution and debugging in Teams App Test Tool.  |
-    
-### Task 2: Configure your custom agent
+[TABLE]
 
-Let's customize the prompt for your custom engine agent.
+### 작업 2: 사용자 에이전트를 구성하기
 
-1.  Go to src/prompts/chat/skprompt.txt and replace the existing code
-    with the below code. After updating, press **ctrl+s** to save the
-    file.
+사용자 지정 엔진 에이전트에 대한 프롬프트를 사용자 지정해 보겠습니다.
 
-    ```
-    The following is a conversation with an AI assistant, who is an expert on answering questions         over the given context.
-    Responses should be in a short journalistic style with no more than 80 words.
-    ```
-    
-    ![](./media/image66.png)
+1.  src/prompts/chat/skprompt.txt로 이동하여 기존 코드를 아래 코드로
+    바꾸세요. 업데이트 후 **ctrl+s**를 눌러 파일을 저장하세요.
 
-2.  Go to the **config.json** file under prompts/chat. Replace the
-    existing code with the following code and replace the **endpoint** ,
-    **index_name**, and **key** values with your **Azure AI Search**
-    resource details. After updating, press **ctrl+s** to save the file.
+> The following is a conversation with an AI assistant, who is an expert
+> on answering questions over the given context.
+>
+> Responses should be in a short journalistic style with no more than 80
+> words.
 
-    ```
-    {
-      "schema": 1.1,
-      "description": "A bot that can chat with users",
-      "type": "completion",
-      "completion": {
-        "completion_type": "chat",
-        "include_history": true,
-        "include_input": true,
-        "max_input_tokens": 2800,
-        "max_tokens": 1000,
-        "temperature": 0.9,
-        "top_p": 1.0,
-        "presence_penalty": 0.6,
-        "frequency_penalty": 0.0
-      },
-      "data_sources": [
-        {
-          "type": "azure_search",
-          "parameters": {
-            "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
-            "index_name": "YOUR-INDEX_NAME",
-            "authentication": {
-              "type": "api_key",
-              "key": "AZURE-AI-SEARCH-KEY"
-            }
-          }
-        }
-      ]
-    }
-    ```
-    
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image67.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
 
-3.  Go to src/app/app.js file and add the following variable
-    inside OpenAIModel – after the azureEndpoint entry.
+2.  프롬프트/채팅 아래의 **config.json** 파일로 이동하세요. 기존 코드를
+    다음 코드로 바꾸고 **endpoint**, **index_name** 및 **key** 값을
+    **Azure AI Search** 리소스 세부 정보로 바꾸세요. 업데이트 후
+    **ctrl+s**를 눌러 파일을 저장하세요.
 
-    +++azureApiVersion: '2024-02-15-preview',+++
+> {
+>
+> "schema": 1.1,
+>
+> "description": "A bot that can chat with users",
+>
+> "type": "completion",
+>
+> "completion": {
+>
+> "completion_type": "chat",
+>
+> "include_history": true,
+>
+> "include_input": true,
+>
+> "max_input_tokens": 2800,
+>
+> "max_tokens": 1000,
+>
+> "temperature": 0.9,
+>
+> "top_p": 1.0,
+>
+> "presence_penalty": 0.6,
+>
+> "frequency_penalty": 0.0
+>
+> },
+>
+> "data_sources": \[
+>
+> {
+>
+> "type": "azure_search",
+>
+> "parameters": {
+>
+> "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
+>
+> "index_name": "YOUR-INDEX_NAME",
+>
+> "authentication": {
+>
+> "type": "api_key",
+>
+> "key": "AZURE-AI-SEARCH-KEY"
+>
+> }
+>
+> }
+>
+> }
+>
+> \]
+>
+> }
 
-    ![](./media/image68.png)
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image63.png)
 
-4.  Open Powershell as an administrator and run the following command,
-    and enter A.
+3.  src/app/app.js 파일로 이동하여 OpenAIModel 내에서 azureEndpoint 항목
+    뒤에 다음 변수를 추가하세요.
 
-    ```
-    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-    ```
-    
-    ![](./media/image69.png)
++++azureApiVersion: '2024-02-15-preview',+++
 
-5.  Back in the **Visual Studio Code**, from the left pane, select **Run
-    and Debug (Ctrl+Shift+D)**. Select **Debug in Test Tool** to start
-    debugging.
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image64.png)
 
-    ![](./media/image70.png)
+4.  관리자 권한으로 Powershell을 열고 다음 명령을 실행한 후 A를
+    입력하세요.
 
-6.  Select Allow access if you get a Windows Security Alert.
+5.  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image71.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image65.png)
 
-7.  Custom engine agent runs within the Teams App Test Tool, which opens
-    in your browser.
+6.  **Visual Studio Code**로 돌아가서 왼쪽 창에서 **Run and Debug
+    (Ctrl+Shift+D)**를 선택하세요. **Debug in Test Tool를** 선택하여
+    디버깅을 시작하세요.
 
-    ![](./media/image72.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image66.png)
 
-8.  The browser will open a new tab, Teams App Test Tool and queries can
-    be run in the app.
+7.  Windows 보안 경고가 표시되면 Allow access를 선택하새요.
 
-    ![A screenshot of a computer Description automatically generated](./media/image73.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image67.png)
 
-## Conclusion
+8.  사용자 지정 엔진 에이전트는 브라우저에서 열리는 Teams App Test Tool
+    내에서 실행됩니다.
 
-By completing this lab, participants have gained hands-on experience in
-building and deploying a custom AI-driven chatbot using the Teams AI
-Library and Teams Toolkit. This included setting up Azure OpenAI
-resources, integrating data storage and AI search capabilities, and
-customizing the chatbot for context-aware interactions. Through this
-exercise, participants have learned how to configure intelligent agents
-tailored to business needs and integrate them into organizational
-workflows, effectively leveraging modern AI capabilities within
-Microsoft Teams.
+![A black screen with white text AI-generated content may be
+incorrect.](./media/image68.png)
 
+9.  브라우저에서 새 탭이 열리고 Teams App Test Tool이 열리며 앱에서
+    쿼리를 실행할 수 있습니다.
+
+![A screenshot of a computer Description automatically
+generated](./media/image69.png)
+
+## 결론
+
+이 실습을 완료함으로써 참가자는 Teams AI 라이브러리 및 Teams Toolkit를
+사용하여 사용자 지정 AI 기반 챗봇을 빌드하고 배포하는 실습 경험을
+얻었습니다. 여기에는 Azure OpenAI 리소스 설정, 데이터 스토리지 및 AI
+검색 기능 통합, 컨텍스트 인식 상호 작용을 위한 챗봇 사용자 지정이
+포함되었습니다. 이 연습을 통해 참가자는 비즈니스 요구 사항에 맞게 조정된
+지능형 에이전트를 구성하고 조직 워크플로에 통합하여 Microsoft Teams 내의
+최신 AI 기능을 효과적으로 활용하는 방법을 배웠습니다.
+
+ 

@@ -1,395 +1,422 @@
-# Lab 7 - Build Multi-Agent solution using Azure AI Agent Service with Semantic Kernel 
+# 실습 7 - Semantic Kernel과 함께 Azure AI 에이전트 서비스를 사용하여 다중 에이전트 솔루션 빌드
 
-We can build enterprise-oriented AI agents through Azure AI Agent
-Service.
+Azure AI Agent Service를 통해 엔터프라이즈 지향 AI 에이전트를 구축할 수
+있습니다.
 
-**Introduction**
+**소개**
 
-The following introduces a blog writing scenario. This scenario involves
-two AI agents: one for writing assistance, and the next for content
-storage and management. These agents can be seamlessly orchestrated
-using AutoGen or Semantic Kernel. In this lab, we are using the Semantic
-Kernel Orchestration.
+다음은 블로그 작성 시나리오를 소개합니다. 이 시나리오에는 두 개의 AI
+에이전트가 포함되는데, 하나는 쓰기 지원을 위한 것이고 다른 하나는 콘텐츠
+스토리지 및 관리를 위한 것입니다. 이러한 에이전트는 AutoGen 또는
+Semantic Kernel을 사용하여 원활하게 오케스트레이션할 수 있습니다. 이
+실습에서는 Semantic Kernel Orchestration을 사용합니다.
 
 ![A diagram of a diagram of a business AI-generated content may be
 incorrect.](./media/image1.png)
 
-**Objective:**
+## 목표:
 
-Using Azure AI Foundry SDK, developers can quickly build agents based on
-Azure AI Agent Service using Python or C#. Enterprises will have
-different AI Agents based on their business, so how should these AI
-Agents be combined in the workflow? We need to use AutoGen or Semantic
-Kernel to orchestrate the AI Agents. In this lab, we use Semantic Kernel
-to develop a Multi-Agent solution using Azure AI Agent Service.
+개발자는 Azure AI Foundry SDK를 사용하여 Python 또는 C#을 사용하여 Azure
+AI Agent Service를 기반으로 에이전트를 빠르게 빌드할 수 있습니다. 기업은
+비즈니스에 따라 다양한 AI 에이전트를 갖게 될 것인데, 이러한 AI
+에이전트를 워크플로에서 어떻게 결합해야 할까요? AutoGen 또는 Semantic
+Kernel을 사용하여 AI 에이전트를 오케스트레이션해야 합니다. 이 실습에서는
+Semantic Kernel을 사용하여 Azure AI 에이전트 서비스를 사용하는 다중
+에이전트 솔루션을 개발합니다.
 
-## Exercise 1: Create an Azure AI Hub resource and project
+## 연습1: Azure AI Hub 리소스 및 프로젝트 생성하기
 
-In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
+이 연습에서는 Azure Portal에서 허브를 생성한 후, Azure AI Foundry에서
+프로젝트를 생성하고, 모델을 배포하고, 실행에 필요한 에이전트를
+생성합니다.
 
-1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
+1.  브라우저에서
+    +++[\*\*https://portal.azure.com/\*\*++를](https://portal.azure.com/**+++)
+    열고 **login credentials**을 사용하여 로그인한 후
+    **Home** 페이지에서 **Azure AI Foundry**를 선택하세요.
 
-    - User name – +++@lab.CloudPortalCredential(User1).Username+++
-    
-    - Password – +++@lab.CloudPortalCredential(User1).Password+++
+    - User name – <+++@lab.CloudPortalCredential>(User1).Username+++
 
-    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
-    
-2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
+    - Password – <+++@lab.CloudPortalCredential>(User1).Password+++
 
-    ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
+![image](./media/image2.png)
 
-3.	 Enter the below details, accept the other defaults and select **Review + create**.
-   
-     -	Subscription - Select your **assigned subscription**
-     
-     -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
-     
-     -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
-     
-     -	Name - +++hub@lab.LabInstance.Id+++
+2.  **Use with AI Foundry** -\> **AI Hubs**를 선택하세요. **+
+    Create** -\> **Hub**를 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
- 
-     ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
+![image](./media/image3.png)
 
-4.	 Once the validation passes, select **Create**.
+3.  아래 세부 정보를 입력하고, 다른 기본값을 적용하고, **Review +
+    create**를 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
+    - Subscription - **assigned subscription**을 선택하세요
 
-5.	 Once the deployment is complete, click on **Go to resource**.
+    - Resource group – 할당된 Resource group (**ResourceGroup1**)을
+      선택하세요
 
-     ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
+    - Region - @lab.CloudResourceGroup(ResourceGroup1).Location을
+      선택하세요
 
-6.	 Select **Launch Azure AI Foundry** from the hub resource page.
+    - Name - <+++hub@lab.LabInstance.Id>+++
 
-     ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
+![image](./media/image4.png)
 
-7.	 From the launched hub resource, scroll down and select **+ New project**.
+![image](./media/image5.png)
 
-     ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
+4.  유효성 검사가 통과되면 **Create**를 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
+![image](./media/image6.png)
 
-8.	 Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
+5.  배포가 완료되면 **Go to resource**를 클릭하세요.
 
-     ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
+![image](./media/image7.png)
 
-9.	 **Close** the Explore and experiment pop up.
+6.  허브 리소스 페이지에서 **Launch Azure AI Foundry**를 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
+![image](./media/image8.png)
 
-10.  You will land in the created project page.
+7.  시작된 허브 리소스에서 아래로 스크롤하여 **+ New project**를
+    선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+![image](./media/image9.png)
 
-11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
+![image](./media/image10.png)
 
-     ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+8.  이름을 <+++multiagent@lab.LabInstance.Id>+++로 입력하고 **Create**를
+    선택하세요.
 
-12.  Scroll down in the left pane and select **Management center**.
+![image](./media/image11.png)
 
-     ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+9.  **Explore and experiment**을 닫으세요.
 
-13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+![image](./media/image12.png)
 
-     ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+10. 생성된 프로젝트 페이지로 이동합니다..
 
-14.  Select **Azure AI Foundry** from the available external assets.
+![image](./media/image13.png)
 
-     ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+11. 페이지를 아래로 스크롤하여 **Project connection string** 값을
+    메모장에 복사하세요.
 
-15.  Select **Add connection** to add the connection.
+![image](./media/image14.png)
 
-     ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+12. 왼쪽 창에서 아래로 스크롤하여 **Management Center**를 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+![image](./media/image15.png)
 
-16.  Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+13. 허브 리소스에서 **Connected resources**를 선택한 후, **+ New
+    connection**을 클릭하여 Azure AI Foundry 리소스와의 연결을
+    생성하세요.
 
-     ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+![image](./media/image16.png)
 
-17.  Select **Go to project** from the left pane.
+14. 사용 가능한 외부 자산에서 **Azure AI Foundry**를 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/9062a254-ce3a-4a64-8a0b-4e0b5abec790)
+![image](./media/image17.png)
 
-18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+15. 연결을 추가하기 위해 **Add connection**을 선택하세요.
 
-     ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+![image](./media/image18.png)
 
-19.  Select **Agents** under **Build and customize** from the left pane.
-     In the **Azure AI Agent Service** page, select your **Azure OpenAI
-     Service** that was created, and then click on **Let’s go**.
+![image](./media/image19.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+16. 연결되면 **Close**를 클릭하세요. **Close** 버튼이 표시되지 않으면
+    브라우저의 **zoom size**를 줄인 후 **Close**를 선택하세요.
 
-20.  Select **gpt-4o-mini** and click on **Confirm**.
+![image](./media/image20.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+17. 왼쪽 창에서 **Go to project**를 선택하세요.
 
-21.  Accept the deployment name as +++**gpt-4o-mini**+++, select the Deployment type to be **Standard**. Accept the other defaults and click on **Deploy** to deploy the model.
+![image](./media/image21.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image10.png)
+18. 프로젝트 페이지에서 **API Key** 및 **Azure OpenAI endpoint** 의 값을
+    복사하여 메모장에 저장하세요.
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image11.png)
+![image](./media/image22.png)
 
-22.  Now, we have the Azure resources ready.
+19. 왼쪽 창의 **Build and customize** 에서**Agents**를 선택하세요.
+    **Azure AI Agent Service** 페이지에서 생성된 **Azure OpenAI
+    Service** 를 선택한 후, **Let’s go**를 클릭하세요.
 
-## Exercise 2: Multi Agent Orchestration 
-
-In this exercise, we will set up the Visual Studio Code and install the pre requisites that are needed for the execution.
-1.  From your VM, open the **Visual Studio Code**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image12.png)
-
-2.  Select **File** -> **Open Folder** and select the folder
-    **MultiAgent** from **C:\LabFiles** and click **Select Folder**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image13.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image14.png)
-
-3.  Select **Yes, I trust the authors** in the pop up.
-
-    ![A screenshot of a computer error AI-generated content may be
-incorrect.](./media/image15.png)
-
-4.  Right click on the notebook and select **Open in Integrated
-    Terminal**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
-
-5.  Execute the below commands one after another to add the **nuget
-    source**.
-
-    +++dotnet nuget list source+++
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
-
-    +++dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org+++
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
-
-6.  Execute the below command to install dotnet interacrive.
-
-    +++dotnet tool install --global Microsoft.dotnet-interactive --version 1.0.556801+++
-
-    ![](./media/image19.png)
-
-7.  Execute +++pip install jupyter+++ to install Jupyter.
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image20.png)
-
-8.  Execute the next command to jupyter interactive.
-
-    +++dotnet interactive jupyter install+++
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image21.png)
-
-9.  **Close** the **Terminal**. Select **Extensions** from the left pane
-    pf the **Visual Studio Code**. Search and select +++**Jupyter**+++ and
-    click on **Install** to install the Jupyter extension.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
-
-10. **Close** the Visual Studio Code and **open** it again.
-
-11. Open the notebook **AzureAIMultiAgentWithSK.ipynb**. Once opened,
-    click on **Select Kernel**.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image23.png)
 
-12. Select **Jupyter Kernel**.
+20. **gpt-4o-mini**를 선택하고 **Confirm**을 클릭하세요.
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image24.png)
 
-13. Select **.NET (C#) dotnet** in the next set of options.
+21. 배포 이름을 +++**gpt-4o-mini**+++로 수락하고 Deployment type을
+    **Standard**으로 선택하세요. 다른 기본값을 적용하고 **Deploy**를
+    클릭하여 모델을 배포하세요.
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-14. Select **Allow access** in the **Security Alert**.
-
-    ![A screenshot of a computer security alert AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-15. Execute the first cell to **install** all the required **packages**.
+22. 이제 Azure 리소스가 준비되었습니다.
 
-    ![A screen shot of a computer program AI-generated content may be incorrect.](./media/image27.png)
+## 연습 2: Multi Agent Orchestration
 
-    ![A screenshot of a computer program AI-generated content may be incorrect.](./media/image28.png)
+이 연습에서는 Visual Studio Code를 설정하고 실행에 필요한 필수 구성
+요소를 설치합니다.
 
-16. Execute the next cell to import the namespaces.
+1.  VM에서 Visual Studio Code를 여세요.
 
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
+
+2.  **File -\> Open Folder**를 선택하고 **C:\LabFiles**에서
+    **MultiAgent** 폴더를 선택한 후 **Select Folder**을 클릭하세요.
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-17. In the next cell, verify that the **deployment** variable value is
-    the same as the **model deployment** that you created. Replace,
+3.  팝업에서 **Yes, I trust the authors**를 선택하세요.
 
-    - Endpoint – **Azure OpenAI Endpoint**
-    
-    - Key – The **API Key**
+![A screenshot of a computer error AI-generated content may be
+incorrect.](./media/image30.png)
 
-    Both the values above, we have saved earlier in a notepad once the
-project was created in the Azure AI Foundry.
+4.  노트북을 마우스 오른쪽 버튼으로 클릭하고 **Open in Integrated
+    Terminal**을 선택하세요.
 
-    After replacing the values, **execute** the cell.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image31.png)
 
-    This sets these values to corresponding variables to be used further.
+5.  아래 명령을 차례로 실행하여 **nuget source**를 추가하세요.
 
-    ![A black screen with numbers AI-generated content may be incorrect.](./media/image30.png)
++++dotnet nuget list source+++
 
-18. The next cell creates a new **KernelBuilder** instance, adds **Azure
-    OpenAI Chat Completion** as an AI service provider to the kernel
-    with the variables from the last step as input and invokes
-    **Build**() creates an instance of Kernel.
-
-    **Execute** it to create the Kernel instance.
-
-    ![A screen shot of a computer code AI-generated content may be incorrect.](./media/image31.png)
-
-19. Execute the next cell to install the required **Azure** packages and
-    the next cell to import the references.
-
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-    ![A screen shot of a computer program AI-generated content may be
+> +++dotnet nuget add
+> source <https://api.nuget.org/v3/index.json> --name nuget.org+++
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-20. The class in the next cell defines a **custom HTTP pipeline policy
-    for Azure SDK** requests and adds a custom HTTP header
-    (x-ms-enable-preview: true) to every outgoing request. **Execute**
-    it.
+6.  아래 명령을 실행하여 dotnet interacrive를 설치하세요.
 
-    ![A screen shot of a computer program AI-generated content may be
-incorrect.](./media/image34.png)
++++dotnet tool install --global Microsoft.dotnet-interactive --version
+1.0.556801+++
 
-## Exercise 3: Save Blog Agent
+![](./media/image34.png)
 
-1.  The next cell defines the **SavePlugin** class which implements a
-    method to **save blog content** using **Azure AI Projects and the
-    Semantic Kernel**.
+7.  +++pip install jupyter+++를 실행하고 Jupyter를 설치하세요.
 
-    - It receives the **blog content** as input.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image35.png)
 
-    - Interacts with **Azure AI Projects** to create an AI agent.
+8.  jupyter interactive에 대한 다음 명령을 실행하세요.
 
-    - Generates and executes Python code to **save** the **content** as
-      a **Markdown** (.md) file.
++++dotnet interactive jupyter install+++
 
-    - **Downloads** and **stores** the generated file locally.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image36.png)
 
-    - **Returns** a **confirmation** message ("Saved").
+9.  **Terminal을 닫으세요**. **Visual Studio Code**의 왼쪽 창에서
+    **Extensions** 을 선택하세요. +++**Jupyter**+++를 검색하고 선택하고
+    **Install**을 클릭하고 Jupyter 확장을 설치하세요.
 
-    To execute this cell, replace **Your Connection String** with your
-**Project Connection String** that you saved earlier to a note pad. It
-can be accessed from the project overview page of Azure AI Foundry
-portal.
-
-    Click on **Execute** after replacing the connection string.
-
-    ![](./media/image35.png)
-
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image36.png)
-
-2.  The next cell initializes **constants** with Save specific values.
-    **Execute** it. These constants will be used in the next cells.
-
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-3.  The next cell creates a **ChatCompletionAgent** named
-    **save_blog_agent**. Execute it to create the agent.
+10. Visual Studio Code를 닫고 다시 여세요.
 
-    ![A computer screen shot of a computer program AI-generated content may
-be incorrect.](./media/image38.png)
+11. Notebook **AzureAIMultiAgentWithSK.ipynb**을 여세요. 열려면 **Select
+    Kernel**을 클릭하세요.
 
-## Exercise 4: Writer agent
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-1.  Execute the next cell in the notebook which declares constants with
-    Writer specific values.
+12. **Jupyter Kernel**을 선택하세요.
 
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image39.png)
 
-2.  The next cell creates a **ChatCompletionAgent** named
-    write-blog_content which will be responsible for writing a blog post
-    using the Microsoft Semantic Kernel and Azure OpenAI chat models.
-    Execute it to create the agent.
+13. 다음 옵션 집합에서 **.NET(C#) dotnet**을 선택하세요.
 
-    ![A computer screen shot of a black screen AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image40.png)
 
-3.  The code in the next cell makes **SavePlugin** available as a
-    function inside **save_blog_agent**. It creates a **Kernel Plugin**
-    from **SavePlugin.** **Adds** the Plugin to the **Agent's Kernel** .
-    The AI calls the **SavePlugin.Save** function when it detects a
-    save-related request.
+14. **Security Alert**에서 **Allow access**를 선택하세요.
 
-    Execute it to create the Kernel Plugin.
-
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer security alert AI-generated content may be
 incorrect.](./media/image41.png)
 
-4.  The next cell contains the code for the class
-    **ApprovalTerminationStrategy**
+15. 첫 번째 셀을 실행하여 필요한 모든 **패키지**를 **설치하세요**.
 
-5.  This **custom termination strategy** is used to determine **when an
-    AI agent should stop running**. **Execute** it.
-
-    ![A computer screen with text on it AI-generated content may be
+![A screen shot of a computer program AI-generated content may be
 incorrect.](./media/image42.png)
 
-6.  The next cell contains the **AgentGroupChat** code. This creates a
-    **multi-agent chat** system where two AI agents
-    (**write_blog_agent** and **save_blog_agent**) collaborate. Uses
-    **ApprovalTerminationStrategy** to determine when the chat should
-    stop.
-
-    Only **save_blog_agent** can approve termination.
-    
-    **Execute** it to configure the multi agent chat.
-
-    ![A computer screen shot of a program AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image43.png)
 
-7.  The next cell contains instructions to the agent. It **adds a user
-    message to the multi-agent chat system**, instructing the AI to
-    **search for information on GraphRAG, write a blog, and save it**.
+16. 다음 셀을 실행하여 네임스페이스를 가져오세요.
 
-    ![](./media/image44.png)
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image44.png)
 
-8.  **Execute** the next cell. This **iterates over the AI-generated
-    responses** in the multi-agent chat **as they are streamed**.
+17. 다음 셀에서 **deployment **변수 값이 생성한 **model**배포와 동일한지
+    확인하세요. 바꾸세요,
 
-    On execution, it writes a blog, saves it.
+    - Endpoint – **Azure OpenAI Endpoint**
 
-    ![A screen shot of a computer AI-generated content may be
+    - Key – **API Key**
+
+위의 두 값은 모두 Azure AI Foundry에서 프로젝트를 생성한 후 이전에
+메모장에 저장했습니다.
+
+값을 바꾼 후 셀을 **실행하세요**.
+
+이렇게 하면 이러한 값이 추가로 사용할 해당 변수로 설정됩니다.
+
+![A black screen with numbers AI-generated content may be
 incorrect.](./media/image45.png)
 
-    ![A screenshot of a computer AI-generated content may be
+18. 다음 셀은 새 **KernelBuilder** 인스턴스를 생성하고, 마지막 단계의
+    변수를 입력으로 사용하여 Kernel에 AI 서비스 공급자로 **Azure OpenAI
+    Chat Completion**을 추가하고, **Build**()를 호출하여 Kernel
+    인스턴스를 생성하세요.
+
+이를 **실행하여** Kernel 인스턴스를 생성하세요.
+
+![A screen shot of a computer code AI-generated content may be
 incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
+19. 다음 셀을 실행하여 필요한 **Azure** 패키지를 설치하고 다음 셀을
+    실행하여 참조를 가져오세요.
+
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image47.png)
 
-**Summary:**
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image48.png)
 
-We have implemented a Multi Agent system using Azure AI Agent Service
-with Semantic Kernel.
+20. 다음 셀의 클래스는 ** custom HTTP pipeline policy for Azure
+    SDK requests을** 정의 하고 나가는 모든 요청에 사용자 지정 HTTP
+    헤더(x-ms-enable-preview: true)를 추가합니다. **실행하세요**.
 
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image49.png)
+
+## 연습 3: 블로그 에이전트 저장하기
+
+1.  다음 셀은 **Azure AI Projects and the Semantic Kernel**을 사용하여
+    **save blog content ** 메서드를 구현하는 **SavePlugin** 클래스를
+    정의하세요.
+
+    - **blog content**를 입력으로 받습니다.
+
+    - **Azure AI Projects** 와 상호 작용 하여 AI 에이전트를 생성합니다.
+
+    - Python 코드를 생성하고 실행하여 콘텐츠를 **Markdown**(.md) 파일로
+      저장합니다.
+
+    - 생성된 파일을 로컬에 다운로드하고 저장합니다.
+
+    - **확인** 메시지("Saved")를 반환합니다.
+
+이 셀을 실행하려면 **Your Connection String**을 이전에 메모장에 저장한
+**Project Connection String**로 바꾸세요. Azure AI Foundry 포털의
+프로젝트 개요 페이지에서 액세스할 수 있습니다.
+
+연결 문자열을 바꾼 후 **Execute 을** 클릭하세요.
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image50.png)
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image51.png)
+
+2.  다음 셀은 특정 값 저장을 사용하여 **constants** 를 초기화합니다.
+    **그것을 실행하세요**. 이러한 상수는 다음 셀에서 사용됩니다.
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
+
+3.  다음 셀은 **save_blog_agent**라는 **ChatCompletionAgent**를
+    생성합니다. 에이전트를 생성하려면 실행하세요.
+
+![A computer screen shot of a computer program AI-generated content may
+be incorrect.](./media/image53.png)
+
+## 연습 4: Writer agent
+
+1.  Writer 특정 값으로 상수를 선언하는 노트북의 다음 셀을 실행하세요.
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
+
+2.  다음 셀은 Microsoft Semantic Kernel 및 Azure OpenAI 채팅 모델을
+    사용하여 블로그 게시물 작성을 담당하는 write-blog_content라는
+    **ChatCompletionAgent**를 만듭니다. 에이전트를 생성하려면
+    실행하세요.
+
+![A computer screen shot of a black screen AI-generated content may be
+incorrect.](./media/image55.png)
+
+3.  다음 셀의 코드는 **SavePlugin**을 **save_blog_agent** 내에서 함수로
+    사용할 수 있도록 합니다. **SavePlugin**에서 **Kernel Plugin** 을
+    생성합니다. **Agent's Kernel** 에 플러그인을 **추가**합니다. AI는
+    저장 관련 요청을 감지하면 **SavePlugin.Save** 함수를 호출합니다.
+
+이를 실행하여 Kernel Plugin을 생성하세요.
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image56.png)
+
+4.  다음 셀에는 **ApprovalTerminationStrategy** 클래스에 대한 코드가
+    포함되어 있습니다
+
+5.  이 **사용자 지정 종료 전략은 AI 에이전트의 실행을 중지해야 하는
+    시기**를 결정하는 데 사용됩니다. **그것을 실행하세요**.
+
+![A computer screen with text on it AI-generated content may be
+incorrect.](./media/image57.png)
+
+6.  다음 셀에는 **AgentGroupChat** 코드가 포함되어 있습니다. 이렇게 하면
+    두 개의 **AI** 에이전트**(write_blog_agent 및 save_blog_agent)**가
+    협업하는 **multi-agent chat** 시스템이 생성됩니다.
+    **ApprovalTerminationStrategy**를 사용하여 채팅을 중지해야 하는
+    시점을 결정합니다.
+
+**save_blog_agent** 만이 종료를 승인할 수 있습니다.
+
+이를 **실행하여** 다중 에이전트 채팅을 구성하세요.
+
+![A computer screen shot of a program AI-generated content may be
+incorrect.](./media/image58.png)
+
+7.  다음 셀에는 에이전트에 대한 지침이 포함되어 있습니다. **다중
+    에이전트 채팅 시스템에 사용자 메시지를 추가하여** AI에게
+    **GraphRAG에서 정보를 검색하고, 블로그를 작성하고, 저장하도록
+    지시합니다**.
+
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image59.png)
+
+8.  다음 셀을 실행하세요. 이는 다중 에이전트 채팅에서 **AI가 생성한
+    응답이 스트리밍될 때 반복됩니다.**
+
+실행시 블로그를 작성하고 저장합니다.
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
+
+## 요약
+
+Semantic Kernel과 함께 Azure AI 에이전트 서비스를 사용하여 다중 에이전트
+시스템을 구현했습니다.
