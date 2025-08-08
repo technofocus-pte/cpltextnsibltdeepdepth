@@ -1,459 +1,537 @@
+# Laboratório 5 - Criando um agente de AI personalizado com o Azure AI Foundry e integração de pesquisa
 
-# Lab 5 - Creating a Custom AI Agent with Azure AI Foundry and search integration
+**Tempo estimado: 45 min**
 
-**Estimated time: 45 min**
+## Objetivo
 
-## Objective
+O objetivo deste laboratório é orientar os participantes na criação de
+um agente com tecnologia de AI usando os serviços do Azure AI e a
+integração com o Search. A Retrieval Augmented Generation (RAG) é uma
+técnica usada para criar aplicativos que integram dados de fontes
+personalizadas em um prompt para um modelo de AI generativo. RAG é um
+padrão comumente usado para desenvolver aplicativos de AI generativa –
+aplicativos baseados em chat que usam um modelo de linguagem para
+interpretar entradas e gerar respostas apropriadas. Os participantes
+aprenderão a usar o portal do Azure AI Foundry para integrar dados
+personalizados em um fluxo de prompts de AI generativo.
 
-The objective of this lab is to guide participants in building an
-AI-powered agent using Azure AI services and Search integration.
-Retrieval Augmented Generation (RAG) is a technique used to build
-applications that integrate data from custom data sources into a prompt
-for a generative AI model. RAG is a commonly used pattern for developing
-generative AI apps - chat-based applications that use a language model
-to interpret inputs and generate appropriate responses. Participants
-will learn to use Azure AI Foundry portal to integrate custom data into
-a generative AI prompt flow.
+## Solução
 
-Solution
+Este laboratório se concentra na integração dos serviços do Azure AI com
+recursos avançados de pesquisa para criar uma solução robusta e
+inteligente. Ele enfatiza a configuração de um agente com tecnologia de
+AI, permitindo a recuperação de dados sem interrupções e fornecendo
+respostas contextuais. Ao utilizar a AI e a integração de pesquisa, a
+solução visa otimizar fluxos de trabalho, aprimorar a tomada de decisões
+e aprimorar o engajamento do usuário por meio de interações intuitivas e
+eficientes.
 
-This lab focuses on integrating Azure AI services with advanced search
-capabilities to create a robust, intelligent solution. It emphasizes
-configuring an AI-powered agent, enabling seamless data retrieval, and
-providing contextual responses. By leveraging AI and search integration,
-the solution aims to streamline workflows, improve decision-making, and
-enhance user engagement through intuitive and efficient interactions.
+## Tarefa 1: Criar um recurso de pesquisa do Azure AI
 
-## Task 1: Create an Azure AI Search resource
+1.  Em um navegador da web, abra o portal do Azure em
+    +++[https://portal.azure.com+++]() e **faça login** usando
 
-1.  In a web browser, open the Azure
-    portal at +++https://portal.azure.com+++ and **Sign in** using
+- Username - <+++@lab.CloudPortalCredential>(User1).Username+++
 
-  - Username - +++@lab.CloudPortalCredential(User1).Username+++
-  
-  - Password - +++@lab.CloudPortalCredential(User1).Password+++
+- Password - <+++@lab.CloudPortalCredential>(User1).Password+++
 
-  ![A screenshot of a computer Description automatically generated](./media/image1.png)
+![A screenshot of a computer Description automatically
+generated](./media/image1.png)
 
-2.  On the home page, select **+ Create a resource.**
+2.  Na página inicial, selecione **+ Create a resource.**
 
-  ![A screenshot of a computer Description automatically generated](./media/image2.png)
+![A screenshot of a computer Description automatically
+generated](./media/image2.png)
 
-3.   From the search bar, search for and select +++**Azure AI Search**+++.
+3.  Na barra de pesquisa, pesquise e selecione +++**Azure AI
+    Search**+++.
 
-  ![A screenshot of a computer Description automatically generated](./media/image3.png)
+![A screenshot of a computer Description automatically
+generated](./media/image3.png)
 
-4.  Select the drop down next to **Create** and select **Azure AI
-    Search**.
+4.  Selecione o menu suspenso ao lado de **Create** e selecione **Azure
+    AI Search**.
 
-  ![A screenshot of a computer Description automatically generated](./media/image4.png)
+![A screenshot of a computer Description automatically
+generated](./media/image4.png)
 
-5.  In the Create a search service page, enter the below details and
-    click on **Review + create**.
+5.  Na página **Create a search service**, insira os detalhes abaixo e
+    clique em **Review + create**.
 
-    - **Subscription**: Select your Azure subscription from the drop
-      down.
+    - **Subscription**: Selecione sua assinatura do Azure no menu
+      suspenso.
 
-    - **Resource group**: Select the Resource group assigned to your
-      subscription (ResourceGroup1)
+    - **Resource group**: Selecione o grupo de recursos atribuído à sua
+      assinatura (ResourceGroup1)
 
-    - **Service name**: +++aisearch@lab.LabInstance.Id+++
+    - **Service name**: <+++aisearch@lab.LabInstance.Id>+++
 
-    - **Location**: Select @lab.CloudResourceGroup(ResourceGroup1).Location
+    - **Location**: Selecione
+      lab.CloudResourceGroup(ResourceGroup1).Location
 
     - **Pricing tier**: Standard
 
-  ![A screenshot of a computer Description automatically generated](./media/image5.png)
+![A screenshot of a computer Description automatically
+generated](./media/image5.png)
 
-6.  Review the settings and click on **Create**.
+6.  Revise as configurações e clique em **Create**.
 
-  ![A screenshot of a search service Description automatically generated](./media/image6.png)
+![A screenshot of a search service Description automatically
+generated](./media/image6.png)
 
-7.  Wait for your Azure AI Search resource deployment to be completed.
+7.  Aguarde a conclusão da implementação do recurso do Azure AI Search.
 
-   ![A screenshot of a computer Description automatically generated](./media/image7.png)
+![A screenshot of a computer Description automatically
+generated](./media/image7.png)
 
-## Task 2: Create an Azure AI Hub resource and project
+## Tarefa 2: Criar um recurso e projeto do Azure AI Hub
 
-1. Select **Azure AI Foundry** from the Azure portal **Home** page.
+1.  Selecione **Azure AI Foundry** na página **Home** do portal do
+    Azure.
 
-   ![image](https://github.com/user-attachments/assets/98874868-93c2-4f81-88ac-89dfc2517de1)
+![image](./media/image8.png)
 
-2. Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**
+2.  Selecione **Use with AI Foundry** -\> **AI Hubs**. Selecione **+
+    Create** -\> **Hub.**
 
-    ![image](https://github.com/user-attachments/assets/ce61ee78-571b-418b-a7a7-117708b5a053)
+![image](./media/image9.png)
 
-3. Enter the below details, accept the other defaults and select **Review + create**.
+3.  Insira os detalhes abaixo, aceite os outros padrões e selecione
+    **Review + create**.
 
-   -    Subscription - Select your **assigned subscription**
-   
-   -    Resource group - Select your assigned Resource group (**ResourceGroup1**)
-     
-   -    Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
-     
-   -    Name - +++**hub@lab.LabInstance.Id**+++
-   
-    ![image](https://github.com/user-attachments/assets/a0a97ed5-8a30-462b-8478-df7c4ce6623d)
+    - Subscription - Selecione sua **assinatura atribuída**
 
-    ![image](https://github.com/user-attachments/assets/19b9e8be-dbb1-4b73-a79d-18494dab7573)
+    - Resource group - Selecione o grupo de recursos atribuído
+      (**ResourceGroup1**)
 
-4. Once the valiation passes, select **Create**.
+    - Region - Selecione
+      @lab.CloudResourceGroup(ResourceGroup1).Location
 
-    ![image](https://github.com/user-attachments/assets/186aa02b-2ade-4174-a33a-b9d54a5cfb0d)
+    - Name -
+      +++[**hub@lab.LabInstance.Id**](mailto:hub@lab.LabInstance.Id)+++
 
-5. Once the deployment is complete, click on **Go to resource**.
+![image](./media/image10.png)
 
-    ![image](https://github.com/user-attachments/assets/0d817499-ccc6-4142-afa7-d69321bba83e)
+![image](./media/image11.png)
 
-6.  Select **Launch Azure AI Foundry** from the hub resource page.
+4.  Após a avaliação, selecione **Create**.
 
-    ![image](https://github.com/user-attachments/assets/fe099937-34ce-45fc-afab-a8ef1fccf3b8)
+![image](./media/image12.png)
 
-7.  From the launched hub resource, scroll down and select **+ New project**
+5.  Quando a implementação estiver concluída, clique em **Go to
+    resource**.
 
-    ![image](https://github.com/user-attachments/assets/61579444-f7b0-46a9-8fb7-315a9a4ad5b2)
+![image](./media/image13.png)
 
-    ![image](https://github.com/user-attachments/assets/e7db51ad-f425-4fca-a13d-6b92b15dd9f6)
+6.  Selecione **Launch Azure AI Foundry** na página de recursos do hub.
 
-8.  Enter the name as +++**ragpfproject@lab.LabInstance.Id**+++ and select **Create**.
+![image](./media/image14.png)
 
-    <img width="697" alt="image" src="https://github.com/user-attachments/assets/6aec7bac-cb5f-4ec9-9dfa-86eae5e8dd0f" />
+7.  No recurso do hub iniciado, role para baixo e selecione **+ New
+    project**
 
-9.  **Close** the Explore and experiment pop up.
+![image](./media/image15.png)
 
-    ![](./media/image13.png)
+![image](./media/image16.png)
 
-10.  You will land in the created project page.
+8.  Digite o nome como
+    +++[**ragpfproject@lab.LabInstance.Id**](mailto:ragpfproject@lab.LabInstance.Id)+++
+    e selecione **Create**.
 
-     ![](./media/image14.png)
+![image](./media/image17.png)
 
-## Task 3: Deploy models
+9.  **Close** o pop-up **Explore and experiment**.
 
-You need two models to implement your solution:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-- An embedding model to vectorize text data for efficient indexing and
-  processing.
+10. Você será direcionado para a página do projeto criado.
 
-- A model that can generate natural language responses to questions
-  based on your data.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
 
-1.  Select **Models + endpoints** under **My assets** from the left
-    pane.
+## Tarefa 3: Implementar modelos
 
-    ![](./media/image15.png)
+Você precisa de dois modelos para implementar sua solução:
 
-2.  On the **Manage deployments of your models and services page,**
-    click on **+Deploy model** and select **Deploy base model.**
+- Um modelo de incorporação para vetorizar dados de texto para indexação
+  e processamento eficientes.
 
-    ![A screenshot of a computer Description automatically generated](./media/image16.png)
+- Um modelo que pode gerar respostas em linguagem natural para perguntas
+  baseadas em seus dados.
 
-3.  On the **Select a model** page, search and
-    select +++**text-embedding-ada-002**+++ model and click on
-    **Confirm.**
+1.  Selecione **Models + endpoints** em **My assets** no painel
+    esquerdo.
 
-    ![A screenshot of a computer Description automatically generated](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
-4.  On the **Deploy model text-embedding-ada-002** pane, accept the pre-
-    populated value for the **Deployment name** Select **Deployment
-    type** as **standard**. Click on **Customize** and enter the following details in
-    the Deploy model wizard.
+2.  Na **página Manage deployments of your models and services,** clique
+    em **+ Deploy model** e selecione **Deploy base model.**
 
-    ![A screenshot of a computer Description automatically generated](./media/image18.png)
+![A screenshot of a computer Description automatically
+generated](./media/image21.png)
 
-  - **Model version**: Select the default version
-  
-  - **AI resource**: Select the resource created previously (That is the resource that gets listed in the drop down)
-  
-  - **Tokens per Minute Rate Limit (thousands)**: 5K
-  
-  - **Content filter**: DefaultV2
-  
-  - **Enable dynamic quota**: Disabled
+3.  Na página **Select a model**, pesquise e selecione o modelo
+    +++**text-embedding-ada-002**+++ e clique em **Confirm.**
 
-  ![A screenshot of a computer Description automatically generated](./media/image19.png)
+![A screenshot of a computer Description automatically
+generated](./media/image22.png)
 
-  ![A screenshot of a computer Description automatically generated](./media/image20.png)
+4.  No painel **Deploy model text-embedding-ada-002**, aceite o valor
+    pré-preenchido para **Deployment name.** Selecione **Deployment
+    type** como **standard**. Clique em **Customize** e insira os
+    seguintes detalhes no assistente de implementação do modelo.
 
-  ![A screenshot of a computer Description automatically generated](./media/image21.png)
+![A screenshot of a computer Description automatically
+generated](./media/image23.png)
 
-5.  Repeat the previous steps to deploy a +++**gpt-4o**+++ model
-    with the deployment name gpt-4o.
+- **Model version**: Selecione a versão padrão
 
-  ![A screenshot of a computer Description automatically generated](./media/image70.png)
+- **AI resource**: Selecione o recurso criado anteriormente (esse é o
+  recurso listado no menu suspenso)
 
-6.  We now have the two deployments ready.
+- **Tokens per Minute Rate Limit (thousands)**: 5K
 
-  ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image71.png)
+- **Content filter**: DefaultV2
 
-  >[!Note] **Note:** Reducing the Tokens Per Minute (TPM) helps avoid over-using the quota available in the subscription you are using. 5,000 TPM is sufficient for the data used in this exercise.
+- **Enable dynamic quota**: Desativado
 
-## Task 4: Add data to your project
+![A screenshot of a computer Description automatically
+generated](./media/image24.png)
 
-The data for your copilot consists of a set of travel brochures in PDF
-format from the fictitious travel agency *Margie’s Travel*. Let’s add
-them to the project.
+![A screenshot of a computer Description automatically
+generated](./media/image25.png)
 
-1.  Select **Data + indexes** under **My assets** from the left pane.
-    Select **+ New data**.
+![A screenshot of a computer Description automatically
+generated](./media/image26.png)
 
-  ![A screenshot of a computer Description automatically generated](./media/image24.png)
+5.  Repita as etapas anteriores para implementar um modelo
+    +++**gpt-4o**+++ com o nome de implementação gpt-4o.
 
-2.  In the **Add your data** wizard, select **Upload files/folders**
-    from the drop down.
+![A screenshot of a computer Description automatically
+generated](./media/image27.png)
 
-  ![A screenshot of a computer Description automatically generated](./media/image25.png)
+6.  Agora temos as duas implementações prontas.
 
-3.  Select **Upload folder** and select the **brochures** folder from
-    **C:\LabFiles** and click **Upload**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
 
-  ![A screenshot of a computer Description automatically generated](./media/image26.png)
+\[!Observação\] **Observação:** Reduzir os Tokens Per Minute (TPM) ajuda
+a evitar o uso excessivo da cota disponível na assinatura que você está
+usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
-  ![A screenshot of a computer Description automatically generated](./media/image27.png)
+## Tarefa 4: Adicionar dados ao seu projeto
 
-4.  Wait for the folder to be uploaded and note that it contains several
-    .pdf files. Select **Next** once the files are all uploaded.
+Os dados do seu copilot consistem em um conjunto de folhetos de viagem
+em formato PDF da agência de viagens fictícia *Margie's Travel* . Vamos
+adicioná-los ao projeto.
 
-    ![A screenshot of a computer Description automatically generated](./media/image28.png)
+1.  Selecione **Data + indexes** em **My assets** no painel esquerdo.
+    Selecione **+ New data**.
 
-5.  On the next page of name and finish, enter the data name as
-    +++**data@lab.LabInstance.Id**+++ and click on **Create.**
+![A screenshot of a computer Description automatically
+generated](./media/image29.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image29.png)
+2.  No assistente **Add your data**, selecione **Upload files/folders**
+    no menu suspenso.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image30.png)
+![A screenshot of a computer Description automatically
+generated](./media/image30.png)
 
-## Task 5: Create an index for your data
+3.  Selecione **Upload folder** e selecione a pasta de **brochures** em
+    **C:\LabFiles** e clique em **Upload**.
 
-Now that you’ve added a data source to your project, you can use it to
-create an index in your Azure AI Search resource.
+![A screenshot of a computer Description automatically
+generated](./media/image31.png)
 
-1.  From the **Data + indexes** page, select the **Indexes** tab.
+![A screenshot of a computer Description automatically
+generated](./media/image32.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image31.png)
+4.  Aguarde o upload da pasta e observe que ela contém vários arquivos
+    .pdf. Selecione **Next** quando todos os arquivos forem enviados.
 
-2.  In the **Indexes** tab, select **+ New index** to add a new index.
-
-    ![A screenshot of a computer Description automatically generated](./media/image32.png)
-
-3.  Enter the below details and click on **Next**.
-
-    - **Data source** - Select **Data in Azure AI Foundry**
-
-    Select the listed **data source** and then click on **Next**.
-
-    ![A screenshot of a computer Description automatically
+![A screenshot of a computer Description automatically
 generated](./media/image33.png)
 
-4.  Enter the below details in the Create a vector index – Index
-    configuration page and click on **Next.**
+5.  Na próxima página de **name and finish**, insira o nome dos dados
+    como
+    +++[**data@lab.LabInstance.Id**](mailto:data@lab.LabInstance.Id)+++
+    e clique em **Create.**
 
-    - **Select Azure AI Search service**: Select **AzureAISearch**
-    
-    - Vector index - +++**brochures-index**+++
-    
-    - **Virtual machine**: Select **Auto select**
+![A screenshot of a computer Description automatically
+generated](./media/image34.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image34.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image35.png)
 
-5.  In the Create a vector index – Search settings page,
+## Tarefa 5: Criar um índice para seus dados
 
-    **Vector settings** - Select **Add vector search to this search
-resource**
+Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la
+para criar um índice no seu recurso do Azure AI Search.
 
-    Accept the other defaults and select **Next.**
+1.  Na página **Data + indexes**, selecione a aba **Indexes**.
 
-    ![A screenshot of a search box Description automatically generated](./media/image35.png)
+![A screenshot of a computer Description automatically
+generated](./media/image36.png)
 
-6.  In the **Review and finish** page, review the details and select
-    **Create vector index**.
- 
-     ![A screenshot of a computer Description automatically generated](./media/image36.png)
+2.  Na aba **Indexes**, selecione **+ New index** para adicionar um novo
+    índice.
 
-7.  Wait for the indexing process to be completed, which can take
-    several minutes. The index creation operation consists of the
-    following jobs:
-
-    - Crack, chunk, and embed the text tokens in your brochures data.
-
-    - Create the Azure AI Search index.
-
-    - Register the index asset.
-
-    ![A screenshot of a computer error Description automatically
+![A screenshot of a computer Description automatically
 generated](./media/image37.png)
 
-    ![A screenshot of a computer program Description automatically
+3.  Insira os detalhes abaixo e clique em **Next**.
+
+    - **Data source** - Selecione **Data in Azure AI Foundry**
+
+Selecione a **data source** e clique em **Next**.
+
+![A screenshot of a computer Description automatically
 generated](./media/image38.png)
 
-## Task 6: Test the index
+4.  Insira os detalhes abaixo na página **Create a vector index – Index
+    configuration** e clique em **Next.**
 
-Before using your index in a RAG-based prompt flow, let’s verify that it
-can be used to affect generative AI responses.
+    - **Select Azure AI Search service**: Selecione **AzureAISearch**
 
-1.  Select the **Playgrounds** from the left pane and select **Chat
+    - Vector index - +++**brochures-index**+++
+
+    - **Virtual machine**: Selecione **Auto select**
+
+![A screenshot of a computer Description automatically
+generated](./media/image39.png)
+
+5.  Na página **Create a vector index – Search settings**,
+
+**Vector settings** - Selecione **Add vector search to this search
+resource**
+
+Aceite os outros padrões e selecione **Next.**
+
+![A screenshot of a search box Description automatically
+generated](./media/image40.png)
+
+6.  Na página **Review and finish**, revise os detalhes e selecione
+    **Create vector index**.
+
+![A screenshot of a computer Description automatically
+generated](./media/image41.png)
+
+7.  Aguarde a conclusão do processo de indexação, que pode levar vários
+    minutos. A operação de criação do índice consiste nas seguintes
+    tarefas:
+
+    - Divida, fragmente e integre os tokens de texto dos dados dos seus
+      folhetos.
+
+    - Crie o índice do Azure AI Search.
+
+    - Registre o ativo indexado.
+
+![A screenshot of a computer error Description automatically
+generated](./media/image42.png)
+
+![A screenshot of a computer program Description automatically
+generated](./media/image43.png)
+
+## Tarefa 6: Testar o índice
+
+Antes de usar seu índice em um fluxo de prompt baseado em RAG, vamos
+verificar se ele pode ser utilizado para influenciar as respostas da AI
+generativa.
+
+1.  Selecione **Playgrounds** no painel esquerdo e selecione **Chat
     Playground.**
 
-    ![A screenshot of a chat Description automatically generated](./media/image39.png)
+![A screenshot of a chat Description automatically
+generated](./media/image44.png)
 
-2.  Click on **Show setup** if it is not visible by default.
+2.  Clique em **Show setup** se não estiver visível por padrão.
 
-    ![A screenshot of a computer Description automatically generated](./media/image40.png)
+![A screenshot of a computer Description automatically
+generated](./media/image45.png)
 
-3.  Ensure that your **gpt-4o** model deployment is selected.
-    Then, in the main chat session panel, submit the prompt +++**Where can I stay in New York?**+++
+3.  Certifique-se de que a implementação do seu modelo **gpt-4o** esteja
+    selecionada. Em seguida, no painel principal da sessão do chat,
+    envie o prompt +++**Where can I stay in New York?**+++
 
-    ![A screenshot of a computer program Description automatically generated](./media/image72.png)
+![A screenshot of a computer program Description automatically
+generated](./media/image46.png)
 
-    ![A screenshot of a chat Description automatically generated](./media/image42.png)
+![A screenshot of a chat Description automatically
+generated](./media/image47.png)
 
-4.  Review the response, which should be a generic answer from the model
-    without any data from the index.
+4.  Revise a resposta, que deve ser uma resposta genérica do modelo sem
+    nenhum dado proveniente do índice.
 
-5.  In the Setup pane, expand the **Add your data** field,
-    select **brochures-index** project index and select the **hybrid
-    (vector + keyword)** search type.
+5.  No painel Configuração, expanda o campo **Add your data**, selecione
+    o índice do projeto **brochures-index** e selecione o tipo de
+    pesquisa **hybrid (vector + keyword)**.
 
-    ![A screenshot of a computer Description automatically generated](./media/image43.png)
+![A screenshot of a computer Description automatically
+generated](./media/image48.png)
 
-    >[!Note] **Note:** Some users are finding newly created indexes unavailable right away. Refreshing the browser usually helps, but if you’re still experiencing the issue where it can’t find the index you may need to wait until the index is recognized.
+\[!Nota\] **Observação:** Alguns usuários estão percebendo que os
+índices recém-criados não ficam disponíveis imediatamente. Atualizar o
+navegador geralmente resolve, mas, se o problema persistir e o índice
+ainda não for encontrado, pode ser necessário aguardar até que o índice
+seja reconhecido.
 
-6.  This addition of the data source starts a new session. Once that is
-    done, resubmit the prompt +++**Where can I stay in New York?**+++
+6.  Esta adição da fonte de dados inicia uma nova sessão. Feito isso,
+    reenvie o prompt +++**Where can I stay in New York?**+++
 
-    ![A screenshot of a chat Description automatically generated](./media/image44.png)
+![A screenshot of a chat Description automatically
+generated](./media/image49.png)
 
-7.  Review the response and note that now the response is based on data
-    in the index.
+7.  Revise a resposta e observe que agora ela é baseada em dados no
+    índice.
 
-    ![A screenshot of a chat Description automatically generated](./media/image45.png)
+![A screenshot of a chat Description automatically
+generated](./media/image50.png)
 
-## Task 7: Use the index in a prompt flow
+## Tarefa 7: Usar o índice em um fluxo de prompt
 
-Your vector index has been saved in your Azure AI Foundry project,
-enabling you to use it easily in a prompt flow.
+Seu índice vetorial foi salvo no seu projeto do Azure AI Foundry,
+permitindo que você o utilize facilmente em um fluxo rápido.
 
-1.  Select the **Prompt flow** under **Build and customize** from the
-    left navigation pane and then click on **Create**.
+1.  Selecione o **Prompt flow** em **Build and customize** no painel de
+    navegação esquerdo e clique em **Create**.
 
-    ![](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image51.png)
 
-2.  Select **Clone** under **Multi-Round Q&A on Your Data**.
+2.  Selecione **Clone** em **Multi-Round Q&A on Your Data**.
 
-    ![A screenshot of a computer Description automatically generated](./media/image47.png)
+![A screenshot of a computer Description automatically
+generated](./media/image52.png)
 
-3.  Give the folder name as +++**brochure-flow**+++ and click on
+3.  Dê o nome da pasta como +++ **brochure-flow** +++ e clique em
     **Clone**.
 
-    ![A screenshot of a computer Description automatically generated](./media/image48.png)
+![A screenshot of a computer Description automatically
+generated](./media/image53.png)
 
-    > [!Note] **Note:** If you face permissions error, retry with a new name after 2 minutes and the flow will get cloned.
+**Observação:** Se ocorrer um erro de permissão, tente novamente com um
+novo nome após 2 minutos e o fluxo será clonado.
 
-    ![](./media/image49.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
-4.  When the prompt flow designer page opens, review **brochure-flow**.
-    Its graph should resemble the following image:
+4.  Quando a página do designer de fluxo de prompts abrir, revise
+    **brochure-flow**. O gráfico deve ser semelhante à seguinte imagem:
 
-    ![](./media/image50.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
-    ![A screenshot a a prompt flow graph](./media/image51.png)
+![A screenshot a a prompt flow graph](./media/image56.png)
 
-    The sample prompt flow you are using implements the prompt logic for a
-chat application in which the user can iteratively submit text input
-to chat interface. The conversational history is retained and included
-in the context for each iteration. The prompt flow orchestrates a
-sequence of *tools* to:
+O fluxo de prompt de exemplo que você está usando implementa a lógica de
+prompt para um aplicativo de chat, no qual o usuário pode enviar
+iterativamente uma entrada de texto para a interface de chat. O
+histórico da conversa é mantido e incluído no contexto de cada iteração.
+O fluxo de prompt orquestra uma sequência de *ferramentas* para:
 
-    - Append the history to the chat input to define a prompt in the form of
-      a contextualized form of a question.
-    
-    - Retrieve the context using your index and a query type of your own
-      choice based on the question.
-    
-    - Generate prompt context by using the retrieved data from the index to
-      augment the question.
-    
-    - Create prompt variants by adding a system message and structuring the
-      chat history.
-    
-    - Submit the prompt to a language model to generate a natural language
-      response.
+- Anexar o histórico à entrada do chat para definir um prompt na forma
+  de uma pergunta contextualizada.
 
-5.  Use the **Start compute session** button to start the runtime
-    compute for the flow.
+- Recuperar o contexto usando seu índice e um tipo de consulta de sua
+  escolha com base na pergunta.
 
-    Wait for the runtime to start. This provides a compute context for the prompt flow. While you’re waiting, in the **Flow** tab, review the sections for the tools in the flow.
+- Gerar contexto de prompt usando os dados recuperados do índice para
+  complementar a pergunta.
 
-    ![A screenshot of a computer screen Description automatically generated](./media/image52.png)
+- Criar variantes de prompt adicionando uma mensagem do sistema e
+  estruturando o histórico do chat.
 
-6.  In the **Inputs** section, ensure the inputs include:
+- Enviar o prompt para um modelo de linguagem para gerar uma resposta em
+  linguagem natural.
+
+5.  Use o botão **Start compute session** para iniciar a execução da
+    computação do fluxo.
+
+Aguarde o início do tempo de execução. Isso fornece um contexto de
+computação para o fluxo de prompt. Enquanto aguarda, na aba **Flow**,
+revise as seções das ferramentas no fluxo.
+
+![A screenshot of a computer screen Description automatically
+generated](./media/image57.png)
+
+6.  Na seção **Inputs**, certifique-se de que as entradas incluam:
 
     - **chat_history**
 
     - **chat_input**
 
-The default chat history in this sample includes some conversation about
+O histórico de chat padrão neste exemplo inclui algumas conversas sobre
 AI.
 
-  ![](./media/image53.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image58.png)
 
-7.  In the **Outputs** section, ensure that the output includes:
+7.  Na seção **Outputs**, certifique-se de que a saída inclua:
 
-    - **chat_output** with value ${chat_with_context.output}
+    - **chat_output** com valor ${chat_with_context.output}
 
-   ![](./media/image54.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
-8.  In the **modify_query_with_history** section, select the following
-    settings (leaving others as they are):
+8.  Na seção **modify_query_with_history**, selecione as seguintes
+    configurações (deixando as outras como estão):
 
-    - **Connection**: Select the **Azure OpenAI resource** for your AI
-      hub that gets listed
+    - **Connection**: Selecione o **Azure OpenAI resource** para seu hub
+      de AI que está listado
 
-    - **Api**: Select **chat**
+    - **API** : Selecione **chat**
 
-    - **deployment_name**: Select **gpt-4o**
+    - **deployment_name**: Selecione **gpt-4o**
 
-    - **response_format**: Select **{“type”:”text”}**
+    - **response_format**: Selecione**{“type”:”text”}**
 
-    ![](./media/image73.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
-9.  Once the compute session has started, in the **lookup** section, set
-    the following parameter values:
+9.  Depois que a sessão de computação for iniciada, na seção **lookup**,
+    defina os seguintes valores de parâmetros:
 
-    - **mlindex_content**: *Select the empty field to open the Generate
-      pane*
+    - **mlindex_content**: *Selecione o campo vazio para abrir o painel
+      Gerar*
 
-      - **index_type**: Select **Registered Index**
+      - **index_type**: Selecione **Registered Index**
 
-      &nbsp;
+ 
 
-      - **mlindex_asset_id**: Select **brochures-index:1**
+- **mlindex_asset_id**: Selecione **brochures-index:1**
 
-    ![A screenshot of a computer Description automatically generated](./media/image56.png)
+![A screenshot of a computer Description automatically
+generated](./media/image61.png)
 
-    ![A screenshot of a computer Description automatically generated](./media/image57.png)
+![A screenshot of a computer Description automatically
+generated](./media/image62.png)
 
-    Back in the Lookup section enter the below details
+De volta à seção de pesquisa, insira os detalhes abaixo
 
-    - **queries**: ${modify_query_with_history.output}
-    
-    - **query_type**: Hybrid (vector + keyword)
-    
-    - **top_k**: 2
+- **queries**: ${modify_query_with_history.output}
 
-    ![A screenshot of a computer Description automatically generated](./media/image58.png)
+- **query_type**: Hybrid (vector + keyword)
 
-10. In the **generate_prompt_context** section, review the Python script
-    and ensure that the **inputs** for this tool include the following
-    parameter:
+- **top_k**: 2
+
+![A screenshot of a computer Description automatically
+generated](./media/image63.png)
+
+10. Na seção **generate_prompt_context**, revise o script Python e
+    certifique-se de que as **inputs** para esta ferramenta incluam o
+    seguinte parâmetro:
 
     - **search_result** *(object)*: ${lookup.output}
 
-    ![A screenshot of a computer Description automatically generated](./media/image59.png)
+![A screenshot of a computer Description automatically
+generated](./media/image64.png)
 
-11. In the **Prompt_variants** section, review the Python script and
-    ensure that the **inputs** for this tool include the following
-    parameters:
+11. Na seção **Prompt_variants**, revise o script Python e certifique-se
+    de que as **inputs** para esta ferramenta incluam os seguintes
+    parâmetros:
 
     - **contexts** *(string)*: ${generate_prompt_context.output}
 
@@ -461,12 +539,13 @@ AI.
 
     - **chat_input** *(string)*: ${inputs.chat_input}
 
-    ![A screenshot of a chat Description automatically generated](./media/image60.png)
+![A screenshot of a chat Description automatically
+generated](./media/image65.png)
 
-12. In the **chat_with_context** section, select the following settings
-    (leaving others as they are):
+12. Na seção **chat_with_context**, selecione as seguintes configurações
+    (deixando as outras como estão):
 
-    - **Connection**: Select the **Azure OpenAI resource**
+    - **Connection**: Selecione o **Azure OpenAI resource**
 
     - **Api**: Chat
 
@@ -474,68 +553,79 @@ AI.
 
     - **response_format**: {“type”:”text”}
 
-    Then ensure that the **inputs** for this tool include the following
-parameters:
+Em seguida, certifique-se de que as **inputs** para esta ferramenta
+incluam os seguintes parâmetros:
 
-    - **prompt_text** *(string)*: ${Prompt_variants.output}
+- **prompt_text** *(string)*: ${Prompt_variants.output}
 
-    ![A screenshot of a computer Description automatically generated](./media/image74.png)
+![A screenshot of a computer Description automatically
+generated](./media/image66.png)
 
-13. Select the **Save** button in the toolbar, to save the changes
-    you’ve made to the tools in the prompt flow.
+13. Selecione o botão **Save** na barra de ferramentas para salvar as
+    alterações feitas nas ferramentas no fluxo de prompt.
 
-    ![A screenshot of a computer Description automatically generated](./media/image62.png)
+![A screenshot of a computer Description automatically
+generated](./media/image67.png)
 
-14. From the toolbar, select **Chat**. A chat pane opens with the sample
-    conversation history and the input already filled in based on the
-    sample values. You can ignore these.
+14. Na barra de ferramentas, selecione **Chat**. Um painel de chat será
+    aberto com o histórico de conversa de exemplo e o campo de entrada
+    já preenchido com valores de amostra. Você pode ignorar essas
+    informações.
 
-    ![A screenshot of a computer Description automatically generated](./media/image63.png)
+![A screenshot of a computer Description automatically
+generated](./media/image68.png)
 
-15. In the chat pane, replace the default input with the
-    question +++**Where can I stay in London?**+++ and submit it.
+15. No painel de chat, substitua a entrada padrão pela pergunta
+    +++**Where can I stay in London?**+++ e envie-a.
 
-    ![](./media/image64.png)
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image69.png)
 
-16. The response is based on data in the index.
+16. A resposta é baseada nos dados do índice.
 
-17. Review the outputs for each tool in the flow.
+17. Revise as saídas de cada ferramenta no fluxo.
 
-    ![A screenshot of a computer Description automatically generated](./media/image65.png)
+![A screenshot of a computer Description automatically
+generated](./media/image70.png)
 
-18. In the chat pane, enter the question +++**What can I do there?**+++
+18. No painel de chat, digite a pergunta +++**What can I do there?**+++
 
-19. Review the response, which should be based on data in the index and
-    it takes **chat history** into account (so “**there**” is understood
-    as “**in London**”).
+19. Revise a resposta, que deve ser baseada nos dados do índice e levar
+    em consideração o **chat history** (portanto, “**there**” é
+    entendido como “**in London**”).
 
-    ![A screenshot of a chat Description automatically generated](./media/image66.png)
+![A screenshot of a chat Description automatically
+generated](./media/image71.png)
 
-20. Review the outputs for each tool in the flow, noting how each tool
-    in the flow operated on its inputs to prepare a contextualized
-    prompt and get an appropriate response.
+20. Revise as saídas de cada ferramenta no fluxo, observando como cada
+    ferramenta operou em suas entradas para preparar um prompt
+    contextualizado e obter uma resposta apropriada.
 
-## Task 8: Clean up the resources:
+## Tarefa 8: Limpar os recursos:
 
-1.  From the Azure portal (+++https://portal.azure.com+++), select the
-    **ResourceGroup1**(the one assigned to you).
+1.  No portal do Azure
+    (+++[https://portal.azure.com+++](https://portal.azure.com+++/)),
+    selecione o **ResourceGroup1** (aquele atribuído a você).
 
-2.  Select all the resources under it and click on **Delete**.
+2.  Selecione todos os recursos abaixo e clique em **Delete**.
 
-    ![A screenshot of a computer Description automatically generated](./media/image67.png)
+![A screenshot of a computer Description automatically
+generated](./media/image72.png)
 
-3.  Enter +++**delete**+++ and click on the **Delete** button to confirm
-    deletion. Click on **Delete** in the Delete confirmation dialog box.
+3.  Digite +++**delete**+++ e clique no botão **Delete** para confirmar
+    a exclusão. Clique em **Delete** na caixa de diálogo de confirmação
+    de exclusão.
 
-    ![A screenshot of a computer Description automatically generated](./media/image68.png)
+![A screenshot of a computer Description automatically
+generated](./media/image73.png)
 
-4.  Ensure that the resources are deleted, by the delete confirmation
-    message.
+4.  Certifique-se de que os recursos sejam excluídos pela mensagem de
+    confirmação de exclusão.
 
-    ![A screenshot of a computer screen Description automatically
-generated](./media/image69.png)
+![A screenshot of a computer screen Description automatically
+generated](./media/image74.png)
 
-**Summary:**
+## Resumo
 
-In this lab, we have learnt to create a custom agent that uses your own
-data from **Azure AI Foundry**.
+Neste laboratório, aprendemos a criar um agente personalizado que usa
+seus próprios dados do **Azure AI Foundry**.
