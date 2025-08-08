@@ -1,534 +1,598 @@
-# Lab 3: Build a Custom Contoso Agent to Chat with Your Data Using Teams AI Library and Teams Toolkit
+# Laboratorio 3: Construya un Contoso Agent personalizado para chatear con sus datos usando el Teams AI Library y Teams Toolkit
 
-**Estimated Time: 45 mins**
+**Duración estimada: 45 minutos**
 
-## Objective
+## Objetivo
 
-The objective of this lab is to enable participants to build a custom
-Contoso Agent leveraging the Teams AI Library and Teams Toolkit.
-Participants will configure the Azure OpenAI API to integrate GPT
-capabilities, set up and manage data using Azure OpenAI and Azure Blob
-Storage, and deploy a customized chat model tailored for AI-driven
-interactions. By the end of the lab, they will have created and
-configured a Teams AI-powered custom agent using Visual Studio Code and
-the Teams Toolkit, gaining practical experience in deploying and
-managing AI-enabled applications.
+El objetivo de este laboratorio es habilitar a los participantes a
+construir un Contoso Agent personalizado aprovechando el Teams AI
+Library y Teams Toolkit. Los participantes configurarán el Azure OpenAI
+API para integrar las capacidades de GPT, configurar y gestionar datos
+mediante Azure OpenAI y Azure Blob Storage, e implementar un modelo de
+chat personalizado para las interacciones impulsadas por la IA. Al final
+del laboratorio, habrán creado y configurado un agente personalizado con
+tecnología de IA de Teams mediante Visual Studio Code y el Teams
+Toolkit, adquiriendo experiencia práctica en la implementación y
+administración de aplicaciones habilitadas para IA.
 
-## Solution Focus Area
+## Área de enfoque de la solución
 
-This lab guide focuses on enabling participants to leverage the Azure
-OpenAI API to create intelligent, context-aware chat interactions.
-Participants will configure GPT-based models and integrate with Azure
-services like Blob Storage and Azure AI Search for efficient data
-management.
+Esta guía de laboratorio se centra en permitir que los participantes
+aprovechen la API de Azure OpenAI para crear interacciones de chat
+inteligentes y contextuales. Los participantes configurarán modelos
+basados en GPT y se integrarán con servicios de Azure como Blob Storage
+y Azure AI Search para una gestión de datos eficiente.
 
-The lab provides hands-on experience in deploying and customizing chat
-models with tailored prompts and settings to meet business needs.
-Additionally, participants will build a custom AI agent using the Teams
-AI Library and Teams Toolkit, integrating it seamlessly into
-organizational workflows.
+El laboratorio proporciona experiencia práctica en la implementación y
+personalización de modelos de chat con prompts y configuraciones
+personalizadas para satisfacer las necesidades empresariales. Además,
+los participantes crearán un agente de IA personalizado utilizando la
+biblioteca de IA de Teams y el Teams Toolkit, integrándolo sin problemas
+en los workflows de la organización.
 
-## Exercise 1: Configuring Azure OpenAI API and Role Permissions
+## Ejericicio 1: Configure el Azure OpenAI API y permisos de roles
 
-### Task 1: Creating an Azure OpenAI API key to use OpenAI’s GPT
+### Tarea 1: Cree un Azure OpenAI API key para usar el GPT del OpenAI
 
-1.  Open a browser, navigate to the following the URL +++https://oai.azure.com/portal+++ and
-    login using,
+1.  Abra un navegador, navegue a la siguiente URL
+    +++<https://oai.azure.com/portal+++> e inicie sesión usando,
 
-    - Username - +++@lab.CloudPortalCredential(User1).Username+++
-      
-    - Password - +++@lab.CloudPortalCredential(User1).Password+++
+    - Username - <+++@lab.CloudPortalCredential>(User1).Username+++
 
-    ![](./media/image1.png)
+    - Password - <+++@lab.CloudPortalCredential>(User1).Password+++
 
-3.  On the **Azure AI Foundry** home page Click on **Create new Azure
-    OpenAI resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-    ![](./media/image2.png)
+2.  En la página de inicio de **Azure AI Foundry** haga clic en **Create
+    new Azure OpenAI resource**.
 
-2.  Create Azure OpenAI Window will open, if prompted sign in again.
-    Enter the below given details into respected fields and click on
-    **Next**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
-    | Property   | Value   |
-    |:---|:------|
-    | Subscription   |   Select the assigned subscription |
-    |  Resource group  |  Select your assigned Resource Group  |
-    | Region   |  Select @lab.CloudResourceGroup(ResourceGroup1).Location  |
-    |  Name  |  +++ContosoAgent@lab.LabInstance.Id+++  | 
-    |  Pricing tier  |  Standard S0  |    
+3.  Se abrirá la ventana Create Azure OpenAI, y si se le pide, inicie
+    sesión de nuevo. Ingrese los siguientes detalles en los campos
+    correspondientes y haga clic en **Next**.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image3.png)
+[TABLE]
 
-4.  Under **Network** tab and **Tags** tab, accept the defaults and
-    click on **Next**
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image3.png)
 
-    ![A screenshot of a computer AI-generated content may be
+4.  En la pestaña **Network** y la pestaña **Tags**, acepte los valores
+    predetrminados y haga clic en **Next**
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image5.png)
 
-4.  On the **Review + submit** tab click on **Create.**
+5.  En la pestaña **Review + submit** haga clic en **Create.**
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-5.  After Successful deployment, window automatically navigate to
-    CognitiveServiceOpenAI Page. Click on **Go to resource** to navigate
-    to the Resource Group page.
+6.  Después de la implementación exitosa, la ventana se navega a la
+    página CognitiveServiceOpenAI automáticamente. Haga clic en **Go to
+    resource** para ir a la página Resource Group.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-6.  Select the created Azure OpenAI resource. In the AzureOpenAI resource page, from the left pane, select **Keys and Endpoint** under **Resource Management** and copy and **save** the **Key** and **Endpoint**
-    values to a notepad for future reference.
+7.  Seleccione el recurso Azure OpenAI creado. En la página AzureOpenAI
+    resource, desde el panel izquierdo, seleccione **Keys and
+    Endpoint** en **Resource Management** y copie y **guarde** los
+    valores de **Key** y **Endpoint** a un notepad para más tarde.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-### Task 2: Assign Cognitive contributor role.
+### Tarea 2: Asigne el rol de Cognitive contributor.
 
-1.  Select the **ResourceGroup1** to go to the Resource Group overview page.
-   
-2.  Select **Access control (IAM)** from the left pane of the Resource
-    group page. Then select **+** **Add** and click **Add role
-    assignment**.
+1.  Seleccione el **ResourceGroup1** para ir a la página de Resource
+    Group overview.
 
-    ![A screenshot of a computer AI-generated content may be
+2.  Seleccione **Access control (IAM)** desde el panel izquierdo de la
+    página Resource group. Y seleccione **+** **Add** y haga clic
+    en **Add role assignment**.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-3.  Search and select +++**cognitive service contributor+++**, click
-    **Next**.
+3.  Busque y seleccione +++**cognitive service contributor+++**, haga
+    clic en **Next**.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-4.  Click on **Select members** to assign members. Search for
-    +++@lab.CloudPortalCredential(User1).Username+++ and click on
-    **Select**. Click **Next**.
+4.  Haga clic en **Select members** para asignar miembros.
+    Busque <+++@lab.CloudPortalCredential>(User1).Username+++ y haga
+    clic en **Select**. Haga clic en **Next**.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-5.  On the assignment type tab, select assignment type as **Active**,
-    duration as **Permanent**, and click on **Review +Assign** and again
-    **Review + Assign**.
+5.  En la pestaña assignment type, seleccione assignment type
+    como **Active**, duration como **Permanent**, y haga clic
+    en **Review +Assign** y de nuevo en **Review + Assign**.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-6.  You will get a success message once the role assignment is
-    successful.
+6.  Recibirá un mensaje de éxito una vez que la asignación de roles se
+    haya realizado correctamente.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image15.png)
 
-## Exercise 2: Set up your data on Azure OpenAI
+## Ejercicio 2: Configure sus datos en Azure OpenAI
 
-### Task 1: Deploy chat in AI Foundary
+### Tarea 1: Implemente el chat en AI Foundry
 
-1.  Select the hamburger menu in the top left and click on **All
-    resources**.
+1.  Seleccione el menú con tres barras horizontales en la esquina
+    superior izquierda y haga clic en **All resources**.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-2.  Select the Azure OpenAI service **ContosoAgent@lab.LabInstance.Id** that you created earlier.
+2.  Seleccione el Azure OpenAI
+    service [**ContosoAgent@lab.LabInstance.Id**](mailto:ContosoAgent@lab.LabInstance.Id) que
+    creó anteriormente.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-3.  Select **Go to Azure AI Foundry portal**.
-   
-4.  Select **Model Catalog** from the left pane.
+3.  Seleccione **Go to Azure AI Foundry portal**.
 
-    <img width="504" alt="image" src="https://github.com/user-attachments/assets/9c9e6e8a-caab-41b7-bcbb-3df9ac62b9ed" />
+4.  Seleccione **Model Catalog** desde el panel izquierdo.
 
-8.  On the **Select a chat completion model** page, search for
-    +++gpt-4o+++, select it and click on **Confirm.**
+![image](./media/image18.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
+5.  En la página **Select a chat completion model**, busque
+    +++gpt-4o+++, selecciónelo y haga clic en **Confirm.**
 
-9.  On the **Deploy model gpt-4o** pane, Expand the **Customize** tab
-    enter the following details, and click on **Deploy.**
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
+
+6.  En l panel **Deploy model gpt-4o**, expanda la
+    pestaña **Customize** ingrese los siguientes detalles, y haga clic
+    en **Deploy.**
 
     - **Deployment type**: Standard
 
     - **Deployment name**: gpt-4o
 
-    - **Token per Minute Rate**: 5K (Scroll to adjust the limit. If it
-      does not work, click on it and then use Shift+Right/Left arrow key
-      to adjust the limit)
+    - **Token per Minute Rate**: 5K (Desplázate para ajustar el límite.
+      Si no funciona, haga clic en él y luego use la tecla de flecha
+      Shift + Derecha / Izquierda para ajustar el límite)
 
     - **Content Filter**: defaultv2
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image21.png)
 
-10.  You can check the deployment under **Shared resources** à
-    **Deployments**
+7.  Puede comprobar la implementación en **Shared
+    resources** en **Deployments**
 
-    ![A screenshot of a computer AI-generated content may be
+\![Una captura de pantalla de un contenido generado por IA de una
+computadora puede ser incorrecto.\](./media/image25.png)
+
+### Tarea 2: Cree una cuenta de almacenamiento
+
+1.  Desde el Azure portal, la página de inicio
+    +++<https://portal.azure.com/+++> , busque y seleccione +++Storage
+    accounts+++.
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image22.png)
+
+2.  Haga clic en **+ Create,** ingrese los siguientes datos y haga clic
+    en **Review + create.**
+
+    - Subscription – Seleccione su subscription
+
+    - Resource group – Seleccione su Resourcegroup asignado
+
+    - Storage account name - <+++contosostorage@lab.LabInstance.Id>+++
+
+    - Region – Select @lab.CloudResourceGroup(ResourceGroup1).Location
+
+    - Primary service – Azure Blob storage o Azure Data Lake Storage Gen
+      2
+
+    - Performance – Standard
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image23.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image24.png)
+
+3.  Haga clic en **Create** y espere a que se complete la implementación
+    y luego haga clic en **Go to resource**.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-### Task 2: Creating a storage account
-
-1.  From the Azure portal, +++https://portal.azure.com/+++ Home page,
-    search for and select +++Storage accounts+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-2.  Click on **+ Create,** enter the following details and click
-    **Review + create.**
+4.  En la cuenta de almacenamiento recién creada, vaya
+    a **Containers** en Data storage y haga clic en **+ Container**
 
-    -    Subscription - Select your subscription
-    
-    -    Resource group – Select your assigned Resourcegroup
-    
-    -    Storage account name - +++contosostorage@lab.LabInstance.Id+++
-    
-    -    Region – Select @lab.CloudResourceGroup(ResourceGroup1).Location
-    
-    -    Primary service – Azure Blob storage or Azure Data Lake Storage Gen 2
-    
-    -    Performance – Standard
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-    ![A screenshot of a computer AI-generated content may be
+5.  Ingrese el container name como +++**source**+++ y haga clic
+    en **create.**
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-3.  Click on **Create** and wait for the deployment to complete and then
-    click on **Go to resource**.
+6.  Haga clic en el **source** container y ábralo.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-    ![A screenshot of a computer AI-generated content may be
+7.  Para agregar datos a la carpeta source container, haga clic
+    en **Upload** --\_ **Browse for files** y luego en C:\Labfiles
+    seleccione **TF-AzureOpenAI.pdf** Después de seleccionar el archivo,
+    haga clic en el botón **Upload**.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-4.  On the newly created storage account, navigate to **Containers**
-    under Data storage and click on **+ Container**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-5.  Enter the container name as +++**source**+++ and click on **create.**
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-6.  Click on **source** container and open it.
+### Tarea 3: Cree Azure AI search
 
-    ![A screenshot of a computer AI-generated content may be
+1.  Desde la página home de Azure portal
+    +++<https://portal.azure.com/+++> , busque y seleccione +++**AI
+    search**+++.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-7.  To add data into the source container, Click on **Upload** --\_
-    **Browse for files** and then from C:\Labfiles select
-    **TF-AzureOpenAI.pdf** After selecting file click on **upload** button.
+2.  Haga clic en **+ Create** para crear un nuevo Azure AI Search
+    resource.
 
-    ![A screenshot of a computer AI-generated content may be
+Ingrese los siguientes detalles y haga clic en **Review + create** y
+seleccione **Create**.
+
+- Subscription: seleccione su subscription
+
+- Resource Group: Seleccione su Resource group asignado
+
+- Service name: <+++contoso-ai-search-@lab.LabInstance.Id>+++
+
+- Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search service AI-generated content may be
 incorrect.](./media/image35.png)
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image36.png)
 
-### Task 3: Create Azure AI search
+3.  En el search-service-contoso-ai-search-01overview haga clic en **Go
+    to resource**.
 
-1.  From the Azure portal +++https://portal.azure.com/+++ Home page,
-    search for and select +++**AI search**+++.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-2.  Click on **+ Create** to create a new Azure AI Search resource.
+4.  En el <contoso-ai-search-@lab.LabInstance.Id> overview, guarde
+    el **URL** endpoint para uso futuro. Luego, desde la barra de
+    navegación izquierda, seleccione **keys** en **Settings** y
+    guarde **primary** y **secondary** **key** para uso futuro.
 
-    Enter the following details and click on **Review + create** and then select **Create**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-    -    Subscription: select your subscription
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-    -    Resource Group: Select your assigned Resource group
-    
-    -    Service name: +++contoso-ai-search-@lab.LabInstance.Id+++
-    
-    -    Location: @lab.CloudResourceGroup(ResourceGroup1).Location
+### Tarea 4: Agregue datos para chatear en Azure AI Foundry
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image38.png)
+1.  Desde la página **Azure AI Foundry**, seleccione **Chat** -\> **Add
+    your data -\> Add a data source**.
 
-    ![A screenshot of a search service AI-generated content may be incorrect.](./media/image39.png)
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image40.png)
 
-    ![A screenshot of a search engine AI-generated content may be incorrect.](./media/image40.png)
+2.  Desde el dropdown, seleccione **Azure Blob Storage (preview)**.
 
-3.  On the search-service-contoso-ai-search-01overview click on **Go to
-    resource**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image41.png)
+3.  En la página **Add data**, ingrese los siguientes detalles y haga
+    clic en **Next.**
 
-4.  On contoso-ai-search-@lab.LabInstance.Id overview, save **URL**
-    endpoint for future use. Then from left navigation bar select
-    **keys** under **Settings** and save **primary** and **secondary** **key** for future
-    use.
+    - Select data source – Azure Blob Storage(preview)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image42.png)
+    - Subscription - Seleccione su subscription
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image43.png)
+    - Select Azure Blob storage resource –
+      Select [**contosostorage@lab.LabInstance.Id**](mailto:contosostorage@lab.LabInstance.Id)
 
-### Task 4: Add data to chat in Azure AI Foundry
+    - Select storage container – Seleccione **source**
 
-1.  From the **Azure AI Foundry** page, select **Chat** -\> **Add your
-    data -\> Add a data source**.
+    - Select Azure AI Search resource –
+      Seleccione [**contoso-ai-search-@lab.LabInstance.Id**](mailto:contoso-ai-search-@lab.LabInstance.Id)
 
-    ![A screenshot of a chat AI-generated content may be incorrect.](./media/image44.png)
+    - Index Name - Type <+++contosoindex@lab.LabInstance.Id>+++
 
-2.  From the dropdown, select **Azure Blob Storage (preview)**.
+    - Indexer schedule - Once
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image45.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image42.png)
 
-3.  On the **Add data** page, enter the following details and click on
-    **Next.**
+4.  En la página **Data management**, seleccione search type
+    como **keyword** y haga clic en **Next**.
 
-    -    Select data source – Azure Blob Storage(preview)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-    -    Subscription - Select your subscription
-    
-    -    Select Azure Blob storage resource – Select **contosostorage@lab.LabInstance.Id**
-    
-    -    Select storage container – Select **source**
-    
-    -    Select Azure AI Search resource – Select **contoso-ai-search-@lab.LabInstance.Id**
-    
-    -    Index Name - Type +++contosoindex@lab.LabInstance.Id+++
-    
-    -    Indexer schedule - Once
+5.  En la página **Data connection**, seleccione **API key** y haga clic
+    en **Next.**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-4.  On the **Data management** page, select search type as **keyword**
-    and click **Next**.
+6.  En la página **Review and finish**, haga clic en **Save and close.**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-5.  On the **Data connection** page, select **API key** and click on
-    **Next.**
+7.  La ingesta llevará algún tiempo, una vez completada, los detalles de
+    los datos se reflejarán en el panel. Una vez completado el proceso
+    de ingesta de datos, puede empezar a crear el agente de motor
+    personalizado mediante el método Teams AI library y Teams Toolkit.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image48.png)
+\[!Ojo\] **Ojo:** Los archivos deben estar en formato .txt, .md, .html,
+.pdf, .docx o .pptx con un límite de tamaño de 16 MB.
 
-6.  On the **Review and finish** page, click on **Save and close.**
+![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image49.png)
+## Ejercicio 3: Cree y configure your custom agent
 
-7.  Ingestion will take some time, once completed the data details will
-    reflect in the pane. After the data ingestion process is complete,
-    you can start creating your custom engine agent using the Teams AI
-    library and Teams Toolkit.
+### Tarea 1: Agregue un Teams Toolkit extension
 
-    >[!Note] **Note:** Files must be in .txt, .md, .html, .pdf, .docx, or .pptx format
-with 16-MB size limit.
+1.  Abra **Visual Studio Code,** en su PC. Seleccione **Trust** para
+    suprimir las restricciones en el Visual Studio Code.
 
-    ![](./media/image50.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image47.png)
 
-## Exercise 3: Create and configure your custom agent
+2.  En la página de inicio de VS, en el panel izquierdo haga clic en el
+    icono **Extensions**, busque +++**Teams Toolkit**+++ y haga clic
+    en **Install.**
 
-### Task 1: Adding a Teams Toolkit extension
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image48.png)
 
-1.  Open **Visual Studio Code,** on your PC. Select **Trust** to remove the restricted mode in the Visual Studio Code. 
+3.  Una vez completada la instalación, seleccione el icono del Teams
+    Toolkit![](./media/image49.png) en el Visual Studio Code Activity
+    Bar y seleccione **Create a New App**.
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
+
+4.  Seleccione **Custom Engine Agent**.
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  On the VS home page, on the left navigation pane click on the
-    **Extensions** icon, search for +++**Teams Toolkit**+++ and click on
-    **Install.**
+5.  Seleccione **Basic AI Chatbot**.
 
-    ![](./media/image52.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
 
-3.  Once the installation is complete, select the Teams Toolkit ![](./media/image53.png) icon in the Visual
-    Studio Code Activity Bar and select **Create a New App**.
+6.  Seleccione **JavaScript** como lenguaje de programación.
 
-    ![](./media/image54.png)
-
-4.  Select **Custom Engine Agent**.
-
-    ![](./media/image55.png)
-
-5.  Select **Basic AI Chatbot**.
-
-    ![](./media/image56.png)
-
-6.  Select **JavaScript** as the programming language.
-
-    ![](./media/image57.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image53.png)
 
 7.  Select **Azure OpenAI**.
 
-    ![](./media/image58.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
-8.  Enter the values from the Azure portal, the one which we have copied
-    and saved in the notepad.
+8.  Ingrese los valores del Portal de Azure, el que hemos copiado y
+    guardado en el archivo notepad.
 
     - **Azure OpenAI key**
 
-    ![](./media/image59.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
-    - **Azure OpenAI endpoint**
+- **Azure OpenAI endpoint**
 
-    ![](./media/image60.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image56.png)
 
-    - **Deployment name** - +++gpt-4o+++
+- **Deployment name** - +++gpt-4o+++
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image61.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image57.png)
 
-9.  Create a new folder to contain the data related to teams and
-    navigate to that location by clicking on **Browse**.
+9.  Cree una nueva carpeta para contener los datos relacionados con los
+    equipos y navegue hasta esa ubicación haciendo clic en **Browse**.
 
-    ![](./media/image62.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image58.png)
 
-    ![](./media/image63.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
-10. Enter +++**TeamsContosoAgent**+++ as the name for your custom engine agent,
-    select **Enter**. Custom engine agent is created in a few seconds.
+10. Ingrese +++**TeamsContosoAgent**+++ como nombre del agente de motor
+    personalizado, seleccione **Enter**. El agente de motor
+    personalizado se crea en unos segundos.
 
-    ![](./media/image64.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
-11. Select Yes, I author
+11. Seleccione Yes, I author
 
-    ![](./media/image65.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
 
-**Take a tour of the source code**
+**Haga un recorrido por el código fuente**
 
-Have a look at what's inside this custom engine agent \> Basic AI
-Chatbot template.
+Echa un vistazo a lo que hay dentro de esta plantilla de chatbot de IA
+básica \> agente de motor personalizado.
 
-| Folder name   | Contents   |
-|:---|:------|
-| .vscode   |   VS Code files for debugging. |
-|  appPackage  |  Templates for the Teams application manifest.  |
-| env   |  Name or value pairs are stored in environment files and used by teamsapp.yml to customize the provisioning and deployment rules.  |
-|  src/  |  The source code for the notification Teams application.  |
-|  src/index.js  |  Sets up the bot app server. |  
-| src/adapter.js   |  Sets up the bot adapter.  |
-|  src/config.js  |  Defines the environment variables.  |
-|  src/prompts/chat/skprompt.txt  |  Defines the prompt.  |
-|  src/prompts/chat/config.json  |  Configures the prompt.  |
-| src/app/app.js   |  Handles business logics for the Basic AI Chatbot.  |
-| teamsapp.yml   |  Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages.  |
-| teamsapp.local.yml   |  This override teamsapp.yml with actions that enable local execution and debugging.  |
-|   teamsapp.testtool.yml |  This override teamsapp.yml with actions that enable local execution and debugging in Teams App Test Tool.  |
-    
-### Task 2: Configure your custom agent
+[TABLE]
 
-Let's customize the prompt for your custom engine agent.
+### Tarea 2: Configure su agente personalizado
 
-1.  Go to src/prompts/chat/skprompt.txt and replace the existing code
-    with the below code. After updating, press **ctrl+s** to save the
-    file.
+Vamos a personalizar el prompt para el agente de motor personalizado.
 
-    ```
-    The following is a conversation with an AI assistant, who is an expert on answering questions         over the given context.
-    Responses should be in a short journalistic style with no more than 80 words.
-    ```
-    
-    ![](./media/image66.png)
+1.  Vaya a src/prompts/chat/skprompt.txt y reemplace el código existente
+    con el código a continuación. Después de actualizar, presione
+    **ctrl+s** para guardar el archivo.
 
-2.  Go to the **config.json** file under prompts/chat. Replace the
-    existing code with the following code and replace the **endpoint** ,
-    **index_name**, and **key** values with your **Azure AI Search**
-    resource details. After updating, press **ctrl+s** to save the file.
+> The following is a conversation with an AI assistant, who is an expert
+> on answering questions over the given context.
+>
+> Responses should be in a short journalistic style with no more than 80
+> words.
 
-    ```
-    {
-      "schema": 1.1,
-      "description": "A bot that can chat with users",
-      "type": "completion",
-      "completion": {
-        "completion_type": "chat",
-        "include_history": true,
-        "include_input": true,
-        "max_input_tokens": 2800,
-        "max_tokens": 1000,
-        "temperature": 0.9,
-        "top_p": 1.0,
-        "presence_penalty": 0.6,
-        "frequency_penalty": 0.0
-      },
-      "data_sources": [
-        {
-          "type": "azure_search",
-          "parameters": {
-            "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
-            "index_name": "YOUR-INDEX_NAME",
-            "authentication": {
-              "type": "api_key",
-              "key": "AZURE-AI-SEARCH-KEY"
-            }
-          }
-        }
-      ]
-    }
-    ```
-    
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image67.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
 
-3.  Go to src/app/app.js file and add the following variable
-    inside OpenAIModel – after the azureEndpoint entry.
+2.  Ve al archivo **de config.json** en prompts/chat. Reemplace el
+    código existente por el código siguiente y reemplace el
+    **endpoint**, el **index_name** y los valores **de key** por los
+    detalles del recurso de **Azure AI Search**. Después de actualizar,
+    presione **ctrl+s** para guardar el archivo.
 
-    +++azureApiVersion: '2024-02-15-preview',+++
+> {
+>
+> "schema": 1.1,
+>
+> "description": "A bot that can chat with users",
+>
+> "type": "completion",
+>
+> "completion": {
+>
+> "completion_type": "chat",
+>
+> "include_history": true,
+>
+> "include_input": true,
+>
+> "max_input_tokens": 2800,
+>
+> "max_tokens": 1000,
+>
+> "temperature": 0.9,
+>
+> "top_p": 1.0,
+>
+> "presence_penalty": 0.6,
+>
+> "frequency_penalty": 0.0
+>
+> },
+>
+> "data_sources": \[
+>
+> {
+>
+> "type": "azure_search",
+>
+> "parameters": {
+>
+> "endpoint": "AZURE-AI-SEARCH-ENDPOINT",
+>
+> "index_name": "YOUR-INDEX_NAME",
+>
+> "authentication": {
+>
+> "type": "api_key",
+>
+> "key": "AZURE-AI-SEARCH-KEY"
+>
+> }
+>
+> }
+>
+> }
+>
+> \]
+>
+> }
 
-    ![](./media/image68.png)
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image63.png)
 
-4.  Open Powershell as an administrator and run the following command,
-    and enter A.
+3.  Vaya al archivo src/app/app.js y agregue la siguiente variable
+    dentro de OpenAIModel, después de la entrada azureEndpoint.
 
-    ```
-    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-    ```
-    
-    ![](./media/image69.png)
++++azureApiVersion: '2024-02-15-preview',+++
 
-5.  Back in the **Visual Studio Code**, from the left pane, select **Run
-    and Debug (Ctrl+Shift+D)**. Select **Debug in Test Tool** to start
-    debugging.
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image64.png)
 
-    ![](./media/image70.png)
+4.  Abra Powershell como administrador y ejecute el siguiente comando, e
+    ingrese A.
 
-6.  Select Allow access if you get a Windows Security Alert.
+5.  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image71.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image65.png)
 
-7.  Custom engine agent runs within the Teams App Test Tool, which opens
-    in your browser.
+6.  Volviendo en el **Visual Studio Code**, en el panel izquierdo,
+    seleccione **Run and Debug (Ctrl+Shift+D)**. Seleccione **Debug in
+    Test Tool** Para iniciar la depuración.
 
-    ![](./media/image72.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image66.png)
 
-8.  The browser will open a new tab, Teams App Test Tool and queries can
-    be run in the app.
+7.  Seleccione Allow access si recibe una alerta de Windows Security.
 
-    ![A screenshot of a computer Description automatically generated](./media/image73.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image67.png)
 
-## Conclusion
+8.  El agente de motor personalizado se ejecuta dentro de la clase Teams
+    App Test Tool, que se abre en su navegador.
 
-By completing this lab, participants have gained hands-on experience in
-building and deploying a custom AI-driven chatbot using the Teams AI
-Library and Teams Toolkit. This included setting up Azure OpenAI
-resources, integrating data storage and AI search capabilities, and
-customizing the chatbot for context-aware interactions. Through this
-exercise, participants have learned how to configure intelligent agents
-tailored to business needs and integrate them into organizational
-workflows, effectively leveraging modern AI capabilities within
-Microsoft Teams.
+![A black screen with white text AI-generated content may be
+incorrect.](./media/image68.png)
 
+9.  El navegador abrirá una nueva pestaña, Teams App Test Tool y las
+    consultas se pueden ejecutar en la aplicación.
+
+![A screenshot of a computer Description automatically
+generated](./media/image69.png)
+
+## Conclusión
+
+Al completar este laboratorio, los participantes han adquirido
+experiencia práctica en la creación e implementación de un chatbot
+personalizado impulsado por IA utilizando la Teams AI library y el Teams
+Toolkit. Esto incluyó la configuración de recursos de Azure OpenAI, la
+integración del almacenamiento de datos y las capacidades de búsqueda de
+IA, y la personalización del chatbot para interacciones sensibles al
+contexto. A través de este ejercicio, los participantes han aprendido a
+configurar agentes inteligentes adaptados a las necesidades del negocio
+e integrarlos en los workflows de la organización, aprovechando
+eficazmente las capacidades modernas de IA dentro de Microsoft Teams.

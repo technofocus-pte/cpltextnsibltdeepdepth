@@ -1,757 +1,880 @@
-# Lab 1 - Streamlining IT Support Operations with Autonomous Copilot Agent using Copilot Studio
+# Laboratorio 1 – Agilice las operaciones de soporte de IT con agente de Copilot autónomo mediante Copilot Studio
 
-**Estimate Time: 60 mins**
+**Duración estimada: 60 minutos**
 
-## Objective
+## Objetivo
 
-The objective of this lab is to enable participants to streamline IT
-support operations at Contoso Solutions by creating an autonomous
-Copilot agent. Participants will learn to set up Microsoft Copilot
-Studio, configure the IT Support Agent, integrate Power Apps and
-Dataverse, enhance the bot’s capabilities with a knowledge base, and
-automate ticket creation using Power Automate. This hands-on lab will
-equip users with the skills to improve IT workflows, reduce manual
-effort, and enhance support efficiency.
+El objetivo de este laboratorio es permitir a los participantes
+simplificar las operaciones de soporte técnico de TI en Contoso
+Solutions mediante la creación de un agente Copilot autónomo. Los
+participantes aprenderán a configurar Microsoft Copilot Studio,
+configurar el agente de soporte de TI, integrar Power Apps y Dataverse,
+mejorar las capacidades del bot con una base de conocimientos y
+automatizar la creación de tickets con Power Automate. Este laboratorio
+práctico equipará a los usuarios con las habilidades para mejorar los
+flujos de trabajo de TI, reducir el esfuerzo manual y mejorar la
+eficiencia del soporte.
 
-## Solution
+## Solución
 
-Participants will create a customized Contoso IT Support Agent using
-Microsoft Copilot Studio, configure it to handle common IT issues, and
-integrate it with Dataverse for storing support data. They will set up a
-development environment, add knowledge sources, and refine the bot's
-conversation flows for better user interaction. By leveraging Power
-Apps, participants will create a Dataverse table to manage IT support
-records. Using Power Automate, they will automate ticket creation and
-email notifications for unresolved issues. Finally, participants will
-test the agent to validate its troubleshooting accuracy and workflow
-automation, ensuring seamless IT support operations.
+Los participantes crearán un agente de soporte técnico de TI de Contoso
+personalizado mediante Microsoft Copilot Studio, lo configurarán para
+manejar problemas de TI comunes y lo integrarán con Dataverse para
+almacenar datos de soporte técnico. Establecerán un entorno de
+desarrollo, agregarán fuentes de conocimiento y refinarán los flujos de
+conversación del bot para una mejor interacción con el usuario. Al
+aprovechar Power Apps, los participantes crearán una tabla de Dataverse
+para administrar los registros de soporte de TI. Con Power Automate,
+automatizarán la creación de tickets y las notificaciones por correo
+electrónico para problemas no resueltos. Por último, los participantes
+pondrán a prueba el agente para validar su precisión en la resolución de
+problemas y la automatización del flujo de trabajo, lo que garantiza que
+las operaciones de soporte de TI sean fluidas.
 
-# Exercise 1: Getting Started with Power Apps
+## Ejercicio 1: Primeros pasos con Power Apps
 
-This exercise introduces participants to Power Apps and Dataverse. The
-goal is to log in to Power Apps, set up a working environment, and
-create a Dataverse table by importing data from an Excel file.
-Participants will learn essential skills for working with data-driven
-applications.
+Este ejercicio presenta a los participantes Power Apps y Dataverse. El
+objetivo es iniciar sesión en Power Apps, configurar un entorno de
+trabajo y crear una tabla de Dataverse importando datos de un archivo de
+Excel. Los participantes aprenderán habilidades esenciales para trabajar
+con aplicaciones basadas en datos.
 
-## Task 1: Logging into Power Apps
+### Tarea 1: Inicie sesión en Power Apps
 
-1.  Navigate to power apps website +++https://www.microsoft.com/en-us/power-platform/products/power-apps+++ and click on the **Try for Free** button.
+1.  Abra un navegador desde el VM del laboratorio.
 
-    ![](./media/image15.png)
+2.  Navegue al sitio web de power apps
+    +++<https://www.microsoft.com/en-us/power-platform/products/power-apps+++> y
+    haga clic en el botón **Try for Free**.
 
+![](./media/image1.png)
 
-2.	Enter the **Administrative Username** from the **Office 365 Tenant** section of the **Resources** tab into the email field and click on the **Start free** button.
+3.  Ingrese el **Administrative Username** desde la sección **Office 365
+    Tenant** de la pestaña **Resources** en el campo del
+    email, **seleccione la casilla** y haga clic en el botón **Start
+    free**.
 
-    ![](./media/img41.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
+4.  Ingrese el **Administrative Password** y se le llevará a la página
+    principal de Power Apps Home.
 
-3.	Enter the **Administrative Password** and you will be taken to the Power Apps Home page.
+5.  Seleccione **Yes** en el diálogo Stay Signed in y **Got it** para el
+    prompt de Save password y seleccione **No, Thanks** en el popup Sign
+    in to Microsoft Edge.
 
-    >[!Note] **Note:** If it agains prompts for the user name, password or any information to login, please provide the same and login.
+\[!Note\] **Ojo:** Si se le pide el user name, password o cualquier
+información para iniciar sesión, por favor proporciónela e inicie
+sesión.
 
-## Task 2: Setting Up a Dataverse Table
+### Tarea 2: Configure una tabla de Dataverse
 
-1.  On the power apps home page, from top select the development
-    environment. In our case its **Dev One**, participant can choose their
-    own environment.
+1.  Asegúrese de que el **entorno Dev One** esté seleccionado.
+    Selecciónelo si aún no lo ha hecho.
 
-    ![](./media/image20.png)
+![](./media/image3.png)
 
+2.  Desde la barra izquierda seleccione **Tables.** En la sección
+    superior de tables haga clic en **+ New table** y
+    seleccione **Create new tables**.
 
-2.  From the left navigation bar select **Tables.** In the tables
-    section top bar click on the **+ New table** and then select
-    **Create new tables**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image4.png)
 
-    ![](./media/image21.png)
+3.  Seleccione la opción **Import an Excel file or CSV** para crear una
+    nueva tabla.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image5.png)
 
-3.  Select **Import an Excel file or CSV** option to create a new table.
+4.  Haga clic en la opción **Select form device** y seleccione el
+    archivo **Support Ticket** desde la carpeta **C:\LabFiles**.
 
-    ![](./media/image22.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image6.png)
 
+5.  Seleccione la tabla y haga clic en **View data** para ver la tabla.
 
-4.  Click on the **Select form device** option and select **Support Ticket**
-    excel file from **C:\LabFiles** folder.
+\[Atención\] **Ojo:** En este caso, la tabla se llama *Employee
+Technical Support Record*. El nombre puede variar con cada ejecución.
+Por favor guarde el nombre de la tabla para referenciar más tarde. El
+nombre de la columna también puede variar.
 
-    ![](./media/image23.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image7.png)
 
+6.  Vaya a table data, seleccione el drop down junto al
+    campo **Technical Issue Description**, seleccione **Edit column**,
+    Establezca el data type como **Text** 🡪 **Multiple line** 🡪 **Plain
+    Text** y haga clic en **Update**. El nombre de la columna puede
+    variar en cada caso.
 
-5.  Select the table and click on **View data** to see the table.
+\[!Atención\] **Ojo:** El **nombre de la columna puede ser un poco
+diferente**, pero se va a pareceer a la descripción del problema ya que
+está generado por Copilot.
 
-    > Note: In my case, the table is named *Employee Technical Support Record*. The name may vary with each execution. Please save the table name for future             reference.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image8.png)
 
-    ![](./media/image24.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image9.png)
 
+7.  Expanda el menú junto al campo **Current Status**, seleccione **Edit
+    column**, Establezca Choices como +++**Unresolved**+++,
+    +++**Resolved**+++, +++**Processing**+++. Establezca Default choice
+    como **Unresolved** y haga clic en **Update**.
 
-6.  Go to table data, select the drop down next to the **Technical Issue Description** field,
-    select **Edit column**, Set the data type as **Text** 🡪 **Multiple
-    line** 🡪 **Plain Text** and click on the **Update**. The column name
-    may be different in each case.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image10.png)
 
-    >[!Note] **Note:** The column name might be slightly different, but it will be something similar to the issue description since it is Copilot generated.
-    
-    ![](./media/image25.png)
+8.  Desde la esquina superior derecha, haga clic en **Save and
+    exit** para salir de la tabla.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image11.png)
 
-    ![](./media/image26.png)
+**Conclusión**
 
+Al completar este ejercicio, los participantes aprenderán:
 
-7.	Select the drop down next to the  **Current Status** field, select **Edit column**, Set
-    the Choices as +++**Unresolved**+++, +++**Resolved**+++, +++**Processing**+++. Set Default
-    choice as **Unresolved** and click on the **Update**.
+- Cómo acceder y navegar por Power Apps mediante las credenciales de
+  office 365 admin tenant.
 
-    ![](./media/image27.png)
+- Pasos para crear y configurar un Dataverse table al importar datos.
 
+- Conocimiento práctico de configurar un entorno para admitir los
+  workflows de desarrollo de aplicaciones.
 
-9.  From top right side click on **Save and exit** to save the table.
+## Ejercicio 2: Cree el Contoso IT Support Agent
 
-    ![](./media/image28.png)
+Este ejercicio se enfoca en iniciar sesión en Microsoft Copilot Studio y
+crear un agente Copilot personalizado para las operaciones de soporte de
+TI en Contoso. Los participantes obtendrán una experiencia práctica de
+navegar por Copilot Studio, configurar entornos y construir un agente
+impulsado por la IA para agilizar los workflows de TI.
 
+### Tarea 1: Iniciar sesión en Microsoft Copilot Studio
 
-## Conclusion
+1.  Desde un navegador, navegue a la url
+    +++[https://copilotstudio.microsoft.com+++](https://copilotstudio.microsoft.com+++/).
 
-By completing this exercise, participants will learn:
+2.  Si dice **Setting up your copilot** como se ve aquí,
+    seleccione **Environments** desde el menú superior derecho y
+    seleccione **Dev One**. Por lo contrario, ignore este paso y siga
+    con el paso 3.
 
-- How to access and navigate Power Apps using office 365 admin tenant credentials.
+![image](./media/image12.png)
 
-- Steps to create and configure a Dataverse table by importing data.
+3.  Haga clic en **Start free trial** para comenzar la prueba de Copilot
+    Studio.
 
-- Practical knowledge of setting up an environment to support app
-  development workflows.
+![](./media/image13.png)
 
-#  Exercise 2: Creating the Contoso IT Support Agent
+### Tarea 2: Cree y configure el Contoso IT Support Agent
 
-This exercise focuses on logging into Microsoft Copilot Studio and
-creating a customized Copilot agent tailored for IT support operations
-at Contoso. Participants will gain hands-on experience navigating
-Copilot Studio, configuring environments, and building an AI-powered
-agent to streamline IT workflows.
+1.  Si ha completado el paso 2 de la tarea anterior, ignore este paso.
+    En la sección de inicio de Copilot Studio de la parte superior
+    derecha, haga clic en **Select environment** y elija **DevOne**.
 
-## Task 1: Logging into Microsoft Copilot Studio
+![](./media/image14.png)
 
-1.	Navigate to the url +++https://copilotstudio.microsoft.com+++ and click on Start free trial to start the Copilot Studio trial.
+2.  En la pestaña welcome to copilot studio, haga clic en **Skip** para
+    seguir adelante.
 
-    ![](./media/image100.png)
+![](./media/image15.png)
 
-  	
-##  Task 2: Creating and Configuring Contoso IT Support Agent 
+3.  Desde la barra izquierda seleccione **Create** y seleccione **New
+    agent** para empezar a crear un nuevo agente.
 
-1.	In Copilot Studio home section from top right, select the **environment** and choose **Dev One** environment. 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-    ![](./media/image6.png)
+4.  Desde la esquina superior derecha, haga clic en **Skip to
+    configure**.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-2.  On welcome copilot studio tab, click on the **Skip** to move
-    forward.
+5.  Ingrese **Name, Description e Instruction** del agente como se ve
+    aquí y haga clic en el botón **Create**.
 
-    ![](./media/image7.png)
+> **Name:** +++Contoso IT Support Agent+++
+>
+> **Description:** +++Create a Contoso IT Support Agent which transforms
+> IT support at Contoso Solutions by providing instant troubleshooting
+> for common issues, automating ticket creation for unresolved problems,
+> and storing all interactions in Dataverse. This solution enhances
+> response times, reduces manual workloads, and boosts employee
+> productivity.+++
+>
+> **Instruction:** +++Create the Copilot Agent and configure it to
+> handle IT support operations. Add a knowledge source containing
+> solutions for common IT issues like hardware troubleshooting,
+> connectivity, and software glitches. Set up a trigger to detect
+> incoming emails from employees describing unresolved issues. Create an
+> action to save these technical issues into a Dataverse table, ensuring
+> all details are stored for tracking and reporting. Test the agent to
+> validate its troubleshooting accuracy and ticket automation workflow
+> before deployment.+++
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-3.  From left navigation bar select **Create** and then select **New agent** to start creating new agent.
+6.  En la página overview de Contoso IT Support Agent, **habilite** el
+    orchestrator para el agente.
 
-    ![](./media/image8.png)
+![](./media/image19.png)
 
+7.  Oen la página overview del agente, **Desactive** la opción “**Allow
+    the AI to use its own general knowledge**”.
 
-4.  From top right corner click on **Skip to configure** button.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
-    ![](./media/image9.png)
+8.  Desde la esquina superior derecha del agente, haga clic en el
+    botón **Settings**.
 
+![](./media/image21.png)
 
-5.  Enter **Name, Description and Instruction** of the agent as given
-    below and click on **Create** button.
+9.  Luego, vaya a la sección **Generative AI**,
+    seleccione **Generative**, establezca content moderation
+    como **Medium** y haga clic en **Save** para guardar la
+    configuración.
 
-    **Name:** +++Contoso IT Support Agent+++
-    
-    **Description:** +++Create a Contoso IT Support Agent which transforms IT support at Contoso Solutions by providing instant troubleshooting for common issues, automating ticket creation for unresolved problems, and storing all interactions in Dataverse. This solution enhances response times, reduces manual workloads, and boosts employee productivity.+++
-    
-    **Instruction:** +++Create the Copilot Agent and configure it to handle IT support operations. Add a knowledge source containing solutions for common IT issues like hardware troubleshooting, connectivity, and software glitches. Set up a trigger to detect incoming emails from employees describing unresolved issues. Create an action to save these technical issues into a Dataverse table, ensuring all details are stored for tracking and reporting. Test the agent to validate its troubleshooting accuracy and ticket automation workflow before deployment.+++
-    
-    ![](./media/image10.png)
+![](./media/image22.png)
 
+**Conclusión**
 
-6.  On overview page of Contoso IT Support Agent, **Enable** the
-    orchestrator for the agent.
+Al completar el ejercicio, los participantes aprenderán:
 
-    ![](./media/image11.png)
+- Cómo acceder y configurar Microsoft Copilot Studio.
 
+- Pasos para crear y configurar un Copilot agent personalizado.
 
-7.  On overview page of the agent, **Disable** the “**Allow the AI to
-    use its own general knowledge**” option.
+- Habilidades prácticas para habilitar las configuraciones de generative
+  AI y orchestrator para el agente.
 
-    ![](./media/image12.png)
+- Maneras de mejorar las operaciones de TI al automatizar la creación de
+  tickets y aprovechar la IA para solucionar problemas.
 
+## Ejercicio 3: Mejore las capacidades del Bot
 
-8.  From top right corner of the agent, click on the **Settings**
-    button.
+Este ejercicio se centra en mejorar las capacidades del Contoso IT
+Support Agent al agregar una vase de conocimiento y personalizar los bot
+topics para una interacción mejorada. Los participantes refinarán las
+respuestas del bot y asegurarán que ayuda a los usuarios de forma eficaz
+en solucionar problemas y escalada.
 
-    ![](./media/image13.png)
+### Tarea 1: Agregue bases de conocimiento
 
+1.  En la página overview del Contoso agent, baje y haga clic en el
+    botón **+ Add Knowledge**.
 
-9.	Then go to **Generative AI** section, select **Generative**, set content moderation as **Medium** and click on **Save** to save the setting.
+![](./media/image23.png)
 
-    ![](./media/image101.png)
+2.  Seleccione **Upload file** para agregar el archivo del
+    laboratorio **Contoso Common IT Issue.docx** desde la
+    carpeta **C:\LabFiles** y haga clic en **Add** para guardar el
+    archivo.
 
+![image](./media/image24.png) ![image](./media/image25.png)
 
-##  Conclusion
+3.  De nuevo, vaya a la página agent overview, baje y haga clic en **+
+    Add knowledge.**
 
-By completing this exercise, participants will learn:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image26.png)
 
-- How to access and set up Microsoft Copilot Studio.
+4.  Seleccione la opción **Dataverse (preview)** como data source.
 
-- Steps to create and configure a custom Copilot agent.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
 
-- Practical skills in enabling generative AI and orchestrator settings
-  for the agent.
+5.  En la barra de búsqueda en la esquina superior derecha, ingrese y
+    búsque +++**Employee**+++ y seleccione la tabla **Employee Technical
+    Support Record**. Luego, haga clic en **Next, Next** y **Add** para
+    agregar el knowledge source.
 
-- Ways to enhance IT operations by automating ticket creation and
-  leveraging AI for troubleshooting.
+**Ojo:** El **nombre de la tabla puede variar** en su caso ya que está
+generado por Copilot.
 
-# Exercise 3: Enhancing Bot Capabilities
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
 
-This exercise focuses on enhancing the capabilities of the Contoso IT
-Support Agent by adding a knowledge base and customizing bot topics for
-improved interaction. Participants will refine the bot's responses and
-ensure it effectively assists users in troubleshooting and escalation.
+![A screenshot of a computer screen AI-generated content may be
+incorrect.](./media/image29.png)
 
-## Task 1: Add Knowledge Base 
+\[!Alerta\] **Importante:** Desde la página Knowledge, asegúrese de que
+se ha cargado el knowledge source exitosamente. Esto suele tardar unos
+10 o 15 minutos en completar.
 
-1.  On Contoso agent overview page, scroll down and click on **+ Add
-    Knowledge** button.
+### Tarea 2: Personalice el Conversation Start Topic
 
-    ![](./media/image29.png)
+1.  Desde la opción en la barra superior, haga clic
+    en **Topics** -\> **System** y luego haga clic y abra
+    el **Conversation Start** topic.
 
+![image](./media/image30.png)
 
-2.  Select **Click to browse** button to add the lab file **Contoso IT Support Issue** from **C:\LabFiles** folder and then click on **Add** to save the file.
+2.  Baje y vaya al message node. Actualice el mensaje con el nombre del
+    bot así:
 
-    ![](./media/image30.png)
+Hello. I’m Bot Name, a virtual assistant. +++How can I help you?+++
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image31.png)
 
-    ![](./media/image31.png)
+3.  Desde la parte superior, haga clic en **Save** para guardar el
+    topic.
 
-3.  Again, go to agent overview page, scroll down and click on **+ Add knowledge.**
+![](./media/image32.png)
 
-    ![](./media/image32.png)
+### Tarea 3: Actualice el Fallback Topic
 
+1.  Desde la opción en la barra superior, haga clic
+    en **Topics** -\> **System** y abra el **Fallback** topic.
 
-4.  Select **Dataverse (preview)** option as data source.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image33.png)
 
-    ![](./media/image33.png)
+2.  Baje y vaya al message node. Actualice el mensaje así:
 
++++I’m sorry. This information is not available in my system. You can
+raise the support ticket via mail for this issue.+++
 
-5.  In top right corner search bar, enter and search for +++**Employee**+++
-    and select **Employee Technical Support Record** table. Then click
-    on the **Next, Next** and **Add** button to add the knowledge
-    source.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image34.png)
 
-    >[!Note] **Note:** The table name might be different in your case since it is a Copilot generated one.
-    
-    ![](./media/image34.png)
+3.  Desde la parte superior derecha, haga clic en el botón **Save** para
+    guardar el topic.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image35.png)
 
-    ![](./media/image35.png)
+**Conclusión**
 
+Al completar este ejercicio, los participantes aprenderán:
 
-## Task 2: Customize the Conversation Start Topic
+- Cómo subir e integrar un knowledge base para mejorar la funcionalidad
+  del bot.
 
-1.  From the top bar option click on **Topics** and then click and open
-    **Conversation Start** topic.
+- Pasos para personalizar los mensajes iniciales de conversación para
+  una experiencia de usuario mejor.
 
-    ![](./media/image36.png)
+- Técnicas para actualizar los fallback responses para mejorar la
+  gestión de consultas no admitidas.
 
+## Ejercicio 4: Pruebe el agente
 
-2.  Scroll down and go to message node. Update the message after bot
-    name as given below:
+Este ejercicio guua a los participantes en la prueba de Contoso IT
+Support Agent para validar su funcionalidad. Los participantes verán
+cómo el bot maneja los prompts con la ayuda de knowledge base y fallback
+topics para asegurar interacciones y escaladas sin problemas.
 
-    Hello. I’m Bot Name, a virtual assistant. +++How can I help you?+++
+1.  Desde la esquina superior derecha, haga clic en el botón **Test**.
+    En la sección de test, haga clic en **Map,** póngalo en **On** y
+    haga clic en **Refresh**.
 
-    ![](./media/image37.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image36.png)
 
+2.  Ingrese el prompt +++**My printer is not working how to fix it**+++
+    . Da una solución en función del knowledge source.
 
-3.  From top click on the **Save** to save the topic.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image37.png)
 
-    ![](./media/image38.png)
+3.  De nuevo, proporcione el prompt +++**Two factor Authentication (2FA)
+    issue**+++ .
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-##  Task 3: Update the Fallback Topic 
+4.  El problema 2FA y su solución no están disponible en el knowledge
+    source, por eso se recurre al fallback topic y devuelve un prompt
+    relacionado con Raise Ticket.
 
-1.  From the top bar option click on **Topics** and then open
-    **Fallback** topic.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-    ![](./media/image39.png)
+**Conclusión**
 
+Al completar este ejercicio, los participantes aprenderán:
 
-2.  Scroll down and go to message node. Update the message as given
-    below:
+- Cómo validar y activar un agente IA para troubleshooting.
 
-    +++I’m sorry. This information is not available in my system. You can raise the support ticket via mail for this issue.+++
+- La validación de las habilidades del bot para responder en función de
+  su knowledge base.
 
-    ![](./media/image40.png)
+- Cómo los fallback topics manejan consultas no admitidas y redirigen al
+  usuario de forma eficaz.
 
+## Ejercicio 5: Automatice la creación de Support Ticket con Power Automate
 
-3.  From top right side click on the **Save** button to save the topic.
+Este ejercicio demuestra cómo automatizar la creación de support ticket
+mediante Power Automate e integrarlo con el Contoso IT Support Agent.
+Los participantes crearán un flujo para agilizar la notificación de
+problemas, almacenar datos en Dataverse y notificar los ingenieros de
+soporte a través del email.
 
-    ![](./media/image41.png)
+1.  Vaya a la página overview del agent, baje y haga clic en **+ Add
+    action**.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image40.png)
 
-##  Conclusion
+2.  En la ventana choose an action, desde la parte superior izquierda,
+    haga clic en **+ New Action** y seleccione **New Power Automate
+    Flow** .
 
-By completing this exercise, participants will learn:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-- How to upload and integrate a knowledge base to enhance the bot's
-  functionality.
+3.  En Power automate flow, haga clic en **When an agent calls the
+    flow** y seleccione **Add an Input**.
 
-- Steps to customize conversation start messages for a more engaging
-  user experience.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image42.png)
 
-- Techniques to update fallback responses for better handling of
-  unsupported queries.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-# Exercise 4: Test the agent
+4.  Seleccione **Text** como el data type of input y renombre el input
+    como +++**Name**+++.
 
-This exercise guides participants through testing the Contoso IT Support
-Agent to validate its functionality. Participants will check how the bot
-handles prompts using the knowledge base and fallback topics to ensure
-seamless interaction and escalation.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-1.  From top right corner click on the **Test** button. Then in test
-    section click on **Map** turn it **On** and then click **Refresh**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-    ![](./media/image42.png)
+5.  De la misma manera, cree más inputs así.
 
+[TABLE]
 
-2.  Enter the prompt +++**My printer is not working how to fix it**+++ . It gives the solution as per knowledge source.
-    
-    ![](./media/image43.png)
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image46.png)
 
+6.  Debajo de **When an agent calls the flow**, haga clic en el
+    signo **(+)**  y seleccione **Add an action**.
 
-3.  Again, give the prompt +++**Two factor Authentication (2FA) issue**+++ .
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image47.png)
 
-    ![](./media/image44.png)
+7.  En la búsqueda Add an action, ingrese +++**Add a new row**+++.
+    Seleccione **Add a new row** desde la sección Microsoft Dataverse.
 
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image48.png)
 
-4.  The 2FA issue and solution is not available in the knowledge source
-    so it will go to fallback topic and return prompt related to Raise
-    Ticket.
+Ojo: A veces, no se crea una conexión de Dataverse automáticamente.
+Puede que tenga que **iniciar sesión** de nuevo con sus credenciales de
+autenticación **OAuth**.
 
-    ![](./media/image45.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image49.png)
 
+8.  En la sección **Table Name** busque y seleccione +++**Employee
+    Technical Support Record**+++ (o el nombre de su tabla
+    correspondiente).
 
-## Conclusion
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
 
-By completing this exercise, participants will learn:
+9.  Debajo de table name seleccione **Show all**, y haga clic en el
+    campo particular y agregue input con la ayuda del botón dynamic
+    content (relámpago) como se ve a continuación. El campo **Current
+    Status** debe estar seleccionado con el dropdown **Unresolved**.
 
-- How to test and activate an AI agent for troubleshooting.
+[TABLE]
 
-- Validation of the bot’s ability to respond using its knowledge base.
+> ![A blue line on a white background AI-generated content may be
+> incorrect.](./media/image51.png)
+>
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image52.png)
 
-- How fallback topics handle unsupported queries and redirect users
-  effectively.
+10. Debajo de Add a new row action haga clic en (+) y seleccione
+    select **Add an action**.
 
-# Exercise 5: Automating Support Ticket Creation with Power Automate
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image53.png)
 
-This exercise demonstrates how to automate support ticket creation using
-Power Automate and integrate it with the Contoso IT Support Agent.
-Participants will create a flow to streamline issue reporting, record
-data in Dataverse, and notify support engineers via email.
+11. En la sección add an action, ingrese +++**Send an email**+++ en la
+    barra de búsqueda y seleccione **send an email (V2)** desde la
+    sección office 365 outlook.
 
-1.  Go to overview page of the agent, scroll down and click on **+ Add action**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
 
-    ![](./media/image46.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image55.png)
 
+12. En la sección send an email, introduzca los siguientes detalles en
+    las secciones correspondientes:
 
-2.  In choose an action window, From top left side click on the **+ New Action** and select **New Power Automate Flow** . 
+> Reemplace los place holders de **Name**, **ID**, **Details** con las
+> variables mediante dynamic content
+>
+> **To**
+>
+> Enter support engineer email (**Use any email ID** - It will be to
+> this id, the mail will be sent by the agent to when Support Ticket is
+> raised)
+>
+> **Subject**
+>
+> New Technical Support Ticket Raised
+>
+> **Body**
+>
+> A new technical support ticket has been raised and requires your
+> attention. Please find details below:
+>
+> Employee Name: \< Name \>
+>
+> Employee ID: \< ID \>
+>
+> Technical Issue: \< Details \>
+>
+> Thank you for your prompt attention to this matter.'
+>
+> Best Regards
 
-    ![](./media/image47a.png)
+![A screenshot of a email AI-generated content may be
+incorrect.](./media/image56.png)
 
+13. Desde la esquina superior izquierda, renombre el flow como
+    +++**Create an Employee Support Ticket**+++.
 
-3.  In Power automate flow, click on **Run a flow from copilot** and then select **Add an Input**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image57.png)
 
-    ![](./media/image48.png)
+14. Desde la barra superior, haga clic en **Save draft** y luego
+    en **Publish**. **Cierre** el Power automate.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image58.png)
 
-4.  Select **Text** as data type of input and rename the input as +++**Name**+++.
+15. Vuelva a la ventana Copilot y haga clic en el botón **Refresh**.
 
-    ![](./media/image49.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image59.png)
 
+16. En la ventana Choose an action, seleccione el **Create an Employee
+    Support Ticket** flow.
 
-    ![](./media/image50.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
 
+17. Haga clic en el botón **Add action** para agregar un flow.
 
-5.  With same procedure create more input as per given below details.
+![A screenshot of a computer screen AI-generated content may be
+incorrect.](./media/image61.png)
 
-    | **Input Name** | **Data Type** |
-    |----------------|---------------|
-    | +++ID+++             | Text          |
-    | +++Email+++          | Text          |
-    | +++Details+++        | Text          |
-    
-    ![](./media/image51.png)
+18. Desde la página **Overview** del agente, en la sección **Action**,
+    seleccione **Edit** para editar los parámetros de la acción.
+    Seleccione la sección **Inputs**.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
 
-6.  Below Run a flow from copilot, click on **(+)** sign and select **Add an action**.
+![A screenshot of a support ticket AI-generated content may be
+incorrect.](./media/image63.png)
 
-    ![](./media/image52a.png)
+19. Ingrese la siguiente decripción en los campos correspondientes, y
+    después de ingresar la descripción, haga clic en el botón **Save**.
 
+[TABLE]
 
-7.  In Add an action search bar, enter +++**Add a new row**+++ . Then select
-    **Add a new row** from Microsoft Dataverse section.
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image64.png)
+>
+> ![A screenshot of a computer AI-generated content may be
+> incorrect.](./media/image65.png)
 
-    ![](./media/image53.png)
+**Conclusión**
 
+Al completar este ejercicio, los participantes aprenderán:
 
-    > Note: Sometimes Dataverse connection is not created automatically, so participant need to **sign** in with their credential, authentication should be **OAuth.**
-    
-    ![](./media/image54.png)
+- Cómo integrar los Power Automate flows con un agente Copilot para la
+  creación de tickets.
 
+- Pasos para recopilar y mapear los datos de forma dinámica desde las
+  interacciones del usuario.
 
-8.  In **Table Name** section search and select +++**Employee Technical Support Record**+++ (or your corresponding table name created).
+- Técnicas para automatizar las notificaciones del email para la
+  escalada de tickets de soporte.
 
-    ![](./media/image55.png)
+- La habilidad de configurar los workflows para una gestión de tickets
+  de soporte eficaz.
 
+## Ejercicio 6: Configure un Trigger basado en email para acciones automatizadas
 
-9.  Below table name select **Show all**, then click on the particular
-    field and add input with the help of dynamic content button (Thunder
-    bolt) as per the below given field. The **Current Status** field
-    should be selected with drop down as **Unresolved**.
+Esta continuación de la automatización de la creación de tickets de
+soporte técnico se centra en la configuración de un trigger en el agente
+de soporte técnico de TI de Contoso para vincular las entradas de correo
+electrónico con el flujo automatizado de Power Automate. Los
+participantes configurarán los disparadores y finalizarán el agente para
+la implementación.
 
-    | Section                     | Input Variable          |
-    |-----------------------------|-------------------------|
-    | Employee Name               | Name (Dynamic Input)    |
-    | Email Address               | Email (Dynamic Input)   |
-    | Employee ID                 | ID (Dynamic Input)      |
-    | Technical Issue Description | Details (Dynamic Input) |
-    
-    ![](./media/image56.png)
-    
-    
-    ![](./media/image57.png)
+1.  Vaya a la página overview del agente, baje y haga clic en **+ Add
+    trigger**.
 
+![A screenshot of a web page AI-generated content may be
+incorrect.](./media/image66.png)
 
-10. Below Add a new row action click on (+) and select **Add an action**.
+2.  Y luego desde la ventana Add trigger, seleccione el **When a new
+    email arrives (V3)** trigger.
 
-    ![](./media/image58a.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image67.png)
 
+3.  Después de la conexión exitosa de copilot y outlook y aparece la
+    marca verde, haga clic en el botón **Next**.
 
-11. In add an action section, enter +++**Send an email**+++ in the search bar
-    and select **send an email (V2)** from office 365 outlook section.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image68.png)
 
-    ![](./media/image59.png)
+4.  En el campo folder seleccione el icono folder y seleccione la
+    carpeta **Inbox** y seleccione **Create trigger**.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image69.png)
 
-12. In send an email section, Enter the below given detail in the
-    respected section:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image70.png)
 
-    Replace the place holders for **Name**, **ID**, **Details** with the variables using dynamic content
-    
-    **To**
-    
-    
-    Enter support engineer email (**Use any email ID** - It will be to this id, the mail will be sent by the agent to when Support Ticket is raised)) 
-    
-    
-    **Subject**
-    
-    ```
-    New Technical Support Ticket Raised 
-    ```
-    
-    **Body**
-    
-    ```
-    A new technical support ticket has been raised and requires your attention. Please find details below:
-    
-    Employee Name: Name (Replace with Name dynamic content variable (Thunder bolt))
-    Employee ID: ID (Replace with ID dynamic content variable (Thunder bolt))
-    Technical Issue: Details (Replace with Details dynamic content variable (Thunder Bolt))
-    
-    Thank you for your prompt attention to this matter.'
-    
-    Best Regards
-    ```
+5.  Cierre el **Time to test your trigger** prompt. En la página Support
+    agent overview, baje y en la sección trigger haga clic en tres
+    puntos **(…)** y seleccione **Edit in Power Automate.**
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image71.png)
 
-    ![](./media/image60.png)
+6.  Haga clic derecho en el trigger When a new email arrives y
+    seleccione **Delete**.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image72.png)
 
-14. From top left corner rename the flow as +++**Employee Data**+++ .
+7.  Y haga clic en Add a trigger, busque +++**When new email
+    arrives**+++ y seleccione **When a new email arrives** trigger desde
+    la sección **Office 365 outlook**.
 
-    ![](./media/image61.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image73.png)
 
+8.  Haga clic en **Send a prompt to the specified copilot for
+    processing**, en la sección body/message ingrese el prompt, +++**Run
+    Create an Employee Support Ticket flow and use content from Body
+    From.**+++ Reemplace **Body** y **From** como dynamic content
+    variable.
 
-15. From top bar click on **Save** button.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image74.png)
 
-    ![](./media/image62z.png)
+9.  **Guarde** y **Publique** el flow, cierre la ventana power automate
+    y vuelva a la ventana copilot.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image75.png)
 
-16. Go back to Copilot window and click on **Refresh** button.
+10. Vaya a la sección overview y desde la esquina superior derecha, haga
+    clic en **Publish** y de nuevo en **Publish** para publicar el
+    copilot.
 
-    ![](./media/image63a.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image76.png)
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image77.png)
 
-17. In Choose an action window, select **Employee Data** flow.
+**Conclusión**
 
-    ![](./media/image64a.png)
+Al completar el ejercicio, los participantes aprenderán:
 
+- Cómo configurar triggers en Copilot para automatizar los workflows
+  basados en las entradas de correo electrónico.
 
-18. Click on **Add action** button to add a flow
+- Pasos para asignar dinámicamente el contenido del correo electrónico a
+  los flujos de Power Automate.
 
-    ![](./media/imagea.png)
+- El proceso de publicación y finalización del agente de IA para su uso
+  operativo.
 
+- Habilidades prácticas para vincular herramientas de comunicación como
+  Outlook con workflows automatizados.
 
-19. Click on the **Employee Data** flow and open it, after opening select inputs option.
+## Ejercicio 7: Pruebe el agente
 
-    ![](./media/imageb.png)
-    
-    ![](./media/imagec.png)
+Este ejercicio se centra en probar la integración de la función Contoso
+IT Support Agent con Power Automate y Outlook. Los participantes
+verificarán la capacidad del agente para procesar correos electrónicos,
+crear tickets de soporte y activar workflows automatizados de manera
+efectiva.
 
+1.  Vaya a la página overview del agente, baje y haga clic en **(…)** en
+    trigger y seleccione **Edit in power automate**.
 
-20. Enter the given description in the respected input, after entering
-    the description click on **Save** button. 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image78.png)
 
-    | Section | Details |
-    |----|----|
-    | Name -- Description | +++Enter the name of the employee.+++ |
-    | ID -- Description | +++Enter the employee ID in the field.+++ |
-    | Email -- Description | +++Enter the email address of the employee from whom the email is received.+++ |
-    | Details -- Description | +++Enter the email details of the employee.+++ |
-    
-    ![](./media/imaged.png)
-    
-    ![](./media/imagee.png)
+2.  Navegará hasta el flujo de Power Automate, desde la barra superior
+    haga clic en el botón **Test** y luego seleccione **Manually** y de
+    nuevo haga clic en **Test**.
 
-## Conclusion
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image79.png)
 
-By completing this exercise, participants will learn:
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image80.png)
 
-- How to integrate Power Automate flows with a Copilot agent for ticket
-  creation.
+3.  **Envíe un correo electrónico** al ID de correo del tenant de
+    administración de 365 desde cualquier otro buzón de correo con el
+    fin de **activar la acción**. El correo debe describir un problema y
+    debe tener sus detalles, como la identificación del empleado,
+    similar a la de la captura de pantalla a continuación. El contenido
+    de ejemplo es el siguiente
 
-- Steps to collect and map input data dynamically from user
-  interactions.
+> Hi Support Team,
+>
+> I hope this message finds you well.
+>
+> Iam Mark Brown, working as a Software Engineer at Contoso. My employee
+> ID is CONTOSO099
+>
+> Issue: Monitor is completely balank and not functioning.
+>
+> Kindly raise a support ticket and assist in resolving this issue at
+> the earlierst.
+>
+> Thank you for your support.
+>
+> Best Regards,
+>
+> Mark Brown
 
-- Techniques to automate email notifications for technical issue
-  escalation.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image81.png)
 
-- The ability to configure workflows for efficient support ticket
-  management.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image82.png)
 
-# Exercise 6: Configuring an Email-Based Trigger for Automated Actions
+4.  Navegue a la página de copilot agent overview, baje y
+    seleccione **Test trigger**.
 
-This continuation of automating support ticket creation focuses on
-setting up a trigger in the Contoso IT Support Agent to link email
-inputs with the automated Power Automate flow. Participants will
-configure triggers and finalize the agent for deployment.
+![A screenshot of a web page AI-generated content may be
+incorrect.](./media/image83.png)
 
-1.  Go to overview page of the agent, scroll down and click on **+ Add trigger**.
+5.  Haga clic en **Start testing**, se iniciará la prueba.
 
-    ![](./media/image70.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image84.png)
 
+6.  En la sección de test haga clic en **Connect**, se abrirá la ventana
+    de conexión.
 
-2.  Then from Add trigger window, select **When a new email arrives (V3)** trigger.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image85.png)
 
-    ![](./media/image71.png)
+7.  Haga clic en **Connect** de nuevo y seleccione **Submit.**
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image86.png)
 
-3.  After successful connection of copilot and outlook and green tick appears click on **Next** button.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image87.png)
 
-    ![](./media/image72.png)
+8.  Navegue a la ventana copilot studio y ejecute el **Test** de nuevo.
 
+![A screenshot of a web page AI-generated content may be
+incorrect.](./media/image83.png)
 
-4.  In folder field select folder icon and select **Inbox** folder and then select **Create trigger**. 
+9.  La solicitud de soporte se genera automáticamente.
 
-    ![](./media/image73.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image88.png)
 
+10. Vaya a Power Apps y vaya a la tabla de registros de tickets de
+    soporte técnico para empleados y compruebe los detalles.
 
-    ![](./media/image74.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image89.png)
 
+11. Compruebe el correo de soporte que configuramos en el flujo de Power
+    Automate para enviar un correo electrónico. El correo electrónico se
+    envía automáticamente al equipo de soporte.
 
-5.  **Close** the **Time to test your trigger** prompt. On Support agent overview page scroll down, on trigger section click on three dots **(…)** and select **Edit in Power Automate.**
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image90.png)
 
-    ![](./media/image75.png)
+12. Vaya a la ventana de prueba y la consulta del escritor como usuario
+    +++**Mark Brown Ticket Current Status**+++ . Da el estado del
+    problema como no resuelto.
 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image91.png)
 
-6.  Right click on When a new email arrives trigger and select **Delete**.
+13. Como ingeniero de soporte, escriba un mensaje en la sección de
+    prueba. +++**I want to know about all Unresolved ticket**+++ .
 
-    ![](./media/image76.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image92.png)
 
+**Conclusión**
 
-7.  Then click on Add a trigger, search for +++**When new email arrives**+++
-    and select **When a new email arrives** trigger from **Office 365
-    outlook** section.
+Al completar este ejercicio, los participantes aprenderán:
 
-    ![](./media/image77.png)
+- Cómo probar la funcionalidad del agente simulando escenarios del mundo
+  real.
 
+- Pasos para validar workflows desencadenados por correo electrónico y
+  generación de tickets en Power Automate.
 
-8.  Click on **Send a prompt to the specified copilot for processing**,
-    in body/message section enter the prompt, +++**Run Employee Data flow and use content from Body From.**+++ Replace “Body” and “From” as dynamic content variable (Thunder bolt option).
+- Cómo revisar los registros generados en Dataverse y asegurarse de que
+  las notificaciones se envíen al equipo de soporte.
 
-    ![](./media/image78.png)
+- Información práctica sobre la depuración y finalización de workflows
+  de automatización.
 
+## Conclusión final de la guía de laboratorio
 
-9.  **Save** the flow, close power automate window and
-    go back to copilot window.
+Esta guía de laboratorio proporcionó a los participantes una experiencia
+práctica en la implementación de un agente de copilot autónomo para el
+servicio de soporte técnico de TI de Contoso Solutions. Al seguir los
+ejercicios paso a paso, los participantes pudieron:
 
-    ![](./media/image79z.png)
+1.  **Configurar Copilot Studio**: Los participantes aprendieron a
+    iniciar sesión en Copilot Studio, crear y configurar el agente de
+    soporte de TI y habilitar configuraciones esenciales como la IA
+    generativa y el orquestador para una solución de problemas eficaz y
+    la automatización de tickets.
 
+2.  **Navegar en Power Apps**: Los participantes adquirieron
+    conocimientos prácticos sobre el inicio de sesión en Power Apps, la
+    configuración de una tabla de Dataverse y la importación de datos de
+    Excel para realizar un seguimiento y administrar los tickets de
+    soporte de manera eficiente.
 
-10. Go to overview section and from top right corner click on
-    **Publish** and again click **Publish** to publish the copilot.
+3.  **Mejorar las capacidades de los bots**: Los ejercicios se centraron
+    en agregar una base de conocimientos al bot, personalizar los temas
+    de inicio y reserva de la conversación para mejorar la interacción
+    del usuario y garantizar que el bot pudiera manejar una amplia gama
+    de escenarios de soporte de TI.
 
-    ![](./media/image80.png)
+4.  **Automatizar las tareas de soporte de TI**: Los participantes
+    también aprendieron a automatizar la creación de tickets de soporte
+    mediante Power Automate, lo que mejoró la capacidad del bot para
+    administrar problemas no resueltos y mejorar los workflows del
+    equipo de TI.
 
-
-    ![](./media/image81.png)
-
-
-## Conclusion
-
-By completing this exercise, participants will learn:
-
-- How to set up triggers in Copilot to automate workflows based on email
-  inputs.
-
-- Steps to dynamically map email content to Power Automate flows.
-
-- The process of publishing and finalizing the AI agent for operational
-  use.
-
-- Practical skills in linking communication tools like Outlook with
-  automated workflows.
-
-# Exercise 7: Test the agent
-
-This exercise focuses on testing the integration of the Contoso IT
-Support Agent with Power Automate and Outlook. Participants will verify
-the agent's ability to process emails, create support tickets, and
-trigger automated workflows effectively.
-
-1.  Go to overview page of agent, scroll down, click on **(…)** on
-    trigger and select **Edit in power automate**.
-
-    ![](./media/image82.png)
-
-
-2.  It will navigate to power automate flow, from top bar click on
-    **Test** button and then select **Manually** and again click on
-    **Test**.
-
-    ![](./media/image83.png)
-
-    ![](./media/image84.png)
-
-
-3.	**Send an email** to the 365 admin tenant mail id from any other mail box in order to **trigger the action**. The mail should be describing an issue and should have your details like employee id in it, similar to the one in the below screenshot.
-
-    ![](./media/image85.png)
-
-
-    ![](./media/image86.png)
-
-
-4.  Navigate to copilot agent overview page, scroll down and select
-    **Test trigger**.
-
-    ![](./media/image87.png)
-
-
-5.  Click on **Start testing**, it will start testing.
-
-    ![](./media/image88.png)
-
-
-6.  In test section click on the **Connect**, it will open the
-    connection window.
-
-    ![](./media/image89a.png)
-
-
-7.  Click on the **Connect** again and then select **Submit.**
-
-    ![](./media/image90.png)
-
-
-    ![](./media/image91.png)
-
-
-8.  Navigate to copilot studio window and re run the **Test**.
-
-    ![](./media/image92.png)
-
-
-9.  The support request is automatically generated.
-
-    ![](./media/image93a.png)
-
-
-10. Navigate to power apps and go to Employee support ticket record
-    table, and check the details.
-
-    ![](./media/image94.png)
-
-
-11. Check the Support mail which we configure in power automate flow to
-    send an email. The email is automatically sent to the support team.
-
-    ![](./media/image95.png)
-
-
-12. Go to test window and writer query as user +++**Mark Brown Ticket Current Status**+++ . It gives the status of the issue as unresolved.
-
-    ![](./media/image96.png)
-
-
-13. As Support Engineer, write a prompt in the test section. +++**I want to know about all Unresolved ticket**+++ .
-
-    ![](./media/image97.png)
-
-
-## Conclusion
-
-By completing this exercise, participants will learn:
-
-- How to test the agent's functionality by simulating real-world
-  scenarios.
-
-- Steps to validate email-triggered workflows and ticket generation in
-  Power Automate.
-
-
-- How to review generated records in Dataverse and ensure notifications
-  are sent to the support team.
-
-- Practical insights into debugging and finalizing automation workflows.
-
-# Final Conclusion of the Lab Guide
-
-This lab guide provided participants with a hands-on experience in
-deploying an Autonomous Copilot Agent for Contoso Solutions' IT support
-service desk. By following the step-by-step exercises, participants were
-able to:
-
-1.  **Set Up Copilot Studio**: Participants learned how to log into
-    Copilot Studio, create and configure the IT support agent, and
-    enable essential settings like generative AI and orchestrator for
-    effective troubleshooting and ticket automation.
-
-2.  **Navigate Power Apps**: Participants gained practical knowledge in
-    logging into Power Apps, setting up a Dataverse table, and importing
-    data from Excel to track and manage support tickets efficiently.
-3.  **Enhance Bot Capabilities**: The exercises focused on adding a
-    knowledge base to the bot, customizing the conversation start and
-    fallback topics to improve user interaction, and ensuring the bot
-    could handle a wide range of IT support scenarios.
-
-4.  **Automate IT Support Tasks**: Participants also learned how to
-    automate the creation of support tickets using Power Automate,
-    enhancing the bot's capability to manage unresolved issues and
-    improve IT team workflows.
-
-By completing these exercises, participants were able to implement a
-robust autonomous support system that improves response times, reduces
-manual workload, and enhances overall productivity for IT support
-operations. The integration of Copilot Studio, Power Apps, and Dataverse
-ensures a seamless flow of information, automates routine tasks, and
-optimizes support workflows, providing immediate troubleshooting
-solutions to employees and automated ticket management for unresolved
-issues.
+Al completar estos ejercicios, los participantes pudieron implementar un
+sólido sistema de soporte autónomo que mejora los tiempos de respuesta,
+reduce la carga de trabajo manual y mejora la productividad general de
+las operaciones de soporte de TI. La integración de Copilot Studio,
+Power Apps y Dataverse garantiza un flujo continuo de información,
+automatiza las tareas rutinarias y optimiza los workflows de soporte,
+proporcionando soluciones inmediatas de solución de problemas a los
+empleados y gestión automatizada de tickets para problemas no resueltos.

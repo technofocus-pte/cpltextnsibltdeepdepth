@@ -1,395 +1,441 @@
-# Lab 7 - Build Multi-Agent solution using Azure AI Agent Service with Semantic Kernel 
+# Laboratorio 7 - Cree una solución multiagente mediante Azure AI Agent Service con Semantic Kernel
 
-We can build enterprise-oriented AI agents through Azure AI Agent
-Service.
+Podemos crear agentes de IA orientados a la empresa a través de Azure AI
+Agent Service.
 
-**Introduction**
+**Introducción**
 
-The following introduces a blog writing scenario. This scenario involves
-two AI agents: one for writing assistance, and the next for content
-storage and management. These agents can be seamlessly orchestrated
-using AutoGen or Semantic Kernel. In this lab, we are using the Semantic
-Kernel Orchestration.
+A continuación, se presenta un escenario de escritura de blogs. Este
+escenario involucra a dos agentes de IA: uno para la asistencia de
+escritura y el siguiente para el almacenamiento y la administración de
+contenido. Estos agentes se pueden orquestar sin problemas mediante
+AutoGen o Semantic Kernel. En este laboratorio, estamos usando el
+Semantic Kernel Orchestration.
 
 ![A diagram of a diagram of a business AI-generated content may be
 incorrect.](./media/image1.png)
 
-**Objective:**
+## Objetivo:
 
-Using Azure AI Foundry SDK, developers can quickly build agents based on
-Azure AI Agent Service using Python or C#. Enterprises will have
-different AI Agents based on their business, so how should these AI
-Agents be combined in the workflow? We need to use AutoGen or Semantic
-Kernel to orchestrate the AI Agents. In this lab, we use Semantic Kernel
-to develop a Multi-Agent solution using Azure AI Agent Service.
+Con Azure AI Foundry SDK, los desarrolladores pueden crear rápidamente
+agentes basados en Azure AI Agent Service con Python o C#. Las empresas
+tendrán diferentes agentes de IA en función de su negocio, entonces,
+¿cómo deben combinarse estos agentes de IA en el flujo de trabajo?
+Necesitamos usar AutoGen o Semantic Kernel para orquestar los Agentes de
+IA. En este laboratorio, utilizamos el Semantic Kernel para desarrollar
+una solución multiagente utilizando Azure AI Agent Service.
 
-## Exercise 1: Create an Azure AI Hub resource and project
+## Ejercicio 1: Cree un recurso y un proyecto deAzure AI Hub
 
-In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
+En este ejercicio, crearemos el centro en Azure Portal y, a
+continuación, un proyecto en Azure AI Foundry, implementaremos el modelo
+y crearemos el agente necesario para la ejecución.
 
-1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
+1.  Desde un navegador, abra +++\*\*<https://portal.azure.com/**+++>, e
+    inicie sesión con sus **credenciales de login** y seleccione **Azure
+    AI Foundry** en la **página** principal.
 
-    - User name – +++@lab.CloudPortalCredential(User1).Username+++
-    
-    - Password – +++@lab.CloudPortalCredential(User1).Password+++
+    - User name – <+++@lab.CloudPortalCredential>(User1).Username+++
 
-    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
-    
-2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
+    - Password – <+++@lab.CloudPortalCredential>(User1).Password+++
 
-    ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
+![image](./media/image2.png)
 
-3.	 Enter the below details, accept the other defaults and select **Review + create**.
-   
-     -	Subscription - Select your **assigned subscription**
-     
-     -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
-     
-     -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
-     
-     -	Name - +++hub@lab.LabInstance.Id+++
+2.  Seleccione **Use with AI Foundry** -\> **AI Hubs**. Seleccione **+
+    Create** -\> **Hub**.
 
-     ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
- 
-     ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
+![image](./media/image3.png)
 
-4.	 Once the validation passes, select **Create**.
+3.  Ingrese los detalles a continuación, acepte los otros valores
+    predeterminados y seleccione **Review + create**.
 
-     ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
+    - Subscription - Seleccione la **suscripción asignada**
 
-5.	 Once the deployment is complete, click on **Go to resource**.
+    - Resource group - Seleccione el grupo de recursos asignado
+      (**ResourceGroup1**)
 
-     ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
+    - Region - Seleccione
+      @lab.CloudResourceGroup(ResourceGroup1).Location
 
-6.	 Select **Launch Azure AI Foundry** from the hub resource page.
+    - Name - <+++hub@lab.LabInstance.Id>+++
 
-     ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
+![image](./media/image4.png)
 
-7.	 From the launched hub resource, scroll down and select **+ New project**.
+![image](./media/image5.png)
 
-     ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
+4.  Una vez superada la validación, seleccione **Create**.
 
-     ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
+![image](./media/image6.png)
 
-8.	 Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
+5.  Una vez que se complete la implementación, haga clic en **Go to
+    resource**.
 
-     ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
+![image](./media/image7.png)
 
-9.	 **Close** the Explore and experiment pop up.
+6.  Seleccione **Launch Azure AI Foundry** desde la página de recursos
+    del hub.
 
-     ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
+![image](./media/image8.png)
 
-10.  You will land in the created project page.
+7.  En el recurso de hub iniciado, baje y seleccione **+ New project**.
 
-     ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+![image](./media/image9.png)
 
-11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
+![image](./media/image10.png)
 
-     ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+8.  Introduzca el nombre como <+++multiagent@lab.LabInstance.Id>+++ y
+    seleccione **Create**.
 
-12.  Scroll down in the left pane and select **Management center**.
+![image](./media/image11.png)
 
-     ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+9.  **Cierre** el popup Explore and experiment.
 
-13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+![image](./media/image12.png)
 
-     ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+10. Llega en la página del proyecto creado.
 
-14.  Select **Azure AI Foundry** from the available external assets.
+![image](./media/image13.png)
 
-     ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+11. Desplácese hacia abajo en la página y copie el valor de la
+    propiedad **Project connection string** a un notepad.
 
-15.  Select **Add connection** to add the connection.
+![image](./media/image14.png)
 
-     ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+12. Desplácese hacia abajo en el panel izquierdo y
+    seleccione **Management center**.
 
-     ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+![image](./media/image15.png)
 
-16.  Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+13. Seleccione **Connected resources** en el Hub resource y haga clic
+    en **+ New connection** para crear una conexión con el Azure AI
+    Foundry resource.
 
-     ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+![image](./media/image16.png)
 
-17.  Select **Go to project** from the left pane.
+14. Seleccione **Azure AI Foundry** de los activos externos disponibles.
 
-     ![image](https://github.com/user-attachments/assets/9062a254-ce3a-4a64-8a0b-4e0b5abec790)
+![image](./media/image17.png)
 
-18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+15. Seleccione **Add connection** para agregar la conexión.
 
-     ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+![image](./media/image18.png)
 
-19.  Select **Agents** under **Build and customize** from the left pane.
-     In the **Azure AI Agent Service** page, select your **Azure OpenAI
-     Service** that was created, and then click on **Let’s go**.
+![image](./media/image19.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+16. Una vez conectado, haga clic en **Close**. Si no se ve el
+    botón **Close**, reduzca el tamaño de **zoom** del navegador y
+    seleccione **Close**.
 
-20.  Select **gpt-4o-mini** and click on **Confirm**.
+![image](./media/image20.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+17. Seleccione **Go to project** desde el panel izquierdo.
 
-21.  Accept the deployment name as +++**gpt-4o-mini**+++, select the Deployment type to be **Standard**. Accept the other defaults and click on **Deploy** to deploy the model.
+![image](./media/image21.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image10.png)
+18. En la página del proyecto, copie los valores de **API
+    Key** y **Azure OpenAI endpoint** y guárdelos en un notepad.
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image11.png)
+![image](./media/image22.png)
 
-22.  Now, we have the Azure resources ready.
+19. Seleccione **Agents** en **Build and customize** en el panel
+    izquierdo. En la página **Azure AI Agent Service**, seleccione
+    su **Azure OpenAI Service** que se creó, y luego haga clic
+    en **Let’s go**.
 
-## Exercise 2: Multi Agent Orchestration 
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image23.png)
 
-In this exercise, we will set up the Visual Studio Code and install the pre requisites that are needed for the execution.
-1.  From your VM, open the **Visual Studio Code**.
+20. Seleccione **gpt-4o-mini** y haga clic en **Confirm**.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image12.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image24.png)
 
-2.  Select **File** -> **Open Folder** and select the folder
-    **MultiAgent** from **C:\LabFiles** and click **Select Folder**.
+21. Acepte el deployment name como +++**gpt-4o-mini**+++, seleccione el
+    Deployment type como **Standard**. Acepte los demás valores
+    predeterminados y haga clic en **Deploy** para implementar el
+    modelo.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image13.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image25.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image14.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image26.png)
 
-3.  Select **Yes, I trust the authors** in the pop up.
+22. Ahora, tenemos listos los recursos de Azure.
 
-    ![A screenshot of a computer error AI-generated content may be
-incorrect.](./media/image15.png)
+## Ejercicio 2: Orquestación multiagente
 
-4.  Right click on the notebook and select **Open in Integrated
-    Terminal**.
+En este ejercicio, configuraremos el código de Visual Studio e
+instalaremos los requisitos previos necesarios para la ejecución.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
+1.  Desde la máquina virtual, abra el **Visual Studio Code**.
 
-5.  Execute the below commands one after another to add the **nuget
-    source**.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
 
-    +++dotnet nuget list source+++
+2.  Seleccione **File** -\> **Open Folder** y seleccione la
+    carpeta **MultiAgent** desde **C:\LabFiles** y haga clic en **Select
+    Folder**.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
 
-    +++dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org+++
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image29.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
+3.  Seleccione **Yes, I trust the authors** en el pop up.
+
+![A screenshot of a computer error AI-generated content may be
+incorrect.](./media/image30.png)
+
+4.  Haga clic con el botón derecho en el notebook y seleccione **Open in
+    Integrated Terminal**.
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image31.png)
+
+5.  Ejecute los siguientes comandos uno tras otro para agregar
+    el **nuget source**.
+
++++dotnet nuget list source+++
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image32.png)
+
+> +++dotnet nuget add
+> source <https://api.nuget.org/v3/index.json> --name nuget.org+++
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image33.png)
 
 6.  Execute the below command to install dotnet interacrive.
 
-    +++dotnet tool install --global Microsoft.dotnet-interactive --version 1.0.556801+++
++++dotnet tool install --global Microsoft.dotnet-interactive --version
+1.0.556801+++
 
-    ![](./media/image19.png)
+![](./media/image34.png)
 
-7.  Execute +++pip install jupyter+++ to install Jupyter.
+7.  Ejecute +++pip install jupyter+++ para instalar Jupyter.
 
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image20.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image35.png)
 
-8.  Execute the next command to jupyter interactive.
+8.  Ejecute el siguiente comando en jupyter interactive.
 
-    +++dotnet interactive jupyter install+++
++++dotnet interactive jupyter install+++
 
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image21.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image36.png)
 
-9.  **Close** the **Terminal**. Select **Extensions** from the left pane
-    pf the **Visual Studio Code**. Search and select +++**Jupyter**+++ and
-    click on **Install** to install the Jupyter extension.
+9.  **Cierre** el **Terminal**. Seleccione **Extensions** desde el panel
+    izquierdo, el archivo **Visual Studio Code**. Busque y seleccione
+    +++**Jupyter**+++ y haga clic en **Install** para instalar la
+    extensión Jupyter.
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
-
-10. **Close** the Visual Studio Code and **open** it again.
-
-11. Open the notebook **AzureAIMultiAgentWithSK.ipynb**. Once opened,
-    click on **Select Kernel**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image23.png)
-
-12. Select **Jupyter Kernel**.
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image24.png)
-
-13. Select **.NET (C#) dotnet** in the next set of options.
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image25.png)
-
-14. Select **Allow access** in the **Security Alert**.
-
-    ![A screenshot of a computer security alert AI-generated content may be
-incorrect.](./media/image26.png)
-
-15. Execute the first cell to **install** all the required **packages**.
-
-    ![A screen shot of a computer program AI-generated content may be incorrect.](./media/image27.png)
-
-    ![A screenshot of a computer program AI-generated content may be incorrect.](./media/image28.png)
-
-16. Execute the next cell to import the namespaces.
-
-    ![A screen shot of a computer program AI-generated content may be
-incorrect.](./media/image29.png)
-
-17. In the next cell, verify that the **deployment** variable value is
-    the same as the **model deployment** that you created. Replace,
-
-    - Endpoint – **Azure OpenAI Endpoint**
-    
-    - Key – The **API Key**
-
-    Both the values above, we have saved earlier in a notepad once the
-project was created in the Azure AI Foundry.
-
-    After replacing the values, **execute** the cell.
-
-    This sets these values to corresponding variables to be used further.
-
-    ![A black screen with numbers AI-generated content may be incorrect.](./media/image30.png)
-
-18. The next cell creates a new **KernelBuilder** instance, adds **Azure
-    OpenAI Chat Completion** as an AI service provider to the kernel
-    with the variables from the last step as input and invokes
-    **Build**() creates an instance of Kernel.
-
-    **Execute** it to create the Kernel instance.
-
-    ![A screen shot of a computer code AI-generated content may be incorrect.](./media/image31.png)
-
-19. Execute the next cell to install the required **Azure** packages and
-    the next cell to import the references.
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image32.png)
-
-    ![A screen shot of a computer program AI-generated content may be
-incorrect.](./media/image33.png)
-
-20. The class in the next cell defines a **custom HTTP pipeline policy
-    for Azure SDK** requests and adds a custom HTTP header
-    (x-ms-enable-preview: true) to every outgoing request. **Execute**
-    it.
-
-    ![A screen shot of a computer program AI-generated content may be
-incorrect.](./media/image34.png)
-
-## Exercise 3: Save Blog Agent
-
-1.  The next cell defines the **SavePlugin** class which implements a
-    method to **save blog content** using **Azure AI Projects and the
-    Semantic Kernel**.
-
-    - It receives the **blog content** as input.
-
-    - Interacts with **Azure AI Projects** to create an AI agent.
-
-    - Generates and executes Python code to **save** the **content** as
-      a **Markdown** (.md) file.
-
-    - **Downloads** and **stores** the generated file locally.
-
-    - **Returns** a **confirmation** message ("Saved").
-
-    To execute this cell, replace **Your Connection String** with your
-**Project Connection String** that you saved earlier to a note pad. It
-can be accessed from the project overview page of Azure AI Foundry
-portal.
-
-    Click on **Execute** after replacing the connection string.
-
-    ![](./media/image35.png)
-
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image36.png)
-
-2.  The next cell initializes **constants** with Save specific values.
-    **Execute** it. These constants will be used in the next cells.
-
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-3.  The next cell creates a **ChatCompletionAgent** named
-    **save_blog_agent**. Execute it to create the agent.
+10. **Cierre** el Visual Studio Code y **ábralo** de nuevo.
 
-    ![A computer screen shot of a computer program AI-generated content may
-be incorrect.](./media/image38.png)
+11. Abra el notebook **AzureAIMultiAgentWithSK.ipynb**. Una vez abierto,
+    haga clic en **Select Kernel**.
 
-## Exercise 4: Writer agent
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-1.  Execute the next cell in the notebook which declares constants with
-    Writer specific values.
+12. Seleccione **Jupyter Kernel**.
 
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image39.png)
 
-2.  The next cell creates a **ChatCompletionAgent** named
-    write-blog_content which will be responsible for writing a blog post
-    using the Microsoft Semantic Kernel and Azure OpenAI chat models.
-    Execute it to create the agent.
+13. Seleccione **.NET (C#) dotnet** en el siguiente conjunto de
+    opciones.
 
-    ![A computer screen shot of a black screen AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image40.png)
 
-3.  The code in the next cell makes **SavePlugin** available as a
-    function inside **save_blog_agent**. It creates a **Kernel Plugin**
-    from **SavePlugin.** **Adds** the Plugin to the **Agent's Kernel** .
-    The AI calls the **SavePlugin.Save** function when it detects a
-    save-related request.
+14. Seleccione **Allow access** en el **Security Alert**.
 
-    Execute it to create the Kernel Plugin.
-
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer security alert AI-generated content may be
 incorrect.](./media/image41.png)
 
-4.  The next cell contains the code for the class
-    **ApprovalTerminationStrategy**
+15. Ejecute la primera celda para **instalar** todos los **paquetes
+    necesarios**.
 
-5.  This **custom termination strategy** is used to determine **when an
-    AI agent should stop running**. **Execute** it.
-
-    ![A computer screen with text on it AI-generated content may be
+![A screen shot of a computer program AI-generated content may be
 incorrect.](./media/image42.png)
 
-6.  The next cell contains the **AgentGroupChat** code. This creates a
-    **multi-agent chat** system where two AI agents
-    (**write_blog_agent** and **save_blog_agent**) collaborate. Uses
-    **ApprovalTerminationStrategy** to determine when the chat should
-    stop.
-
-    Only **save_blog_agent** can approve termination.
-    
-    **Execute** it to configure the multi agent chat.
-
-    ![A computer screen shot of a program AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image43.png)
 
-7.  The next cell contains instructions to the agent. It **adds a user
-    message to the multi-agent chat system**, instructing the AI to
-    **search for information on GraphRAG, write a blog, and save it**.
+16. Ejecute la siguiente celda para importar el namespaces.
 
-    ![](./media/image44.png)
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image44.png)
 
-8.  **Execute** the next cell. This **iterates over the AI-generated
-    responses** in the multi-agent chat **as they are streamed**.
+17. En la siguiente celda, compruebe que el valor de la variable de
+    **implementación** es el mismo que el **model deployment** que usted
+    creó. Reemplace,
 
-    On execution, it writes a blog, saves it.
+    - Endpoint – **Azure OpenAI Endpoint**
 
-    ![A screen shot of a computer AI-generated content may be
+    - Key – The **API Key**
+
+Los dos valores anteriores, los hemos guardado anteriormente en un
+notepad una vez que se creó el proyecto en el Azure AI Foundry.
+
+Después de reemplazar los valores, **ejecute** la celda.
+
+Esto establece estos valores en las variables correspondientes que se
+utilizarán más adelante.
+
+![A black screen with numbers AI-generated content may be
 incorrect.](./media/image45.png)
 
-    ![A screenshot of a computer AI-generated content may be
+18. La siguiente celda crea una nueva **instancia de KernelBuilder**,
+    agrega **Azure OpenAI Chat Completion** como proveedor de servicios
+    de IA al kernel con las variables del último paso como entrada e
+    invoca **Build**() crea una instancia de Kernel.
+
+**Ejecútelo** para crear la instancia del kernel.
+
+![A screen shot of a computer code AI-generated content may be
 incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
+19. Ejecute la siguiente celda para instalar los paquetes de **Azure**
+    necesarios y la siguiente celda para importar las referencias.
+
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image47.png)
 
-**Summary:**
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image48.png)
 
-We have implemented a Multi Agent system using Azure AI Agent Service
-with Semantic Kernel.
+20. La clase de la celda siguiente define una **directiva de pipeline
+    HTTP personalizada para** las solicitudes del Azure SDK y agrega un
+    encabezado HTTP personalizado (x-ms-enable-preview: true) a cada
+    solicitud saliente. **Ejecutarlo** .
 
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image49.png)
+
+## Ejercicio 3: Guarde el Blog Agent
+
+1.  La siguiente celda define la **clase SavePlugin**, que implementa un
+    método para **guardar el contenido del blog** usando **Azure AI
+    Projects y el Semantic Kernel**.
+
+    - Recibe el contenido del **blog** como entrada.
+
+    - Interactúa con **proyectos de Azure AI** para crear un agente de
+      IA.
+
+    - Genera y ejecuta código Python para **guardar** el **contenido**
+      como un **archivo Markdown** (.md).
+
+    - **Descarga** y **almacena** el archivo generado localmente.
+
+    - **Devuelve** un **mensaje de** confirmación ("Saved").
+
+Para ejecutar esta celda, reemplace **Your Connection String** con
+su **Project Connection String** que haya guardado anteriormente en un
+notepad. Se puede acceder a él desde la página de información general
+del proyecto del portal de Azure AI Foundry.
+
+Haga clic en **Execute** después de reemplazar el connection string.
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image50.png)
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image51.png)
+
+2.  La siguiente celda inicializa **las constantes** con Save specific
+    values. **Ejecútelo**. Estas constantes se utilizarán en las
+    siguientes celdas.
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
+
+3.  La siguiente celda crea un **ChatCompletionAgent** denominado
+    **save_blog_agent**. Ejecútelo para crear el agente.
+
+![A computer screen shot of a computer program AI-generated content may
+be incorrect.](./media/image53.png)
+
+## Ejercicio 4: Writer agent
+
+1.  Ejecute la siguiente celda en el notebook que declara constantes con
+    Writer specific values.
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
+
+2.  La siguiente celda crea un **ChatCompletionAgent** llamado
+    write-blog_content que será responsable de escribir una publicación
+    de blog usando Microsoft Semantic Kernel y Azure OpenAI chat models.
+    Ejecútelo para crear el agente.
+
+![A computer screen shot of a black screen AI-generated content may be
+incorrect.](./media/image55.png)
+
+3.  El código de la siguiente celda hace que **SavePlugin** esté
+    disponible como una función dentro de **save_blog_agent**. Crea un
+    **kernel plugin** a partir de **SavePlugin. Agrega** el plugin al
+    **kernel del agente**. La IA llama a la función **SavePlugin.Save**
+    cuando detecta una solicitud relacionada con el guardado.
+
+Ejecútelo para crear el Kernel Plugin.
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image56.png)
+
+4.  La siguiente celda contiene el código de la
+    clase **ApprovalTerminationStrategy**
+
+5.  Este **custom termination strategy** se utiliza para determinar
+    **cuándo debe dejar de ejecutarse un agente de IA**. **Ejecútelo**.
+
+![A computer screen with text on it AI-generated content may be
+incorrect.](./media/image57.png)
+
+6.  La siguiente celda contiene el **código de AgentGroupChat**. Esto
+    crea un sistema **de chat multiagente** en el que colaboran dos
+    agentes de IA (**write_blog_agent** y **save_blog_agent**). Usa
+    **ApprovalTerminationStrategy** para determinar cuándo se debe
+    detener el chat.
+
+Solo **save_blog_agent** puede aprobar la rescisión.
+
+**Ejecútelo** para configurar el chat multiagente.
+
+![A computer screen shot of a program AI-generated content may be
+incorrect.](./media/image58.png)
+
+7.  La siguiente celda contiene instrucciones para el agente. **Agrega
+    un mensaje de usuario al sistema de chat multiagente**, instruyendo
+    a la IA para **buscar información en GraphRAG, escribir un blog y
+    guardarlo**.
+
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image59.png)
+
+8.  **Ejecute** la siguiente celda. Esto **itera sobre las respuestas
+    generadas por IA** en el chat multiagente **a medida que se
+    transmiten**.
+
+Al ejecutarse, escribe un blog y lo guarda.
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
+
+## Resumen
+
+Hemos implementado un Multi Agent system usando Azure AI Agent Service
+con Semantic Kernel.
