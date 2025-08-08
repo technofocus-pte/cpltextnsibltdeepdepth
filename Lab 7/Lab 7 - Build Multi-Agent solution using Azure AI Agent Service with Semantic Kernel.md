@@ -1,395 +1,404 @@
-# Lab 7 - Build Multi-Agent solution using Azure AI Agent Service with Semantic Kernel 
+# 实验 7 - 使用带有Semantic Kernel的 Azure AI 代理服务构建多代理解决方案
 
-We can build enterprise-oriented AI agents through Azure AI Agent
-Service.
+我们可以通过 Azure AI 代理服务构建面向企业的 AI 代理。
 
-**Introduction**
+**介绍**
 
-The following introduces a blog writing scenario. This scenario involves
-two AI agents: one for writing assistance, and the next for content
-storage and management. These agents can be seamlessly orchestrated
-using AutoGen or Semantic Kernel. In this lab, we are using the Semantic
-Kernel Orchestration.
+下面介绍一个博客写作场景。此方案涉及两个 AI
+代理：一个用于编写帮助，另一个用于内容存储和管理。这些代理可以使用
+AutoGen 或 Semantic Kernel 无缝编排。在本实验中，我们将使用 Semantic
+Kernel Orchestration。
 
 ![A diagram of a diagram of a business AI-generated content may be
 incorrect.](./media/image1.png)
 
-**Objective:**
+## 目的:
 
-Using Azure AI Foundry SDK, developers can quickly build agents based on
-Azure AI Agent Service using Python or C#. Enterprises will have
-different AI Agents based on their business, so how should these AI
-Agents be combined in the workflow? We need to use AutoGen or Semantic
-Kernel to orchestrate the AI Agents. In this lab, we use Semantic Kernel
-to develop a Multi-Agent solution using Azure AI Agent Service.
+使用 Azure AI Foundry SDK，开发人员可以使用 Python 或 C# 基于 Azure AI
+代理服务快速构建代理。企业会根据其业务拥有不同的 AI Agent，那么这些 AI
+Agent 应该如何在工作流中组合呢？我们需要使用 AutoGen 或 Semantic Kernel
+来编排 AI 代理。在本实验中，我们使用语义内核通过 Azure AI
+代理服务开发多代理解决方案。
 
-## Exercise 1: Create an Azure AI Hub resource and project
+## 练习 1：创建 Azure AI Hub 资源和项目
 
-In this exercise, we will create the hub in the Azure portal, then a project in the Azure AI Foundry, deploy the model and create the agent required for the execution.
+在本练习中，我们将在 Azure 门户中创建中心，然后在 Azure AI Foundry
+中创建一个项目，部署模型并创建执行所需的代理。
 
-1.  From a browser, open +++**https://portal.azure.com/**+++, and login using your **login** **credentials** and select **Azure AI Foundry** from the **Home** page.
+1.  在浏览器中，打开
+    +++\*\*<https://portal.azure.com/**+++>，然后使用**login** **credentials** 登录，然后从**主页**中选择
+    **Azure AI Foundry**。
 
-    - User name – +++@lab.CloudPortalCredential(User1).Username+++
-    
-    - Password – +++@lab.CloudPortalCredential(User1).Password+++
+    - 用户名 – <+++@lab.CloudPortalCredential>(User1).Username+++
 
-    ![image](https://github.com/user-attachments/assets/b26ef8b5-13dd-414e-91bb-c2963cf7cce0)
-    
-2.	Select **Use with AI Foundry** -> **AI Hubs**. Select **+ Create** -> **Hub**.
+    - 密码 – <+++@lab.CloudPortalCredential>(User1).Password+++
 
-    ![image](https://github.com/user-attachments/assets/d5b52709-4acc-4700-9da4-39e4f99bab1b)
+![image](./media/image2.png)
 
-3.	 Enter the below details, accept the other defaults and select **Review + create**.
-   
-     -	Subscription - Select your **assigned subscription**
-     
-     -	Resource group - Select your assigned Resource group (**ResourceGroup1**)
-     
-     -	Region - Select @lab.CloudResourceGroup(ResourceGroup1).Location
-     
-     -	Name - +++hub@lab.LabInstance.Id+++
+2.  选择 **Use with AI Foundry** -\> **AI Hubs**。选择 **+
+    Create -\> Hub**。
 
-     ![image](https://github.com/user-attachments/assets/8d93aaba-be60-428d-87c0-31d808dbe764)
- 
-     ![image](https://github.com/user-attachments/assets/373f295f-0978-4ec6-befa-197ea1abc3a5)
+![image](./media/image3.png)
 
-4.	 Once the validation passes, select **Create**.
+3.  输入以下详细信息，接受其他默认值，然后选择 **Review + create**。
 
-     ![image](https://github.com/user-attachments/assets/dbd63853-0474-4df4-b77c-c29472bfd0ed)
+    - 订阅 - 选择**已分配的订阅**
 
-5.	 Once the deployment is complete, click on **Go to resource**.
+    - 资源组 - 选择已分配的资源组 （**ResourceGroup1**）
 
-     ![image](https://github.com/user-attachments/assets/9b06560b-8a37-41d1-935f-0c7f9dce13f4)
+    &nbsp;
 
-6.	 Select **Launch Azure AI Foundry** from the hub resource page.
+    - 区域 - 选择 @lab.CloudResourceGroup(ResourceGroup1).Location
 
-     ![image](https://github.com/user-attachments/assets/c0d16b19-0425-48e2-8a97-0efde10642c4)
+    - 名字 - <+++hub@lab.LabInstance.Id>+++
 
-7.	 From the launched hub resource, scroll down and select **+ New project**.
+![image](./media/image4.png)
 
-     ![image](https://github.com/user-attachments/assets/f38fd293-fa4c-410b-a8fc-fe5427ede9ad)
+![image](./media/image5.png)
 
-     ![image](https://github.com/user-attachments/assets/40c1a532-0953-42b6-b728-4084f8ceea04)
+4.  验证通过后，选择 **Create** 。
 
-8.	 Enter the name as +++multiagent@lab.LabInstance.Id+++ and select **Create**.
+![image](./media/image6.png)
 
-     ![image](https://github.com/user-attachments/assets/e4b5fd6b-2fa1-4790-9042-4f4642aedaba)
+5.  部署完成后，单击 **Go to resource**。
 
-9.	 **Close** the Explore and experiment pop up.
+![image](./media/image7.png)
 
-     ![image](https://github.com/user-attachments/assets/745309d4-4b57-4303-8623-8e538ece3e25)
+6.  从中心资源页中选择“**Launch Azure AI Foundry**”。
 
-10.  You will land in the created project page.
+![image](./media/image8.png)
 
-     ![image](https://github.com/user-attachments/assets/d8fd443d-0181-4ecd-ac00-64488705fa81)
+7.  从启动的中心资源中，向下滚动并选择 **+ New project**。
 
-11.  Scroll down the page and copy the value of the **Project connection string** to a notepad.
+![image](./media/image9.png)
 
-     ![image](https://github.com/user-attachments/assets/ec005fdd-75c4-4871-9fd3-aba1cb657d84)
+![image](./media/image10.png)
 
-12.  Scroll down in the left pane and select **Management center**.
+8.  将名称输入为 <+++multiagent@lab.LabInstance.Id>+++，然后选择
+    **Create**。
 
-     ![image](https://github.com/user-attachments/assets/cdaa9a3a-4f72-4dd1-9f65-95d710d7663c)
+![image](./media/image11.png)
 
-13.  Select **Connected resources** under the Hub resource and then click on **+ New connection** to create a connection with the Azure AI Foundry resource.
+9.  **Close** Explore and experiment 弹出窗口。
 
-     ![image](https://github.com/user-attachments/assets/e5cdc311-b72b-447f-9517-f2f84afdb663)
+![image](./media/image12.png)
 
-14.  Select **Azure AI Foundry** from the available external assets.
+10. 您将进入创建的项目页面。
 
-     ![image](https://github.com/user-attachments/assets/2d2b9ed9-78f3-466d-a374-0c79935bf4da)
+![image](./media/image13.png)
 
-15.  Select **Add connection** to add the connection.
+11. 向下滚动页面，并将 **Project connection string** 的值复制到记事本。
 
-     ![image](https://github.com/user-attachments/assets/babc62ed-5218-41bb-9820-f0a2f979ec8f)
+![image](./media/image14.png)
 
-     ![image](https://github.com/user-attachments/assets/dbdfe97a-5aa3-4782-927c-b70d3d59d185)
+12. 在左侧窗格中向下滚动，然后选择**Management center**。
 
-16.  Once connected, click on **Close**. If the **Close** button is not visible, reduce the **zoom size** of the browser and then select **Close**.
+![image](./media/image15.png)
 
-     ![image](https://github.com/user-attachments/assets/c20d1bca-2e92-4263-bb09-d65847f03839)
+13. 在“Hub resource”下选择“**Connected resources** ”，然后单击“+ **New
+    connection** ”以创建与 Azure AI Foundry 资源的连接。 
 
-17.  Select **Go to project** from the left pane.
+![image](./media/image16.png)
 
-     ![image](https://github.com/user-attachments/assets/9062a254-ce3a-4a64-8a0b-4e0b5abec790)
+14. 从可用的外部资产中选择 **Azure AI Foundry**。
 
-18.  From the project page, copy the values of the **API Key** and the **Azure OpenAI endpoint** and save it to a notepad.
+![image](./media/image17.png)
 
-     ![image](https://github.com/user-attachments/assets/020eedc1-9d7e-4219-b546-28f0c76bcfe9)
+15. 选择 **Add connection** 以添加连接。
 
-19.  Select **Agents** under **Build and customize** from the left pane.
-     In the **Azure AI Agent Service** page, select your **Azure OpenAI
-     Service** that was created, and then click on **Let’s go**.
+![image](./media/image18.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+![image](./media/image19.png)
 
-20.  Select **gpt-4o-mini** and click on **Confirm**.
+16. 连接后，单击 **Close**。如果 **Close**
+    按钮不可见，请减小浏览器的**zoom size **，然后选择 **Close**。
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+![image](./media/image20.png)
 
-21.  Accept the deployment name as +++**gpt-4o-mini**+++, select the Deployment type to be **Standard**. Accept the other defaults and click on **Deploy** to deploy the model.
+17. 从 左侧窗格中选择 **Go to project**。
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image10.png)
+![image](./media/image21.png)
 
-     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image11.png)
+18. 在项目页面中，复制 **API Key** 和 **Azure OpenAI
+    endpoint** 的值，并将其保存到记事本中。
 
-22.  Now, we have the Azure resources ready.
+![image](./media/image22.png)
 
-## Exercise 2: Multi Agent Orchestration 
+19. 在左侧窗格中的 **Build and customize**下选择 **Agents**。在 **Azure
+    AI Agent Service** 页面中，选择已创建的 **Azure OpenAI
+    Service** ，然后单击 “**Let’s go**”。 
 
-In this exercise, we will set up the Visual Studio Code and install the pre requisites that are needed for the execution.
-1.  From your VM, open the **Visual Studio Code**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image12.png)
-
-2.  Select **File** -> **Open Folder** and select the folder
-    **MultiAgent** from **C:\LabFiles** and click **Select Folder**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image13.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image14.png)
-
-3.  Select **Yes, I trust the authors** in the pop up.
-
-    ![A screenshot of a computer error AI-generated content may be
-incorrect.](./media/image15.png)
-
-4.  Right click on the notebook and select **Open in Integrated
-    Terminal**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
-
-5.  Execute the below commands one after another to add the **nuget
-    source**.
-
-    +++dotnet nuget list source+++
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
-
-    +++dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org+++
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
-
-6.  Execute the below command to install dotnet interacrive.
-
-    +++dotnet tool install --global Microsoft.dotnet-interactive --version 1.0.556801+++
-
-    ![](./media/image19.png)
-
-7.  Execute +++pip install jupyter+++ to install Jupyter.
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image20.png)
-
-8.  Execute the next command to jupyter interactive.
-
-    +++dotnet interactive jupyter install+++
-
-    ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image21.png)
-
-9.  **Close** the **Terminal**. Select **Extensions** from the left pane
-    pf the **Visual Studio Code**. Search and select +++**Jupyter**+++ and
-    click on **Install** to install the Jupyter extension.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image22.png)
-
-10. **Close** the Visual Studio Code and **open** it again.
-
-11. Open the notebook **AzureAIMultiAgentWithSK.ipynb**. Once opened,
-    click on **Select Kernel**.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image23.png)
 
-12. Select **Jupyter Kernel**.
+20. 选择 **gpt-4o-mini**，然后单击 **Confirm**。
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image24.png)
 
-13. Select **.NET (C#) dotnet** in the next set of options.
+21. 接受部署名称为 +++**gpt-4o-mini**+++，选择 Deployment type 为
+    **Standard**。接受其他默认值，然后单击 **Deploy** 以部署模型。
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-14. Select **Allow access** in the **Security Alert**.
-
-    ![A screenshot of a computer security alert AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-15. Execute the first cell to **install** all the required **packages**.
+22. 现在，我们已经准备好了 Azure 资源。
 
-    ![A screen shot of a computer program AI-generated content may be incorrect.](./media/image27.png)
+## 练习 2：多代理编排
 
-    ![A screenshot of a computer program AI-generated content may be incorrect.](./media/image28.png)
+在本练习中，我们将设置 Visual Studio Code 并安装执行所需的先决条件。
 
-16. Execute the next cell to import the namespaces.
+1.  在 VM 中，打开 **Visual Studio Code**。
 
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
+
+2.  选择**File -\> Open Folder，**然后从 **C：\LabFiles** 中选择文件夹
+    **MultiAgent**，然后单击**Select Folder。**
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-17. In the next cell, verify that the **deployment** variable value is
-    the same as the **model deployment** that you created. Replace,
+3.  在弹出窗口中选择 **Yes， I trust the authors**。
 
-    - Endpoint – **Azure OpenAI Endpoint**
-    
-    - Key – The **API Key**
+![A screenshot of a computer error AI-generated content may be
+incorrect.](./media/image30.png)
 
-    Both the values above, we have saved earlier in a notepad once the
-project was created in the Azure AI Foundry.
+4.  右键单击笔记本并选择 **Open in Integrated Terminal**。
 
-    After replacing the values, **execute** the cell.
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image31.png)
 
-    This sets these values to corresponding variables to be used further.
+5.  依次执行以下命令以添加 **nuget source**。
 
-    ![A black screen with numbers AI-generated content may be incorrect.](./media/image30.png)
++++dotnet nuget list source+++
 
-18. The next cell creates a new **KernelBuilder** instance, adds **Azure
-    OpenAI Chat Completion** as an AI service provider to the kernel
-    with the variables from the last step as input and invokes
-    **Build**() creates an instance of Kernel.
-
-    **Execute** it to create the Kernel instance.
-
-    ![A screen shot of a computer code AI-generated content may be incorrect.](./media/image31.png)
-
-19. Execute the next cell to install the required **Azure** packages and
-    the next cell to import the references.
-
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-    ![A screen shot of a computer program AI-generated content may be
+> +++dotnet nuget add
+> source <https://api.nuget.org/v3/index.json> --name nuget.org+++
+
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image33.png)
 
-20. The class in the next cell defines a **custom HTTP pipeline policy
-    for Azure SDK** requests and adds a custom HTTP header
-    (x-ms-enable-preview: true) to every outgoing request. **Execute**
-    it.
+6.  执行以下命令以安装 dotnet interacrive。
 
-    ![A screen shot of a computer program AI-generated content may be
-incorrect.](./media/image34.png)
++++dotnet tool install --global Microsoft.dotnet-interactive --version
+1.0.556801+++
 
-## Exercise 3: Save Blog Agent
+![](./media/image34.png)
 
-1.  The next cell defines the **SavePlugin** class which implements a
-    method to **save blog content** using **Azure AI Projects and the
-    Semantic Kernel**.
+7.  执行 +++pip install jupyter+++ 安装 Jupyter。
 
-    - It receives the **blog content** as input.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image35.png)
 
-    - Interacts with **Azure AI Projects** to create an AI agent.
+8.  执行下一个命令以使用 jupyter interactive。
 
-    - Generates and executes Python code to **save** the **content** as
-      a **Markdown** (.md) file.
++++dotnet interactive jupyter install+++
 
-    - **Downloads** and **stores** the generated file locally.
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image36.png)
 
-    - **Returns** a **confirmation** message ("Saved").
+9.  **关闭Terminal**。从 **Visual Studio Code** 的左窗格中选择
+    **Extensions** 。搜索并选择 +++**Jupyter**+++，然后单击 **Install**
+    安装 以安装 **Jupyter** 扩展。 
 
-    To execute this cell, replace **Your Connection String** with your
-**Project Connection String** that you saved earlier to a note pad. It
-can be accessed from the project overview page of Azure AI Foundry
-portal.
-
-    Click on **Execute** after replacing the connection string.
-
-    ![](./media/image35.png)
-
-    ![A screen shot of a computer AI-generated content may be incorrect.](./media/image36.png)
-
-2.  The next cell initializes **constants** with Save specific values.
-    **Execute** it. These constants will be used in the next cells.
-
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-3.  The next cell creates a **ChatCompletionAgent** named
-    **save_blog_agent**. Execute it to create the agent.
+10. **Close** Visual Studio Code，然后再次**open**它。
 
-    ![A computer screen shot of a computer program AI-generated content may
-be incorrect.](./media/image38.png)
+11. 打开笔记本 **AzureAIMultiAgentWithSK.ipynb**。打开后，单击 **Select
+    Kernel**。
 
-## Exercise 4: Writer agent
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-1.  Execute the next cell in the notebook which declares constants with
-    Writer specific values.
+12. 选择 **Jupyter Kernel**。
 
-    ![A screen shot of a computer AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image39.png)
 
-2.  The next cell creates a **ChatCompletionAgent** named
-    write-blog_content which will be responsible for writing a blog post
-    using the Microsoft Semantic Kernel and Azure OpenAI chat models.
-    Execute it to create the agent.
+13. 在 下一组选项中选择 .**NET （C#） dotnet**。
 
-    ![A computer screen shot of a black screen AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image40.png)
 
-3.  The code in the next cell makes **SavePlugin** available as a
-    function inside **save_blog_agent**. It creates a **Kernel Plugin**
-    from **SavePlugin.** **Adds** the Plugin to the **Agent's Kernel** .
-    The AI calls the **SavePlugin.Save** function when it detects a
-    save-related request.
+14. 在**Security Alert**中选择 **Allow access**。
 
-    Execute it to create the Kernel Plugin.
-
-    ![A screen shot of a computer program AI-generated content may be
+![A screenshot of a computer security alert AI-generated content may be
 incorrect.](./media/image41.png)
 
-4.  The next cell contains the code for the class
-    **ApprovalTerminationStrategy**
+15. 执行第一个单元以**install **所有必需的** packages**。
 
-5.  This **custom termination strategy** is used to determine **when an
-    AI agent should stop running**. **Execute** it.
-
-    ![A computer screen with text on it AI-generated content may be
+![A screen shot of a computer program AI-generated content may be
 incorrect.](./media/image42.png)
 
-6.  The next cell contains the **AgentGroupChat** code. This creates a
-    **multi-agent chat** system where two AI agents
-    (**write_blog_agent** and **save_blog_agent**) collaborate. Uses
-    **ApprovalTerminationStrategy** to determine when the chat should
-    stop.
-
-    Only **save_blog_agent** can approve termination.
-    
-    **Execute** it to configure the multi agent chat.
-
-    ![A computer screen shot of a program AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image43.png)
 
-7.  The next cell contains instructions to the agent. It **adds a user
-    message to the multi-agent chat system**, instructing the AI to
-    **search for information on GraphRAG, write a blog, and save it**.
+16. 执行下一个单元以导入命名空间。
 
-    ![](./media/image44.png)
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image44.png)
 
-8.  **Execute** the next cell. This **iterates over the AI-generated
-    responses** in the multi-agent chat **as they are streamed**.
+17. 在下一个单元格中，验证 **deployment** 变量值是否与您创建的 **model
+    deployment** 相同。取代,
 
-    On execution, it writes a blog, saves it.
+    1.  Endpoint – **Azure OpenAI Endpoint**
 
-    ![A screen shot of a computer AI-generated content may be
+    2.  Key – The **API Key**
+
+在 Azure AI Foundry 中创建项目后，我们之前将上述两个值保存在记事本中。
+
+替换值后，**execute**单元格。
+
+这会将这些值设置为要进一步使用的相应变量。
+
+![A black screen with numbers AI-generated content may be
 incorrect.](./media/image45.png)
 
-    ![A screenshot of a computer AI-generated content may be
+18. 下一个单元创建一个新的 **KernelBuilder** 实例，将 **Azure OpenAI
+    Chat Completion**作为 AI
+    服务提供商添加到内核中，并将上一步中的变量作为输入，然后调用
+    **Build**（） 创建 Kernel 实例。
+
+**Execute **它以创建 Kernel 实例。
+
+![A screen shot of a computer code AI-generated content may be
 incorrect.](./media/image46.png)
 
-    ![A screenshot of a computer AI-generated content may be
+19. 执行下一个单元以安装所需的 **Azure**
+    包，并执行下一个单元以导入引用。
+
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image47.png)
 
-**Summary:**
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image48.png)
 
-We have implemented a Multi Agent system using Azure AI Agent Service
-with Semantic Kernel.
+20. 下一个单元格中的类为 **custom HTTP pipeline policy for Azure
+    SDK** ，并将自定义 HTTP 标头 （x-ms-enable-preview： true）
+    添加到每个传出请求。**Execute**它。
 
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image49.png)
+
+## 练习 3：保存博客代理
+
+1.  下一个单元格定义了 **SavePlugin** 类，该类实现了使用 **Azure AI
+    Projects and the Semantic Kernel save blog content** 的方法。 
+
+    - 它接收 blog content作为输入。
+
+    - 与 **Azure AI Projects** 交互以创建 AI 代理。
+
+    - 生成并执行 Python 代码以 **将**内容**另存**为 **Markdown** （.md）
+      文件。
+
+    - **Download**并**存储在**本地生成的文件。
+
+    &nbsp;
+
+    - **返回确认消息 （“Saved”）。**
+
+要执行此单元格，请将 **Your Connection String**
+替换为您之前保存到记事本的 **Project Connection String**。可以从 Azure
+AI Foundry 门户的项目概述页访问它。
+
+替换连接字符串后单击 **Execute**。
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image50.png)
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image51.png)
+
+2.  下一个单元格使用 Save specific values
+    初始化**Constants**。**Execute**它。这些常量将在下一个单元格中使用。
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image52.png)
+
+3.  下一个单元格将创建一个 名为 **save_blog_agent** 的
+    **ChatCompletionAgent**。执行它以创建代理。
+
+![A computer screen shot of a computer program AI-generated content may
+be incorrect.](./media/image53.png)
+
+## 练习 4：编写器代理
+
+1.  执行笔记本中的下一个单元格，该单元格使用 Writer 特定值声明常量。
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image54.png)
+
+2.  下一个单元格创建一个名为 write-blog_content 的
+    **ChatCompletionAgent**，它将负责使用 Microsoft 语义内核和 Azure
+    OpenAI 聊天模型编写博客文章。执行它以创建代理。
+
+![A computer screen shot of a black screen AI-generated content may be
+incorrect.](./media/image55.png)
+
+3.  下一个单元格中的代码使 **SavePlugin** 可用作 save_blog_agent
+    中的函数。它 从 **SavePlugin** 创建一个 **Kernel
+    Plugin。**将插件添加到代理的 **kernel** 中。AI
+    在检测到与保存相关的请求时调用 **SavePlugin.Save** 函数。
+
+执行它以创建 Kernel Plugin。
+
+![A screen shot of a computer program AI-generated content may be
+incorrect.](./media/image56.png)
+
+4.  下一个单元格包含类 **ApprovalTerminationStrategy 的代码**
+
+5.  此自**custom termination strategy** 用于确定 **when an AI agent
+    should stop running**。**Execute**它。 
+
+![A computer screen with text on it AI-generated content may be
+incorrect.](./media/image57.png)
+
+6.  下一个单元格包含 **AgentGroupChat**
+    代码。这将创建一个多**multi-agent chat** 系统，其中两个 AI
+    代理（**write_blog_agent** 和 **save_blog_agent**）协作。使用
+    **ApprovalTerminationStrategy** 确定聊天应何时停止。
+
+只有**save_blog_agent**可以批准终止。
+
+**Execute**它以配置多代理聊天。
+
+![A computer screen shot of a program AI-generated content may be
+incorrect.](./media/image58.png)
+
+7.  下一个单元格包含对代理的指令。它**adds a user message to the
+    multi-agent chat system**，指示 **search for information on
+    GraphRAG, write a blog, and save it**。, instructing
+
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image59.png)
+
+8.  **Execute**下一个单元格。这将在流式传输时多代理聊天中 **iterates
+    over the AI-generated responses**。 
+
+在执行时，它会编写一个博客，并保存它。
+
+![A screen shot of a computer AI-generated content may be
+incorrect.](./media/image60.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image61.png)
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image62.png)
+
+## 总结
+
+我们使用带有Semantic Kernel的 Azure AI 代理服务实现了多代理系统。
