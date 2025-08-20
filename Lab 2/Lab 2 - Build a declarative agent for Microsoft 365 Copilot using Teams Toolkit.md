@@ -1,4 +1,4 @@
-# Lab 2: Build a declarative agent for Microsoft 365 Copilot using Teams Toolkit
+# Lab 2: Build a declarative agent for Microsoft 365 Copilot using Microsoft 365 Agents Toolkit
 
 **Estimated Time: 30 mins**
 
@@ -484,3 +484,4 @@ Some of the benefits of having conversation starters are:
 **Summary:**
 
 In this lab, we have learnt to build a declarative agent using the Teams Toolkit and test the agent’s functionality.
+
