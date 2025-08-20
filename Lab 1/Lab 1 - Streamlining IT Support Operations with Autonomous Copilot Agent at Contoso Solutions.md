@@ -1,808 +1,1083 @@
-# Lab 1 - Copilot Studio を使用した自律型 Copilot エージェントによる IT サポート業務の効率化
+# **ラボ 1 - Copilot Studio を使用した Autonomous Copilot Agent による IT サポート業務の効率化**
 
-**所要時間：60分**
+**所要時間: 60 分**
 
-## 目的
+**目的**
 
-このLabの目的は、参加者が自律型Copilotエージェントを作成し、Contoso
-SolutionsにおけるITサポート業務を効率化できるようにすることです。参加者は、Microsoft
-Copilot Studioのセットアップ、ITサポートエージェントの構成、Power
-AppsとDataverseの統合、ナレッジベースによるボットの機能強化、Power
-Automateを使用してチケット作成の自動化について学習します。この実践的なLabを通して、ITワークフローの改善、手動業の削減とサポート効率性の向上に必要なスキルを習得できます
+このラボの目的は、参加者が自律的な Copilot
+エージェントを作成することで、Contoso Solutions での IT
+サポート業務を効率化できるようにすることです。参加者は、Microsoft
+Copilot Studio の設定、IT サポート エージェントの構成、Power Apps と
+Dataverse の統合、ナレッジ ベースによるボットの機能の強化、Power
+Automate
+を使用したチケット作成の自動化について学習します。このハンズオンラボでは、ITワークフローを改善し、手作業を減らし、サポート効率を向上させるスキルをユーザーに身に付けさせます。
 
-## 解決
+**解決**
 
 参加者は、Microsoft Copilot Studio を使用してカスタマイズされた Contoso
-IT サポートエージェントを作成し、一般的な IT
-問題に対応できるように構成し、サポートデータを保存するために Dataverse
-と統合します。開発環境を構築し、ナレッジソースを追加し、ボットの会話フローを調整してユーザーインタラクションを改善します。Power
-Apps を活用して、IT サポート記録を管理するための Dataverse
-テーブルを作成します。Power Automate
-を使用して、未解決の問題に関するチケット作成とメール通知を自動化します。最後に、参加者はエージェントのトラブルシューティング精度とワークフローの自動化を確認用、エージェントをテストし、シームレスな
-IT サポートオペレーションを実現します。
+IT サポート エージェントを作成し、一般的な IT
+問題を処理するように構成し、サポート データを格納するために Dataverse
+と統合します。開発環境を設定し、ナレッジ
+ソースを追加し、ボットの会話フローを洗練して、ユーザーとの対話を改善します。Power
+Apps を活用することで、参加者は IT サポート レコードを管理するための
+Dataverse テーブルを作成します。Power Automate
+を使用すると、チケットの作成と未解決の問題のメール通知が自動化されます。最後に、参加者はエージェントをテストして、トラブルシューティングの精度とワークフローの自動化を検証し、シームレスなITサポート運用を確保します。
 
-## 演習 1: Power Appsを使い始める
+## 演習 1: Power Apps の使用を開始する
 
-この演習では、Power AppsとDataverseの概要を紹介します。Power
-Appsにログインし、作業環境を構築し、ExcelファイルからデータをインポートしてDataverseテーブルを作成することを目標とします。参加者は、データ駆動型アプリケーションを操作するための基本的なスキルを習得します。
+この演習では、参加者に Power Apps と Dataverse
+を紹介します。目標は、Power Apps にログインし、作業環境を設定し、Excel
+ファイルからデータをインポートして Dataverse
+テーブルを作成することです。参加者は、データ駆動型アプリケーションを操作するための基本的なスキルを習得します。
 
-### タスク 1: Power Apps へのログイン
+### **タスク 1: Power Apps へのログイン**
 
-1.  Lab VM からブラウザを開きます。
-
-2.  Power Appsのウェブサイト
+1.  Power Apps の Web サイト
     +++<https://www.microsoft.com/en-us/power-platform/products/power-apps+++>
-    に移動し、**Try for Free**ボタンをクリックします。
+    に移動し、\[**Try for Free**\] ボタンをクリックします。
 
 ![](./media/image1.png)
 
-3.  **Resources** タブの**Office 365
-    Tenant** **セクション**から**Administrative Username** を電子メール
-    フィールドに入力し、**checkbox** を**select** し**、 Start
-    free** ボタンをクリックします。
+2.  「**リソース**」タブの**「Office 365 Tenant**」セクション
+    から「**管理ユーザー名**」を
+    メールフィールドに入力し、チェックボックスを選択して「**Start
+    free**」ボタンをクリックします 。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image2.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image2.png)
 
-4.  **Administrative Password** を入力すると、Power Apps
-    のホームページに移動します。
+3.  **管理パスワード** を入力する と、Power Apps ホーム
+    ページに移動します。
 
-5.  \[サインイン状態を維持する\] ダイアログで**Yes** を選択し、
-    パスワードの保存プロンプトで **Got it** を選択し**、** Microsoft
-    Edge にサインイン ポップアップで**No, Thanks**を選択します。
+4.  \[サインインしたままにする\]ダイアログで\[Yes\]を選択し
+    、\[パスワードの保存\]プロンプトで\[了解しました\]を選択し、\[MicrosoftEdgeにサインイン\]ポップアップで\[**No,
+    Thanks** \]を選択します。
 
-**注:**
-ユーザー名、パスワード、またはログインするための情報を再度要求された場合は、同じものを入力してログインしてください。
+\[!注意\]**注:**ユーザー名、パスワード、またはログインするための情報を再度入力する場合は、同じ情報を入力してログインしてください。
 
-### タスク2: Dataverseテーブルの設定
+### **タスク 2: 開発者環境設定の更新**
 
-1.  **Dev
-    One**環境が選択されていることを確認してください。選択されていない場合は選択してください。
+1.  ログイン資格情報を使用して、+++https://admin.powerplatform.microsoft.com/home+++
+    で Power Platform 管理センターにログインします。
 
-> ![](./media/image3.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image3.png)
 
-2.  左側のナビゲーションバーから**Tables**を選択します**。**テーブルセクションの上部バーで
-    **+ New table** をクリックし、 **Create new tables**を選択します。
+2.  左側のウィンドウから **Manage**を選択し、環境
+    で**+New**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image4.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image4.png)
 
-3.  新しいテーブルを作成するには、 **Import an Excel file or
-    CSV** **オプション**を選択します。
+3.  環境名を **+++Dev One+++** として指定し、種類 **を Developer**
+    として選択し、**Next**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image5.png)
+![](./media/image5.png)
 
-4.  **Select from device **オプションをクリックし、
-    **C:\LabFiles** フォルダーから**Support Ticket**
-    Excelファイルを選択します。
+4.  Dataverse の追加 ダイアログで **Save**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image6.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image6.png)
 
-5.  テーブルを選択し、 **View data**をクリックしてテーブルを表示します。
+5.  環境が Ready になったら、作成した **Dev One** 環境を選択します。
 
-**注:**この場合、テーブル名は*Employee Technical Support
-Recordです*。テーブル名は実行ごとに異なる場合があります。今後の参考のために、テーブル名を保存しておいてください。列名も実行ごとに異なる場合があります。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image7.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image7.png)
+6.  \[**Edit\]をクリックして**設定を編集します。
 
-6.  テーブルデータに移動し**、Technical Issue
-    Description **フィールドの横にあるドロップダウンを選択し、**Edit
-    column**をせんたくし**、**data typeフィールドに**Text **🡪** Multiple
-    line **🡪** Plain
-    Text を選択し、Update**をクリックします。列名はそれぞれ異なる場合があります。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image8.png)
 
-**注:**列名は少し異なる場合がありますが**、** Copilot
-によって生成されるため、問題の説明に似たようなものになります。
+7.  編集ウィンドウで、管理モードを \[**ON**\]
+    に切り替え、**Save**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image9.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image10.png)
 
-7.  **Current Status **フィールドの横にあるドロップダウンを選択し、
-    **Edit column**を選択して、選択肢を+++ **Unresolved** +++、+++
-    **Resolvedみ**+++、+++ **Processing**
-    +++とセットします。デフォルトの選択肢を**「Unresolved 」**とセットし、**Update**をクリックします。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image11.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image10.png)
+8.  編集した変更を保存したら、\[**Settings**\] を選択します。
 
-8.  右上の**Save and exit **をクリックしてテーブルを保存します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image12.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image11.png)
+9.  \[**Product -\> Features\] を選択します**。
 
-**結論**
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image13.png)
 
-この演習を完了した上、参加者は習得すること：
+10. 機能 **で、Dataverse searchと Single table searchオプションを オン
+    に**切り替え、**Saveを選択します**。
 
-- Office 365 アドミンテナント証明書を使用して Power Apps
-  にアクセスし、操作する方法。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image14.png)
 
-- データをインポートして Dataverse テーブルを作成および構成する手順。
+### タスク 3: Dataverse テーブルの設定
 
-- アプリ開発ワークフローをサポートする環境を設定するための実践的な知識。
+1.  右上の **Dev One** 環境を選択します。
 
-## 演習 2: Contoso IT サポート エージェントの作成
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image15.png)
 
-この演習では、Microsoft Copilot
-Studioにログインし、Contoso社のITサポート業務用、カスタマイズされたCopilotエージェントを作成することに焦点を当てます。参加者は、Copilot
-Studio の操作、環境の設定、そして IT ワークフローを効率化する AI
-駆動エージェントの構築について、実践的な経験を習得します。
+2.  左側のナビゲーションバーから、「**Tables」を選択します。** テーブル
+    セクションのトップ バーで、 **\[+ New table**\] をクリックし、
+    \[**Create new tables\]** を選択します。
 
-### タスク 1: Microsoft Copilot Studio へのログイン
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image16.png)
 
-1.  ブラウザから、 URL
-    +++[https://copilotstudio.microsoft.com+++](https://copilotstudio.microsoft.com+++/)へ移動します。
+3.  \[**Import an Excel file or CSV**\]
+    オプションを選択して、新しいテーブルを作成します。
 
-2.  下のスクリーンショットのように**Setting up your
-    copilot**と表示されている場合は、右上のメニューから**Environments**を選択し**、
-    Dev
-    One**を選択してください。表示されない場合は、この手順を無視して手順3に進んでください。
+![](./media/image17.png)
 
-![image](./media/image12.png)
+4.  \[**Select from
+    device\]**オプションをクリックし、**C:\LabFiles**フォルダから**Support
+    Ticket**のExcelファイルを選択します。
 
-3.  Copilot Studio の試用版を起動するには、 **Start free
-    trial **をクリックします。
+![](./media/image18.png)
 
-![](./media/image13.png)
+5.  次の画面で **\[Import**\] を選択します。
 
-### タスク 2: Contoso IT サポート エージェントの作成と構成
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image19.png)
 
-1.  前のタスクのステップ2が完了している場合は、このステップを無視してください。完了していない場合は、このステップを実行します。Copilot
-    Studioのホームセクションで、右上にある**environment **を選択し、
-    **DevOne**環境を選択します。
+6.  テーブルを選択し、\[**View
+    data\]**をクリックしてテーブルを表示します。
 
-![](./media/image14.png)
+\[!注**\]注:**この場合、テーブルの名前は*Employee Technical Support
+Record*です。名前は実行のたびに異なる場合があります。後で参照できるように、テーブル名を保存してください。列名も実行によって異なる場合があります。
 
-2.  Welcome to Copilot Studioタブで、
-    **Skip**をクリックして先に進みます。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image20.png)
 
-![](./media/image15.png)
+7.  テーブルデータに移動し、\[**Technical Issue
+    Description\]**フィールドの横にあるドロップダウンを選択し**、\[**Edit
+    coulmn**\]**を選択し、データタイプを**\[Text** 🡪 **Multiple
+    line** 🡪 **Plain
+    Text**に設定し、\[**update\]**をクリックします。列名は、それぞれ異なる場合があります。
 
-3.  左側のナビゲーション バーから**Create **を選択し、 **New
-    agent**を選択して新しいエージェントの作成を開始します。
+\[!注\] **注:** **列名は若干異なる場合があります**が、Copilot
+で生成されるため、問題の説明に似た名前になります。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
-
-4.  右上にある**Skip to configure **ボタンをクリックします。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image17.png)
-
-5.  以下のようにエージェントの**Name、Description、Instruction**を入力し、
-    **Create**ボタンをクリックします。
-
-> **Name:** +++Contoso IT Support Agent+++
->
-> **Description:** +++Create a Contoso IT Support Agent which transforms
-> IT support at Contoso Solutions by providing instant troubleshooting
-> for common issues, automating ticket creation for unresolved problems,
-> and storing all interactions in Dataverse. This solution enhances
-> response times, reduces manual workloads, and boosts employee
-> productivity.+++
->
-> **Instruction:** +++Create the Copilot Agent and configure it to
-> handle IT support operations. Add a knowledge source containing
-> solutions for common IT issues like hardware troubleshooting,
-> connectivity, and software glitches. Set up a trigger to detect
-> incoming emails from employees describing unresolved issues. Create an
-> action to save these technical issues into a Dataverse table, ensuring
-> all details are stored for tracking and reporting. Test the agent to
-> validate its troubleshooting accuracy and ticket automation workflow
-> before deployment.+++
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image18.png)
-
-6.  Contoso IT Support
-    Agentの概要ページで、エージェントのオーケストレーターを**Enable にします。**
-
-![](./media/image19.png)
-
-7.  エージェントの概要ページで、 「 **Allow the AI to use its own
-    general knowledge」**オプション**をDisable **にします。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image20.png)
-
-8.  エージェントの右上にある**Setting**ボタンをクリックします。
-
-![](./media/image21.png)
-
-9.  **Generative AI**セクションに移動し、
-    **Generative**を選択して、コンテンツ
-    モデレーションを**Mediumに設定し**、
-    **Save **をクリックして設定を保存します。
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image21.png)
 
 ![](./media/image22.png)
 
-**結論**
+8.  \[**Current Status\]**
+    フィールドの横にあるドロップダウンを選択し、\[**Edit column\]**
+    を選択し、選択肢を+++**Unresolved**+++, +++**Resolved**+++,
+    +++**Processing**+++に設定します。デフォルトの選択肢を**未解決に設定し、\[Update\]をクリックします**。
 
-この演習を完了した上、参加者は習得すること：
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image23.png)
+
+9.  右上の「**Save and exit」をクリックして**、テーブルを保存します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image24.png)
+
+### タスク 4: OneDrive にファイルを追加する
+
+1.  Power Apps ページの左上から、メニューを選択し、OneDrive
+    を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image25.png)
+
+2.  \[**My files** -\> **+ Add new**\] を選択します。
+
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image26.png)
+
+3.  \[**Files upload\]** を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image27.png)
+
+4.  C:\LabFiles**からIT Support.xlsxを選択します**。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image28.png)
+
+5.  このファイルは、後の演習で使用します。
+
+![](./media/image29.png)
+
+> **結論**
+>
+> この演習を完了すると、参加者は次のことを習得します：
+
+- Office 365 管理者テナントの資格情報を使用して Power Apps
+  にアクセスし、ナビゲートする方法。
+
+- データをインポートして Dataverse テーブルを作成および構成する手順。
+
+- アプリ開発ワークフローをサポートするための環境設定に関する実践的な知識。
+
+## 演習 2: Contoso IT サポート エージェントの作成
+
+この演習では、Microsoft Copilot Studio にログインし、Contoso の IT
+サポート操作用にカスタマイズされた Copilot
+エージェントを作成することに重点を置いています。参加者は、Copilot
+Studioの操作、環境の設定、ITワークフローを効率化するためのAI搭載エージェントの構築を実際に体験することができます。
+
+### 
+
+### タスク 1: Contoso IT サポート エージェントの作成と構成
+
+1.  宿泊資格情報を使用して+++https://copilotstudio.microsoft.com+++にログインします。
+
+2.  Copilot Studio のホーム
+    セクション右上で、**環境**を選択し、**DevOne** 環境を選択します。
+
+![](./media/image30.png)
+
+3.  welcome copilot studioタブで、**Skip**をクリックして先に進みます。
+
+![](./media/image31.png)
+
+4.  左側のナビゲーション バーから \[**Create**\] を選択し、\[**New
+    agent**\] を選択して新しいエージェントの作成を開始します。
+
+![](./media/image32.png)
+
+5.  右上隅の\[**Skip to configure\]**ボタンをクリックします。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image33.png)
+
+6.  エージェントの名前、説明、指示**を以下のように入力**
+    し、\[**Create\]**ボタンをクリックします。
+
+> **名前:** +++Contoso IT Support Agent+++
+>
+> **説明:** +++Create a Contoso IT Support Agent which transforms IT
+> support at Contoso Solutions by providing instant troubleshooting for
+> common issues, automating ticket creation for unresolved problems, and
+> storing all interactions in Dataverse. This solution enhances response
+> times, reduces manual workloads, and boosts employee productivity. +++
+>
+> **手順:** +++Copilot Agent を作成し、IT
+> サポート操作を処理するように構成します。ハードウェアのトラブルシューティング、接続性、ソフトウェアの不具合など、一般的な
+> IT 問題の解決策を含むナレッジ
+> ソースを追加します。未解決の問題を説明する OneDrive
+> ファイルの更新を検出するトリガーを設定します。これらの技術的な問題を
+> Dataverse
+> テーブルに保存するアクションを作成し、すべての詳細が追跡とレポートのために保存されるようにします。デプロイ前にエージェントをテストして、トラブルシューティングの精度とチケット自動化ワークフローを検証します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image34.png)
+
+7.  Contoso IT サポート
+    エージェントの概要ページで、**エージェントのオーケストレーター**を有効にします。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image35.png)
+
+8.  エージェントの右上隅から、\[**Settings\]**ボタンをクリックします。
+
+![](./media/image36.png)
+
+9.  次に、\[**Generative
+    AI\]**セクションに移動し、\[**Generative\]**を選択し、コンテンツモデレーションを**\[Medium\]に設定し、\[Save\]**をクリックして
+    設定を保存します。
+
+![](./media/image37.png)
+
+10. 保存**したら** 、設定ペインを閉じます。
+
+11. エージェントの概要ページで、\[**Allow the AI to use its own general
+    knowledge\] オプション**を無効にします。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image38.png)
+
+> **結論**
+>
+> この演習を完了すると、参加者は次のことを習得します。
 
 - Microsoft Copilot Studio にアクセスして設定する方法。
 
 - カスタム Copilot エージェントを作成して構成する手順。
 
-- エージェントの生成 AI
-  とオーケストレーター設定を有効にするための実践的なスキル。
+- エージェントのジェネレーティブ AI
+  とオーケストレーターの設定を有効にする実践的なスキル。
 
-- チケット作成を自動化し、トラブルシューティングに AI を活用することで
-  IT 運用を強化する方法。
+- チケット作成を自動化し、トラブルシューティングにAIを活用することで、IT運用を強化する方法。
 
-## 演習3：ボットの機能強化
+## 演習 3: Bot 機能の強化
 
-この演習では、ナレッジベースを追加し、改良されたインタラクションのために、ボットトピックをカスタマイズすることを通じて、Contoso
-ITサポートエージェントの機能を強化することに焦点を当てます。参加者は、ボットの応答を改良し、トラブルシューティングやエスカレーションでユーザーを効果的に支援できるようにする。
+この演習では、ナレッジ ベースを追加し、ボット
+トピックをカスタマイズして対話を改善することで、Contoso IT サポート
+エージェントの機能を強化することに焦点を当てています。参加者は、ボットの応答を洗練し、トラブルシューティングとエスカレーションでユーザーを効果的に支援できるようにします。
 
-### タスク1: ナレッジベースの追加
+### タスク 1: ナレッジ ベースを追加する
 
-1.  Contoso エージェントの概要ページで、下にスクロールして**+ Add
-    Knowledge**ボタンをクリックします。
+1.  Contoso エージェントの概要ページで、下にスクロールして \[**+ Add
+    Knowledge\]** ボタンをクリックします。
 
-![](./media/image23.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image39.png)
 
-2.  **Upload file**を選択して、 **C:\LabFiles**フォルダーからLab
-    ファイル**Contoso Common IT Issue.docx**を追加し**、
-    Add**をクリックしてファイルを保存します。
+2.  \[**Upload file\]** を選択して、**C:\LabFile**フォルダー から ラボ
+    ファイル **Contoso Common IT Issue.docx**を追加し、\[**Add**\]
+    をクリックしてファイルを保存します。
 
-![image](./media/image24.png) ![image](./media/image25.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image40.png)
 
-3.  もう一度、エージェント概要ページに移動し、下にスクロールして**+ Add
-    knowledge**をクリックします**。**
+>  ![画像](./media/image41.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image26.png)
+3.  再度、エージェントの概要ページに移動し、下にスクロールして\[**+ Add
+    knowledge**\]**をクリックします。**
 
-4.  データ ソースとして**Dataverse (preview)**オプションを選択します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image42.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image27.png)
+4.  **データ ソースとしてDataverse (preview)**オプションを選択します。
 
-5.  右上隅の検索バーに+++**Employee**+++と入力して検索し、 **Employee
-    Technical Support Record **テーブルを選択します。
-    **Next**ボタン**、**それから**Add**ボタンをクリックして、ナレッジソースを追加します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image43.png)
 
-**注:**テーブル名はCopilot
-によって生成されたものなので、**異なる場合があります。**
+5.  右上隅の検索バーで、**+++Employee+++**と入力して検索し、\[**Employee
+    Technical Support
+    Record**\]を選択します。次に、\[**Next\]、\[Next**\]、\[**Add**\]ボタンをクリックして、ナレッジソースを追加します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image28.png)
+**注:** テーブル名は **Copilot**
+で生成されたものであるため、**この場合は異なる場合があります。**
 
-![A screenshot of a computer screen AI-generated content may be
-incorrect.](./media/image29.png)
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image44.png)
 
-**重要:**
-ナレッジページで、追加したナレッジソースが正常にアップロードされていることを確認してください。アップロードには通常10～15分かかります。
+![](./media/image45.png)
 
-### タスク2: 会話開始トピックをカスタマイズする
+\[!アラート\]**重要:**ナレッジページで、追加されたナレッジソースが正常にアップロードされたことを確認します。通常、完了するまでに
+10 分から 15 分かかります。
 
-1.  上部バーのオプションから、 **Topics -\> System **をクリックし、
-    **Conversation Start **トピックをクリックして開きます。
+### タスク 2: 会話開始トピックのカスタマイズ
 
-![image](./media/image30.png)
+1.  トップバーオプションから\[**Topics**\]をクリックし、**\[System\]**を選択してから、\[**Conversation
+    Start**\]をクリックして開きます。
 
-2.  下にスクロールしてメッセージノードに移動し、ボット名の後のメッセージを以下のように更新します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image46.png)
 
-Hello. I’m Bot Name, a virtual assistant. +++How can I help you? +++
+2.  下にスクロールして、メッセージノードに移動します。ボット名の後のメッセージを次のように更新します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image31.png)
+こんにちは。私はボット名、バーチャルアシスタントです。+++How can I help
+you?+++
 
-3.  上から**Save**をクリックしてトピックを保存します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image47.png)
 
-![](./media/image32.png)
+3.  上部から「**Save**」をクリックして トピックを保存します。
 
-### タスク3: フォールバックトピックを更新する
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image48.png)
 
-1.  上部バーのオプションから、
-    **Topics -\> System**をクリックし、**Fallback**トピックを開きま。
+### タスク 3: フォールバック トピックの更新
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+1.  トップバーオプションから\[**Topics**\]をクリックし
+    、\[**Fallback**\]トピックを開きます。
 
-2.  下にスクロールしてメッセージノードに移動し、以下のようにメッセージを更新します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image49.png)
 
-+++I’m sorry. This information is not available in my system. You can
-raise the support ticket via mail for this issue. +++
+2.  下にスクロールして、メッセージノードに移動します。メッセージを次のように更新します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image34.png)
+> +++I’m sorry. This information is not available in my system. You can
+> raise the support ticket via mail for this issue.+++
 
-3.  トピックを保存するには、右上の**Save**ボタンをクリックします。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image50.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image35.png)
+3.  右上の「**Save**」ボタンをクリックして、トピックを保存します。
 
-**結論**
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image51.png)
 
-この演習を完了した上、参加者は習得すること：
+> **結論**
+>
+> この演習を完了すると、参加者は次のことを習得します。
 
-- ボットの機能を強化するためにナレッジ
-  ベースをアップロードして統合する方法。
+- ナレッジ ベースをアップロードして統合し、ボットの機能を強化する方法。
 
-- 魅力的なユーザー体験にとって会話開始メッセージをカスタマイズ手順。
+- 会話開始メッセージをカスタマイズして、より魅力的なユーザー
+  エクスペリエンスを実現する手順。
 
-- サポートされていないクエリを適切に対応するためにフォールバック応答を更新する手法。
+- サポートされていないクエリの処理を改善するためにフォールバック応答を更新する手法。
 
-## 演習4: エージェントのテスト
+## **演習 4: エージェントのテスト**
 
-この演習では、Contoso IT
-サポートエージェントの機能を検証するために、テストを行うことに指導します。参加者は、ボットがシームレスな対話とエスカレーションのため、どのようにナレッジベースとフォールバックトピックを使用してプロンプトを処理することを検証します。
+この演習では、Contoso IT サポート
+エージェントをテストしてその機能を検証する方法を参加者に説明します。参加者は、ナレッジ
+ベースとフォールバック
+トピックを使用してボットがプロンプトを処理する方法を確認し、シームレスな対話とエスカレーションを確保します。
 
-1.  右上の**Test**ボタンをクリックします。次に、テストセクションで**Map**をクリックしてOnにし、
-    **Refresh**をクリックします。
+1.  右上隅の「**Test**」ボタンをクリックします。次に、テストセクションで\[Map\]をクリックし、\[ON**\]**にして、\[Refresh**\]**をクリックします。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image36.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image52.png)
 
-2.  +++**My printer is not working how to fix
-    it**+++プロンプトを入力してください。ナレッジソースに基づいて解決策が表示されます。
+2.  プロンプトを入力します +++**My printer is not working how to fix
+    it**+++ .それは知識源に従って解決策を提供します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image37.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image53.png)
 
-3.  再度、+++**Two factor Authentication (2FA) issue**+++ .
-    プロンプトを入力します。
+3.  再度、プロンプトを +++**Two factor Authentication (2FA)
+    issue**+++と表示します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image38.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image54.png)
 
-1.  2FA の問題と解決策はナレッジ ソースにないので、フォールバック
-    トピックに移動し、チケット作成に関連するプロンプトを返します。
+4.  2FA の問題と解決策はナレッジ
+    ソースでは利用できないため、フォールバック
+    トピックに移動し、チケットの発行に関連するプロンプトを返します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image39.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image55.png)
 
-**結論**
+> **結論**
+>
+> この演習を完了すると、参加者は次のことを習得します。
 
-この演習を完了した上、参加者は習得すること：
+- トラブルシューティングのためにAIエージェントをテストしてアクティブ化する方法。
 
-- トラブルシューティングのために AI
-  エージェントをテストとアクティブ化する方法。
-
-- ナレッジ ベースを使用してボットが応答する能力の検証。
+- ナレッジ ベースを使用して応答するボットの能力の検証。
 
 - フォールバック
-  トピックがどのようにサポートされていないクエリを処理し、ユーザーを効果的にリダイレクトすること。
+  トピックがサポートされていないクエリを処理し、ユーザーを効果的にリダイレクトする方法。
 
-## 演習5: Power Automateを使用したサポートチケット作成の自動化
+## 演習 5: Power Automate を使用したサポート チケット作成の自動化
 
-この演習では、Power Automate
-を使用してサポートチケット作成の自動化およびContoso IT
-サポートエージェントと統合する方法を説明します。参加者は、問題報告の効率化、Dataverse
-にデータ記録とサポートエンジニアにメールで通知するフローを作成します。
+この演習では、AgentFlow を使用してサポート
+チケットの作成を自動化し、Contoso IT サポート
+エージェントと統合する方法を示します。参加者は、問題の報告を効率化し、Dataverse
+にデータを記録するためのフローを作成します。
 
-1.  エージェントの概要ページに移動し、下にスクロールして**+ Add
-    action**をクリックします。
+1.  エージェントの左側のメニュー バーから **Flows**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image40.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image56.png)
 
-2.  アクションの選択ウィンドウで、左上から**+ New
-    Action **をクリックし、**New Power Automate Flow **を選択します。
+2.  **Start in designer**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image41.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image57.png)
 
-3.  Power Automate フローで、**When an agent calls the
-    flow **をクリックし、**Add an Input**を選択します。
+3.  **Add a trigger**を選択し、**When an agent calls the
+    flowトリガー**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image42.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image58.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image43.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image59.png)
 
-4.  データタイプのインプットとして**Text**を選択し、入力の名前を +++
-    **Name** +++ に変更します。
+4.  追加されたトリガー \[**When an agent calls the flow\]**
+    を選択し、**\[Add an Input\]** を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image44.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image60.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image45.png)
+5.  入力のデータ型として \[**Text\]**を選択し 、入力の名前を
+    **+++Name+++**に変更します。
 
-5.  同じ手順を従って、以下のようにさらにインプットを作成します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image61.png)
 
-[TABLE]
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image62.png)
 
-> ![A screenshot of a computer AI-generated content may be
-> incorrect.](./media/image46.png)
+6.  同じ手順で、以下の詳細に従ってさらに入力を作成します。
 
-6.  **When an agent calls the flow**の下、
-    **(+)** 記号をクリックし、**Add an action**を選択します。
+| Input Name  |  Data Type |
+|:--------|:--------|
+|  +++ID+++  |  Text  |
+|  +++Email+++  |  Text  |
+|  +++Details+++  |  Text |
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image47.png)
 
-7.  Add an action検索バーに+++**Add a new row**+++を入力します。次に、
-    Microsoft Dataverseセクションから**Add a new row**を選択します。
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image63.png)
 
-![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image48.png)
+7.  \[**When an agent calls the flow**\] で、**(+)**
+    記号をクリックし、\[**Add an action\] を選択します**。
 
-注: Dataverse
-接続が自動的に作成されない場合があります。その場合は、資格情報**OAuth認証**を使用して再度**sign
-in する**必要があります。
+![](./media/image64.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image49.png)
+8.  アクション検索バーの追加に「+++**Add a new
+    row**+++」と入力します。次に、**Microsoft Dataverse
+    セクションからAdd a new row**を選択します。
 
-8.  **Table Name **セクションで、 +++**Employee Technical Support
-    Record**+++ （または作成したテーブル名)を検索して選択します。
+![コンピュータプログラムのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image65.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image50.png)
+**注**: Dataverse
+接続が自動的に作成されない場合があります。資格情報の**OAuth**認証で**再度サインインする**必要がある場合があります。
 
-9.  テーブル名の下で**Show
-    all**を選択し、特定のフィールドをクリックして、下の表に従って動的コンテンツボタン（サンダーボルト）を使用してインプットを追加します**Current
-    Status** フィールドのドロップダウンで**Unresolved**を選択します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image66.png)
 
-[TABLE]
+9.  **\[Table Name**\] セクションで、**+++Employee Technical Support
+    Record+++** (または作成した対応するテーブル名)
+    を検索して選択します。
 
-10. ![A blue line on a white background AI-generated content may be
-    incorrect.](./media/image51.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image67.png)
 
-> ![A screenshot of a computer AI-generated content may be
-> incorrect.](./media/image52.png)
+10. テーブル名の下で\[**Show
+    all**\]を選択し、特定のフィールドをクリックして、次の表のように**動的コンテンツ**ボタン(サンダーボルト)を使用して**入力を追加します。**
 
-11. Add a new rowアクションの下で (+)をクリックし、**Add an
-    actionを選択します**。
+> \[**Current Status\]** フィールドを **\[Unresolved\]** に設定します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image53.png)
+| Section   |  Input Variable  |
+|:---------|:--------|
+| Employee Name   |  Name (Dynamic Input)  |
+| Email Address   |  Email (Dynamic Input)  |
+|  Employee ID |  ID (Dynamic Input)  |
+|  Technical Issue Description  |  Details (Dynamic Input)  |
 
-12. アクションの追加セクションで、検索バーに+++**Send an
-    email**+++を入力し**、** Office 365 Outlook セクションから**send an
-    email (V2)** を選択します**。**
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image54.png)
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image55.png)
-
-13. 電子メールの送信セクションで、該当するセクションに以下の詳細を入力します。
-
-> **Name, ID,
-> Details**のプレースホルダーを動的コンテンツを使用した変数に置き換えます。
+> ![白い背景に青い線
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image68.png)
 >
-> **To**
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image69.png)
+
+11. 上部のバーから \[**Save draft**\] をクリックし、\[**Publish\]
+    をクリックします**。 **Power automate** タブを**閉じます**。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image70.png)
+
+12. 左側のメニュー バーから **フロー** を選択し、**無題の**フロー
+    (作成したばかりのフロー) を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image71.png)
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image72.png)
+
+13. フローで **Edit** を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image73.png)
+
+14. フローに+++**Create an Employee Support
+    Ticket**+++という名前を付け、**Save**を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image74.png)
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image75.png)
+
+15. **Contoso IT Support Agent** **Overviewページで、 \[+ Add action\]**
+    を選択します。
+
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image76.png)
+
+16. 「**Create an Employee Support Ticket」フロー** を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image77.png)
+
+17. \[**Add action**\] ボタンをクリックして、フローを追加します。
+
+![コンピュータ画面のスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image78.png)
+
+18. エージェントの \[**Overview**\] ページの \[**Action**\]
+    セクションで、\[**Edit**\]
+    を選択してアクションのパラメータを編集します。\[**Inputs\]**
+    セクションを選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image79.png)
+
+![サポート チケットのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image80.png)
+
+19. 指定された説明を指定された入力フィールドに入力し、説明を入力した後、\[**Save\]**ボタンをクリックします。
+
+|  Section  | Details   |
+|:---|:------|
+|  Name -- Description  | +++Enter the name of the employee.+++   |
+| ID -- Description  |  +++Enter the employee ID in the field.+++  |
+|  Email -- Description | +++Enter the email address of the employee from whom the email is received.+++   |
+| Details -- Description   | +++Enter the email details of the employee.+++   |
+
+
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image81.png)
 >
-> サポート エンジニアのメール アドレスを入力します (**任意のメール ID
-> を使用します**- サポート チケットが発行されると、エージェントからこの
-> IDにメールが送信されます)
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image82.png)
 >
-> **Subject**
+> **結論**
 >
-> New Technical Support Ticket Raised
->
-> **Body**
+> この演習を完了すると、参加者は次のことを習得します。
 
-A new technical support ticket has been raised and requires your
-attention. Please find details below:
+- エージェント フローを Copilot
+  エージェントと統合してチケットを作成する方法。
 
-Employee Name: \< Name \>
-
-Employee ID: \< ID \>
-
-Technical Issue: \< Details \>
-
-Thank you for your prompt attention to this matter.'
-
-Best Regards
-
-![A screenshot of a email AI-generated content may be
-incorrect.](./media/image56.png)
-
-14. 左上隅から、フロー名を +++ **Create an Employee Support Ticket** +++
-    に変更します。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image57.png)
-
-15. 上部のバーから**Save draft **をクリックし、
-    **Publish**をクリックします。Power Automateタブを閉じます。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image58.png)
-
-16. Copilot ウィンドウに戻り、 **Refresh**ボタンをクリックします。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image59.png)
-
-17. アクションの選択ウィンドウで、**Create an Employee Support
-    Ticket **フローの作成を選択します。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image60.png)
-
-18. フローを追加するには、 **Add action** ボタンをクリックします。
-
-![A screenshot of a computer screen AI-generated content may be
-incorrect.](./media/image61.png)
-
-19. エージェントの**Overview** ページの**Action**セクションで**Edit**を選択し、アクションのパラメータを編集します。
-    **Inputs**セクションを選択します。
-
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image62.png)
-
-![A screenshot of a support ticket AI-generated content may be
-incorrect.](./media/image63.png)
-
-20. 該当するインプットフィールドに指定された説明を入力し、説明を入力した後に**Save**ボタンをクリックします。
-
-[TABLE]
-
-> ![A screenshot of a computer AI-generated content may be
-> incorrect.](./media/image64.png)
->
-> ![A screenshot of a computer AI-generated content may be
-> incorrect.](./media/image65.png)
-
-**結論**
-
-この演習を完了した上、参加者は習得すること：
-
-- チケット作成のために Power Automate フローを Copilot
-  エージェントと統合する方法。
-
-- ユーザーの操作から入力データを動的に収集してマッピングする手順。
+- ユーザーの操作から入力データを動的に収集してマップする手順。
 
 - 技術的な問題のエスカレーションのための電子メール通知を自動化する手法。
 
-- 効率的なサポート チケット管理のためにワークフローを構成する機能。
+- 効率的なサポートチケット管理のためのワークフローを設定する機能。
 
-## 演習6: 自動アクションのためのメールベースのトリガーの設定
+## 演習 6: 自動アクションのトリガーの設定
 
-サポートチケット作成の自動化の続きとなるこのセッションでは、Contoso IT
-サポートエージェントにトリガーを設定し、メール入力を自動化された Power
-Automate
-フローにリンクさせることに焦点を当てます。参加者はトリガーを設定し、エージェントの展開を完了させます。
+このサポート チケット作成の自動化の続きは、自動化された Power Automate
+フローを使用して OneDrive でファイルを作成するために、Contoso IT
+サポート
+エージェントでトリガーを設定することに焦点を当てています。参加者はトリガーを構成し、デプロイのためにエージェントを完成させます。
 
-1.  エージェントの概要ページに移動し、下にスクロールして**+ Add
-    trigger**をクリックします。
+1.  エージェントの概要ページに移動し、下にスクロールして **\[+Add
+    trigger\] をクリックします**。
 
-![A screenshot of a web page AI-generated content may be
-incorrect.](./media/image66.png)
+![Web ページのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image83.png)
 
-2.  次に、トリガーの追加ウィンドウから、**When a new email arrives
-    (V3) **トリガーを選択します。
+2.  \[**When a file is created**\] トリガーを選択し、\[**Next**\]
+    をクリックします。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image67.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image84.png)
 
-3.  Copilot と Outlook
-    の接続が成功し、緑色のチェックマークが表示されたら、
-    **Next **ボタンをクリックします。
+3.  接続の確立が成功したら、**Next**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image68.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image85.png)
 
-4.  フォルダー フィールドでフォルダー
-    アイコンを選択し、**Inbox** フォルダーを選択して、**Create
-    trigger**を選択します。
+4.  \[**Folder\]** で \[**Root\]** を選択し**、\[Include Subfolders\]
+    で** \[**Yes\]** を選択し、**\[Create trigger\]** をクリックします。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image69.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image86.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image70.png)
+5.  \[トリガーをテストする時間\] ダイアログを**閉じます。**
 
-5.  **Time to test your
-    trigger **というプロンプトを閉じます。サポートエージェントの概要ページで下にスクロールし、トリガーセクションで3つの点**（…）**をクリックして、
-    **Edit in Power Automate**選択します。
+![コンピュータエラーのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image87.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image71.png)
+6.  エージェントの 概要 ページで、追加されたトリガーの横にある 3
+    つのドット –**When a file is created**を選択し、**Edit in Power
+    Automateを選択します**。
 
-6.  When a new email arriveトリガーを右クリックし、
-    **Delete**を選択します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image88.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image72.png)
+7.  ファイルが作成されたときノードの下にある \[+\]
+    記号を選択して、アクションを追加します。アクション
+    ウィンドウで、**+++Get a row+++** を検索し、**Excel Online
+    (Business)** の下の **Get a row**を選択します。
 
-7.  次に、Add a triggerをクリックし、+++**When new email
-    arrives**+++を検索して、 **Office 365 Outlook**セクションから**When
-    a new email arrives **トリガーを選択します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image89.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image73.png)
+8.  アクションが追加されたら、以下の詳細を追加します。
 
-8.  **Send a prompt to the specified copilot for
-    processingる**をクリックし、本文/メッセージ セクションに+++**Run
-    Create an Employee Support Ticket flow and use content from Body
-    From.**+++プロンプトを入力します**。** +++ **Body**と**From
-    を**動的コンテンツ変数として置き換えます。
+- 場所 – OneDrive for Business を選択します
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image74.png)
+- ドキュメント ライブラリ – OneDrive
 
-9.  フローを**Save**して**Publish**して下さい。それから、power Automate
-    ウィンドウを閉じて、Copilot ウィンドウに戻ります。
+- ファイル – ITSupport.xlsx
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image75.png)
+- テーブル – Table1
 
-10. 概要セクションに移動し、右上隅の**Publish **をクリックし、もう一度**Publish **をクリックしてcopilotを公開します。
+- キー列 – ID
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image76.png)
+- キー値 – +++ID1234+++
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image77.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image90.png)
 
-**結論**
+9.  \[**Sends a prompt to the specified copilot for
+    processing**\]ノードを選択します。
 
-この演習を完了した上、参加者は習得すること：
+\[本文/メッセージ\] に「+++Run the flow Create an Employee Support
+Ticket+++」と入力し、動的な値、名前、ID、メール
+ID、説明、ステータスを追加します。次に、「+++along with a message "New
+record added to the Employee Support table"+++」を追加します。
 
-- メール入力に基づいてワークフローを自動化するために、Copilot
-  でトリガーを設定する方法。
+下のスクリーンショットのようになります。
 
-- 電子メールの内容を Power Automate フローに動的にマップする手順。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image91.png)
 
-- AI エージェントを運用用に公開し、完成させるプロセス。
+10. 次に、\[**Save Draft**\]をクリックしてフローを保存し
+    、\[**Publish**\] をクリックしてフローを公開します。
 
-- Outlookなどコミュニケーションツールをと自動化されたワークフローとリンクする実践的なスキル。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image92.png)
 
-## 演習7: エージェントのテスト
+11. Copilot Studio に戻り、 **エージェントをPublishします。**
 
-この演習では、Contoso IT Support Agent と Power Automate および Outlook
-の統合をテストすること焦点を当てます。参加者は、エージェントの電子メールの処理、サポートチケットの作成及び自動化されたワークフローを効果的にトリガーする機能を検証します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image93.png)
 
-1.  エージェントの概要ページに移動し、下にスクロールしてトリガーの**(…)**をクリックし、
-    **Edit in power automate**を選択します。
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image94.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image78.png)
+## 演習 7: エージェントのテスト
 
-2.  Power Automate Flow
-    に移動し、上部のバーから**Test**ボタンをクリックし、
-    **Manually**を選択して、もう一度**Testをクリックします。**
+1.  Power Automate
+    フローから、**ファイルが作成されたら**、**Test**を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image79.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image95.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image80.png)
+2.  **\[Manually\]** オプションを選択し、\[**Test**\] を選択します。
 
-3.  アクションをトリガーするために、他のメールボックスから365
-    管理者テナントのメール
-    IDにメールを送信します。メールには問題の説明と、従業員IDなどの詳細情報が記載されている必要があります。下のスクリーンショットをご覧ください。内容の例は以下の通りです。
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image96.png)
+
+3.  **OneDrive** ページを開きます。**My files で** \[**+ Add new**\]
+    を選択し、\[**Word Document**\] を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image97.png)
+
+4.  Power Automate
+    ページに戻ると、フローが実行を開始し、通過したことを確認できます。
+
+> ![コンピューターのスクリーンショット
+> AIが生成したコンテンツが正しくない可能性があります。](./media/image98.png)
+
+5.  エージェントの概要ページで、\[ **Test
+    Trigger\]**アイコンを選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image99.png)
+
+6.  最新のトリガーを選択し、\[**Start testing\]**を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image100.png)
+
+7.  フローを実行し、サポート トラッカーからデータをフェッチし、Dataverse
+    テーブルで更新します。
+
+![コンピュータ画面のスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image101.png)
+
+8.  この場合、トラッカーには 1 つのサポート チケットの詳細があり、それが
+    Dataverse テーブルに追加されるため、ユーザーのサポート
+    チケットが作成されます。
+
+9.  ユーザーから問題に関するメールを受信したときのメール生成の方が適切です。メールの設定部分は、テナントの権限制限のため、ここでは実行できませんでした。次のタスクを検討してください
+    (アクセス許可を持つテナントがある場合)。
+
+## 本番環境で実行するタスク
+
+本番環境では、サポート チケットの生成は主にメールベースになります。
+
+このタスクは 、テナントがメール
+アカウントの使用に制限を設けているため、このテスト環境で実行することを意図していません。これらの手順は、メールを送受信できるテナントがある場合は、**演習
+5: Power Automate を使用したサポート チケット作成の自動化 のステップ
+10** の後にフローに追加できます。
+
+この実行では、このタスクを無視してください。これは、メール生成部分の学習と理解、およびITサポート操作の主要な役割を果たすトリガーとして受信メールを設定し、エージェントをテストするためだけに追加されました
+
+1.  \[新しい行アクションの追加\] で (+) をクリックし、\[**Add an
+    action\]**を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image102.png)
+
+2.  アクションの追加セクションで、検索バーに「+++**Send an
+    email**+++」と入力し、**Office 365 Outlook セクションから「send an
+    email (V2)**」を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image103.png)
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image104.png)
+
+3.  「メールの送信」セクションで、該当するセクションに以下の詳細を入力します。
+
+> 動的コンテンツを使用して、**名前**、**ID**、**詳細**のプレースホルダを変数に置き換えます
+>
+> **宛先**
+>
+> サポートエンジニアのメールアドレスを入力します(**任意のメールIDを使用します**-このIDになります、メールはサポートチケットが発行されたときにエージェントから送信されます)
+>
+> **件名**
+>
+> 新しいテクニカル サポート チケットが発行されました
+>
+> **体**
+>
+> 新しいテクニカル サポート
+> チケットが発行され、注意が必要です。詳細は以下をご覧ください。
+>
+> 従業員名: \<名 \>
+>
+> 従業員ID:\<ID\>
+>
+> 技術的な問題:\<詳細\>
+>
+> この件について迅速に対応していただき、ありがとうございます。」
+>
+> よろしくお願いいたします
+
+![メールのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image105.png)
+
+4.  左上隅から、フローの名前を +++**Create an Employee Support
+    Ticket**+++に変更します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image106.png)
+
+5.  フローを保存して公開する
+
+6.  エージェントの概要ページに移動し、下にスクロールして **\[+Add
+    trigger\]** をクリックします。
+
+![Web ページのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image83.png)
+
+7.  次に、\[トリガーの追加\] ウィンドウから、\[**When a new email
+    arrives (V3)\]** トリガーを選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image107.png)
+
+8.  コパイロットとOutlookの接続が成功したら、緑色のチェックマークが表示され、\[**Next\]**ボタンをクリックします。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image108.png)
+
+9.  フォルダー フィールドで、フォルダー アイコンを選択し、**Inbox**
+    フォルダーを選択してから、**Create trigger**を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image109.png)
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image110.png)
+
+10. \[**Time to test your trigger\]** プロンプトを閉じます
+    。Supportエージェントの概要ページで、下にスクロールし、トリガーセクションで3つのドット(...)
+    をクリックし、**Edit in Power Automate**を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image111.png)
+
+11. 　新しいメールが届いたときトリガーを右クリックし、「Delete」を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image112.png)
+
+12. 次に、トリガーの追加をクリックし、\[+++**When new email
+    arrives**+++\]を検索して、\[**Office 365のOutlook**から**When a new
+    email arrives**トリガーを選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image113.png)
+
+13. \[**Send a prompt to the specified copilot for processing**,**\]
+    をクリックし**、\[Body/message\] セクションに「+++**Run Create an
+    Employee Support Ticket flow and use content from Body
+    From.**+++を入力します**。**+++
+    **Body**と**From**を動的コンテンツ変数として置き換えます。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image114.png)
+
+14. **フローをSaveし**て**Publishし**、Power Automate
+    ウィンドウを閉じて、copilot ウィンドウに戻ります。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image115.png)
+
+15. 概要セクションに移動し、右上隅から\[**Publish**\]をクリックし
+    、もう一度\[**Publish**\]をクリックして コパイロットを公開します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image116.png)
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image117.png)
+
+> **結論**
+>
+> この演習を完了すると、参加者は次のことを習得します。
+
+- 技術的な問題のエスカレーションのための電子メール通知を自動化する手法。
+
+&nbsp;
+
+- Copilot
+  でトリガーを設定して、メール入力に基づいてワークフローを自動化する方法。
+
+- 電子メール コンテンツを Power Automate フローに動的にマップする手順。
+
+- 運用用に AI エージェントを公開して完成させるプロセス。
+
+- Outlookなどのコミュニケーションツールを自動化されたワークフローとリンクする実践的なスキル。
+
+**エージェントをテストする**
+
+この演習では、Contoso IT サポート エージェントと Power Automate および
+Outlook
+の統合のテストに焦点を当てています。参加者は、エージェントがメールを処理し、サポートチケットを作成し、自動化されたワークフローを効果的にトリガーする能力を確認します。
+
+1.  エージェントの概要ページに移動し、下にスクロールして、(**...)**
+    をトリガーでクリックし、**Edit in power automate**を選択します。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image118.png)
+
+2.  Power Automate フローに移動し、上部のバーから **\[Test**\]
+    ボタンをクリックしてから **\[Manually\]**を選択し、もう一度
+    **\[Test\] をクリックします**。
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image119.png)
+
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image120.png)
+
+3.  **アクションをトリガー**するために、他のメールボックスから365管理者テナントのメール**IDにメールを送信します。**メールには問題が説明されており、以下のスクリーンショットのように、従業員IDなどの詳細が含まれている必要があります。コンテンツの例を以下に示します。
 
 > Hi Support Team,
 >
 > I hope this message finds you well.
 >
-> I　am Mark Brown, working as a Software Engineer at Contoso. My
-> employee ID is CONTOSO099
+> Iam Mark Brown, working as a Software Engineer at Contoso. My employee
+> ID is CONTOSO099
 >
-> Issue: Monitor is completely blank and not functioning.
+> Issue: Monitor is completely balank and not functioning.
 >
 > Kindly raise a support ticket and assist in resolving this issue at
-> the earliest.
+> the earlierst.
 >
 > Thank you for your support.
 >
-> Best Regards,  
+> Best Regards,
+>
 > Mark Brown
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image81.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image121.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image82.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image122.png)
 
-4.  Copilot エージェントの概要ページに移動し、下にスクロールして**Test
-    trigger**を選択します。
+4.  copilot エージェントの概要ページに移動し、下にスクロールして
+    \[**Test trigger\]** を選択します。
 
-![A screenshot of a web page AI-generated content may be
-incorrect.](./media/image83.png)
+![Web ページのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image123.png)
 
-5.  **Start testing**をクリックすると、テストが開始されます。
+5.  \[**Start testing\]をクリックすると**、テストが開始されます。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image84.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image124.png)
 
-6.  テスト
-    セクションで**Connect**をクリックすると、接続ウィンドウが開きます。
+6.  テストセクションで\[**Connect**\]をクリックすると、接続ウィンドウが開きます。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image85.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image125.png)
 
-7.  もう一度**Connect**をクリックし、 **Submit**を選択します。
+7.  \[**Connect\]** をもう一度クリックし、\[**Submit\]** を選択します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image86.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image126.png)
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image87.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image127.png)
 
-8.  Copilot Studio ウィンドウに移動して、**Test**を再実行します。
+8.  copilot Studio ウィンドウに移動し、**Test**を再実行します。
 
-![A screenshot of a web page AI-generated content may be
-incorrect.](./media/image83.png)
+![Web ページのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image123.png)
 
-9.  サポート リクエストは自動的に生成されます。
+9.  サポートリクエストは自動的に生成されます。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image88.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image128.png)
 
-10. Power Apps に移動し、Employee support ticket
-    レコードテーブルに移動して、詳細を確認します。
+10. Power Apps に移動し、従業員サポート チケット レコード
+    テーブルに移動して、詳細を確認します。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image89.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image129.png)
 
-11. Power Automate Flow
-    でメールを送信するように設定したサポートメールをご確認ください。メールはサポートチームに自動的に送信されます。
+11. メールを送信するために Power Automate フローで構成したサポート
+    メールを確認します。メールはサポートチームに自動的に送信されます。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image90.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image130.png)
 
-12. テストウィンドウに移動し、ユーザー として+++**Mark Brown Ticket
-    Current
-    Status**+++クエリを記述します。問題のステータスは未解決と表示されます。
+12. テストウィンドウに移動し、ユーザー+++**Mark Brown Ticket Current
+    Status**+++としてクエリを書きます。問題のステータスが未解決として表示されます。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image91.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image131.png)
 
-13. サポート エンジニアとして、テスト セクションに+++**I want to know
-    about all Unresolved ticket**+++プロンプトを記述します。
+13. サポートエンジニアとして、テストセクションにプロンプトを記述します。+++**I
+    want to know about all Unresolved ticket**+++ 。
 
-![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image92.png)
+![コンピューターのスクリーンショット
+AIが生成したコンテンツが正しくない可能性があります。](./media/image132.png)
 
-**結論**
+> **結論**
+>
+> この演習を完了すると、参加者は次のことを習得します。
 
-この演習を完了した上、参加者は習得すること：
-
-- 現実的なシナリオをシミュレートしてエージェントの機能をテストする方法。
+- 実際のシナリオをシミュレートしてエージェントの機能をテストする方法。
 
 - Power Automate
-  でチケットの生成及び電子メールを通じてトリガーされたワークフローを検証する手順。
+  でメールによってトリガーされるワークフローとチケット生成を検証する手順。
 
-- Dataverse で生成されたレコードを確認する方法、または、サポート
-  チームに通知が送信されていることの確認。
+- Dataverse で生成されたレコードを確認し、通知がサポート
+  チームに送信されるようにする方法。
 
-- 自動化ワークフローのデバッグと最終決定に関する実践的な洞察。
+- 自動化ワークフローのデバッグとファイナライズに関する実践的な洞察。
 
-## Labガイドの最終結論
+**ラボガイドの最終結論**
 
-このLabガイドでは、Contoso
-SolutionsのITサポートサービスデスクにAutonomous
-Copilotエージェントを導入する実践的な演習を行いました。すべての演習を一歩に従って、参加者は以下のことを実現しました。
+このラボ ガイドでは、参加者に Contoso Solutions の IT サポート サービス
+デスクの Autonomous Copilot Agent
+のデプロイに関する実践的な体験を提供しました。ステップバイステップの演習に従うことで、参加者は次のことができるようになりました。
 
-1.  **Copilot Studio のセットアップ**: 参加者は、Copilot Studio
-    にログインし、IT サポート
-    エージェントを作成して構成し、必要なトラブルシューティングとチケット自動化のために生成
-    AI
-    やオーケストレーターなどの重要な設定を有効にする方法を学びました。
+1.  **Copilot Studioのセットアップ**:参加者は、Copilot
+    Studioへのログイン方法、ITサポートエージェントの作成と設定方法、効果的なトラブルシューティングとチケット自動化のためのジェネレーティブAIやオーケストレーターなどの基本的な設定を有効にする方法を学びました。
 
 2.  **Power Apps の操作**: 参加者は、Power Apps へのログイン、Dataverse
-    テーブルの設定、Excel からのデータのインポートによるサポート
-    チケットの効率的な追跡と管理に関する実践的な知識を習得しました。
+    テーブルの設定、Excel
+    からのデータのインポートに関する実践的な知識を得て、サポート
+    チケットを効率的に追跡および管理しました。
 
-3.  **ボットの機能強化**: 演習では、ボットにナレッジ
+3.  **ボット機能の強化**: この演習では、ボットにナレッジ
     ベースを追加し、会話の開始トピックとフォールバック
-    トピックをカスタマイズしてユーザー
-    インタラクションを改善し、ボットが幅広い IT サポート
-    シナリオを処理できることに焦点を当てました。
+    トピックをカスタマイズしてユーザー操作を改善し、ボットが幅広い IT
+    サポート シナリオを処理できるようにすることに重点を置いています。
 
 4.  **IT サポート タスクの自動化**: 参加者は、Power Automate
     を使用してサポート
-    チケットの作成を自動化し、ボットの能力を強化して未解決の問題を管理し、IT
-    チームのワークフローを改善する方法も学びました。
+    チケットの作成を自動化する方法も学び、未解決の問題を管理し、IT
+    チームのワークフローを改善するボットの機能を強化しました。
 
-これらの演習を完了することで、参加者は応答時間の短縮、手動の負荷軽減、そしてITサポート業務全体の生産性向上を実現する、堅牢な自律型サポートシステムを導入することができました。Copilot
-Studio、Power
-Apps、Dataverseの統合により、シームレスな情報フローが確保され、定型業務が自動化され、サポートワークフローが最適化されます。これにより、従業員は即座にトラブルシューティングの解決策を得られるようになり、未解決の問題についてはチケット管理が自動化されます。
+これらの演習を完了することで、参加者は、応答時間を改善し、手作業の負荷を減らし、ITサポート業務の全体的な生産性を向上させる堅牢な自律型サポートシステムを実装することができました。Copilot
+Studio、Power Apps、Dataverse
+の統合により、シームレスな情報の流れが確保され、日常的なタスクが自動化され、サポート
+ワークフローが最適化され、従業員に即時のトラブルシューティング
+ソリューションが提供され、未解決の問題に対するチケット管理が自動化されます。
