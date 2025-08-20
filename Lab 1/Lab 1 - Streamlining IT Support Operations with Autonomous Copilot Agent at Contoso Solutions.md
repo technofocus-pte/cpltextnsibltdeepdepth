@@ -476,7 +476,11 @@ incorrect.](./media/image62.png)
 
 6.  使用相同的程序，根据以下详细信息创建更多输入。
 
-[TABLE]
+    | 输入名称   |  数据类型  |
+    |:--------|:--------|
+    |  +++ID+++  |  文本  |
+    |  +++Email+++  |  文本  |
+    |  +++Details+++  |  文本  |
 
 > ![A screenshot of a computer AI-generated content may be
 > incorrect.](./media/image63.png)
@@ -510,7 +514,12 @@ incorrect.](./media/image67.png)
 
 > 将 **Current Status** 字段设置为 **Unresolved** （未解决）。
 
-[TABLE]
+| 部分   |  输入变量  |
+|:---------|:--------|
+| 员工姓名   |  名称（动态输入）  |
+| 电子邮件地址   |  电子邮件（动态输入）  |
+|  员工 ID  |  ID （动态输入）  |
+|  技术问题描述  |  细节 （动态输入）  |
 
 > ![A blue line on a white background AI-generated content may be
 > incorrect.](./media/image68.png)
@@ -574,7 +583,12 @@ incorrect.](./media/image80.png)
 
 19. 在尊重的输入字段中输入给定的描述，输入描述后单击 **Save** 按钮。
 
-[TABLE]
+|  部分  | 详情   |
+|:---|:------|
+|  名称 （Name） -- 描述  | +++Enter the name of the employee.+++   |
+| ID -- 描述   |  +++Enter the employee ID in the field.+++  |
+|  电子邮件 -- 描述  | +++Enter the email address of the employee from whom the email is received.+++   |
+| 详细信息 -- 描述   | +++Enter the email details of the employee.+++   |
 
 > ![A screenshot of a computer AI-generated content may be
 > incorrect.](./media/image81.png)
@@ -1010,4 +1024,5 @@ Autonomous Copilot 代理的实践经验。通过遵循分步练习，参与者�
 通过完成这些练习，参与者能够实施强大的自主支持系统，从而缩短响应时间，减少手动工作量，并提高
 IT 支持运营的整体生产力。Copilot Studio、Power Apps 和 Dataverse
 的集成确保了无缝的信息流，自动化了日常任务，并优化了支持工作流程，为员工提供了即时的故障排除解决方案，并为未解决的问题提供了自动化的票证管理。
+
 
