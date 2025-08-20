@@ -543,7 +543,12 @@ incorrect.](./media/image62.png)
 6.  Con el mismo procedimiento, cree más entradas según los detalles que
     se indican a continuación.
 
-[TABLE]
+| Input Name  |  Data Type |
+|:--------|:--------|
+|  +++ID+++  |  Texto  |
+|  +++Email+++  |  Texto  |
+|  +++Details+++  |  Texto |
+
 
 > ![A screenshot of a computer AI-generated content may be
 > incorrect.](./media/image63.png)
@@ -581,7 +586,13 @@ incorrect.](./media/image67.png)
 
 > Establezca el campo **Current Status** a **Unresolved**.
 
-[TABLE]
+| Section   |  Input Variable  |
+|:---------|:--------|
+| Employee Name   |  Name (Dynamic Input)  |
+| Email Address   |  Email (Dynamic Input)  |
+| Employee ID |  ID (Dynamic Input)  |
+| Technical Issue Description  |  Details (Dynamic Input) |
+
 
 > ![A blue line on a white background AI-generated content may be
 > incorrect.](./media/image68.png)
@@ -648,7 +659,13 @@ incorrect.](./media/image80.png)
 19. Ingrese la descripción dada en el campo de entrada respectivo,
     después de ingresar la descripción, haga clic en el botón **Save**.
 
-[TABLE]
+|  Section  | Details   |
+|:---|:------|
+|  Name -- Description | +++Enter the name of the employee.+++   |
+| ID -- Description   |  +++Enter the employee ID in the field.+++  |
+|  Email -- Description  | +++Enter the email address of the employee from whom the email is received.+++   |
+| Details -- Description  | +++Enter the email details of the employee.+++   |
+
 
 > ![A screenshot of a computer AI-generated content may be
 > incorrect.](./media/image81.png)
@@ -1162,3 +1179,4 @@ interrupciones, automatiza las tareas rutinarias y optimiza los
 workflows de soporte, proporcionando soluciones inmediatas de solución
 de problemas a los empleados y gestión automatizada de tickets para
 problemas no resueltos.
+
