@@ -502,7 +502,11 @@ incorrect.](./media/image62.png)
 
 6.  동일한 절차로 아래에 주어진 세부 정보에 따라 추가 입력을 생성합니다.
 
-[TABLE]
+| **Input Name** | **Data Type** |
+|----------------|---------------|
+| +++ID+++             | Text          |
+| +++Email+++          | Text          |
+| +++Details+++        | Text          |
 
 > ![A screenshot of a computer AI-generated content may be
 > incorrect.](./media/image63.png)
@@ -536,7 +540,12 @@ incorrect.](./media/image67.png)
 
 > **Current Status**필드를 **Unresolved**로 설정합니다.
 
-[TABLE]
+| 섹션                     | 입력 변수          |
+|-----------------------------|-------------------------|
+| Employee Name               | Name (Dynamic Input)    |
+| Email Address               | Email (Dynamic Input)   |
+| Employee ID                 | ID (Dynamic Input)      |
+| Technical Issue Description | Details (Dynamic Input) |
 
 > ![A blue line on a white background AI-generated content may be
 > incorrect.](./media/image68.png)
@@ -602,7 +611,12 @@ incorrect.](./media/image80.png)
 19. 해당 입력 필드에 주어진 설명을 입력하고, 설명을 입력한 후 **Save**
     버튼을 클릭합니다.
 
-[TABLE]
+| 섹션 | 세부 정보 |
+|----|----|
+| Name -- Description | +++Enter the name of the employee.+++ |
+| ID -- Description | +++Enter the employee ID in the field.+++ |
+| Email -- Description | +++Enter the email address of the employee from whom the email is received.+++ |
+| Details -- Description | +++Enter the email details of the employee.+++ |
 
 > ![A screenshot of a computer AI-generated content may be
 > incorrect.](./media/image81.png)
@@ -1069,3 +1083,4 @@ Copilot Agent를 배포하는 실무 경험을 참가자들에게 제공했습�
 원활한 정보 흐름을 보장하고, 일상적인 작업을 자동화하며, 지원 워크플로를
 최적화하여 직원들에게 즉각적인 문제 해결 솔루션을 제공하고, 해결되지
 않은 문제에 대한 티켓 관리를 자동화합니다.
+
